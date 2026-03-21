@@ -20,7 +20,7 @@ const BUILDERS = [
     id: "dwh",
     name: "lovells",
     color: "#1B3D6F",
-    logo: "https://www.dwh.co.uk/favicon.ico",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",
     relationship: "David Wilson Homes is renowned for building premium, design-led family homes. Our carpenters understand the higher specification and attention to detail that DWH developments demand, and we've built a strong working relationship with their site management and commercial teams across Nottinghamshire.",
     sites: [
       { name: "Old Mill Farm", location: "Cotgrave, Nottingham", lat: 52.917, lng: -1.046, housetypes: ["Holden","Kingsley","Layton","Windermere"] },
