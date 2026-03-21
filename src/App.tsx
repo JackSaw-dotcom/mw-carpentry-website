@@ -356,7 +356,7 @@ export default function App() {
     logoText: { color: "#fff", fontSize: 15, fontWeight: 600, letterSpacing: 0.3 },
     navLinks: { display: "flex", gap: 24, alignItems: "center" },
     navLink: (active) => ({ color: active ? "#B8860B" : "rgba(255,255,255,0.65)", fontSize: 12, fontWeight: 600, letterSpacing: 1.2, textTransform: "uppercase", cursor: "pointer", transition: "0.2s", borderBottom: active ? "2px solid #B8860B" : "2px solid transparent", paddingBottom: 2 }),
-    hero: { marginTop: 64, height: "85vh", minHeight: 600, background: "linear-gradient(135deg, rgba(12,24,33,0.88) 0%, rgba(12,24,33,0.55) 100%), url('./hero-bg.png') center/cover", display: "flex", alignItems: "center", padding: "0 48px" },
+    hero: { marginTop: 64, height: "85vh", minHeight: 600, background: "linear-gradient(135deg, rgba(12,24,33,0.88) 0%, rgba(12,24,33,0.55) 100%), url('https://www.ete-ltd.co.uk/wp-content/uploads/2019/07Untitled-1_web.jpg') center/cover", display: "flex", alignItems: "center", padding: "0 48px" },
     section: { padding: "80px 48px", maxWidth: 1320, margin: "0 auto" },
     sectionDark: { background: "#0C1821", color: "#fff", padding: "80px 48px" },
     sectionAlt: { background: "#F8F7F4", padding: "80px 48px" },
