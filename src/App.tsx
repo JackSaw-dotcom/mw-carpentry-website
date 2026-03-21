@@ -608,57 +608,279 @@ export default function App() {
 
       {/* MAP */}
       {activeSection === "map" && (
-        <div style={{marginTop:64}}>
-          <div style={sty.section}>
-            <span style={sty.label}>Site Map</span>
-            <h2 style={sty.h2}>Our Active Sites</h2>
-            <p style={sty.sub}>Colour-coded by builder across the Midlands.</p>
-            <div style={{display:"flex",gap:12,flexWrap:"wrap",margin:"20px 0"}}>
-              {BUILDERS.map(b => (
-                <div key={b.id} style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:600,color:"#555"}}>
-                  <span style={{width:10,height:10,borderRadius:"50%",background:b.color,display:"inline-block"}}></span>{b.name}
+  <div style={{ marginTop: 64, background: "#f6f4ef", minHeight: "100vh" }}>
+    <div style={{ ...sty.section, maxWidth: 1400 }}>
+      <div style={{ marginBottom: 28 }}>
+        <span style={sty.label}>Coverage</span>
+        <h2 style={sty.h2}>Midlands Site Map</h2>
+        <p style={{ ...sty.sub, maxWidth: 760 }}>
+          Active projects across Derbyshire, Nottinghamshire, Staffordshire and Leicestershire.
+          Select a site below to jump straight into the relevant builder and development.
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "320px 1fr",
+          gap: 24,
+          alignItems: "start",
+        }}
+      >
+        {/* LEFT PANEL */}
+        <div
+          style={{
+            background: "#0C1821",
+            color: "#fff",
+            borderRadius: 14,
+            padding: 24,
+            position: "sticky",
+            top: 24,
+            boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: 1.5,
+              color: "rgba(255,255,255,0.55)",
+              marginBottom: 8,
+            }}
+          >
+            Live coverage
+          </div>
+
+          <div style={{ fontSize: 34, fontWeight: 700, lineHeight: 1, marginBottom: 18 }}>
+            {BUILDERS.reduce((a, b) => a + b.sites.length, 0)}
+          </div>
+
+          <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginBottom: 22 }}>
+            Active sites plotted across the Midlands
+          </div>
+
+          <div style={{ display: "grid", gap: 10 }}>
+            {BUILDERS.map((b) => (
+              <div
+                key={b.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  padding: "10px 12px",
+                  borderRadius: 10,
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: b.color,
+                      display: "inline-block",
+                      boxShadow: `0 0 0 3px ${b.color}22`,
+                    }}
+                  />
+                  <span style={{ fontSize: 13, fontWeight: 600 }}>{b.name}</span>
                 </div>
-              ))}
+                <span style={{ fontSize: 12, color: "rgba(255,255,255,0.6)" }}>
+                  {b.sites.length}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* MAP CARD */}
+        <div>
+          <div
+            style={{
+              background: "#fff",
+              borderRadius: 18,
+              overflow: "hidden",
+              border: "1px solid #e8e2d8",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "18px 22px",
+                borderBottom: "1px solid #eee7dc",
+                background: "linear-gradient(180deg, #fdfbf8 0%, #f5f1ea 100%)",
+              }}
+            >
+              <div>
+                <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: 1.5, color: "#B8860B", fontWeight: 700 }}>
+                  Regional footprint
+                </div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "#0C1821", marginTop: 4 }}>
+                  M&W active developments
+                </div>
+              </div>
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "#666",
+                  background: "#fff",
+                  border: "1px solid #e9dfcf",
+                  padding: "8px 12px",
+                  borderRadius: 999,
+                }}
+              >
+                Updated from live site list
+              </div>
             </div>
-            <div style={{position:"relative",background:"#e8e6e0",borderRadius:8,overflow:"hidden",height:600,marginTop:16}}>
-              {/* SVG Map of Midlands */}
-              <svg viewBox="0 0 800 600" style={{width:"100%",height:"100%"}}>
-                <defs>
-                  <radialGradient id="mg" cx="50%" cy="50%"><stop offset="0%" stopColor="#d4d0c8"/><stop offset="100%" stopColor="#e8e6e0"/></radialGradient>
-                </defs>
-                <rect fill="url(#mg)" width="800" height="600"/>
-                {/* County outlines simplified */}
-                <text x="400" y="30" textAnchor="middle" style={{fontSize:14,fill:"#999",fontWeight:600}}>MIDLANDS SITE MAP</text>
-                <text x="280" y="180" style={{fontSize:10,fill:"#bbb",fontWeight:600}}>STAFFORDSHIRE</text>
-                <text x="500" y="160" style={{fontSize:10,fill:"#bbb",fontWeight:600}}>NOTTINGHAMSHIRE</text>
-                <text x="420" y="280" style={{fontSize:10,fill:"#bbb",fontWeight:600}}>DERBYSHIRE</text>
-                <text x="540" y="420" style={{fontSize:10,fill:"#bbb",fontWeight:600}}>LEICESTERSHIRE</text>
-                {/* Plot all sites */}
-                {BUILDERS.flatMap(b => b.sites.map(s => {
-                  // Convert lat/lng to SVG coords (rough projection)
-                  const x = ((s.lng + 2.2) / 1.8) * 700 + 50;
-                  const y = ((53.5 - s.lat) / 1.2) * 500 + 50;
-                  return (
-                    <g key={`${b.id}-${s.name}`}>
-                      <circle cx={x} cy={y} r={7} fill={b.color} stroke="#fff" strokeWidth={2} opacity={0.9}/>
-                      <title>{`${b.name}: ${s.name} — ${s.location}`}</title>
-                      <text x={x} y={y-12} textAnchor="middle" style={{fontSize:8,fill:"#555",fontWeight:600}}>{s.name.length > 18 ? s.name.slice(0,16)+"…" : s.name}</text>
-                    </g>
-                  );
-                }))}
-              </svg>
+
+            <div
+              style={{
+                padding: 20,
+                background:
+                  "radial-gradient(circle at 50% 35%, #ebe6dc 0%, #e4ddd1 32%, #ddd5c8 100%)",
+              }}
+            >
+              <div
+                style={{
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  border: "1px solid rgba(12,24,33,0.08)",
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 100%)",
+                }}
+              >
+                <svg viewBox="0 0 900 620" style={{ width: "100%", height: "auto", display: "block" }}>
+                  <defs>
+                    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="6" stdDeviation="8" floodOpacity="0.18" />
+                    </filter>
+                  </defs>
+
+                  {/* background */}
+                  <rect width="900" height="620" fill="#e7e1d6" />
+
+                  {/* abstract land shapes */}
+                  <path
+                    d="M170 80 C 240 40, 330 45, 390 80 C 430 50, 510 55, 580 90 C 650 80, 740 125, 765 210 C 810 265, 810 355, 760 425 C 740 500, 655 560, 555 565 C 500 600, 405 595, 330 560 C 250 565, 175 520, 130 455 C 85 390, 80 280, 110 205 C 110 145, 130 105, 170 80 Z"
+                    fill="#d9d1c4"
+                    stroke="#c8beaf"
+                    strokeWidth="2"
+                  />
+
+                  {/* county labels */}
+                  <text x="275" y="170" style={{ fontSize: 15, fill: "#9a8f7d", fontWeight: 700, letterSpacing: 1.2 }}>
+                    STAFFORDSHIRE
+                  </text>
+                  <text x="540" y="160" style={{ fontSize: 15, fill: "#9a8f7d", fontWeight: 700, letterSpacing: 1.2 }}>
+                    NOTTINGHAMSHIRE
+                  </text>
+                  <text x="405" y="310" style={{ fontSize: 15, fill: "#9a8f7d", fontWeight: 700, letterSpacing: 1.2 }}>
+                    DERBYSHIRE
+                  </text>
+                  <text x="560" y="470" style={{ fontSize: 15, fill: "#9a8f7d", fontWeight: 700, letterSpacing: 1.2 }}>
+                    LEICESTERSHIRE
+                  </text>
+
+                  {/* map title */}
+                  <text x="450" y="42" textAnchor="middle" style={{ fontSize: 22, fill: "#6e6457", fontWeight: 800, letterSpacing: 1 }}>
+                    MIDLANDS SITE MAP
+                  </text>
+
+                  {/* markers */}
+                  {BUILDERS.flatMap((b) =>
+                    b.sites.map((s) => {
+                      const x = ((s.lng + 2.2) / 1.8) * 700 + 95;
+                      const y = ((53.5 - s.lat) / 1.2) * 470 + 75;
+
+                      return (
+                        <g key={`${b.id}-${s.name}`} filter="url(#softShadow)">
+                          <line x1={x} y1={y - 8} x2={x} y2={y - 28} stroke="#6f6558" strokeWidth="1.5" opacity="0.55" />
+                          <rect
+                            x={x - 58}
+                            y={y - 56}
+                            rx="8"
+                            ry="8"
+                            width="116"
+                            height="22"
+                            fill="rgba(255,255,255,0.92)"
+                            stroke="rgba(12,24,33,0.08)"
+                          />
+                          <text
+                            x={x}
+                            y={y - 41}
+                            textAnchor="middle"
+                            style={{ fontSize: 10, fill: "#3e3a35", fontWeight: 700 }}
+                          >
+                            {s.name.length > 16 ? `${s.name.slice(0, 16)}…` : s.name}
+                          </text>
+                          <circle cx={x} cy={y} r={11} fill={`${b.color}22`} />
+                          <circle cx={x} cy={y} r={6.5} fill={b.color} stroke="#fff" strokeWidth="2.5" />
+                          <title>{`${b.name}: ${s.name} — ${s.location}`}</title>
+                        </g>
+                      );
+                    })
+                  )}
+                </svg>
+              </div>
             </div>
-            {/* Site list */}
-            <div style={{marginTop:32}}>
-              {BUILDERS.map(b => (
-                <div key={b.id} style={{marginBottom:16}}>
-                  <h4 style={{fontSize:13,fontWeight:700,display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
-                    <span style={{width:10,height:10,borderRadius:"50%",background:b.color,display:"inline-block"}}></span>{b.name}
+          </div>
+
+          {/* SITE LIST */}
+          <div style={{ marginTop: 22 }}>
+            <div
+              style={{
+                background: "#fff",
+                border: "1px solid #ebe4d9",
+                borderRadius: 16,
+                padding: 22,
+                boxShadow: "0 10px 24px rgba(0,0,0,0.05)",
+              }}
+            >
+              <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 16, color: "#0C1821" }}>
+                Browse active developments
+              </div>
+
+              {BUILDERS.map((b) => (
+                <div key={b.id} style={{ marginBottom: 18 }}>
+                  <h4 style={{ fontSize: 13, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span
+                      style={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: "50%",
+                        background: b.color,
+                        display: "inline-block",
+                      }}
+                    />
+                    {b.name}
                   </h4>
-                  <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-                    {b.sites.map((s,i) => (
-                      <span key={i} style={{fontSize:12,padding:"5px 14px",borderRadius:100,background:"#f5f3ef",color:"#555",cursor:"pointer"}}
-                        onClick={() => { setActiveSection("builders"); setSelectedBuilder(b); setSelectedSite(s); setSelectedHouse(null); }}>
+
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                    {b.sites.map((s, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          fontSize: 12,
+                          padding: "8px 14px",
+                          borderRadius: 999,
+                          background: "#f5f1ea",
+                          color: "#49443d",
+                          cursor: "pointer",
+                          border: "1px solid #e7dfd2",
+                          fontWeight: 500,
+                        }}
+                        onClick={() => {
+                          setActiveSection("builders");
+                          setSelectedBuilder(b);
+                          setSelectedSite(s);
+                          setSelectedHouse(null);
+                        }}
+                      >
                         {s.name} — {s.location}
                       </span>
                     ))}
@@ -668,8 +890,10 @@ export default function App() {
             </div>
           </div>
         </div>
-      )}
-
+      </div>
+    </div>
+  </div>
+)}
       {/* PAST PROJECTS */}
       {activeSection === "past" && (
         <div style={{marginTop:64}}>
