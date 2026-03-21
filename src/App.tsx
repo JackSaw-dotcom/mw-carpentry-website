@@ -18,7 +18,7 @@ const BUILDERS = [
   },
   {
     id: "dwh",
-    name: "lovells",
+    name: "Lovell Homes",
     color: "#1B3D6F",
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",
     relationship: "David Wilson Homes is renowned for building premium, design-led family homes. Our carpenters understand the higher specification and attention to detail that DWH developments demand, and we've built a strong working relationship with their site management and commercial teams across Nottinghamshire.",
