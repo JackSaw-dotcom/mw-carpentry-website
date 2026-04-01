@@ -29,6 +29,9 @@ import j13 from "./IMG_7240.jpeg";
 import j14 from "./IMG_7364.jpeg";
 import j15 from "./IMG_7526.jpeg";
 import j16 from "./IMG_7549.jpeg";
+const NAVY = '#0C1821';
+const GOLD = '#B8860B';
+const CREAM = '#f6f4ef';
 const GALLERY_PHOTOS={joists:[{src:j1,caption:"I-beam joists with joist hangers — first floor"},{src:j2,caption:"Stairwell opening marked out on structural decking"},{src:j3,caption:"Structural decking complete — first floor"},{src:j4,caption:"I-beam floor joists with strutting"},{src:j5,caption:"Floor joists with trimming around stairwell"},{src:j6,caption:"Completed structural floor with Peel Clean Xtra"},{src:j7,caption:"I-beam joists — first floor installation"},{src:j8,caption:"Completed decked floor from scaffold"},{src:j9,caption:"Floor joists with herringbone strutting"},{src:j10,caption:"Structural decking with loft hatch opening"},{src:j11,caption:"Decked floor — wide angle view across site"},{src:j12,caption:"First floor joists with trimmer detail"},{src:j13,caption:"Structural decking complete — side elevation"},{src:j14,caption:"Decked floor with stairwell marked — site view"},{src:j15,caption:"Completed structural floor — elevated view"},{src:j16,caption:"Joists and decking — finished first floor"}],roofs:[{src:rf1,caption:"Trussed rafter installation — gable end"},{src:rf2,caption:"Roof trusses from scaffold level"},{src:rf3,caption:"Trussed rafters with bracing"},{src:rf4,caption:"Front door canopy — porch carpentry"},{src:rf5,caption:"Cut roof structure — hipped roof from above"}],"first-fix":[{src:ff1,caption:"Stud partitions & door linings — first floor"},{src:ff2,caption:"Staircase installation with safety barrier"},{src:ff3,caption:"Stud framing around staircase opening"},{src:ff4,caption:"Winder staircase installation"},{src:ff5,caption:"Dormer room stud partitions"},{src:ff6,caption:"Loft room framing with Velux window"},{src:ff7,caption:"Ground floor stud partitions & door linings"},{src:ff8,caption:"Under-stair framing detail"}],"second-fix":[],finals:[],extras:[]};
 const BUILDERS=[{id:"barratt",name:"Barratt Homes",color:"#E31937",logo:"https://www.barratthomes.co.uk/favicon.ico",relationship:"Our partnership with Barratt Homes stretches back over a decade. They trust M&W to deliver consistently across multiple sites.",sites:[{name:"Thoresby Vale",location:"Edwinstowe, Mansfield",lat:53.177,lng:-1.069,housetypes:["Windermere","Holden","Moresby","Kennett","Radleigh"]},{name:"Romans' Quarter",location:"Bingham, Nottingham",lat:52.949,lng:-1.0,housetypes:["Hollinwood","Bradgate","Moresby","Alderney"]},{name:"Dunstall Park",location:"Tamworth, Staffordshire",lat:52.634,lng:-1.693,housetypes:["Windermere","Archford","Holden","Kennett"]},{name:"Poppy Fields",location:"Uttoxeter, Staffordshire",lat:52.898,lng:-1.86,housetypes:["Maidstone","Ellerton","Denford"]},{name:"Bertelin Fields",location:"Beaconside, Stafford",lat:52.826,lng:-2.117,housetypes:["Windermere","Archford","Kennett","Moresby"]}]},{id:"dwh",name:"Lovell Homes",color:"#1B3D6F",logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",relationship:"Our carpenters understand the higher specification that Lovell developments demand.",sites:[{name:"Old Mill Farm",location:"Cotgrave, Nottingham",lat:52.917,lng:-1.046,housetypes:["Holden","Kingsley","Layton","Windermere"]},{name:"Berry Hill",location:"Mansfield",lat:53.148,lng:-1.188,housetypes:["Hollinwood","Bradgate","Exeter"]},{name:"Gateford Park",location:"Worksop, Nottinghamshire",lat:53.321,lng:-1.132,housetypes:["Radleigh","Holden","Moresby"]}]},{id:"bellway",name:"Bellway Homes",color:"#003DA5",logo:"https://s3-eu-west-1.amazonaws.com/tpd/logos/58932caa0000ff00059bf27f/0x0.png",relationship:"Bellway is one of our longest-standing partners across their East Midlands division.",sites:[{name:"The Meadows",location:"Alvaston, Derby",lat:52.893,lng:-1.434,housetypes:["Joiner","Craftsman","Turner","Tanner","Weaver"]},{name:"Holbrook Park",location:"Chellaston, Derby",lat:52.873,lng:-1.437,housetypes:["Craftsman","Joiner","Turner","Weaver","Cooper"]},{name:"Coppice Heights",location:"Ripley, Derbyshire",lat:53.051,lng:-1.405,housetypes:["Joiner","Turner","Tanner","Fletcher"]},{name:"Springwood",location:"Midway, S. Derbyshire",lat:52.773,lng:-1.542,housetypes:["Joiner","Craftsman","Turner","Weaver"]},{name:"Hugglescote Grange",location:"Hugglescote, Leicestershire",lat:52.727,lng:-1.362,housetypes:["Craftsman","Turner","Cooper","Fletcher"]},{name:"Abbey Fields Grange",location:"Hucknall, Nottinghamshire",lat:53.033,lng:-1.195,housetypes:["Tanner","Weaver","Turner","Joiner"]},{name:"Ashlands",location:"Sutton in Ashfield, Notts",lat:53.128,lng:-1.255,housetypes:["Joiner","Craftsman","Turner"]},{name:"Torvill Park",location:"Fairham, Nottingham",lat:52.909,lng:-1.163,housetypes:["Craftsman","Turner","Tanner","Weaver"]}]},{id:"persimmon",name:"Persimmon Homes",color:"#D4002A",logo:"https://cdn.prod.website-files.com/65a518d6a768fc381c83acf8/65a518d6a768fc381c83b06d_2020_Persimmon_1.png",relationship:"A fast-paced partnership built on trust across Derbyshire, Nottinghamshire, and Leicestershire.",sites:[{name:"Clipstone Park",location:"Clipstone, Mansfield",lat:53.167,lng:-1.137,housetypes:["Bedale","Alnwick","Byford","Bolsover","Kielder"]},{name:"The Oaks",location:"Calverton, Notts",lat:53.033,lng:-1.093,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Boulton Moor",location:"Chellaston, Derby",lat:52.872,lng:-1.413,housetypes:["Bedale","Alnwick","Bolsover","Kielder","Roseberry"]},{name:"Jubilee Gardens",location:"Ilkeston, Derbyshire",lat:52.972,lng:-1.307,housetypes:["Bedale","Byford","Alnwick","Bolsover"]},{name:"Foxley Fields",location:"Market Harborough, Leics",lat:52.478,lng:-0.918,housetypes:["Kielder","Roseberry","Alnwick","Bolsover"]}]},{id:"stmodwen",name:"St. Modwen Homes",color:"#6B2D5B",logo:"https://ramsboards.com/wp-content/uploads/2021/01/st.modwen-homes.webp",relationship:"With their head office in Derby, St. Modwen are a natural partner for M&W.",sites:[{name:"Hilton Valley",location:"Hilton, Derbyshire",lat:52.862,lng:-1.596,housetypes:["Arden","Berwick","Carleton","Danbury"]},{name:"Bramshall Meadows",location:"Uttoxeter, Staffordshire",lat:52.907,lng:-1.847,housetypes:["Arden","Berwick","Carleton","Elmswell"]},{name:"Snibston Mill",location:"Coalville, Leicestershire",lat:52.725,lng:-1.37,housetypes:["Arden","Carleton","Danbury","Elmswell"]},{name:"Egstow Park",location:"Clay Cross, Derbyshire",lat:53.163,lng:-1.413,housetypes:["Berwick","Carleton","Danbury"]}]},{id:"countryside",name:"Countryside Homes",color:"#2B6E44",logo:"https://nla-production-media.s3.eu-west-2.amazonaws.com/84908/Untitled-design-15.png?v=1766430558",relationship:"M&W support their Midlands mixed-tenure developments.",sites:[{name:"Edwalton Fields",location:"Edwalton, Nottingham",lat:52.917,lng:-1.12,housetypes:["Thornbury","Wentworth","Henley","Sudbury"]},{name:"Mastin Moor",location:"Chesterfield, Derbyshire",lat:53.267,lng:-1.342,housetypes:["Thornbury","Henley","Sudbury"]}]},{id:"vistry",name:"Vistry / Bovis Homes",color:"#00594F",logo:"https://housingforum.org.uk/wp-content/uploads/2020/05/Untitled-design.png",relationship:"Our work on Broadnook Garden Village is a testament to their trust in M&W.",sites:[{name:"Broadnook Garden Village",location:"Rothley, Leicestershire",lat:52.719,lng:-1.138,housetypes:["Limewood","Fern","Lime","Oak","Willow"]},{name:"Partridge Walk",location:"Stafford",lat:52.808,lng:-2.101,housetypes:["Limewood","Oak","Willow","Cedar"]},{name:"Hinckley 475",location:"Hinckley, Leicestershire",lat:52.54,lng:-1.37,housetypes:["Limewood","Fern","Oak","Willow"]}]},{id:"ashberry",name:"Ashberry Homes",color:"#7B3F98",logo:"https://www.ashberryhomes.co.uk/img/default-social-image.jpg",relationship:"M&W deliver consistently across Ashberry's Nottinghamshire sites.",sites:[{name:"Potters Gate",location:"Farndon, Newark",lat:53.064,lng:-0.856,housetypes:["Greenwood","Oakwood","Birchwood"]},{name:"Longridge",location:"Long Eaton, Notts",lat:52.89,lng:-1.275,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]}]},{id:"davidsons",name:"Davidsons Homes",color:"#C8102E",logo:"https://davidsonsgroup.co.uk/wp-content/uploads/2023/01/Screenshot-2023-01-03-at-16.53.01-1024x522.png",relationship:"Davidsons are a well-respected Midlands developer. We're proud to be part of their supply chain.",sites:[{name:"Davidsons at Huncote",location:"Huncote, Leicestershire",lat:52.582,lng:-1.218,housetypes:["The Arden","The Warwick","The Ashby","The Leamington"]},{name:"Davidsons at Boulton Moor",location:"Derby",lat:52.878,lng:-1.418,housetypes:["The Arden","The Warwick","The Kenilworth"]}]},{id:"wheeldons",name:"Wheeldon Homes",color:"#2E4057",logo:"https://www.panddg.co.uk/wp-content/uploads/2022/02/logo-wheeldon-homes.svg",relationship:"A boutique developer that values the personal service M&W bring.",sites:[{name:"Oaklands",location:"Etwall, South Derbyshire",lat:52.871,lng:-1.599,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"The Green",location:"Church Broughton, Derby",lat:52.857,lng:-1.66,housetypes:["The Chatsworth","The Haddon"]}]},{id:"crest",name:"Crest Nicholson",color:"#003C71",logo:"https://www.crestnicholson.com/favicon.ico",relationship:"M&W meet Crest Nicholson's exacting standards on every element.",sites:[{name:"Barley Fields",location:"Queniborough, Leicestershire",lat:52.697,lng:-1.08,housetypes:["Elm","Beech","Maple","Rowan","Birch"]}]}];
 const PAST_PROJECTS=[{year:"2024-25",builder:"Bellway",site:"Holbrook Park Ph1",location:"Chellaston",units:167,scope:"Full package"},{year:"2023-25",builder:"Persimmon",site:"Boulton Moor",location:"Chellaston",units:245,scope:"Full package"},{year:"2023-24",builder:"Barratt",site:"Thoresby Vale Ph2",location:"Mansfield",units:180,scope:"Full package"},{year:"2022-24",builder:"St. Modwen",site:"Hilton Valley Ph3",location:"Hilton",units:120,scope:"1st & 2nd fix"},{year:"2021-23",builder:"Persimmon",site:"Jubilee Gardens",location:"Ilkeston",units:200,scope:"Full package"},{year:"2020-22",builder:"Barratt",site:"Dunstall Park",location:"Tamworth",units:280,scope:"Full package"},{year:"2019-21",builder:"Bellway",site:"The Meadows Ph1",location:"Alvaston",units:78,scope:"Full package"},{year:"2018-20",builder:"Persimmon",site:"Clipstone Park",location:"Mansfield",units:190,scope:"Full package"},{year:"2017-19",builder:"Bellway",site:"Coppice Heights",location:"Ripley",units:130,scope:"Full package"},{year:"2016-18",builder:"Persimmon",site:"Carlton View",location:"Gedling",units:170,scope:"Full package"},{year:"2015-17",builder:"Bellway",site:"Hugglescote Grange",location:"Leicestershire",units:140,scope:"Full package"},{year:"2014-16",builder:"Barratt",site:"Grange Park",location:"Loughborough",units:220,scope:"Full package"},{year:"2012-14",builder:"Bellway",site:"Stenson Fields",location:"Derby",units:250,scope:"Full package"},{year:"2010-12",builder:"Persimmon",site:"Wollaton Vale",location:"Nottingham",units:200,scope:"Full package"},{year:"2008-10",builder:"Barratt",site:"Chestnut Grove",location:"Long Eaton",units:140,scope:"Full package"},{year:"2005-07",builder:"Bellway",site:"Millbrook Park",location:"Stapleford",units:85,scope:"Full package"}];
@@ -151,73 +154,23 @@ const INVOICES = [
   { id: 6, carpenter: "Chris Taylor", site: "The Meadows", plot: "5", houseType: "Turner", stage: "Roofs", amount: 1210, status: "paid", date: "2026-03-05" }
 ];
 
-const handleLogin = (e) => {
-    e.preventDefault();
-    let foundUser = null;
+const getSiteHousetypes = (siteName) => {
+  for (let builder of BUILDERS) {
+    const site = builder.sites.find(s => s.name === siteName);
+    if (site) return site.housetypes;
+  }
+  return [];
+};
 
-    if (pinInput === '4444') {
-      foundUser = { role: 'admin', name: 'Admin' };
-    } else if (pinInput === '1234') {
-      foundUser = CARPENTERS.find(c => c.pin === pinInput) || { role: 'carpenter', name: 'Dave Mitchell', pin: '1234' };
-      foundUser.role = 'carpenter';
-    } else if (pinInput === '5678') {
-      foundUser = CARPENTERS.find(c => c.pin === pinInput) || { role: 'carpenter', name: 'Ryan Cooper', pin: '5678' };
-      foundUser.role = 'carpenter';
-    } else if (pinInput === '1111') {
-      foundUser = SITE_MANAGERS.find(s => s.pin === pinInput);
-      foundUser.role = 'site_manager';
-    } else if (pinInput === '2222') {
-      foundUser = SITE_MANAGERS.find(s => s.pin === pinInput);
-      foundUser.role = 'site_manager';
-    } else if (pinInput === '9999') {
-      foundUser = { role: 'invoice', name: 'Office/Invoice' };
-    } else if (pinInput === '0000') {
-      foundUser = { role: 'public', name: 'Guest' };
-    }
+const formatDate = (date) => {
+  return new Date(date).toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' });
+};
 
-    if (foundUser) {
-      setUser(foundUser);
-      setCurrentPage('app');
-      setAdminTab('dashboard');
-      setCarpenterTab('schedule');
-      setInvoiceTab('pending');
-      setSiteManagerTab('overview');
-      setPinInput('');
-    } else {
-      alert('Invalid PIN');
-    }
-  };
-
-  const getBuilderAndSites = () => {
-    if (!user) return { builder: null, sites: [] };
-    if (user.role === 'admin') return { builder: null, sites: [] };
-    if (user.role === 'carpenter' || user.role === 'site_manager') {
-      const builder = BUILDERS.find(b => b.sites.some(s => s.name === user.site));
-      if (builder) {
-        const site = builder.sites.find(s => s.name === user.site);
-        return { builder, sites: [site] };
-      }
-    }
-    return { builder: null, sites: [] };
-  };
-
-  const getSiteHousetypes = (siteName) => {
-    for (let builder of BUILDERS) {
-      const site = builder.sites.find(s => s.name === siteName);
-      if (site) return site.housetypes;
-    }
-    return [];
-  };
-
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' });
-  };
-
-  const daysInRange = (start, end) => {
-    const s = new Date(start);
-    const e = new Date(end);
-    return Math.ceil((e - s) / (1000 * 60 * 60 * 24)) + 1;
-  };
+const daysInRange = (start, end) => {
+  const s = new Date(start);
+  const e = new Date(end);
+  return Math.ceil((e - s) / (1000 * 60 * 60 * 24)) + 1;
+};
 
 export default function App(){
   const [currentPage, setCurrentPage] = useState('home');
