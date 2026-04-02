@@ -219,6 +219,23 @@ const[notifMessage,setNotifMessage]=useState('');
 const[signingNotifId,setSigningNotifId]=useState(null);
 const[isDrawing,setIsDrawing]=useState(false);
 const sigCanvasRef=useRef(null);
+const[smSelectedCarp,setSmSelectedCarp]=useState(null);
+const[siteFiles,setSiteFiles]=useState([
+{id:1,site:'Holbrook Park',name:'Plot 14 - Snag List',createdBy:'Michael',date:'2026-03-28',photos:[{id:1,note:'Kitchen skirting gap - needs refitting',dataUrl:null},{id:2,note:'Landing door lining not plumb',dataUrl:null}],sentTo:'Dave Mitchell',status:'open'},
+{id:2,site:'Holbrook Park',name:'Plot 22 - Second Fix Check',createdBy:'Michael',date:'2026-03-30',photos:[{id:1,note:'All door handles fitted correctly',dataUrl:null}],sentTo:null,status:'open'}
+]);
+const[newFileName,setNewFileName]=useState('');
+const[newFilePhotos,setNewFilePhotos]=useState([]);
+const[newFileNote,setNewFileNote]=useState('');
+const[creatingFile,setCreatingFile]=useState(false);
+const[viewingFileId,setViewingFileId]=useState(null);
+const[adminSiteView,setAdminSiteView]=useState(null);
+const[adminSiteWorkTab,setAdminSiteWorkTab]=useState('logged');
+const[sendDocCarp,setSendDocCarp]=useState(null);
+const[sendDocType,setSendDocType]=useState('Toolbox Talk');
+const[sendDocTitle,setSendDocTitle]=useState('');
+const[sendDocMessage,setSendDocMessage]=useState('');
+const fileInputRef=useRef(null);
   // Website/old portal states from App7
   const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
@@ -430,7 +447,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           transition: 'left 0.25s ease'
         }}>
 
-          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Delays','Fixings','Notifications','Price Lists','Documents'].map(tab => (
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Sites','Delays','Fixings','Notifications','Price Lists','Documents'].map(tab => (
             <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -444,13 +461,16 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
               {tab === 'Fixings' && allFixingRequests.filter(r=>r.status==='pending').length > 0 && (
                 <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{allFixingRequests.filter(r=>r.status==='pending').length}</span>
               )}
+              {tab === 'Sites' && siteFiles.filter(f => f.status === 'open').length > 0 && (
+                <span style={{marginLeft:6,backgroundColor:'#1565c0',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{siteFiles.filter(f => f.status === 'open').length}</span>
+              )}
               {tab === 'Notifications' && notifications.some(n => n.recipients.some(r => !n.responses[r]?.signed)) && (
                 <span style={{marginLeft:6,backgroundColor:'#1565c0',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>!</span>
               )}
             </button>
           ))}
 
-          {user?.role === 'site_manager' && ['Overview','Log Work','Notifications','Documents'].map(tab => (
+          {user?.role === 'site_manager' && ['Overview','Log Work','Compliance','Site Files','Notifications','Documents'].map(tab => (
             <button key={tab} onClick={() => { setSiteManagerTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: siteManagerTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -458,6 +478,17 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
                 fontWeight: siteManagerTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
               {tab}
+              {tab === 'Compliance' && (() => {
+                const siteCps = CARPENTERS.filter(c => c.site === user?.site);
+                const unsigned = siteCps.filter(c => {
+                  const carpNotifs = notifications.filter(n => n.recipients.includes(c.name));
+                  return carpNotifs.some(n => !n.responses[c.name]?.signed);
+                }).length;
+                return unsigned > 0 ? <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{unsigned}</span> : null;
+              })()}
+              {tab === 'Site Files' && siteFiles.filter(f => f.site === user?.site && f.status === 'open').length > 0 && (
+                <span style={{marginLeft:6,backgroundColor:'#1565c0',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{siteFiles.filter(f => f.site === user?.site && f.status === 'open').length}</span>
+              )}
             </button>
           ))}
 
@@ -1052,7 +1083,316 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
-          {/* ========== CARPENTER SCHEDULE ========== */}
+          {/* ========== SITE MANAGER COMPLIANCE ========== */}
+          {user?.role === 'site_manager' && siteManagerTab === 'compliance' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Compliance: {user?.site}</h2>
+              <p style={{color:'#666',fontSize:13,marginBottom:16}}>Check carpenter induction, RAMS, and toolbox talk status. Send documents to sign.</p>
+              {(() => {
+                const siteCps = CARPENTERS.filter(c => c.site === user?.site);
+                if(siteCps.length === 0) return <p style={{color:'#888',fontSize:14}}>No carpenters assigned to this site.</p>;
+                return siteCps.map(carp => {
+                  const carpNotifs = notifications.filter(n => n.recipients.includes(carp.name));
+                  const toolboxTalks = carpNotifs.filter(n => n.type === 'Toolbox Talk');
+                  const rams = carpNotifs.filter(n => n.type === 'RAMS');
+                  const hsDocs = carpNotifs.filter(n => n.type === 'H&S Document');
+                  const tbSigned = toolboxTalks.length > 0 && toolboxTalks.every(n => n.responses[carp.name]?.signed);
+                  const ramsSigned = rams.length > 0 && rams.every(n => n.responses[carp.name]?.signed);
+                  const hsSigned = hsDocs.length > 0 && hsDocs.every(n => n.responses[carp.name]?.signed);
+                  const allClear = (toolboxTalks.length === 0 || tbSigned) && (rams.length === 0 || ramsSigned) && (hsDocs.length === 0 || hsSigned);
+                  const isExpanded = smSelectedCarp === carp.id;
+                  return (
+                    <div key={carp.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:10,marginBottom:12,overflow:'hidden',borderLeft:'6px solid '+(allClear?'#4caf50':'#d32f2f')}}>
+                      <div onClick={()=>setSmSelectedCarp(isExpanded?null:carp.id)} style={{padding:16,cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                        <div>
+                          <strong style={{fontSize:15,color:NAVY}}>{carp.name}</strong>
+                          <span style={{marginLeft:10,fontSize:11,color:'#888'}}>{carp.id}</span>
+                        </div>
+                        <div style={{display:'flex',gap:6,alignItems:'center'}}>
+                          <span style={{padding:'3px 8px',borderRadius:4,fontSize:10,fontWeight:'bold',backgroundColor:allClear?'#e8f5e9':'#ffebee',color:allClear?'#2e7d32':'#c62828'}}>{allClear?'All Clear':'Action Required'}</span>
+                          <span style={{fontSize:12,color:'#888'}}>{isExpanded?'[-]':'[+]'}</span>
+                        </div>
+                      </div>
+                      {isExpanded && (
+                        <div style={{padding:'0 16px 16px'}}>
+                          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))',gap:10,marginBottom:14}}>
+                            <div style={{padding:12,borderRadius:6,backgroundColor:toolboxTalks.length===0?'#f5f5f5':tbSigned?'#e8f5e9':'#fff3e0',textAlign:'center',border:'1px solid '+(tbSigned?'#a5d6a7':'#ffcc80')}}>
+                              <div style={{fontSize:11,color:'#666',marginBottom:4}}>Toolbox Talks</div>
+                              <div style={{fontWeight:'bold',fontSize:14,color:toolboxTalks.length===0?'#999':tbSigned?'#2e7d32':'#e65100'}}>{toolboxTalks.length===0?'None Sent':tbSigned?'Signed':'Unsigned'}</div>
+                              <div style={{fontSize:10,color:'#888',marginTop:2}}>{toolboxTalks.length} sent</div>
+                            </div>
+                            <div style={{padding:12,borderRadius:6,backgroundColor:rams.length===0?'#f5f5f5':ramsSigned?'#e8f5e9':'#fff3e0',textAlign:'center',border:'1px solid '+(ramsSigned?'#a5d6a7':'#ffcc80')}}>
+                              <div style={{fontSize:11,color:'#666',marginBottom:4}}>RAMS</div>
+                              <div style={{fontWeight:'bold',fontSize:14,color:rams.length===0?'#999':ramsSigned?'#2e7d32':'#e65100'}}>{rams.length===0?'None Sent':ramsSigned?'Signed':'Unsigned'}</div>
+                              <div style={{fontSize:10,color:'#888',marginTop:2}}>{rams.length} sent</div>
+                            </div>
+                            <div style={{padding:12,borderRadius:6,backgroundColor:hsDocs.length===0?'#f5f5f5':hsSigned?'#e8f5e9':'#fff3e0',textAlign:'center',border:'1px solid '+(hsSigned?'#a5d6a7':'#ffcc80')}}>
+                              <div style={{fontSize:11,color:'#666',marginBottom:4}}>H&S Docs</div>
+                              <div style={{fontWeight:'bold',fontSize:14,color:hsDocs.length===0?'#999':hsSigned?'#2e7d32':'#e65100'}}>{hsDocs.length===0?'None Sent':hsSigned?'Signed':'Unsigned'}</div>
+                              <div style={{fontSize:10,color:'#888',marginTop:2}}>{hsDocs.length} sent</div>
+                            </div>
+                          </div>
+                          {carpNotifs.length > 0 && (
+                            <div style={{marginBottom:14}}>
+                              <h4 style={{color:NAVY,fontSize:13,margin:'0 0 8px'}}>Document History</h4>
+                              {carpNotifs.sort((a,b)=>b.id-a.id).map(n => (
+                                <div key={n.id} style={{padding:8,marginBottom:4,backgroundColor:'#fafafa',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:6,fontSize:12}}>
+                                  <div><span style={{padding:'1px 5px',borderRadius:2,fontSize:9,fontWeight:'bold',marginRight:6,backgroundColor:n.type==='Toolbox Talk'?'#e3f2fd':n.type==='RAMS'?'#fff3e0':'#fce4ec',color:n.type==='Toolbox Talk'?'#1565c0':n.type==='RAMS'?'#e65100':'#c62828'}}>{n.type}</span>{n.title}</div>
+                                  <span style={{padding:'2px 6px',borderRadius:3,fontSize:10,fontWeight:'bold',backgroundColor:n.responses[carp.name]?.signed?'#e8f5e9':n.responses[carp.name]?.read?'#fff8e1':'#ffebee',color:n.responses[carp.name]?.signed?'#2e7d32':n.responses[carp.name]?.read?'#e65100':'#c62828'}}>{n.responses[carp.name]?.signed?'Signed':n.responses[carp.name]?.read?'Read':'Unread'}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {sendDocCarp===carp.id ? (
+                            <div style={{padding:14,backgroundColor:NAVY,borderRadius:8}}>
+                              <h4 style={{color:CREAM,margin:'0 0 10px',fontSize:14}}>Send Document to {carp.name}</h4>
+                              <div style={{marginBottom:10}}><label style={{display:'block',color:'#aaa',fontSize:11,marginBottom:3}}>Type</label>
+                                <select value={sendDocType} onChange={(e)=>setSendDocType(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}><option>Toolbox Talk</option><option>RAMS</option><option>H&S Document</option></select></div>
+                              <div style={{marginBottom:10}}><label style={{display:'block',color:'#aaa',fontSize:11,marginBottom:3}}>Title</label>
+                                <input type="text" value={sendDocTitle} onChange={(e)=>setSendDocTitle(e.target.value)} placeholder="e.g. Working at Heights - April 2026" style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                              <div style={{marginBottom:12}}><label style={{display:'block',color:'#aaa',fontSize:11,marginBottom:3}}>Message / Instructions</label>
+                                <textarea value={sendDocMessage} onChange={(e)=>setSendDocMessage(e.target.value)} placeholder="Details for the carpenter..." style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,minHeight:60,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
+                              <div style={{display:'flex',gap:8}}>
+                                <button onClick={()=>{
+                                  if(!sendDocTitle.trim()||!sendDocMessage.trim()){alert('Please fill in all fields');return;}
+                                  const notif={id:Date.now(),type:sendDocType,title:sendDocTitle,message:sendDocMessage,site:user?.site,sentBy:user?.name||'Site Manager',sentDate:new Date().toISOString().split('T')[0],recipients:[carp.name],responses:{}};
+                                  setNotifications([notif,...notifications]);setSendDocCarp(null);setSendDocTitle('');setSendDocMessage('');
+                                  setSuccessMsg('Document sent to '+carp.name);setTimeout(()=>setSuccessMsg(''),2500);
+                                }} style={{backgroundColor:GOLD,color:NAVY,padding:'8px 18px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13}}>Send</button>
+                                <button onClick={()=>{setSendDocCarp(null);setSendDocTitle('');setSendDocMessage('');}} style={{backgroundColor:'#666',color:'white',padding:'8px 18px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>Cancel</button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button onClick={()=>setSendDocCarp(carp.id)} style={{backgroundColor:GOLD,color:NAVY,padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13}}>Send Document to Sign</button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          )}
+
+          {/* ========== SITE MANAGER SITE FILES (PHOTO LOGS / SNAG LISTS) ========== */}
+          {user?.role === 'site_manager' && siteManagerTab === 'site files' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Site Files: {user?.site}</h2>
+              <p style={{color:'#666',fontSize:13,marginBottom:16}}>Create plot files with photos and notes for snag lists, inspections, and handovers.</p>
+              {!creatingFile && !viewingFileId && (
+                <button onClick={()=>setCreatingFile(true)} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 22px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:14,marginBottom:18}}>Create New File</button>
+              )}
+              {creatingFile && (
+                <div style={{backgroundColor:NAVY,padding:20,borderRadius:10,marginBottom:18}}>
+                  <h3 style={{color:CREAM,margin:'0 0 14px',fontSize:16}}>New Site File</h3>
+                  <div style={{marginBottom:12}}><label style={{display:'block',color:'#aaa',fontSize:11,marginBottom:3}}>File Name</label>
+                    <input type="text" value={newFileName} onChange={(e)=>setNewFileName(e.target.value)} placeholder="e.g. Plot 14 - Snag List" style={{width:'100%',padding:10,borderRadius:4,border:'1px solid '+GOLD,fontSize:14,boxSizing:'border-box'}} /></div>
+                  <div style={{marginBottom:12}}>
+                    <label style={{display:'block',color:'#aaa',fontSize:11,marginBottom:3}}>Photos ({newFilePhotos.length} added)</label>
+                    <input ref={fileInputRef} type="file" accept="image/*" capture="environment" multiple onChange={(e)=>{
+                      const files=Array.from(e.target.files||[]);
+                      files.forEach(file=>{const reader=new FileReader();reader.onload=(ev)=>{setNewFilePhotos(prev=>[...prev,{id:Date.now()+Math.random(),note:newFileNote||'',dataUrl:ev.target.result,fileName:file.name}]);};reader.readAsDataURL(file);});
+                      if(fileInputRef.current)fileInputRef.current.value='';
+                    }} style={{display:'none'}} />
+                    <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:8}}>
+                      <button onClick={()=>fileInputRef.current?.click()} style={{backgroundColor:GOLD,color:NAVY,padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Upload Photo</button>
+                      <button onClick={()=>{const input=fileInputRef.current;if(input){input.setAttribute('capture','environment');input.click();}}} style={{backgroundColor:'#1565c0',color:'white',padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Take Photo</button>
+                    </div>
+                    <div style={{marginBottom:8}}><input type="text" value={newFileNote} onChange={(e)=>setNewFileNote(e.target.value)} placeholder="Note for next photo..." style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #555',fontSize:12,boxSizing:'border-box',backgroundColor:'#1a2a3a',color:'white'}} /></div>
+                    {newFilePhotos.length > 0 && (
+                      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:8}}>
+                        {newFilePhotos.map((p,idx) => (
+                          <div key={p.id} style={{backgroundColor:'#1a2a3a',borderRadius:6,overflow:'hidden',border:'1px solid #333'}}>
+                            {p.dataUrl && <img src={p.dataUrl} alt="" style={{width:'100%',height:80,objectFit:'cover'}} />}
+                            <div style={{padding:6}}>
+                              <div style={{fontSize:10,color:'#aaa'}}>Photo {idx+1}</div>
+                              {p.note && <div style={{fontSize:11,color:CREAM,marginTop:2}}>{p.note}</div>}
+                              <button onClick={()=>setNewFilePhotos(prev=>prev.filter(x=>x.id!==p.id))} style={{fontSize:10,color:'#d32f2f',background:'none',border:'none',cursor:'pointer',padding:0,marginTop:4}}>Remove</button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div style={{display:'flex',gap:8,marginTop:14}}>
+                    <button onClick={()=>{
+                      if(!newFileName.trim()){alert('Please enter a file name');return;}
+                      const newFile={id:Date.now(),site:user?.site,name:newFileName,createdBy:user?.name||'Site Manager',date:new Date().toISOString().split('T')[0],photos:newFilePhotos.map((p,i)=>({id:i+1,note:p.note,dataUrl:p.dataUrl})),sentTo:null,status:'open'};
+                      setSiteFiles(prev=>[newFile,...prev]);setCreatingFile(false);setNewFileName('');setNewFilePhotos([]);setNewFileNote('');
+                      setSuccessMsg('Site file created: '+newFileName);setTimeout(()=>setSuccessMsg(''),2500);
+                    }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 22px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13}}>Save File</button>
+                    <button onClick={()=>{setCreatingFile(false);setNewFileName('');setNewFilePhotos([]);setNewFileNote('');}} style={{backgroundColor:'#666',color:'white',padding:'10px 22px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>Cancel</button>
+                  </div>
+                </div>
+              )}
+              {viewingFileId && (() => {
+                const file = siteFiles.find(f => f.id === viewingFileId);
+                if(!file) return null;
+                return (
+                  <div style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:10,padding:18,marginBottom:18}}>
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8,marginBottom:14}}>
+                      <h3 style={{color:NAVY,margin:0,fontSize:18}}>{file.name}</h3>
+                      <button onClick={()=>setViewingFileId(null)} style={{backgroundColor:'#666',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12}}>Back</button>
+                    </div>
+                    <div style={{fontSize:12,color:'#888',marginBottom:14}}>Created by {file.createdBy} on {file.date} | {file.photos.length} photo{file.photos.length!==1?'s':''}</div>
+                    {file.photos.length > 0 ? (
+                      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:12}}>
+                        {file.photos.map((photo,idx) => (
+                          <div key={photo.id} style={{backgroundColor:'#f9f9f9',borderRadius:8,overflow:'hidden',border:'1px solid #ddd'}}>
+                            {photo.dataUrl ? <img src={photo.dataUrl} alt="" style={{width:'100%',height:150,objectFit:'cover'}} /> : <div style={{width:'100%',height:150,backgroundColor:'#e0e0e0',display:'flex',alignItems:'center',justifyContent:'center',color:'#999',fontSize:12}}>Photo {idx+1}</div>}
+                            <div style={{padding:10}}>
+                              <div style={{fontSize:12,fontWeight:'bold',color:NAVY}}>Photo {idx+1}</div>
+                              {photo.note && <div style={{fontSize:12,color:'#555',marginTop:4}}>{photo.note}</div>}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : <p style={{color:'#888',fontSize:13}}>No photos in this file.</p>}
+                    <div style={{marginTop:16,display:'flex',gap:8,flexWrap:'wrap'}}>
+                      {!file.sentTo && (
+                        <div style={{width:'100%'}}>
+                          <label style={{display:'block',fontSize:11,color:'#666',marginBottom:4}}>Send as snag list to carpenter:</label>
+                          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+                            <select onChange={(e)=>{
+                              if(e.target.value){
+                                setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,sentTo:e.target.value}:f));
+                                setSuccessMsg('Snag list sent to '+e.target.value);setTimeout(()=>setSuccessMsg(''),2500);
+                              }
+                            }} style={{padding:8,borderRadius:4,border:'1px solid #ddd',fontSize:12,flex:1,minWidth:150}}>
+                              <option value="">Select carpenter</option>
+                              {CARPENTERS.filter(c=>c.site===user?.site).map(c=><option key={c.id} value={c.name}>{c.name}</option>)}
+                            </select>
+                          </div>
+                        </div>
+                      )}
+                      {file.sentTo && <div style={{fontSize:12,color:'#2e7d32',padding:8,backgroundColor:'#e8f5e9',borderRadius:4}}>Sent to: {file.sentTo}</div>}
+                      <button onClick={()=>{setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,status:f.status==='open'?'closed':'open'}:f));setSuccessMsg('File '+(file.status==='open'?'closed':'reopened'));setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:file.status==='open'?'#4caf50':'#e65100',color:'white',padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>{file.status==='open'?'Close File':'Reopen File'}</button>
+                    </div>
+                  </div>
+                );
+              })()}
+              {!creatingFile && !viewingFileId && (
+                <div>
+                  {siteFiles.filter(f => f.site === user?.site).length === 0 ? <p style={{color:'#888',fontSize:14}}>No site files created yet.</p> : (
+                    siteFiles.filter(f => f.site === user?.site).sort((a,b)=>b.id-a.id).map(file => (
+                      <div key={file.id} onClick={()=>setViewingFileId(file.id)} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,cursor:'pointer',borderLeft:'5px solid '+(file.status==='open'?GOLD:'#4caf50'),display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:14,color:NAVY}}>{file.name}</strong>
+                          <div style={{fontSize:11,color:'#888',marginTop:2}}>{file.date} | {file.photos.length} photo{file.photos.length!==1?'s':''} | By {file.createdBy}</div>
+                          {file.sentTo && <div style={{fontSize:11,color:'#2e7d32',marginTop:2}}>Sent to: {file.sentTo}</div>}
+                        </div>
+                        <span style={{padding:'3px 8px',borderRadius:4,fontSize:10,fontWeight:'bold',backgroundColor:file.status==='open'?'#fff8e1':'#e8f5e9',color:file.status==='open'?'#e65100':'#2e7d32'}}>{file.status==='open'?'Open':'Closed'}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== ADMIN SITES FOLDER ========== */}
+          {user?.role === 'admin' && adminTab === 'sites' && (
+            <div>
+              {!adminSiteView ? (
+                <div>
+                  <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>All Sites</h2>
+                  <p style={{color:'#666',fontSize:13,marginBottom:16}}>Browse sites, view work progress, site files, and allocate jobs.</p>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:12}}>
+                    {[...new Set([...workLog.map(w=>w.site),...allocations.map(a=>a.site),...siteFiles.map(f=>f.site)])].sort().map(site => {
+                      const siteWork = workLog.filter(w => w.site === site);
+                      const siteAllocs = allocations.filter(a => a.site === site);
+                      const siteF = siteFiles.filter(f => f.site === site);
+                      const logged = siteWork.filter(w => w.status === 'logged').length;
+                      const allocated = siteWork.filter(w => w.status === 'allocated').length;
+                      const complete = siteWork.filter(w => w.status === 'complete').length;
+                      const activeAllocs = siteAllocs.filter(a => !a.completed && new Date(a.startDate) <= todayDate && new Date(a.endDate) >= todayDate).length;
+                      const builder = siteWork[0]?.builder || siteAllocs[0]?.builder || '';
+                      return (
+                        <div key={site} onClick={()=>{setAdminSiteView(site);setAdminSiteWorkTab('logged');}} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:10,padding:16,cursor:'pointer',transition:'box-shadow 0.2s',borderLeft:'6px solid '+GOLD}}>
+                          <h3 style={{color:NAVY,margin:'0 0 4px',fontSize:16}}>{site}</h3>
+                          <div style={{fontSize:12,color:'#888',marginBottom:10}}>{builder}</div>
+                          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,fontSize:12}}>
+                            <div style={{padding:6,backgroundColor:'#e3f2fd',borderRadius:4,textAlign:'center'}}><strong style={{color:'#1565c0'}}>{logged}</strong><div style={{fontSize:10,color:'#666'}}>Logged</div></div>
+                            <div style={{padding:6,backgroundColor:'#fff8e1',borderRadius:4,textAlign:'center'}}><strong style={{color:'#e65100'}}>{activeAllocs}</strong><div style={{fontSize:10,color:'#666'}}>In Progress</div></div>
+                            <div style={{padding:6,backgroundColor:'#e8f5e9',borderRadius:4,textAlign:'center'}}><strong style={{color:'#2e7d32'}}>{complete}</strong><div style={{fontSize:10,color:'#666'}}>Complete</div></div>
+                            <div style={{padding:6,backgroundColor:'#f3e5f5',borderRadius:4,textAlign:'center'}}><strong style={{color:'#7b1fa2'}}>{siteF.length}</strong><div style={{fontSize:10,color:'#666'}}>Site Files</div></div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:16,flexWrap:'wrap'}}>
+                    <button onClick={()=>setAdminSiteView(null)} style={{backgroundColor:NAVY,color:CREAM,padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>Back to All Sites</button>
+                    <h2 style={{ color:NAVY, margin:0, fontSize:22 }}>{adminSiteView}</h2>
+                  </div>
+                  <div style={{display:'flex',gap:6,marginBottom:16,flexWrap:'wrap'}}>
+                    {['Logged','Allocated','Complete','Site Files'].map(tab => (
+                      <button key={tab} onClick={()=>setAdminSiteWorkTab(tab.toLowerCase())} style={{padding:'8px 16px',borderRadius:4,border:'none',cursor:'pointer',fontWeight:adminSiteWorkTab===tab.toLowerCase()?'bold':'normal',fontSize:13,backgroundColor:adminSiteWorkTab===tab.toLowerCase()?GOLD:'#e0e0e0',color:adminSiteWorkTab===tab.toLowerCase()?NAVY:'#333'}}>{tab} ({tab==='Site Files'?siteFiles.filter(f=>f.site===adminSiteView).length:workLog.filter(w=>w.site===adminSiteView&&(tab==='Logged'?w.status==='logged':tab==='Allocated'?w.status==='allocated':w.status==='complete')).length})</button>
+                    ))}
+                  </div>
+                  {(adminSiteWorkTab==='logged'||adminSiteWorkTab==='allocated'||adminSiteWorkTab==='complete') && (
+                    <div>
+                      {workLog.filter(w=>w.site===adminSiteView&&(adminSiteWorkTab==='logged'?w.status==='logged':adminSiteWorkTab==='allocated'?w.status==='allocated':w.status==='complete')).length===0 ? (
+                        <p style={{color:'#888',fontSize:14}}>No {adminSiteWorkTab} work for this site.</p>
+                      ) : (
+                        workLog.filter(w=>w.site===adminSiteView&&(adminSiteWorkTab==='logged'?w.status==='logged':adminSiteWorkTab==='allocated'?w.status==='allocated':w.status==='complete')).map(item => (
+                          <div key={item.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'5px solid '+(item.status==='complete'?'#4caf50':item.status==='allocated'?GOLD:'#1565c0')}}>
+                            <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
+                              <div>
+                                <strong style={{fontSize:14,color:NAVY}}>Plot {item.plot} - {item.houseType}</strong>
+                                <div style={{fontSize:12,color:'#666',marginTop:2}}>{item.stage} | Priority: {item.priority} | {item.expectedDays}d est.</div>
+                                {item.notes && <div style={{fontSize:12,color:'#888',marginTop:2}}>{item.notes}</div>}
+                                {item.allocatedTo && <div style={{fontSize:12,color:'#2e7d32',marginTop:2}}>Allocated to: {item.allocatedTo}</div>}
+                              </div>
+                              {item.status==='logged' && (
+                                <button onClick={(e)=>{e.stopPropagation();setAllocateId(item.id);setAdminTab('allocate');}} style={{backgroundColor:GOLD,color:NAVY,padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12,alignSelf:'flex-start'}}>Allocate</button>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                  {adminSiteWorkTab==='site files' && (
+                    <div>
+                      {siteFiles.filter(f=>f.site===adminSiteView).length===0 ? (
+                        <p style={{color:'#888',fontSize:14}}>No site files for this site.</p>
+                      ) : (
+                        siteFiles.filter(f=>f.site===adminSiteView).sort((a,b)=>b.id-a.id).map(file => (
+                          <div key={file.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'5px solid '+(file.status==='open'?GOLD:'#4caf50')}}>
+                            <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+                              <div>
+                                <strong style={{fontSize:14,color:NAVY}}>{file.name}</strong>
+                                <div style={{fontSize:11,color:'#888',marginTop:2}}>{file.date} | {file.photos.length} photo{file.photos.length!==1?'s':''} | By {file.createdBy}</div>
+                                {file.sentTo && <div style={{fontSize:11,color:'#2e7d32',marginTop:2}}>Sent to: {file.sentTo}</div>}
+                              </div>
+                              <span style={{padding:'3px 8px',borderRadius:4,fontSize:10,fontWeight:'bold',backgroundColor:file.status==='open'?'#fff8e1':'#e8f5e9',color:file.status==='open'?'#e65100':'#2e7d32'}}>{file.status==='open'?'Open':'Closed'}</span>
+                            </div>
+                            {file.photos.length > 0 && (
+                              <div style={{display:'flex',gap:6,marginTop:10,overflowX:'auto',paddingBottom:4}}>
+                                {file.photos.map((photo,idx) => (
+                                  <div key={photo.id} style={{flexShrink:0,width:100}}>
+                                    {photo.dataUrl ? <img src={photo.dataUrl} alt="" style={{width:100,height:70,objectFit:'cover',borderRadius:4}} /> : <div style={{width:100,height:70,backgroundColor:'#e0e0e0',borderRadius:4,display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,color:'#999'}}>Photo {idx+1}</div>}
+                                    {photo.note && <div style={{fontSize:10,color:'#666',marginTop:2}}>{photo.note}</div>}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+
+                    {/* ========== CARPENTER SCHEDULE ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Schedule</h2>
