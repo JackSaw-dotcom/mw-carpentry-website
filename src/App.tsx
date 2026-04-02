@@ -207,8 +207,20 @@ const[delayingAllocId,setDelayingAllocId]=useState(null);
 const[delayReason,setDelayReason]=useState('');
 const[delayDays,setDelayDays]=useState(1);
 const[allFixingRequests,setAllFixingRequests]=useState([]);
+const[notifications,setNotifications]=useState([
+{id:1,type:'Toolbox Talk',title:'Working at Heights - Spring 2026',message:'All carpenters must review the updated working at heights procedure before commencing roof work. Key changes include new harness requirements and altered anchor point specifications.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-20',recipients:['Dave Mitchell','Tom Harris','Sam Bennett'],responses:{}},
+{id:2,type:'RAMS',title:'RAMS - First Fix Holbrook Park',message:'Please review and sign the Risk Assessment and Method Statement for first fix carpentry at Holbrook Park. This covers all first fix operations including floor joists, stud walls, and roof trusses.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-22',recipients:['Dave Mitchell','Tom Harris','Sam Bennett'],responses:{}},
+{id:3,type:'H&S Document',title:'Site Safety Briefing - March 2026',message:'Monthly site safety briefing document. All operatives must read and sign to confirm understanding of current site hazards and control measures.',site:'Coppice Heights',sentBy:'Admin',sentDate:'2026-03-25',recipients:['Ryan Cooper'],responses:{}}
+]);
+const[notifType,setNotifType]=useState('Toolbox Talk');
+const[notifTitle,setNotifTitle]=useState('');
+const[notifSite,setNotifSite]=useState('');
+const[notifMessage,setNotifMessage]=useState('');
+const[signingNotifId,setSigningNotifId]=useState(null);
+const[isDrawing,setIsDrawing]=useState(false);
+const sigCanvasRef=useRef(null);
   // Website/old portal states from App7
-  const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[delayReason,setDelayReason]=useState("");const[delayDuration,setDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
+  const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
 const doLogin=()=>{
 if(pin==="4444"){setPortal("mgr");setPUser({name:"Admin \u2014 M&W",role:"admin"});setPTab("dashboard");setUser({role:'admin',name:'Admin'});setCurrentPage('app');setAdminTab('dashboard');return;}
@@ -229,41 +241,38 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
 
 
 
+
   // ===== ENHANCED PORTAL =====
   if(currentPage === 'app' && user) {
   const myAllocs = allocations.filter(a => a.carpenter === user?.name);
   const todayStr = new Date().toISOString().split('T')[0];
   const todayDate = new Date(todayStr);
 
+  const myNotifications = user?.role === 'carpenter'
+    ? notifications.filter(n => n.recipients.includes(user?.name))
+    : user?.role === 'site_manager'
+    ? notifications.filter(n => n.site === user?.site)
+    : notifications;
+
+  const unreadNotifs = user?.role === 'carpenter'
+    ? myNotifications.filter(n => !n.responses[user?.name]?.read).length
+    : 0;
+
   const handleDelay = (allocId) => {
     if(!delayReason.trim()) { alert('Please enter a reason for the delay'); return; }
     const alloc = allocations.find(a => a.id === allocId);
     if(!alloc) return;
     const delayEntry = {
-      id: Date.now(),
-      allocId: allocId,
-      carpenter: alloc.carpenter,
-      site: alloc.site,
-      plot: alloc.plot,
-      houseType: alloc.houseType,
-      stage: alloc.stage,
-      reason: delayReason,
-      delayDays: delayDays,
-      originalEnd: alloc.endDate,
-      date: new Date().toLocaleDateString('en-GB'),
-      status: 'active'
+      id: Date.now(), allocId, carpenter: alloc.carpenter, site: alloc.site, plot: alloc.plot,
+      houseType: alloc.houseType, stage: alloc.stage, reason: delayReason, delayDays: delayDays,
+      originalEnd: alloc.endDate, date: new Date().toLocaleDateString('en-GB'), status: 'active'
     };
     setDelays([...delays, delayEntry]);
-    // Push this allocation's end date back
-    const newEnd = new Date(alloc.endDate);
-    newEnd.setDate(newEnd.getDate() + delayDays);
-    // Also push all subsequent allocations for this carpenter back
-    const sortedAllocs = [...allocations].sort((a,b) => new Date(a.startDate) - new Date(b.startDate));
     const updatedAllocs = allocations.map(a => {
       if(a.id === allocId) {
+        const newEnd = new Date(a.endDate); newEnd.setDate(newEnd.getDate() + delayDays);
         return {...a, endDate: newEnd.toISOString().split('T')[0], delayed: true, delayDays: (a.delayDays||0) + delayDays};
       }
-      // Push subsequent allocs for same carpenter
       if(a.carpenter === alloc.carpenter && new Date(a.startDate) > new Date(alloc.endDate)) {
         const ns = new Date(a.startDate); ns.setDate(ns.getDate() + delayDays);
         const ne = new Date(a.endDate); ne.setDate(ne.getDate() + delayDays);
@@ -272,38 +281,118 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       return a;
     });
     setAllocations(updatedAllocs);
-    setDelayingAllocId(null);
-    setDelayReason('');
-    setDelayDays(1);
+    setDelayingAllocId(null); setDelayReason(''); setDelayDays(1);
     setSuccessMsg('Delay recorded - schedule updated'); setTimeout(()=>setSuccessMsg(''),2500);
   };
 
   const markAllocComplete = (allocId) => {
     setAllocations(allocations.map(a => a.id === allocId ? {...a, completed: true, completedDate: todayStr} : a));
-    // Also update work log
     const alloc = allocations.find(a => a.id === allocId);
-    if(alloc) {
-      setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
-    }
+    if(alloc) setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
     setSuccessMsg('Job marked as complete'); setTimeout(()=>setSuccessMsg(''),2500);
   };
 
   const handleFixingRequest = (item, qty, notes, allocInfo) => {
-    const req = {
-      id: Date.now(),
-      carpenter: user?.name,
-      site: allocInfo?.site || user?.site || '',
-      plot: allocInfo?.plot || '',
-      stage: allocInfo?.stage || '',
-      item: item,
-      qty: qty,
-      notes: notes,
-      date: new Date().toLocaleDateString('en-GB'),
-      status: 'pending'
-    };
-    setAllFixingRequests([...allFixingRequests, req]);
-    return req;
+    return { id: Date.now(), carpenter: user?.name, site: allocInfo?.site || user?.site || '',
+      plot: allocInfo?.plot || '', stage: allocInfo?.stage || '', item, qty, notes,
+      date: new Date().toLocaleDateString('en-GB'), status: 'pending' };
   };
+
+  const sendNotification = () => {
+    if(!notifTitle.trim() || !notifSite || !notifMessage.trim()) { alert('Please fill in all fields'); return; }
+    const siteCarpenterNames = CARPENTERS.filter(c => c.site === notifSite).map(c => c.name);
+    if(siteCarpenterNames.length === 0) { alert('No carpenters assigned to this site'); return; }
+    const notif = {
+      id: Date.now(), type: notifType, title: notifTitle, message: notifMessage,
+      site: notifSite, sentBy: user?.name || 'Admin',
+      sentDate: new Date().toISOString().split('T')[0],
+      recipients: siteCarpenterNames, responses: {}
+    };
+    setNotifications([notif, ...notifications]);
+    setNotifTitle(''); setNotifMessage(''); setNotifSite(user?.role === 'site_manager' ? user?.site : '');
+    setSuccessMsg('Notification sent to ' + siteCarpenterNames.length + ' carpenter' + (siteCarpenterNames.length>1?'s':'')); setTimeout(()=>setSuccessMsg(''),2500);
+  };
+
+  const markNotifRead = (notifId) => {
+    setNotifications(notifications.map(n => {
+      if(n.id === notifId) {
+        const resp = {...n.responses};
+        resp[user?.name] = {...(resp[user?.name]||{}), read: true, readDate: new Date().toLocaleDateString('en-GB')};
+        return {...n, responses: resp};
+      }
+      return n;
+    }));
+  };
+
+  const startSignature = (notifId, canvas) => {
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = NAVY;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    // Draw guide line
+    ctx.save();
+    ctx.strokeStyle = '#ddd';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4,4]);
+    ctx.beginPath();
+    ctx.moveTo(10, canvas.height - 20);
+    ctx.lineTo(canvas.width - 10, canvas.height - 20);
+    ctx.stroke();
+    ctx.restore();
+    ctx.strokeStyle = NAVY;
+    ctx.lineWidth = 2;
+  };
+
+  const signNotification = (notifId) => {
+    const canvas = sigCanvasRef.current;
+    if(!canvas) return;
+    const sigData = canvas.toDataURL();
+    // Check if canvas has actual drawing (not just the guide line)
+    const ctx = canvas.getContext('2d');
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height - 25).data;
+    let hasDrawing = false;
+    for(let i = 3; i < pixels.length; i += 4) { if(pixels[i] > 0) { hasDrawing = true; break; } }
+    if(!hasDrawing) { alert('Please draw your signature above the line'); return; }
+    setNotifications(notifications.map(n => {
+      if(n.id === notifId) {
+        const resp = {...n.responses};
+        resp[user?.name] = {...(resp[user?.name]||{}), read: true, signed: true, signature: sigData,
+          signedDate: new Date().toLocaleDateString('en-GB') + ' ' + new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})};
+        return {...n, responses: resp};
+      }
+      return n;
+    }));
+    setSigningNotifId(null);
+    setSuccessMsg('Document signed successfully'); setTimeout(()=>setSuccessMsg(''),2500);
+  };
+
+  const handleCanvasMouseDown = (e) => {
+    const canvas = sigCanvasRef.current;
+    if(!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const ctx = canvas.getContext('2d');
+    setIsDrawing(true);
+    ctx.beginPath();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    ctx.moveTo(x * (canvas.width/rect.width), y * (canvas.height/rect.height));
+  };
+
+  const handleCanvasMouseMove = (e) => {
+    if(!isDrawing) return;
+    const canvas = sigCanvasRef.current;
+    if(!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const ctx = canvas.getContext('2d');
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    ctx.lineTo(x * (canvas.width/rect.width), y * (canvas.height/rect.height));
+    ctx.stroke();
+  };
+
+  const handleCanvasMouseUp = () => { setIsDrawing(false); };
 
   return (
     <div style={{ fontFamily: 'DM Sans, sans-serif', backgroundColor: CREAM, minHeight: '100vh' }}>
@@ -333,7 +422,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           transition: 'left 0.25s ease'
         }}>
 
-          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Delays','Fixings','Price Lists','Documents'].map(tab => (
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Delays','Fixings','Notifications','Price Lists','Documents'].map(tab => (
             <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -347,10 +436,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
               {tab === 'Fixings' && allFixingRequests.filter(r=>r.status==='pending').length > 0 && (
                 <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{allFixingRequests.filter(r=>r.status==='pending').length}</span>
               )}
+              {tab === 'Notifications' && notifications.some(n => n.recipients.some(r => !n.responses[r]?.signed)) && (
+                <span style={{marginLeft:6,backgroundColor:'#1565c0',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>!</span>
+              )}
             </button>
           ))}
 
-          {user?.role === 'site_manager' && ['Overview','Log Work','Documents'].map(tab => (
+          {user?.role === 'site_manager' && ['Overview','Log Work','Notifications','Documents'].map(tab => (
             <button key={tab} onClick={() => { setSiteManagerTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: siteManagerTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -361,7 +453,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </button>
           ))}
 
-          {user?.role === 'carpenter' && ['Schedule','Documents','Price Lists','Fixings','Invoice'].map(tab => (
+          {user?.role === 'carpenter' && ['Schedule','Notifications','Documents','Price Lists','Fixings','Invoice'].map(tab => (
             <button key={tab} onClick={() => { setCarpenterTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: carpenterTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -369,6 +461,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
                 fontWeight: carpenterTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
               {tab}
+              {tab === 'Notifications' && unreadNotifs > 0 && (
+                <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{unreadNotifs}</span>
+              )}
             </button>
           ))}
 
@@ -410,13 +505,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   {label:'Total Carpenters', val: CARPENTERS.length},
                   {label:'Active Sites', val: BUILDERS.reduce((s,b) => s + b.sites.length, 0)},
                   {label:'Unallocated Work', val: workLog.filter(w => w.status === 'logged').length},
-                  {label:'Allocated This Week', val: allocations.filter(a=>!a.completed).length},
+                  {label:'Allocated', val: allocations.filter(a=>!a.completed).length},
                   {label:'Active Delays', val: delays.filter(d=>d.status==='active').length},
                   {label:'Pending Fixings', val: allFixingRequests.filter(r=>r.status==='pending').length},
-                  {label:'Total Invoiced', val: 'GBP ' + invoices.filter(i => i.status === 'paid').reduce((s,i) => s + i.amount, 0)},
+                  {label:'Unsigned Docs', val: notifications.reduce((c,n)=>c+n.recipients.filter(r=>!n.responses[r]?.signed).length,0)},
                   {label:'Pending Invoices', val: 'GBP ' + invoices.filter(i => i.status === 'pending').reduce((s,i) => s + i.amount, 0)}
                 ].map((c,ci) => (
-                  <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + (c.label.includes('Delay')?'#d32f2f':GOLD) }}>
+                  <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + (c.label.includes('Delay')||c.label.includes('Unsigned')?'#d32f2f':GOLD) }}>
                     <p style={{ margin: 0, fontSize: '11px', opacity: 0.8 }}>{c.label}</p>
                     <h3 style={{ margin: '5px 0 0 0', fontSize: '24px' }}>{c.val}</h3>
                   </div>
@@ -486,8 +581,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   if(selectedSiteForLog && formData.plot && formData.houseType && formData.stage){
                     const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===selectedSiteForLog));
                     setWorkLog([...workLog, {id:Math.max(...workLog.map(w=>w.id),0)+1, site:selectedSiteForLog, builder:builder?builder.name:'', plot:formData.plot, houseType:formData.houseType, stage:formData.stage, expectedDays:formData.expectedDays, priority:formData.priority, notes:formData.notes, status:'logged'}]);
-                    setFormData({site:'',plot:'',houseType:'',stage:'',expectedDays:1,priority:'medium',notes:''});
-                    setSelectedSiteForLog('');
+                    setFormData({site:'',plot:'',houseType:'',stage:'',expectedDays:1,priority:'medium',notes:''}); setSelectedSiteForLog('');
                     setSuccessMsg('Work logged successfully'); setTimeout(()=>setSuccessMsg(''),2500);
                   }
                 }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
@@ -497,9 +591,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
               <div style={{overflowX:'auto'}}>
               <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'700px' }}>
                 <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                  {['Site','Plot','Type','Stage','Days','Priority','Status','Allocated To'].map(h => (
-                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
-                  ))}
+                  {['Site','Plot','Type','Stage','Days','Priority','Status','Allocated To'].map(h => <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>)}
                 </tr></thead>
                 <tbody>
                   {workLog.map((item, idx) => (
@@ -515,8 +607,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     </tr>
                   ))}
                 </tbody>
-              </table>
-              </div>
+              </table></div>
             </div>
           )}
 
@@ -524,15 +615,11 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'admin' && adminTab === 'allocate' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Allocate Work</h2>
-              {workLog.filter(w => w.status === 'logged').length === 0 ? (
-                <p style={{color:'#666', fontSize:14}}>No unallocated work items. Add work via the Work Log tab.</p>
-              ) : (
+              {workLog.filter(w => w.status === 'logged').length === 0 ? <p style={{color:'#666', fontSize:14}}>No unallocated work items.</p> : (
               <div style={{overflowX:'auto'}}>
               <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'600px' }}>
                 <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                  {['Site','Plot','Type','Stage','Days','Action'].map(h => (
-                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
-                  ))}
+                  {['Site','Plot','Type','Stage','Days','Action'].map(h => <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>)}
                 </tr></thead>
                 <tbody>
                   {workLog.filter(w => w.status === 'logged').map((item, idx) => (
@@ -548,12 +635,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                             <select value={allocateCarpenter} onChange={(e) => setAllocateCarpenter(e.target.value)}
                               style={{ padding:'5px', borderRadius:'3px', border:'1px solid '+GOLD, fontSize:'11px', minWidth:'120px' }}>
                               <option value="">Select Carpenter</option>
-                              {CARPENTERS.filter(c => !c.status || c.status !== 'leave').map(c => (
-                                <option key={c.id} value={c.name}>{c.name} - {c.site}</option>
-                              ))}
+                              {CARPENTERS.filter(c => !c.status || c.status !== 'leave').map(c => <option key={c.id} value={c.name}>{c.name} - {c.site}</option>)}
                             </select>
-                            <input type="date" value={allocateStartDate} onChange={(e) => setAllocateStartDate(e.target.value)}
-                              style={{ padding:'5px', borderRadius:'3px', border:'1px solid '+GOLD, fontSize:'11px' }} />
+                            <input type="date" value={allocateStartDate} onChange={(e) => setAllocateStartDate(e.target.value)} style={{ padding:'5px', borderRadius:'3px', border:'1px solid '+GOLD, fontSize:'11px' }} />
                             <button onClick={() => {
                               if(allocateCarpenter && allocateStartDate){
                                 const ed=new Date(allocateStartDate); ed.setDate(ed.getDate()+item.expectedDays-1);
@@ -562,27 +646,17 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                                 setAllocateId(null); setAllocateCarpenter(''); setAllocateStartDate('');
                                 setSuccessMsg('Work allocated to '+allocateCarpenter); setTimeout(()=>setSuccessMsg(''),2500);
                               }
-                            }} style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>
-                              Confirm
-                            </button>
-                            <button onClick={() => {setAllocateId(null);setAllocateCarpenter('');setAllocateStartDate('');}}
-                              style={{ backgroundColor:'#999', color:'white', padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px' }}>
-                              Cancel
-                            </button>
+                            }} style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>Confirm</button>
+                            <button onClick={() => {setAllocateId(null);setAllocateCarpenter('');setAllocateStartDate('');}} style={{ backgroundColor:'#999', color:'white', padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px' }}>Cancel</button>
                           </div>
                         ) : (
-                          <button onClick={() => setAllocateId(item.id)}
-                            style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>
-                            Allocate
-                          </button>
+                          <button onClick={() => setAllocateId(item.id)} style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>Allocate</button>
                         )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
-              </div>
-              )}
+              </table></div>)}
             </div>
           )}
 
@@ -591,44 +665,29 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Schedule</h2>
               <div style={{ marginBottom:'15px' }}>
-                <button onClick={() => setScheduleView('gantt')}
-                  style={{ backgroundColor: scheduleView==='gantt'?GOLD:'#ccc', color: scheduleView==='gantt'?NAVY:'black', padding:'8px 15px', margin:'0 5px 0 0', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>
-                  Gantt View
-                </button>
-                <button onClick={() => setScheduleView('list')}
-                  style={{ backgroundColor: scheduleView==='list'?GOLD:'#ccc', color: scheduleView==='list'?NAVY:'black', padding:'8px 15px', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>
-                  List View
-                </button>
+                <button onClick={() => setScheduleView('gantt')} style={{ backgroundColor: scheduleView==='gantt'?GOLD:'#ccc', color: scheduleView==='gantt'?NAVY:'black', padding:'8px 15px', margin:'0 5px 0 0', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>Gantt</button>
+                <button onClick={() => setScheduleView('list')} style={{ backgroundColor: scheduleView==='list'?GOLD:'#ccc', color: scheduleView==='list'?NAVY:'black', padding:'8px 15px', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>List</button>
               </div>
               {scheduleView === 'gantt' && (
                 <div style={{ overflowX:'auto', backgroundColor:'white', padding:'15px', borderRadius:'8px' }}>
                   <div style={{ display:'flex' }}>
                     <div style={{ width:'130px', flexShrink:0 }}>
                       <div style={{ fontWeight:'bold', padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:12 }}>Carpenter</div>
-                      {[...new Set(allocations.map(a => a.carpenter))].map(carp => (
-                        <div key={carp} style={{ padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:'12px' }}>{carp}</div>
-                      ))}
+                      {[...new Set(allocations.map(a => a.carpenter))].map(carp => <div key={carp} style={{ padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:'12px' }}>{carp}</div>)}
                     </div>
                     <div style={{ display:'flex', flex:1 }}>
                       {Array.from({length:21},(_,i) => {
                         const date = new Date(2026,2,24+i);
-                        return (
-                          <div key={i} style={{ minWidth:'45px', flexShrink:0, borderRight:'1px solid #eee' }}>
-                            <div style={{ fontWeight:'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center' }}>
-                              {formatDate(date).split(' ')[0]} {date.getDate()}
-                            </div>
-                            {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
-                              const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
-                              return (
-                                <div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px',
-                                  backgroundColor: af ? (af.completed ? '#c8e6c9' : af.delayed ? '#ffcdd2' : GOLD) : 'white',
-                                  color: af ? NAVY : '#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
-                                  {af ? (af.completed ? 'Done' : af.site.substring(0,4)) : ''}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        );
+                        return (<div key={i} style={{ minWidth:'45px', flexShrink:0, borderRight:'1px solid #eee' }}>
+                          <div style={{ fontWeight:'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center' }}>{formatDate(date).split(' ')[0]} {date.getDate()}</div>
+                          {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
+                            const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
+                            return (<div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px',
+                              backgroundColor: af?(af.completed?'#c8e6c9':af.delayed?'#ffcdd2':GOLD):'white',
+                              color: af?NAVY:'#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
+                              {af?(af.completed?'Done':af.site.substring(0,4)):''}</div>);
+                          })}
+                        </div>);
                       })}
                     </div>
                   </div>
@@ -643,9 +702,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 <div style={{overflowX:'auto'}}>
                 <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'700px' }}>
                   <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                    {['Carpenter','Site','Plot','Type','Stage','Start','End','Status'].map(h => (
-                      <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
-                    ))}
+                    {['Carpenter','Site','Plot','Type','Stage','Start','End','Status'].map(h => <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>)}
                   </tr></thead>
                   <tbody>
                     {allocations.map((alloc,idx) => (
@@ -658,15 +715,12 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.startDate)}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.endDate)}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>
-                          {alloc.completed ? <span style={{color:'#2e7d32',fontWeight:'bold'}}>Complete</span> :
-                           alloc.delayed ? <span style={{color:'#d32f2f',fontWeight:'bold'}}>Delayed +{alloc.delayDays}d</span> :
-                           <span style={{color:GOLD,fontWeight:'bold'}}>Active</span>}
+                          {alloc.completed?<span style={{color:'#2e7d32',fontWeight:'bold'}}>Complete</span>:alloc.delayed?<span style={{color:'#d32f2f',fontWeight:'bold'}}>Delayed +{alloc.delayDays}d</span>:<span style={{color:GOLD,fontWeight:'bold'}}>Active</span>}
                         </td>
                       </tr>
                     ))}
                   </tbody>
-                </table>
-                </div>
+                </table></div>
               )}
             </div>
           )}
@@ -678,24 +732,18 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
               <div style={{overflowX:'auto'}}>
               <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'500px' }}>
                 <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                  {['ID','Name','PIN','Site','Builder','Status'].map(h => (
-                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
-                  ))}
+                  {['ID','Name','PIN','Site','Builder','Status'].map(h => <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>)}
                 </tr></thead>
                 <tbody>
                   {CARPENTERS.map((carp,idx) => (
                     <tr key={carp.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.id}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.name}</td>
-                      <td style={{ padding:'8px', fontSize:'12px', fontFamily:'monospace' }}>{carp.pin}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.site}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.builder}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.status || 'Active'}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.id}</td><td style={{ padding:'8px', fontSize:'12px' }}>{carp.name}</td>
+                      <td style={{ padding:'8px', fontSize:'12px', fontFamily:'monospace' }}>{carp.pin}</td><td style={{ padding:'8px', fontSize:'12px' }}>{carp.site}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.builder}</td><td style={{ padding:'8px', fontSize:'12px' }}>{carp.status || 'Active'}</td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
-              </div>
+              </table></div>
             </div>
           )}
 
@@ -703,51 +751,24 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'admin' && adminTab === 'delays' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Delayed Works</h2>
-              {delays.length === 0 ? (
-                <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}>
-                  <p style={{color:'#666',fontSize:14,margin:0}}>No delays reported.</p>
-                </div>
-              ) : (
+              {delays.length === 0 ? <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}><p style={{color:'#666',fontSize:14,margin:0}}>No delays reported.</p></div> : (
                 <div>
-                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(160px, 1fr))',gap:12,marginBottom:20}}>
-                    <div style={{backgroundColor:'#d32f2f',color:'white',padding:14,borderRadius:8}}>
-                      <p style={{margin:0,fontSize:11,opacity:.8}}>Active Delays</p>
-                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.filter(d=>d.status==='active').length}</h3>
-                    </div>
-                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8}}>
-                      <p style={{margin:0,fontSize:11,opacity:.8}}>Total Delay Days</p>
-                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.reduce((s,d)=>s+d.delayDays,0)}</h3>
-                    </div>
-                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8}}>
-                      <p style={{margin:0,fontSize:11,opacity:.8}}>Resolved</p>
-                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.filter(d=>d.status==='resolved').length}</h3>
-                    </div>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:12,marginBottom:20}}>
+                    <div style={{backgroundColor:'#d32f2f',color:'white',padding:14,borderRadius:8}}><p style={{margin:0,fontSize:11,opacity:.8}}>Active Delays</p><h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.filter(d=>d.status==='active').length}</h3></div>
+                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8}}><p style={{margin:0,fontSize:11,opacity:.8}}>Total Delay Days</p><h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.reduce((s,d)=>s+d.delayDays,0)}</h3></div>
                   </div>
                   {delays.sort((a,b)=>b.id-a.id).map(d => (
-                    <div key={d.id} style={{backgroundColor:'white',border: d.status==='active'?'2px solid #d32f2f':'1px solid #ddd',borderLeft: d.status==='active'?'5px solid #d32f2f':'5px solid #999',borderRadius:8,padding:16,marginBottom:10}}>
-                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
-                        <div>
-                          <strong style={{fontSize:15}}>{d.carpenter}</strong>
-                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{d.site} - Plot {d.plot} / {d.houseType} / {d.stage}</div>
-                        </div>
+                    <div key={d.id} style={{backgroundColor:'white',border:d.status==='active'?'2px solid #d32f2f':'1px solid #ddd',borderLeft:d.status==='active'?'5px solid #d32f2f':'5px solid #999',borderRadius:8,padding:16,marginBottom:10}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+                        <div><strong style={{fontSize:15}}>{d.carpenter}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{d.site} - Plot {d.plot} / {d.stage}</div></div>
                         <div style={{textAlign:'right'}}>
-                          <span style={{display:'inline-block',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold',
-                            backgroundColor: d.status==='active'?'#ffebee':'#e8f5e9', color: d.status==='active'?'#c62828':'#2e7d32'}}>
-                            {d.status==='active'?'ACTIVE DELAY':'RESOLVED'}
-                          </span>
+                          <span style={{display:'inline-block',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold',backgroundColor:d.status==='active'?'#ffebee':'#e8f5e9',color:d.status==='active'?'#c62828':'#2e7d32'}}>{d.status==='active'?'ACTIVE':'RESOLVED'}</span>
                           <div style={{fontSize:12,marginTop:4,fontWeight:'bold',color:'#d32f2f'}}>+{d.delayDays} day{d.delayDays>1?'s':''}</div>
                         </div>
                       </div>
-                      <div style={{marginTop:10,padding:10,backgroundColor:'#fafafa',borderRadius:4,fontSize:13}}>
-                        <strong>Reason:</strong> {d.reason}
-                      </div>
-                      <div style={{marginTop:6,fontSize:11,color:'#999'}}>Reported: {d.date} | Original end: {d.originalEnd}</div>
-                      {d.status === 'active' && (
-                        <button onClick={() => setDelays(delays.map(dd => dd.id===d.id ? {...dd, status:'resolved'} : dd))}
-                          style={{marginTop:8,backgroundColor:'#2e7d32',color:'white',padding:'5px 12px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
-                          Mark Resolved
-                        </button>
-                      )}
+                      <div style={{marginTop:10,padding:10,backgroundColor:'#fafafa',borderRadius:4,fontSize:13}}><strong>Reason:</strong> {d.reason}</div>
+                      <div style={{marginTop:6,fontSize:11,color:'#999'}}>Reported: {d.date}</div>
+                      {d.status==='active' && <button onClick={()=>setDelays(delays.map(dd=>dd.id===d.id?{...dd,status:'resolved'}:dd))} style={{marginTop:8,backgroundColor:'#2e7d32',color:'white',padding:'5px 12px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>Mark Resolved</button>}
                     </div>
                   ))}
                 </div>
@@ -755,64 +776,134 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
-          {/* ========== ADMIN FIXINGS MANAGEMENT ========== */}
+          {/* ========== ADMIN FIXINGS ========== */}
           {user?.role === 'admin' && adminTab === 'fixings' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Fixings and Materials Requests</h2>
-              {allFixingRequests.length === 0 ? (
-                <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}>
-                  <p style={{color:'#666',fontSize:14,margin:0}}>No fixing requests yet. Carpenters can submit requests from their portal.</p>
-                </div>
-              ) : (
+              {allFixingRequests.length === 0 ? <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}><p style={{color:'#666',fontSize:14,margin:0}}>No fixing requests yet.</p></div> : (
                 <div>
-                  <div style={{display:'flex',gap:8,marginBottom:15,flexWrap:'wrap'}}>
-                    {['all','pending','approved','denied'].map(f => (
-                      <button key={f} onClick={() => setPlotFilter(f)}
-                        style={{padding:'6px 14px',borderRadius:4,border:'none',cursor:'pointer',fontSize:12,fontWeight:'bold',
-                          backgroundColor:plotFilter===f?GOLD:'#ddd', color:plotFilter===f?NAVY:'#333'}}>
-                        {f.charAt(0).toUpperCase()+f.slice(1)} {f!=='all' && <span>({allFixingRequests.filter(r=>r.status===f).length})</span>}
-                      </button>
-                    ))}
-                  </div>
-                  {allFixingRequests.filter(r => plotFilter==='all' || !plotFilter || r.status===plotFilter).sort((a,b)=>b.id-a.id).map(req => (
-                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderLeft: req.status==='pending'?'5px solid '+GOLD : req.status==='approved'?'5px solid #2e7d32':'5px solid #999', borderRadius:8,padding:14,marginBottom:10}}>
-                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
+                  {allFixingRequests.sort((a,b)=>b.id-a.id).map(req => (
+                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderLeft:req.status==='pending'?'5px solid '+GOLD:req.status==='approved'?'5px solid #2e7d32':'5px solid #999',borderRadius:8,padding:14,marginBottom:10}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
                         <div>
                           <strong style={{fontSize:14}}>{req.carpenter}</strong>
-                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{req.site}{req.plot ? ' - Plot '+req.plot : ''} {req.stage ? '/ '+req.stage : ''}</div>
+                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{req.site}{req.plot?' - Plot '+req.plot:''}</div>
                           <div style={{marginTop:6,fontSize:14}}><strong>{req.item}</strong> x {req.qty}</div>
                           {req.notes && <div style={{fontSize:12,color:'#888',marginTop:4}}>Note: {req.notes}</div>}
-                          <div style={{fontSize:11,color:'#aaa',marginTop:4}}>Requested: {req.date}</div>
                         </div>
                         <div style={{display:'flex',gap:6,alignItems:'center'}}>
-                          {req.status === 'pending' && (
-                            <>
-                              <button onClick={() => {
-                                setAllFixingRequests(allFixingRequests.map(r => r.id===req.id ? {...r, status:'approved'} : r));
-                                setSuccessMsg('Fixing request approved'); setTimeout(()=>setSuccessMsg(''),2500);
-                              }} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
-                                Approve
-                              </button>
-                              <button onClick={() => {
-                                setAllFixingRequests(allFixingRequests.map(r => r.id===req.id ? {...r, status:'denied'} : r));
-                                setSuccessMsg('Fixing request denied'); setTimeout(()=>setSuccessMsg(''),2500);
-                              }} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
-                                Deny
-                              </button>
-                            </>
-                          )}
-                          {req.status !== 'pending' && (
-                            <span style={{padding:'4px 12px',borderRadius:4,fontSize:11,fontWeight:'bold',
-                              backgroundColor: req.status==='approved'?'#e8f5e9':'#ffebee',
-                              color: req.status==='approved'?'#2e7d32':'#c62828'}}>
-                              {req.status.toUpperCase()}
-                            </span>
-                          )}
+                          {req.status==='pending' && (<>
+                            <button onClick={()=>{setAllFixingRequests(allFixingRequests.map(r=>r.id===req.id?{...r,status:'approved'}:r));setSuccessMsg('Approved');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>Approve</button>
+                            <button onClick={()=>{setAllFixingRequests(allFixingRequests.map(r=>r.id===req.id?{...r,status:'denied'}:r));setSuccessMsg('Denied');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>Deny</button>
+                          </>)}
+                          {req.status!=='pending' && <span style={{padding:'4px 12px',borderRadius:4,fontSize:11,fontWeight:'bold',backgroundColor:req.status==='approved'?'#e8f5e9':'#ffebee',color:req.status==='approved'?'#2e7d32':'#c62828'}}>{req.status.toUpperCase()}</span>}
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== ADMIN + SITE MANAGER NOTIFICATIONS (SEND) ========== */}
+          {((user?.role === 'admin' && adminTab === 'notifications') || (user?.role === 'site_manager' && siteManagerTab === 'notifications')) && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Notifications and Signing</h2>
+
+              {/* Send form */}
+              <div style={{backgroundColor:NAVY,color:CREAM,padding:'20px',borderRadius:'8px',marginBottom:'25px'}}>
+                <h3 style={{margin:'0 0 15px',fontSize:16,color:GOLD}}>Send New Notification</h3>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:12,marginBottom:12}}>
+                  <div>
+                    <label style={{display:'block',marginBottom:4,fontSize:11}}>Type</label>
+                    <select value={notifType} onChange={(e)=>setNotifType(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}>
+                      <option value="Toolbox Talk">Toolbox Talk</option>
+                      <option value="RAMS">RAMS (Risk Assessment)</option>
+                      <option value="H&S Document">H&S Document</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{display:'block',marginBottom:4,fontSize:11}}>Site</label>
+                    {user?.role === 'site_manager' ? (
+                      <input type="text" value={user?.site} disabled style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,backgroundColor:'#eee',boxSizing:'border-box'}} />
+                    ) : (
+                      <select value={notifSite} onChange={(e)=>setNotifSite(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}>
+                        <option value="">Select Site</option>
+                        {BUILDERS.flatMap(b=>b.sites.map(s=>s.name)).map(s=><option key={s} value={s}>{s}</option>)}
+                      </select>
+                    )}
+                  </div>
+                </div>
+                <div style={{marginBottom:12}}>
+                  <label style={{display:'block',marginBottom:4,fontSize:11}}>Title</label>
+                  <input type="text" value={notifTitle} onChange={(e)=>setNotifTitle(e.target.value)} placeholder="e.g. Working at Heights Briefing"
+                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,boxSizing:'border-box',fontSize:13}} />
+                </div>
+                <div style={{marginBottom:12}}>
+                  <label style={{display:'block',marginBottom:4,fontSize:11}}>Message / Document Details</label>
+                  <textarea value={notifMessage} onChange={(e)=>setNotifMessage(e.target.value)} placeholder="Enter the full details of the toolbox talk, RAMS, or H&S document..."
+                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:100,boxSizing:'border-box',fontFamily:'inherit',fontSize:13}} />
+                </div>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:10}}>
+                  <div style={{fontSize:12,opacity:.8}}>
+                    Will be sent to: {CARPENTERS.filter(c=>c.site===(user?.role==='site_manager'?user?.site:notifSite)).map(c=>c.name).join(', ') || 'Select a site'}
+                  </div>
+                  <button type="button" onClick={()=>{
+                    if(user?.role==='site_manager') { if(!notifTitle.trim()||!notifMessage.trim()){alert('Please fill in all fields');return;} const siteCarpenterNames=CARPENTERS.filter(c=>c.site===user?.site).map(c=>c.name); if(siteCarpenterNames.length===0){alert('No carpenters on this site');return;} setNotifications([{id:Date.now(),type:notifType,title:notifTitle,message:notifMessage,site:user?.site,sentBy:user?.name,sentDate:new Date().toISOString().split('T')[0],recipients:siteCarpenterNames,responses:{}},...notifications]); setNotifTitle('');setNotifMessage(''); setSuccessMsg('Sent to '+siteCarpenterNames.length+' carpenter'+(siteCarpenterNames.length>1?'s':'')); setTimeout(()=>setSuccessMsg(''),2500); }
+                    else sendNotification();
+                  }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 24px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>
+                    Send to Site
+                  </button>
+                </div>
+              </div>
+
+              {/* Sent notifications with response tracking */}
+              <h3 style={{color:NAVY,fontSize:16,marginBottom:12}}>Sent Notifications</h3>
+              {myNotifications.length === 0 ? <p style={{color:'#666',fontSize:14}}>No notifications sent yet.</p> : (
+                myNotifications.sort((a,b)=>b.id-a.id).map(notif => {
+                  const totalRecipients = notif.recipients.length;
+                  const readCount = notif.recipients.filter(r=>notif.responses[r]?.read).length;
+                  const signedCount = notif.recipients.filter(r=>notif.responses[r]?.signed).length;
+                  return (
+                    <div key={notif.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:16,marginBottom:12}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8,marginBottom:10}}>
+                        <div>
+                          <span style={{display:'inline-block',padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold',marginRight:6,
+                            backgroundColor:notif.type==='Toolbox Talk'?'#e3f2fd':notif.type==='RAMS'?'#fff3e0':'#fce4ec',
+                            color:notif.type==='Toolbox Talk'?'#1565c0':notif.type==='RAMS'?'#e65100':'#c62828'}}>{notif.type}</span>
+                          <strong style={{fontSize:15}}>{notif.title}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:4}}>Site: {notif.site} | Sent: {notif.sentDate} | By: {notif.sentBy}</div>
+                        </div>
+                        <div style={{textAlign:'right',fontSize:12}}>
+                          <div>Read: <strong>{readCount}/{totalRecipients}</strong></div>
+                          <div style={{color: signedCount===totalRecipients?'#2e7d32':'#e65100',fontWeight:'bold'}}>Signed: {signedCount}/{totalRecipients}</div>
+                        </div>
+                      </div>
+                      <div style={{fontSize:13,color:'#333',marginBottom:12,padding:10,backgroundColor:'#fafafa',borderRadius:4,whiteSpace:'pre-wrap'}}>{notif.message}</div>
+                      <div style={{borderTop:'1px solid #eee',paddingTop:10}}>
+                        <p style={{margin:'0 0 8px',fontSize:12,fontWeight:'bold',color:NAVY}}>Responses:</p>
+                        {notif.recipients.map(name => {
+                          const resp = notif.responses[name];
+                          return (
+                            <div key={name} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'6px 8px',marginBottom:4,backgroundColor:resp?.signed?'#e8f5e9':resp?.read?'#fff8e1':'#f5f5f5',borderRadius:4,fontSize:13}}>
+                              <span>{name}</span>
+                              <div style={{display:'flex',gap:8,alignItems:'center'}}>
+                                {resp?.read && <span style={{fontSize:11,color:'#666'}}>Read {resp.readDate}</span>}
+                                {resp?.signed ? (
+                                  <span style={{fontSize:11,color:'#2e7d32',fontWeight:'bold'}}>Signed {resp.signedDate}</span>
+                                ) : (
+                                  <span style={{fontSize:11,color:'#e65100'}}>Awaiting signature</span>
+                                )}
+                                {resp?.signature && <img src={resp.signature} alt="sig" style={{height:25,border:'1px solid #ddd',borderRadius:2}} />}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })
               )}
             </div>
           )}
@@ -820,23 +911,16 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {/* ========== ADMIN PRICE LISTS ========== */}
           {user?.role === 'admin' && adminTab === 'price lists' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists by Builder and Site</h2>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
               {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
                 <div key={builder} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
                   <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{builder}</h3>
                   {Object.entries(sites).map(([site, rates]) => (
                     <div key={site} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
                       <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{site}</h4>
-                      <table style={{ width:'100%', fontSize:'12px' }}>
-                        <tbody>
-                          {Object.entries(rates).map(([stage, price]) => (
-                            <tr key={stage} style={{ borderBottom:'1px solid #eee' }}>
-                              <td style={{ padding:'4px' }}>{stage}</td>
-                              <td style={{ padding:'4px', textAlign:'right', fontWeight:'bold' }}>GBP {price}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                      <table style={{ width:'100%', fontSize:'12px' }}><tbody>
+                        {Object.entries(rates).map(([stage, price]) => <tr key={stage} style={{borderBottom:'1px solid #eee'}}><td style={{padding:'4px'}}>{stage}</td><td style={{padding:'4px',textAlign:'right',fontWeight:'bold'}}>GBP {price}</td></tr>)}
+                      </tbody></table>
                     </div>
                   ))}
                 </div>
@@ -851,14 +935,10 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
               {Object.entries(DOCUMENTS).map(([site, categories]) => (
                 <div key={site} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
                   <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{site}</h3>
-                  {Object.entries(categories).map(([category, docs]) => (
-                    <div key={category} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
-                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{category}</h4>
-                      <div style={{ fontSize:'13px' }}>
-                        {docs.map((doc, idx) => (
-                          <div key={idx} style={{ marginBottom:'4px', padding:'6px 8px', backgroundColor:'white', borderRadius:'3px' }}>{doc}</div>
-                        ))}
-                      </div>
+                  {Object.entries(categories).map(([cat, docs]) => (
+                    <div key={cat} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
+                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{cat}</h4>
+                      {docs.map((doc,idx) => <div key={idx} style={{marginBottom:4,padding:'6px 8px',backgroundColor:'white',borderRadius:3,fontSize:13}}>{doc}</div>)}
                     </div>
                   ))}
                 </div>
@@ -870,33 +950,17 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'site_manager' && siteManagerTab === 'overview' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Site Overview: {user?.site}</h2>
-              <div style={{ marginBottom:'15px' }}>
-                <input type="text" placeholder="Filter by plot number" value={plotFilter} onChange={(e) => setPlotFilter(e.target.value)}
-                  style={{ padding:'8px', borderRadius:'4px', border:'2px solid '+GOLD, fontSize:'14px', width:'100%', maxWidth:'250px', boxSizing:'border-box' }} />
-              </div>
-              {workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter))).length === 0 ? (
-                <p style={{color:'#666', fontSize:14}}>No work logged for this site yet. Use Log Work to add entries.</p>
-              ) : (
+              <input type="text" placeholder="Filter by plot" value={plotFilter} onChange={(e)=>setPlotFilter(e.target.value)} style={{padding:8,borderRadius:4,border:'2px solid '+GOLD,fontSize:14,width:'100%',maxWidth:250,boxSizing:'border-box',marginBottom:15}} />
+              {workLog.filter(w=>w.site===user?.site&&(plotFilter===''||w.plot.includes(plotFilter))).length===0 ? <p style={{color:'#666',fontSize:14}}>No work logged for this site.</p> : (
               <div style={{overflowX:'auto'}}>
-              <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'400px' }}>
-                <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                  {['Plot','House Type','Current Stage','Carpenter'].map(h => (
-                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
-                  ))}
-                </tr></thead>
-                <tbody>
-                  {workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter))).map((item,idx) => (
-                    <tr key={item.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.plot}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.houseType}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.stage}</td>
-                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.allocatedTo || '-'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              </div>
-              )}
+              <table style={{width:'100%',borderCollapse:'collapse',minWidth:400}}>
+                <thead><tr style={{backgroundColor:NAVY,color:CREAM}}>{['Plot','House Type','Stage','Carpenter'].map(h=><th key={h} style={{padding:10,textAlign:'left',fontSize:11}}>{h}</th>)}</tr></thead>
+                <tbody>{workLog.filter(w=>w.site===user?.site&&(plotFilter===''||w.plot.includes(plotFilter))).map((item,idx)=>(
+                  <tr key={item.id} style={{backgroundColor:idx%2===0?'#f9f9f9':'white',borderBottom:'1px solid #ddd'}}>
+                    <td style={{padding:8,fontSize:12}}>{item.plot}</td><td style={{padding:8,fontSize:12}}>{item.houseType}</td>
+                    <td style={{padding:8,fontSize:12}}>{item.stage}</td><td style={{padding:8,fontSize:12}}>{item.allocatedTo||'-'}</td>
+                  </tr>))}</tbody>
+              </table></div>)}
             </div>
           )}
 
@@ -904,43 +968,23 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'site_manager' && siteManagerTab === 'log work' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Log Work Request</h2>
-              <div style={{ backgroundColor:NAVY, color:CREAM, padding:'20px', borderRadius:'8px', maxWidth:'500px' }}>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Plot Number</label>
-                  <input type="text" placeholder="e.g. 34" value={smPlot} onChange={(e) => setSmPlot(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>House Type</label>
-                  <select value={smHouseType} onChange={(e) => setSmHouseType(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
-                    <option value="">Select</option>
-                    {getSiteHousetypes(user?.site).map(ht => <option key={ht} value={ht}>{ht}</option>)}
-                  </select>
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Stage</label>
-                  <select value={smStage} onChange={(e) => setSmStage(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
-                    <option value="">Select</option>
-                    {['Joists','Roof','First Fix','Drop Backs','Second Fix','Final','Snags'].map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Notes</label>
-                  <textarea placeholder="Any additional details..." value={smNotes} onChange={(e) => setSmNotes(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, minHeight:'60px', boxSizing:'border-box', fontFamily:'inherit', fontSize:13 }} />
-                </div>
-                <button type="button" onClick={() => {
-                  if(smPlot && smHouseType && smStage){
-                    const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===user?.site));
-                    setWorkLog([...workLog, {id:Math.max(...workLog.map(w=>w.id),0)+1, site:user?.site, builder:builder?builder.name:'', plot:smPlot, houseType:smHouseType, stage:smStage, expectedDays:2, priority:'medium', notes:smNotes, status:'logged'}]);
-                    setSmPlot(''); setSmHouseType(''); setSmStage(''); setSmNotes('');
-                    setSuccessMsg('Work request submitted'); setTimeout(()=>setSuccessMsg(''),2500);
-                  } else { alert('Please fill in plot, house type and stage'); }
-                }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
-                  Submit Request
-                </button>
+              <div style={{backgroundColor:NAVY,color:CREAM,padding:20,borderRadius:8,maxWidth:500}}>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Plot Number</label>
+                  <input type="text" placeholder="e.g. 34" value={smPlot} onChange={(e)=>setSmPlot(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,boxSizing:'border-box',fontSize:13}} /></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>House Type</label>
+                  <select value={smHouseType} onChange={(e)=>setSmHouseType(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}>
+                    <option value="">Select</option>{getSiteHousetypes(user?.site).map(ht=><option key={ht} value={ht}>{ht}</option>)}</select></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Stage</label>
+                  <select value={smStage} onChange={(e)=>setSmStage(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}>
+                    <option value="">Select</option>{['Joists','Roof','First Fix','Drop Backs','Second Fix','Final','Snags'].map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Notes</label>
+                  <textarea placeholder="Details..." value={smNotes} onChange={(e)=>setSmNotes(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:60,boxSizing:'border-box',fontFamily:'inherit',fontSize:13}} /></div>
+                <button type="button" onClick={()=>{
+                  if(smPlot&&smHouseType&&smStage){const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===user?.site));
+                    setWorkLog([...workLog,{id:Math.max(...workLog.map(w=>w.id),0)+1,site:user?.site,builder:builder?builder.name:'',plot:smPlot,houseType:smHouseType,stage:smStage,expectedDays:2,priority:'medium',notes:smNotes,status:'logged'}]);
+                    setSmPlot('');setSmHouseType('');setSmStage('');setSmNotes('');setSuccessMsg('Work request submitted');setTimeout(()=>setSuccessMsg(''),2500);
+                  }else{alert('Please fill in all fields');}
+                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Submit Request</button>
               </div>
             </div>
           )}
@@ -949,123 +993,66 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'site_manager' && siteManagerTab === 'documents' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
-              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
-                <div key={category} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
-                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:15 }}>{category}</h3>
-                  <div style={{ fontSize:'13px' }}>
-                    {docs.map((doc, idx) => (
-                      <div key={idx} style={{ marginBottom:'6px', padding:'8px', backgroundColor:'#f9f9f9', borderRadius:'4px', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
-                        <span>{doc}</span>
-                        <button onClick={() => { setSuccessMsg('Download started: '+doc); setTimeout(()=>setSuccessMsg(''),2500); }}
-                          style={{ padding:'4px 10px', fontSize:'11px', backgroundColor:GOLD, color:NAVY, border:'none', borderRadius:'3px', cursor:'pointer', fontWeight:'bold' }}>
-                          View
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([cat,docs])=>(
+                <div key={cat} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
+                  <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:15}}>{cat}</h3>
+                  {docs.map((doc,idx)=><div key={idx} style={{marginBottom:6,padding:8,backgroundColor:'#f9f9f9',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8,fontSize:13}}>
+                    <span>{doc}</span><button onClick={()=>{setSuccessMsg('Download: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>View</button>
+                  </div>)}
                 </div>
               ))}
             </div>
           )}
 
-          {/* ========== CARPENTER SCHEDULE (MOBILE-FIRST WITH DELAY) ========== */}
+          {/* ========== CARPENTER SCHEDULE ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Week</h2>
-              {myAllocs.length === 0 ? (
-                <div style={{ backgroundColor:'white', padding:'20px', borderRadius:'8px', textAlign:'center' }}>
-                  <p style={{ color:'#666', fontSize:16, margin:0 }}>No work scheduled.</p>
-                  <p style={{ color:'#999', fontSize:13, marginTop:8 }}>Check back later or contact your site manager.</p>
-                </div>
-              ) : (
+              {myAllocs.length === 0 ? <div style={{backgroundColor:'white',padding:20,borderRadius:8,textAlign:'center'}}><p style={{color:'#666',fontSize:16,margin:0}}>No work scheduled.</p></div> : (
                 <div>
                   {myAllocs.sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).map(alloc => {
-                    const start = new Date(alloc.startDate);
-                    const end = new Date(alloc.endDate);
-                    const isActive = todayDate >= start && todayDate <= end && !alloc.completed;
-                    const isPast = todayDate > end || alloc.completed;
-                    const isFuture = todayDate < start;
-                    const totalDays = daysInRange(alloc.startDate, alloc.endDate);
-                    const daysWorked = isActive ? Math.max(1, Math.ceil((todayDate - start)/(1000*60*60*24))+1) : isPast ? totalDays : 0;
-                    const progress = isPast ? 100 : isActive ? Math.round((daysWorked/totalDays)*100) : 0;
+                    const start=new Date(alloc.startDate);const end=new Date(alloc.endDate);
+                    const isActive=todayDate>=start&&todayDate<=end&&!alloc.completed;const isPast=todayDate>end||alloc.completed;const isFuture=todayDate<start;
+                    const totalDays=daysInRange(alloc.startDate,alloc.endDate);
+                    const daysWorked=isActive?Math.max(1,Math.ceil((todayDate-start)/(864e5))+1):isPast?totalDays:0;
+                    const progress=isPast?100:isActive?Math.round((daysWorked/totalDays)*100):0;
                     return (
-                      <div key={alloc.id} style={{
-                        backgroundColor: '#fff',
-                        border: isActive ? '2px solid '+GOLD : '1px solid #ddd',
-                        borderRadius: '10px', padding: '16px', marginBottom: '12px',
-                        borderLeft: isActive ? '6px solid '+GOLD : isPast ? '6px solid #4caf50' : '6px solid '+NAVY
-                      }}>
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:6,marginBottom:10}}>
-                          {isActive && <span style={{backgroundColor:GOLD, color:NAVY, padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>IN PROGRESS</span>}
-                          {isPast && <span style={{backgroundColor:'#4caf50', color:'white', padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>COMPLETE</span>}
-                          {isFuture && <span style={{backgroundColor:NAVY, color:CREAM, padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>UPCOMING</span>}
-                          {alloc.delayed && <span style={{backgroundColor:'#d32f2f', color:'white', padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
+                      <div key={alloc.id} style={{backgroundColor:'#fff',border:isActive?'2px solid '+GOLD:'1px solid #ddd',borderRadius:10,padding:16,marginBottom:12,borderLeft:isActive?'6px solid '+GOLD:isPast?'6px solid #4caf50':'6px solid '+NAVY}}>
+                        <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6,marginBottom:10}}>
+                          {isActive&&<span style={{backgroundColor:GOLD,color:NAVY,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>IN PROGRESS</span>}
+                          {isPast&&<span style={{backgroundColor:'#4caf50',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>COMPLETE</span>}
+                          {isFuture&&<span style={{backgroundColor:NAVY,color:CREAM,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>UPCOMING</span>}
+                          {alloc.delayed&&<span style={{backgroundColor:'#d32f2f',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
                           <span style={{fontSize:12,color:'#888'}}>{totalDays} day{totalDays>1?'s':''}</span>
                         </div>
-                        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', fontSize:14 }}>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Site</span><strong>{alloc.site}</strong></div>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Plot</span><strong>{alloc.plot}</strong></div>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>House Type</span><strong>{alloc.houseType}</strong></div>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Stage</span><strong style={{ color:GOLD }}>{alloc.stage}</strong></div>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
-                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
+                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,fontSize:14}}>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Site</span><strong>{alloc.site}</strong></div>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Plot</span><strong>{alloc.plot}</strong></div>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>House Type</span><strong>{alloc.houseType}</strong></div>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Stage</span><strong style={{color:GOLD}}>{alloc.stage}</strong></div>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
+                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
                         </div>
-                        {/* Progress bar */}
-                        {(isActive || isPast) && (
-                          <div style={{marginTop:12}}>
-                            <div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}>
-                              <span>Day {daysWorked} of {totalDays}</span>
-                              <span>{progress}%</span>
-                            </div>
-                            <div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}>
-                              <div style={{backgroundColor: isPast?'#4caf50':GOLD, height:'100%', width:progress+'%', borderRadius:4, transition:'width 0.3s'}}></div>
-                            </div>
-                          </div>
-                        )}
-                        {/* Action buttons for active jobs */}
-                        {isActive && !alloc.completed && (
+                        {(isActive||isPast)&&(<div style={{marginTop:12}}><div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}><span>Day {daysWorked} of {totalDays}</span><span>{progress}%</span></div><div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}><div style={{backgroundColor:isPast?'#4caf50':GOLD,height:'100%',width:progress+'%',borderRadius:4}}></div></div></div>)}
+                        {isActive&&!alloc.completed&&(
                           <div style={{marginTop:14,display:'flex',gap:8,flexWrap:'wrap'}}>
-                            <button onClick={() => markAllocComplete(alloc.id)}
-                              style={{backgroundColor:'#4caf50',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>
-                              Mark Complete
-                            </button>
-                            {delayingAllocId === alloc.id ? (
+                            <button onClick={()=>markAllocComplete(alloc.id)} style={{backgroundColor:'#4caf50',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Mark Complete</button>
+                            {delayingAllocId===alloc.id?(
                               <div style={{width:'100%',marginTop:8,padding:12,backgroundColor:'#fff3e0',borderRadius:6,border:'1px solid #ffcc80'}}>
                                 <p style={{margin:'0 0 8px',fontSize:13,fontWeight:'bold',color:'#e65100'}}>Report Delay</p>
-                                <div style={{marginBottom:8}}>
-                                  <label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Reason for delay</label>
-                                  <textarea value={delayReason} onChange={(e) => setDelayReason(e.target.value)}
-                                    placeholder="e.g. Materials not delivered, weather, access issue..."
-                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13,minHeight:50,boxSizing:'border-box',fontFamily:'inherit'}} />
-                                </div>
-                                <div style={{marginBottom:10}}>
-                                  <label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Additional days needed</label>
-                                  <select value={delayDays} onChange={(e) => setDelayDays(parseInt(e.target.value))}
-                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13}}>
-                                    {[1,2,3,4,5,6,7].map(d => <option key={d} value={d}>{d} day{d>1?'s':''}</option>)}
-                                  </select>
-                                </div>
+                                <div style={{marginBottom:8}}><label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Reason</label>
+                                  <textarea value={delayReason} onChange={(e)=>setDelayReason(e.target.value)} placeholder="e.g. Materials not delivered, weather..."
+                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13,minHeight:50,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
+                                <div style={{marginBottom:10}}><label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Additional days</label>
+                                  <select value={delayDays} onChange={(e)=>setDelayDays(parseInt(e.target.value))} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13}}>
+                                    {[1,2,3,4,5,6,7].map(d=><option key={d} value={d}>{d} day{d>1?'s':''}</option>)}</select></div>
                                 <div style={{display:'flex',gap:8}}>
-                                  <button onClick={() => handleDelay(alloc.id)}
-                                    style={{backgroundColor:'#e65100',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>
-                                    Submit Delay
-                                  </button>
-                                  <button onClick={() => {setDelayingAllocId(null);setDelayReason('');setDelayDays(1);}}
-                                    style={{backgroundColor:'#999',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12}}>
-                                    Cancel
-                                  </button>
+                                  <button onClick={()=>handleDelay(alloc.id)} style={{backgroundColor:'#e65100',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Submit Delay</button>
+                                  <button onClick={()=>{setDelayingAllocId(null);setDelayReason('');setDelayDays(1);}} style={{backgroundColor:'#999',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12}}>Cancel</button>
                                 </div>
                               </div>
-                            ) : (
-                              <button onClick={() => setDelayingAllocId(alloc.id)}
-                                style={{backgroundColor:'#e65100',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>
-                                Report Delay
-                              </button>
-                            )}
+                            ):(<button onClick={()=>setDelayingAllocId(alloc.id)} style={{backgroundColor:'#e65100',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Report Delay</button>)}
                           </div>
-                        )}
-                        {isFuture && (
-                          <div style={{marginTop:10,fontSize:12,color:'#888',fontStyle:'italic'}}>Starts {formatDate(alloc.startDate)}</div>
                         )}
                       </div>
                     );
@@ -1075,24 +1062,106 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
+          {/* ========== CARPENTER NOTIFICATIONS (READ + SIGN) ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'notifications' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Notifications</h2>
+              {myNotifications.length === 0 ? <p style={{color:'#666',fontSize:14}}>No notifications.</p> : (
+                myNotifications.sort((a,b)=>b.id-a.id).map(notif => {
+                  const myResp = notif.responses[user?.name] || {};
+                  return (
+                    <div key={notif.id} style={{backgroundColor:'white',border: myResp.signed?'1px solid #ddd':'2px solid '+GOLD,borderRadius:10,padding:16,marginBottom:14,borderLeft: myResp.signed?'6px solid #4caf50':myResp.read?'6px solid '+GOLD:'6px solid #d32f2f'}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6,marginBottom:8}}>
+                        <div>
+                          <span style={{display:'inline-block',padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold',marginRight:6,
+                            backgroundColor:notif.type==='Toolbox Talk'?'#e3f2fd':notif.type==='RAMS'?'#fff3e0':'#fce4ec',
+                            color:notif.type==='Toolbox Talk'?'#1565c0':notif.type==='RAMS'?'#e65100':'#c62828'}}>{notif.type}</span>
+                          {!myResp.read && <span style={{display:'inline-block',padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold',backgroundColor:'#d32f2f',color:'white'}}>NEW</span>}
+                        </div>
+                        <div style={{fontSize:11,color:'#888'}}>{notif.sentDate} | From: {notif.sentBy}</div>
+                      </div>
+                      <h3 style={{margin:'0 0 8px',fontSize:16,color:NAVY}}>{notif.title}</h3>
+                      <div style={{fontSize:13,color:'#333',padding:12,backgroundColor:'#fafafa',borderRadius:6,marginBottom:12,whiteSpace:'pre-wrap',lineHeight:1.5}}>{notif.message}</div>
+
+                      {/* Read checkbox */}
+                      <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:12,padding:10,backgroundColor:myResp.read?'#e8f5e9':'#fff8e1',borderRadius:6}}>
+                        <input type="checkbox" checked={!!myResp.read}
+                          onChange={()=>{if(!myResp.read) markNotifRead(notif.id);}}
+                          style={{width:20,height:20,cursor:'pointer',accentColor:GOLD}} />
+                        <label style={{fontSize:14,fontWeight:'bold',color:myResp.read?'#2e7d32':'#333',cursor:'pointer'}}
+                          onClick={()=>{if(!myResp.read) markNotifRead(notif.id);}}>
+                          {myResp.read ? 'Read on ' + myResp.readDate : 'I have read and understood this document'}
+                        </label>
+                      </div>
+
+                      {/* Signature area */}
+                      {myResp.read && !myResp.signed && (
+                        <div style={{border:'2px solid '+GOLD,borderRadius:8,padding:16,backgroundColor:'#fffdf5'}}>
+                          <p style={{margin:'0 0 10px',fontSize:14,fontWeight:'bold',color:NAVY}}>E-Signature Required</p>
+                          <p style={{margin:'0 0 12px',fontSize:12,color:'#666'}}>Please sign below to confirm you have read and understood this document. Use your finger or mouse to draw your signature.</p>
+                          {signingNotifId === notif.id ? (
+                            <div>
+                              <canvas ref={sigCanvasRef} width={400} height={150}
+                                style={{border:'1px solid #ccc',borderRadius:4,width:'100%',maxWidth:400,height:150,touchAction:'none',cursor:'crosshair',backgroundColor:'white'}}
+                                onMouseDown={handleCanvasMouseDown}
+                                onMouseMove={handleCanvasMouseMove}
+                                onMouseUp={handleCanvasMouseUp}
+                                onMouseLeave={handleCanvasMouseUp}
+                                onTouchStart={handleCanvasMouseDown}
+                                onTouchMove={handleCanvasMouseMove}
+                                onTouchEnd={handleCanvasMouseUp}
+                              />
+                              <div style={{marginTop:10,display:'flex',gap:8,flexWrap:'wrap'}}>
+                                <button onClick={()=>signNotification(notif.id)}
+                                  style={{backgroundColor:'#2e7d32',color:'white',padding:'8px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13}}>
+                                  Confirm Signature
+                                </button>
+                                <button onClick={()=>{const c=sigCanvasRef.current;if(c){const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);startSignature(notif.id,c);}}}
+                                  style={{backgroundColor:'#999',color:'white',padding:'8px 20px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>
+                                  Clear
+                                </button>
+                                <button onClick={()=>setSigningNotifId(null)}
+                                  style={{backgroundColor:'#ddd',color:'#333',padding:'8px 20px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button onClick={()=>{setSigningNotifId(notif.id);setTimeout(()=>{startSignature(notif.id,sigCanvasRef.current);},100);}}
+                              style={{backgroundColor:GOLD,color:NAVY,padding:'10px 24px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:14}}>
+                              Open Signature Pad
+                            </button>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Already signed */}
+                      {myResp.signed && (
+                        <div style={{padding:12,backgroundColor:'#e8f5e9',borderRadius:6,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+                          <div>
+                            <strong style={{color:'#2e7d32',fontSize:14}}>Document Signed</strong>
+                            <div style={{fontSize:12,color:'#666',marginTop:2}}>Signed: {myResp.signedDate}</div>
+                          </div>
+                          {myResp.signature && <img src={myResp.signature} alt="Your signature" style={{height:40,border:'1px solid #c8e6c9',borderRadius:4}} />}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          )}
+
           {/* ========== CARPENTER DOCUMENTS ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'documents' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
-              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
-                <div key={category} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
-                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:15 }}>{category}</h3>
-                  <div style={{ fontSize:'13px' }}>
-                    {docs.map((doc, idx) => (
-                      <div key={idx} style={{ marginBottom:'6px', padding:'8px', backgroundColor:'#f9f9f9', borderRadius:'4px', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
-                        <span>{doc}</span>
-                        <button onClick={() => { setSuccessMsg('Download started: '+doc); setTimeout(()=>setSuccessMsg(''),2500); }}
-                          style={{ padding:'4px 10px', fontSize:'11px', backgroundColor:GOLD, color:NAVY, border:'none', borderRadius:'3px', cursor:'pointer', fontWeight:'bold' }}>
-                          View
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([cat,docs])=>(
+                <div key={cat} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
+                  <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:15}}>{cat}</h3>
+                  {docs.map((doc,idx)=><div key={idx} style={{marginBottom:6,padding:8,backgroundColor:'#f9f9f9',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8,fontSize:13}}>
+                    <span>{doc}</span><button onClick={()=>{setSuccessMsg('Download: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>View</button>
+                  </div>)}
                 </div>
               ))}
             </div>
@@ -1102,22 +1171,15 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'price lists' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
-              {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
-                <div key={builder} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
-                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{builder}</h3>
-                  {Object.entries(sites).map(([site, rates]) => (
-                    <div key={site} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
-                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{site}</h4>
-                      <table style={{ width:'100%', fontSize:'12px' }}>
-                        <tbody>
-                          {Object.entries(rates).map(([stage, price]) => (
-                            <tr key={stage} style={{ borderBottom:'1px solid #eee' }}>
-                              <td style={{ padding:'4px' }}>{stage}</td>
-                              <td style={{ padding:'4px', textAlign:'right', fontWeight:'bold' }}>GBP {price}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+              {Object.entries(PRICE_LISTS).map(([builder,sites])=>(
+                <div key={builder} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
+                  <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:16}}>{builder}</h3>
+                  {Object.entries(sites).map(([site,rates])=>(
+                    <div key={site} style={{marginLeft:10,marginBottom:10,padding:10,backgroundColor:'#f9f9f9',borderRadius:4}}>
+                      <h4 style={{color:'#333',margin:'0 0 8px',fontSize:14}}>{site}</h4>
+                      <table style={{width:'100%',fontSize:12}}><tbody>
+                        {Object.entries(rates).map(([stage,price])=><tr key={stage} style={{borderBottom:'1px solid #eee'}}><td style={{padding:4}}>{stage}</td><td style={{padding:4,textAlign:'right',fontWeight:'bold'}}>GBP {price}</td></tr>)}
+                      </tbody></table>
                     </div>
                   ))}
                 </div>
@@ -1129,58 +1191,35 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'fixings' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Fixings / Materials</h2>
-              <div style={{ backgroundColor:NAVY, color:CREAM, padding:'20px', borderRadius:'8px', maxWidth:'500px', marginBottom:'20px' }}>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Allocation</label>
-                  <select value={fixingAlloc} onChange={(e) => setFixingAlloc(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
-                    <option value="">Select</option>
-                    {myAllocs.filter(a=>!a.completed).map(a => (
-                      <option key={a.id} value={a.id}>{a.site} - Plot {a.plot} ({a.stage})</option>
-                    ))}
-                  </select>
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Item Description</label>
-                  <input type="text" placeholder="e.g. M8 bolts, wall ties..." value={fixingItem} onChange={(e) => setFixingItem(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Quantity</label>
-                  <input type="number" placeholder="e.g. 500" value={fixingQty} onChange={(e) => setFixingQty(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
-                </div>
-                <div style={{ marginBottom:'15px' }}>
-                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Notes</label>
-                  <textarea placeholder="Any additional details..." value={fixingNotes} onChange={(e) => setFixingNotes(e.target.value)}
-                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, minHeight:'60px', boxSizing:'border-box', fontFamily:'inherit', fontSize:13 }} />
-                </div>
-                <button type="button" onClick={() => {
-                  if(fixingAlloc && fixingItem && fixingQty){
-                    const alloc = myAllocs.find(a => String(a.id) === String(fixingAlloc));
-                    const req = handleFixingRequest(fixingItem, fixingQty, fixingNotes, alloc);
-                    setFixingRequests([...fixingRequests, req]);
-                    setFixingAlloc(''); setFixingItem(''); setFixingQty(''); setFixingNotes('');
-                    setSuccessMsg('Fixing request submitted'); setTimeout(()=>setSuccessMsg(''),2500);
-                  } else { alert('Please fill in allocation, item and quantity'); }
-                }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
-                  Request
-                </button>
+              <div style={{backgroundColor:NAVY,color:CREAM,padding:20,borderRadius:8,maxWidth:500,marginBottom:20}}>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Allocation</label>
+                  <select value={fixingAlloc} onChange={(e)=>setFixingAlloc(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13}}>
+                    <option value="">Select</option>{myAllocs.filter(a=>!a.completed).map(a=><option key={a.id} value={a.id}>{a.site} - Plot {a.plot} ({a.stage})</option>)}</select></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Item</label>
+                  <input type="text" placeholder="e.g. M8 bolts, wall ties..." value={fixingItem} onChange={(e)=>setFixingItem(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,boxSizing:'border-box',fontSize:13}} /></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Quantity</label>
+                  <input type="number" placeholder="e.g. 500" value={fixingQty} onChange={(e)=>setFixingQty(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,boxSizing:'border-box',fontSize:13}} /></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Notes</label>
+                  <textarea placeholder="Details..." value={fixingNotes} onChange={(e)=>setFixingNotes(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:60,boxSizing:'border-box',fontFamily:'inherit',fontSize:13}} /></div>
+                <button type="button" onClick={()=>{
+                  if(fixingAlloc&&fixingItem&&fixingQty){const alloc=myAllocs.find(a=>String(a.id)===String(fixingAlloc));
+                    const req=handleFixingRequest(fixingItem,fixingQty,fixingNotes,alloc);
+                    setAllFixingRequests([...allFixingRequests,req]);setFixingRequests([...fixingRequests,req]);
+                    setFixingAlloc('');setFixingItem('');setFixingQty('');setFixingNotes('');
+                    setSuccessMsg('Request submitted');setTimeout(()=>setSuccessMsg(''),2500);
+                  }else{alert('Fill in allocation, item and quantity');}
+                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Request</button>
               </div>
-              {(fixingRequests.length > 0 || allFixingRequests.filter(r=>r.carpenter===user?.name).length > 0) && (
-                <div>
-                  <h3 style={{ color:NAVY, fontSize:16 }}>Your Requests</h3>
-                  {[...fixingRequests, ...allFixingRequests.filter(r=>r.carpenter===user?.name)].map(r => (
-                    <div key={r.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'6px', padding:'12px', marginBottom:'8px', fontSize:13 }}>
+              {allFixingRequests.filter(r=>r.carpenter===user?.name).length>0&&(
+                <div><h3 style={{color:NAVY,fontSize:16}}>Your Requests</h3>
+                  {allFixingRequests.filter(r=>r.carpenter===user?.name).map(r=>(
+                    <div key={r.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:6,padding:12,marginBottom:8,fontSize:13}}>
                       <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:4}}>
                         <strong>{r.item} x{r.qty}</strong>
-                        <span style={{ padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold',
-                          backgroundColor: r.status==='approved'?'#e8f5e9' : r.status==='denied'?'#ffebee' : '#e3f2fd',
-                          color: r.status==='approved'?'#2e7d32' : r.status==='denied'?'#c62828' : '#1565c0' }}>
-                          {(r.status||'pending').toUpperCase()}
-                        </span>
-                      </div>
-                      <div style={{color:'#666', fontSize:12, marginTop:4}}>{r.site || r.alloc} - {r.date}</div>
+                        <span style={{padding:'2px 8px',borderRadius:3,fontSize:11,fontWeight:'bold',
+                          backgroundColor:r.status==='approved'?'#e8f5e9':r.status==='denied'?'#ffebee':'#e3f2fd',
+                          color:r.status==='approved'?'#2e7d32':r.status==='denied'?'#c62828':'#1565c0'}}>{(r.status||'pending').toUpperCase()}</span>
+                      </div><div style={{color:'#666',fontSize:12,marginTop:4}}>{r.site} - {r.date}</div>
                     </div>
                   ))}
                 </div>
@@ -1192,84 +1231,52 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'invoice' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>My Invoices</h2>
-              {invoices.filter(i => i.carpenter === user?.name).length === 0 ? (
-                <p style={{color:'#666', fontSize:14}}>No invoices yet.</p>
-              ) : (
+              {invoices.filter(i=>i.carpenter===user?.name).length===0?<p style={{color:'#666',fontSize:14}}>No invoices yet.</p>:(
                 <div>
-                  {invoices.filter(i => i.carpenter === user?.name).map(inv => (
-                    <div key={inv.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'8px', padding:'14px', marginBottom:'10px' }}>
+                  {invoices.filter(i=>i.carpenter===user?.name).map(inv=>(
+                    <div key={inv.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10}}>
                       <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
-                        <div>
-                          <strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong>
-                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div>
-                        </div>
-                        <div style={{textAlign:'right'}}>
-                          <div style={{fontSize:18,fontWeight:'bold'}}>GBP {inv.amount}</div>
-                          <span style={{
-                            display:'inline-block', padding:'2px 10px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginTop:4,
-                            backgroundColor: inv.status==='paid'?'#e8f5e9' : inv.status==='approved'?'#e3f2fd' : '#fff3e0',
-                            color: inv.status==='paid'?'#2e7d32' : inv.status==='approved'?'#1565c0' : '#e65100'
-                          }}>{inv.status.toUpperCase()}</span>
+                        <div><strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div></div>
+                        <div style={{textAlign:'right'}}><div style={{fontSize:18,fontWeight:'bold'}}>GBP {inv.amount}</div>
+                          <span style={{display:'inline-block',padding:'2px 10px',borderRadius:3,fontSize:11,fontWeight:'bold',marginTop:4,
+                            backgroundColor:inv.status==='paid'?'#e8f5e9':inv.status==='approved'?'#e3f2fd':'#fff3e0',
+                            color:inv.status==='paid'?'#2e7d32':inv.status==='approved'?'#1565c0':'#e65100'}}>{inv.status.toUpperCase()}</span>
                         </div>
                       </div>
                     </div>
                   ))}
-                  <div style={{ marginTop:'15px', padding:'15px', backgroundColor:NAVY, color:CREAM, borderRadius:'8px', fontSize:14 }}>
-                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'pending').reduce((s,i) => s + i.amount, 0)}</strong></div>
-                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'approved').reduce((s,i) => s + i.amount, 0)}</strong></div>
-                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'paid').reduce((s,i) => s + i.amount, 0)}</strong></div>
+                  <div style={{marginTop:15,padding:15,backgroundColor:NAVY,color:CREAM,borderRadius:8,fontSize:14}}>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='pending').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='approved').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
                   </div>
                 </div>
               )}
             </div>
           )}
 
-          {/* ========== INVOICE/OFFICE PORTAL ========== */}
-          {user?.role === 'invoice' && ['pending','approved','paid'].map(status => (
-            invoiceTab === status && (
+          {/* ========== INVOICE/OFFICE ========== */}
+          {user?.role === 'invoice' && ['pending','approved','paid'].map(status=>(
+            invoiceTab===status&&(
               <div key={status}>
-                <h2 style={{ color:NAVY, marginTop:0, fontSize:22, textTransform:'capitalize' }}>{status} Invoices</h2>
-                {invoices.filter(i => i.status === status).length === 0 ? (
-                  <p style={{color:'#666', fontSize:14}}>No {status} invoices.</p>
-                ) : (
+                <h2 style={{color:NAVY,marginTop:0,fontSize:22,textTransform:'capitalize'}}>{status} Invoices</h2>
+                {invoices.filter(i=>i.status===status).length===0?<p style={{color:'#666',fontSize:14}}>No {status} invoices.</p>:(
                   <div>
-                    {invoices.filter(i => i.status === status).map(inv => (
-                      <div key={inv.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'8px', padding:'14px', marginBottom:'10px' }}>
+                    {invoices.filter(i=>i.status===status).map(inv=>(
+                      <div key={inv.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10}}>
                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
-                          <div>
-                            <strong style={{fontSize:14}}>{inv.carpenter}</strong>
-                            <div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.site} - Plot {inv.plot} / {inv.houseType} / {inv.stage}</div>
-                            <div style={{fontSize:11,color:'#999',marginTop:2}}>{inv.date}</div>
-                          </div>
-                          <div style={{textAlign:'right',display:'flex',alignItems:'center',gap:10}}>
+                          <div><strong style={{fontSize:14}}>{inv.carpenter}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.site} - Plot {inv.plot} / {inv.houseType} / {inv.stage}</div></div>
+                          <div style={{display:'flex',alignItems:'center',gap:10}}>
                             <strong style={{fontSize:18}}>GBP {inv.amount}</strong>
-                            {status === 'pending' && (
-                              <button onClick={() => {
-                                setInvoices(invoices.map(i => i.id===inv.id ? {...i, status:'approved'} : i));
-                                setSuccessMsg('Invoice signed off'); setTimeout(()=>setSuccessMsg(''),2500);
-                              }} style={{ backgroundColor:GOLD, color:NAVY, padding:'6px 12px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:12 }}>
-                                Sign Off
-                              </button>
-                            )}
-                            {status === 'approved' && (
-                              <button onClick={() => {
-                                setInvoices(invoices.map(i => i.id===inv.id ? {...i, status:'paid'} : i));
-                                setSuccessMsg('Invoice marked as paid'); setTimeout(()=>setSuccessMsg(''),2500);
-                              }} style={{ backgroundColor:'#2e7d32', color:'white', padding:'6px 12px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:12 }}>
-                                Mark Paid
-                              </button>
-                            )}
-                            {status === 'paid' && (
-                              <span style={{ fontSize:12, color:'#2e7d32', fontWeight:'bold' }}>Paid</span>
-                            )}
+                            {status==='pending'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'approved'}:i));setSuccessMsg('Signed off');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:GOLD,color:NAVY,padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Sign Off</button>}
+                            {status==='approved'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'paid'}:i));setSuccessMsg('Marked paid');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Mark Paid</button>}
+                            {status==='paid'&&<span style={{fontSize:12,color:'#2e7d32',fontWeight:'bold'}}>Paid</span>}
                           </div>
                         </div>
                       </div>
                     ))}
-                    <div style={{ marginTop:'15px', padding:'15px', backgroundColor:NAVY, color:CREAM, borderRadius:'8px' }}>
-                      <p style={{ margin:'0', fontWeight:'bold', fontSize:'16px' }}>
-                        Total {status}: GBP {invoices.filter(i => i.status === status).reduce((sum, i) => sum + i.amount, 0)}
-                      </p>
+                    <div style={{marginTop:15,padding:15,backgroundColor:NAVY,color:CREAM,borderRadius:8}}>
+                      <p style={{margin:0,fontWeight:'bold',fontSize:16}}>Total {status}: GBP {invoices.filter(i=>i.status===status).reduce((s,i)=>s+i.amount,0)}</p>
                     </div>
                   </div>
                 )}
@@ -1281,6 +1288,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       </div>
     </div>
   ); }
+
 
 
 
