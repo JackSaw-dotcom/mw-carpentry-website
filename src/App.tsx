@@ -286,10 +286,18 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
   };
 
   const markAllocComplete = (allocId) => {
-    setAllocations(allocations.map(a => a.id === allocId ? {...a, completed: true, completedDate: todayStr} : a));
     const alloc = allocations.find(a => a.id === allocId);
-    if(alloc) setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
-    setSuccessMsg('Job marked as complete'); setTimeout(()=>setSuccessMsg(''),2500);
+    if(!alloc) return;
+    setAllocations(allocations.map(a => a.id === allocId ? {...a, completed: true, completedDate: todayStr} : a));
+    setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
+    const siteRates = PRICE_LISTS[alloc.builder]?.[alloc.site] || PRICE_LISTS[Object.keys(PRICE_LISTS).find(b => PRICE_LISTS[b][alloc.site])]?.[alloc.site] || {};
+    const stageKey = alloc.stage === 'Final' ? 'Finals' : alloc.stage;
+    const amount = siteRates[stageKey] || siteRates[alloc.stage] || 0;
+    if(amount > 0) {
+      const newInvoice = { id: Math.max(...invoices.map(inv=>inv.id),0)+1, carpenter: alloc.carpenter, site: alloc.site, plot: alloc.plot, houseType: alloc.houseType, stage: alloc.stage, amount, status: 'pending', date: todayStr };
+      setInvoices(prev => [...prev, newInvoice]);
+    }
+    setSuccessMsg('Job complete — invoice generated'); setTimeout(()=>setSuccessMsg(''),2500);
   };
 
   const handleFixingRequest = (item, qty, notes, allocInfo) => {
@@ -509,6 +517,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   {label:'Active Delays', val: delays.filter(d=>d.status==='active').length},
                   {label:'Pending Fixings', val: allFixingRequests.filter(r=>r.status==='pending').length},
                   {label:'Unsigned Docs', val: notifications.reduce((c,n)=>c+n.recipients.filter(r=>!n.responses[r]?.signed).length,0)},
+                  {label:'Invoices Pending', val: invoices.filter(i=>i.status==='pending').length},
+                  {label:'Overdue Jobs', val: allocations.filter(a=>!a.completed&&new Date(a.endDate)<todayDate).length},
                   {label:'Pending Invoices', val: 'GBP ' + invoices.filter(i => i.status === 'pending').reduce((s,i) => s + i.amount, 0)}
                 ].map((c,ci) => (
                   <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + (c.label.includes('Delay')||c.label.includes('Unsigned')?'#d32f2f':GOLD) }}>
@@ -683,9 +693,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
                             const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
                             return (<div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px',
-                              backgroundColor: af?(af.completed?'#c8e6c9':af.delayed?'#ffcdd2':GOLD):'white',
+                              backgroundColor: af?(af.completed?'#c8e6c9':af.delayed?'#ffcdd2':new Date(af.startDate)<=todayDate&&new Date(af.endDate)>=todayDate?GOLD:NAVY):'white',
                               color: af?NAVY:'#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
-                              {af?(af.completed?'Done':af.site.substring(0,4)):''}</div>);
+                              {af?(af.completed?'Done':af.delayed?'Delay':af.site.substring(0,4)):''}</div>);
                           })}
                         </div>);
                       })}
@@ -695,6 +705,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:GOLD,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Active</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#c8e6c9',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ffcdd2',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:NAVY,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Upcoming</span>
                   </div>
                 </div>
               )}
@@ -715,7 +726,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.startDate)}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.endDate)}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>
-                          {alloc.completed?<span style={{color:'#2e7d32',fontWeight:'bold'}}>Complete</span>:alloc.delayed?<span style={{color:'#d32f2f',fontWeight:'bold'}}>Delayed +{alloc.delayDays}d</span>:<span style={{color:GOLD,fontWeight:'bold'}}>Active</span>}
+                          {alloc.completed?<span style={{color:'#2e7d32',fontWeight:'bold'}}>Complete</span>:alloc.delayed?<span style={{color:'#d32f2f',fontWeight:'bold'}}>Delayed +{alloc.delayDays}d</span>:new Date(alloc.startDate)<=todayDate&&new Date(alloc.endDate)>=todayDate?<span style={{color:GOLD,fontWeight:'bold'}}>In Progress</span>:todayDate>new Date(alloc.endDate)?<span style={{color:'#d32f2f',fontWeight:'bold'}}>Overdue</span>:<span style={{color:NAVY,fontWeight:'bold'}}>Upcoming</span>}
                         </td>
                       </tr>
                     ))}
@@ -949,18 +960,55 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {/* ========== SITE MANAGER OVERVIEW ========== */}
           {user?.role === 'site_manager' && siteManagerTab === 'overview' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Site Overview: {user?.site}</h2>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Build Programme: {user?.site}</h2>
               <input type="text" placeholder="Filter by plot" value={plotFilter} onChange={(e)=>setPlotFilter(e.target.value)} style={{padding:8,borderRadius:4,border:'2px solid '+GOLD,fontSize:14,width:'100%',maxWidth:250,boxSizing:'border-box',marginBottom:15}} />
-              {workLog.filter(w=>w.site===user?.site&&(plotFilter===''||w.plot.includes(plotFilter))).length===0 ? <p style={{color:'#666',fontSize:14}}>No work logged for this site.</p> : (
-              <div style={{overflowX:'auto'}}>
-              <table style={{width:'100%',borderCollapse:'collapse',minWidth:400}}>
-                <thead><tr style={{backgroundColor:NAVY,color:CREAM}}>{['Plot','House Type','Stage','Carpenter'].map(h=><th key={h} style={{padding:10,textAlign:'left',fontSize:11}}>{h}</th>)}</tr></thead>
-                <tbody>{workLog.filter(w=>w.site===user?.site&&(plotFilter===''||w.plot.includes(plotFilter))).map((item,idx)=>(
-                  <tr key={item.id} style={{backgroundColor:idx%2===0?'#f9f9f9':'white',borderBottom:'1px solid #ddd'}}>
-                    <td style={{padding:8,fontSize:12}}>{item.plot}</td><td style={{padding:8,fontSize:12}}>{item.houseType}</td>
-                    <td style={{padding:8,fontSize:12}}>{item.stage}</td><td style={{padding:8,fontSize:12}}>{item.allocatedTo||'-'}</td>
-                  </tr>))}</tbody>
-              </table></div>)}
+              {(() => {
+                const siteAllocs = allocations.filter(a => a.site === user?.site && (plotFilter === '' || a.plot.includes(plotFilter)));
+                const siteWork = workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter)));
+                const completedCount = siteAllocs.filter(a => a.completed).length;
+                const activeCount = siteAllocs.filter(a => !a.completed && new Date(a.startDate) <= todayDate && new Date(a.endDate) >= todayDate).length;
+                const delayedCount = siteAllocs.filter(a => a.delayed && !a.completed).length;
+                return (<div>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(130px,1fr))',gap:10,marginBottom:18}}>
+                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8,textAlign:'center'}}><div style={{fontSize:22,fontWeight:'bold'}}>{siteWork.length}</div><div style={{fontSize:11}}>Total Jobs</div></div>
+                    <div style={{backgroundColor:GOLD,color:NAVY,padding:14,borderRadius:8,textAlign:'center'}}><div style={{fontSize:22,fontWeight:'bold'}}>{activeCount}</div><div style={{fontSize:11}}>In Progress</div></div>
+                    <div style={{backgroundColor:'#4caf50',color:'white',padding:14,borderRadius:8,textAlign:'center'}}><div style={{fontSize:22,fontWeight:'bold'}}>{completedCount}</div><div style={{fontSize:11}}>Complete</div></div>
+                    {delayedCount>0&&<div style={{backgroundColor:'#d32f2f',color:'white',padding:14,borderRadius:8,textAlign:'center'}}><div style={{fontSize:22,fontWeight:'bold'}}>{delayedCount}</div><div style={{fontSize:11}}>Delayed</div></div>}
+                  </div>
+                  {siteAllocs.length > 0 && (<div style={{marginBottom:18}}>
+                    <h3 style={{color:NAVY,fontSize:16,margin:'0 0 10px'}}>Allocated Works</h3>
+                    {siteAllocs.sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).map(alloc => {
+                      const start=new Date(alloc.startDate);const end=new Date(alloc.endDate);
+                      const totalDays=daysInRange(alloc.startDate,alloc.endDate);
+                      const isComp=alloc.completed;const isAct=!isComp&&todayDate>=start&&todayDate<=end;
+                      const prog=isComp?100:isAct?Math.round((Math.max(1,Math.ceil((todayDate-start)/864e5)+1)/totalDays)*100):0;
+                      return (<div key={alloc.id} style={{backgroundColor:'white',padding:12,borderRadius:8,marginBottom:8,borderLeft:'5px solid '+(isComp?'#4caf50':alloc.delayed?'#d32f2f':isAct?GOLD:NAVY),border:'1px solid #ddd'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6,fontSize:13}}>
+                          <strong>Plot {alloc.plot} - {alloc.houseType}</strong>
+                          <span style={{padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold',backgroundColor:isComp?'#e8f5e9':isAct?'#fff8e1':'#e3f2fd',color:isComp?'#2e7d32':isAct?'#e65100':'#1565c0'}}>{isComp?'Complete':isAct?'In Progress':'Upcoming'}</span>
+                        </div>
+                        <div style={{fontSize:12,color:'#666',marginTop:4}}>{alloc.stage} | {alloc.carpenter} | {formatDate(alloc.startDate)} - {formatDate(alloc.endDate)} ({totalDays}d)</div>
+                        {alloc.delayed&&<div style={{fontSize:11,color:'#d32f2f',marginTop:4}}>Delayed +{alloc.delayDays} day{alloc.delayDays>1?'s':''}</div>}
+                        {(isComp||isAct)&&<div style={{marginTop:6,backgroundColor:'#e0e0e0',borderRadius:4,height:4,overflow:'hidden'}}><div style={{backgroundColor:isComp?'#4caf50':GOLD,height:'100%',width:prog+'%',borderRadius:4}}></div></div>}
+                      </div>);
+                    })}
+                  </div>)}
+                  {siteWork.length > 0 && (<div>
+                    <h3 style={{color:NAVY,fontSize:16,margin:'0 0 10px'}}>Work Log</h3>
+                    <div style={{overflowX:'auto'}}>
+                    <table style={{width:'100%',borderCollapse:'collapse',minWidth:400}}>
+                      <thead><tr style={{backgroundColor:NAVY,color:CREAM}}>{['Plot','House Type','Stage','Status','Carpenter'].map(h=><th key={h} style={{padding:10,textAlign:'left',fontSize:11}}>{h}</th>)}</tr></thead>
+                      <tbody>{siteWork.map((item,idx)=>(
+                        <tr key={item.id} style={{backgroundColor:item.status==='complete'?'#f1f8e9':idx%2===0?'#f9f9f9':'white',borderBottom:'1px solid #ddd'}}>
+                          <td style={{padding:8,fontSize:12}}>{item.plot}</td><td style={{padding:8,fontSize:12}}>{item.houseType}</td>
+                          <td style={{padding:8,fontSize:12}}>{item.stage}</td>
+                          <td style={{padding:8,fontSize:12}}><span style={{padding:'2px 6px',borderRadius:3,fontSize:10,fontWeight:'bold',backgroundColor:item.status==='complete'?'#e8f5e9':item.status==='allocated'?'#fff8e1':'#e3f2fd',color:item.status==='complete'?'#2e7d32':item.status==='allocated'?'#e65100':'#1565c0'}}>{item.status==='complete'?'Complete':item.status==='allocated'?'In Progress':'Logged'}</span></td>
+                          <td style={{padding:8,fontSize:12}}>{item.allocatedTo||'-'}</td>
+                        </tr>))}</tbody>
+                    </table></div>
+                  </div>)}
+                </div>);
+              })()}
             </div>
           )}
 
@@ -1007,22 +1055,29 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {/* ========== CARPENTER SCHEDULE ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Week</h2>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Schedule</h2>
               {myAllocs.length === 0 ? <div style={{backgroundColor:'white',padding:20,borderRadius:8,textAlign:'center'}}><p style={{color:'#666',fontSize:16,margin:0}}>No work scheduled.</p></div> : (
                 <div>
                   {myAllocs.sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).map(alloc => {
                     const start=new Date(alloc.startDate);const end=new Date(alloc.endDate);
-                    const isActive=todayDate>=start&&todayDate<=end&&!alloc.completed;const isPast=todayDate>end||alloc.completed;const isFuture=todayDate<start;
                     const totalDays=daysInRange(alloc.startDate,alloc.endDate);
-                    const daysWorked=isActive?Math.max(1,Math.ceil((todayDate-start)/(864e5))+1):isPast?totalDays:0;
-                    const progress=isPast?100:isActive?Math.round((daysWorked/totalDays)*100):0;
+                    const isComplete = alloc.completed === true;
+                    const isActive = !isComplete && todayDate >= start && todayDate <= end;
+                    const isOverdue = !isComplete && todayDate > end;
+                    const isFuture = !isComplete && todayDate < start;
+                    const daysElapsed = isActive ? Math.max(1, Math.ceil((todayDate - start) / 864e5) + 1) : isComplete ? totalDays : isOverdue ? totalDays : 0;
+                    const progress = isComplete ? 100 : isActive ? Math.round((daysElapsed / totalDays) * 100) : isOverdue ? 100 : 0;
+                    const statusLabel = isComplete ? 'COMPLETE' : isOverdue ? 'OVERDUE' : isActive ? 'IN PROGRESS' : 'UPCOMING';
+                    const statusBg = isComplete ? '#4caf50' : isOverdue ? '#d32f2f' : isActive ? GOLD : NAVY;
+                    const statusColor = isComplete ? 'white' : isOverdue ? 'white' : isActive ? NAVY : CREAM;
+                    const borderLeftColor = isComplete ? '#4caf50' : isOverdue ? '#d32f2f' : isActive ? GOLD : NAVY;
                     return (
-                      <div key={alloc.id} style={{backgroundColor:'#fff',border:isActive?'2px solid '+GOLD:'1px solid #ddd',borderRadius:10,padding:16,marginBottom:12,borderLeft:isActive?'6px solid '+GOLD:isPast?'6px solid #4caf50':'6px solid '+NAVY}}>
+                      <div key={alloc.id} style={{backgroundColor:'#fff',border:(isActive||isOverdue)?'2px solid '+statusBg:'1px solid #ddd',borderRadius:10,padding:16,marginBottom:12,borderLeft:'6px solid '+borderLeftColor}}>
                         <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6,marginBottom:10}}>
-                          {isActive&&<span style={{backgroundColor:GOLD,color:NAVY,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>IN PROGRESS</span>}
-                          {isPast&&<span style={{backgroundColor:'#4caf50',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>COMPLETE</span>}
-                          {isFuture&&<span style={{backgroundColor:NAVY,color:CREAM,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>UPCOMING</span>}
-                          {alloc.delayed&&<span style={{backgroundColor:'#d32f2f',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
+                          <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+                            <span style={{backgroundColor:statusBg,color:statusColor,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>{statusLabel}</span>
+                            {alloc.delayed&&<span style={{backgroundColor:'#ff6f00',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
+                          </div>
                           <span style={{fontSize:12,color:'#888'}}>{totalDays} day{totalDays>1?'s':''}</span>
                         </div>
                         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,fontSize:14}}>
@@ -1033,8 +1088,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div><span style={{color:'#888',fontSize:11,display:'block'}}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
                           <div><span style={{color:'#888',fontSize:11,display:'block'}}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
                         </div>
-                        {(isActive||isPast)&&(<div style={{marginTop:12}}><div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}><span>Day {daysWorked} of {totalDays}</span><span>{progress}%</span></div><div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}><div style={{backgroundColor:isPast?'#4caf50':GOLD,height:'100%',width:progress+'%',borderRadius:4}}></div></div></div>)}
-                        {isActive&&!alloc.completed&&(
+                        {!isFuture&&(<div style={{marginTop:12}}><div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}><span>{isComplete?'Completed':'Day '+daysElapsed+' of '+totalDays}</span><span>{progress}%</span></div><div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}><div style={{backgroundColor:isComplete?'#4caf50':isOverdue?'#d32f2f':GOLD,height:'100%',width:progress+'%',borderRadius:4}}></div></div></div>)}
+                        {(isActive||isOverdue)&&!isComplete&&(
                           <div style={{marginTop:14,display:'flex',gap:8,flexWrap:'wrap'}}>
                             <button onClick={()=>markAllocComplete(alloc.id)} style={{backgroundColor:'#4caf50',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Mark Complete</button>
                             {delayingAllocId===alloc.id?(
@@ -1052,6 +1107,11 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                                 </div>
                               </div>
                             ):(<button onClick={()=>setDelayingAllocId(alloc.id)} style={{backgroundColor:'#e65100',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Report Delay</button>)}
+                          </div>
+                        )}
+                        {isComplete&&alloc.completedDate&&(
+                          <div style={{marginTop:10,padding:8,backgroundColor:'#e8f5e9',borderRadius:6,fontSize:12,color:'#2e7d32'}}>
+                            Completed on {formatDate(alloc.completedDate)} | Invoice auto-generated
                           </div>
                         )}
                       </div>
