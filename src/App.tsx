@@ -35,7 +35,7 @@ const CREAM = '#f6f4ef';
 const GALLERY_PHOTOS={joists:[{src:j1,caption:"I-beam joists with joist hangers — first floor"},{src:j2,caption:"Stairwell opening marked out on structural decking"},{src:j3,caption:"Structural decking complete — first floor"},{src:j4,caption:"I-beam floor joists with strutting"},{src:j5,caption:"Floor joists with trimming around stairwell"},{src:j6,caption:"Completed structural floor with Peel Clean Xtra"},{src:j7,caption:"I-beam joists — first floor installation"},{src:j8,caption:"Completed decked floor from scaffold"},{src:j9,caption:"Floor joists with herringbone strutting"},{src:j10,caption:"Structural decking with loft hatch opening"},{src:j11,caption:"Decked floor — wide angle view across site"},{src:j12,caption:"First floor joists with trimmer detail"},{src:j13,caption:"Structural decking complete — side elevation"},{src:j14,caption:"Decked floor with stairwell marked — site view"},{src:j15,caption:"Completed structural floor — elevated view"},{src:j16,caption:"Joists and decking — finished first floor"}],roofs:[{src:rf1,caption:"Trussed rafter installation — gable end"},{src:rf2,caption:"Roof trusses from scaffold level"},{src:rf3,caption:"Trussed rafters with bracing"},{src:rf4,caption:"Front door canopy — porch carpentry"},{src:rf5,caption:"Cut roof structure — hipped roof from above"}],"first-fix":[{src:ff1,caption:"Stud partitions & door linings — first floor"},{src:ff2,caption:"Staircase installation with safety barrier"},{src:ff3,caption:"Stud framing around staircase opening"},{src:ff4,caption:"Winder staircase installation"},{src:ff5,caption:"Dormer room stud partitions"},{src:ff6,caption:"Loft room framing with Velux window"},{src:ff7,caption:"Ground floor stud partitions & door linings"},{src:ff8,caption:"Under-stair framing detail"}],"second-fix":[],finals:[],extras:[]};
 const BUILDERS=[{id:"barratt",name:"Barratt Homes",color:"#E31937",logo:"https://www.barratthomes.co.uk/favicon.ico",relationship:"Our partnership with Barratt Homes stretches back over a decade. They trust M&W to deliver consistently across multiple sites.",sites:[{name:"Thoresby Vale",location:"Edwinstowe, Mansfield",lat:53.177,lng:-1.069,housetypes:["Windermere","Holden","Moresby","Kennett","Radleigh"]},{name:"Romans' Quarter",location:"Bingham, Nottingham",lat:52.949,lng:-1.0,housetypes:["Hollinwood","Bradgate","Moresby","Alderney"]},{name:"Dunstall Park",location:"Tamworth, Staffordshire",lat:52.634,lng:-1.693,housetypes:["Windermere","Archford","Holden","Kennett"]},{name:"Poppy Fields",location:"Uttoxeter, Staffordshire",lat:52.898,lng:-1.86,housetypes:["Maidstone","Ellerton","Denford"]},{name:"Bertelin Fields",location:"Beaconside, Stafford",lat:52.826,lng:-2.117,housetypes:["Windermere","Archford","Kennett","Moresby"]}]},{id:"dwh",name:"Lovell Homes",color:"#1B3D6F",logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",relationship:"Our carpenters understand the higher specification that Lovell developments demand.",sites:[{name:"Old Mill Farm",location:"Cotgrave, Nottingham",lat:52.917,lng:-1.046,housetypes:["Holden","Kingsley","Layton","Windermere"]},{name:"Berry Hill",location:"Mansfield",lat:53.148,lng:-1.188,housetypes:["Hollinwood","Bradgate","Exeter"]},{name:"Gateford Park",location:"Worksop, Nottinghamshire",lat:53.321,lng:-1.132,housetypes:["Radleigh","Holden","Moresby"]}]},{id:"bellway",name:"Bellway Homes",color:"#003DA5",logo:"https://s3-eu-west-1.amazonaws.com/tpd/logos/58932caa0000ff00059bf27f/0x0.png",relationship:"Bellway is one of our longest-standing partners across their East Midlands division.",sites:[{name:"The Meadows",location:"Alvaston, Derby",lat:52.893,lng:-1.434,housetypes:["Joiner","Craftsman","Turner","Tanner","Weaver"]},{name:"Holbrook Park",location:"Chellaston, Derby",lat:52.873,lng:-1.437,housetypes:["Craftsman","Joiner","Turner","Weaver","Cooper"]},{name:"Coppice Heights",location:"Ripley, Derbyshire",lat:53.051,lng:-1.405,housetypes:["Joiner","Turner","Tanner","Fletcher"]},{name:"Springwood",location:"Midway, S. Derbyshire",lat:52.773,lng:-1.542,housetypes:["Joiner","Craftsman","Turner","Weaver"]},{name:"Hugglescote Grange",location:"Hugglescote, Leicestershire",lat:52.727,lng:-1.362,housetypes:["Craftsman","Turner","Cooper","Fletcher"]},{name:"Abbey Fields Grange",location:"Hucknall, Nottinghamshire",lat:53.033,lng:-1.195,housetypes:["Tanner","Weaver","Turner","Joiner"]},{name:"Ashlands",location:"Sutton in Ashfield, Notts",lat:53.128,lng:-1.255,housetypes:["Joiner","Craftsman","Turner"]},{name:"Torvill Park",location:"Fairham, Nottingham",lat:52.909,lng:-1.163,housetypes:["Craftsman","Turner","Tanner","Weaver"]}]},{id:"persimmon",name:"Persimmon Homes",color:"#D4002A",logo:"https://cdn.prod.website-files.com/65a518d6a768fc381c83acf8/65a518d6a768fc381c83b06d_2020_Persimmon_1.png",relationship:"A fast-paced partnership built on trust across Derbyshire, Nottinghamshire, and Leicestershire.",sites:[{name:"Clipstone Park",location:"Clipstone, Mansfield",lat:53.167,lng:-1.137,housetypes:["Bedale","Alnwick","Byford","Bolsover","Kielder"]},{name:"The Oaks",location:"Calverton, Notts",lat:53.033,lng:-1.093,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Boulton Moor",location:"Chellaston, Derby",lat:52.872,lng:-1.413,housetypes:["Bedale","Alnwick","Bolsover","Kielder","Roseberry"]},{name:"Jubilee Gardens",location:"Ilkeston, Derbyshire",lat:52.972,lng:-1.307,housetypes:["Bedale","Byford","Alnwick","Bolsover"]},{name:"Foxley Fields",location:"Market Harborough, Leics",lat:52.478,lng:-0.918,housetypes:["Kielder","Roseberry","Alnwick","Bolsover"]}]},{id:"stmodwen",name:"St. Modwen Homes",color:"#6B2D5B",logo:"https://ramsboards.com/wp-content/uploads/2021/01/st.modwen-homes.webp",relationship:"With their head office in Derby, St. Modwen are a natural partner for M&W.",sites:[{name:"Hilton Valley",location:"Hilton, Derbyshire",lat:52.862,lng:-1.596,housetypes:["Arden","Berwick","Carleton","Danbury"]},{name:"Bramshall Meadows",location:"Uttoxeter, Staffordshire",lat:52.907,lng:-1.847,housetypes:["Arden","Berwick","Carleton","Elmswell"]},{name:"Snibston Mill",location:"Coalville, Leicestershire",lat:52.725,lng:-1.37,housetypes:["Arden","Carleton","Danbury","Elmswell"]},{name:"Egstow Park",location:"Clay Cross, Derbyshire",lat:53.163,lng:-1.413,housetypes:["Berwick","Carleton","Danbury"]}]},{id:"countryside",name:"Countryside Homes",color:"#2B6E44",logo:"https://nla-production-media.s3.eu-west-2.amazonaws.com/84908/Untitled-design-15.png?v=1766430558",relationship:"M&W support their Midlands mixed-tenure developments.",sites:[{name:"Edwalton Fields",location:"Edwalton, Nottingham",lat:52.917,lng:-1.12,housetypes:["Thornbury","Wentworth","Henley","Sudbury"]},{name:"Mastin Moor",location:"Chesterfield, Derbyshire",lat:53.267,lng:-1.342,housetypes:["Thornbury","Henley","Sudbury"]}]},{id:"vistry",name:"Vistry / Bovis Homes",color:"#00594F",logo:"https://housingforum.org.uk/wp-content/uploads/2020/05/Untitled-design.png",relationship:"Our work on Broadnook Garden Village is a testament to their trust in M&W.",sites:[{name:"Broadnook Garden Village",location:"Rothley, Leicestershire",lat:52.719,lng:-1.138,housetypes:["Limewood","Fern","Lime","Oak","Willow"]},{name:"Partridge Walk",location:"Stafford",lat:52.808,lng:-2.101,housetypes:["Limewood","Oak","Willow","Cedar"]},{name:"Hinckley 475",location:"Hinckley, Leicestershire",lat:52.54,lng:-1.37,housetypes:["Limewood","Fern","Oak","Willow"]}]},{id:"ashberry",name:"Ashberry Homes",color:"#7B3F98",logo:"https://www.ashberryhomes.co.uk/img/default-social-image.jpg",relationship:"M&W deliver consistently across Ashberry's Nottinghamshire sites.",sites:[{name:"Potters Gate",location:"Farndon, Newark",lat:53.064,lng:-0.856,housetypes:["Greenwood","Oakwood","Birchwood"]},{name:"Longridge",location:"Long Eaton, Notts",lat:52.89,lng:-1.275,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]}]},{id:"davidsons",name:"Davidsons Homes",color:"#C8102E",logo:"https://davidsonsgroup.co.uk/wp-content/uploads/2023/01/Screenshot-2023-01-03-at-16.53.01-1024x522.png",relationship:"Davidsons are a well-respected Midlands developer. We're proud to be part of their supply chain.",sites:[{name:"Davidsons at Huncote",location:"Huncote, Leicestershire",lat:52.582,lng:-1.218,housetypes:["The Arden","The Warwick","The Ashby","The Leamington"]},{name:"Davidsons at Boulton Moor",location:"Derby",lat:52.878,lng:-1.418,housetypes:["The Arden","The Warwick","The Kenilworth"]}]},{id:"wheeldons",name:"Wheeldon Homes",color:"#2E4057",logo:"https://www.panddg.co.uk/wp-content/uploads/2022/02/logo-wheeldon-homes.svg",relationship:"A boutique developer that values the personal service M&W bring.",sites:[{name:"Oaklands",location:"Etwall, South Derbyshire",lat:52.871,lng:-1.599,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"The Green",location:"Church Broughton, Derby",lat:52.857,lng:-1.66,housetypes:["The Chatsworth","The Haddon"]}]},{id:"crest",name:"Crest Nicholson",color:"#003C71",logo:"https://www.crestnicholson.com/favicon.ico",relationship:"M&W meet Crest Nicholson's exacting standards on every element.",sites:[{name:"Barley Fields",location:"Queniborough, Leicestershire",lat:52.697,lng:-1.08,housetypes:["Elm","Beech","Maple","Rowan","Birch"]}]}];
 const PAST_PROJECTS=[{year:"2024-25",builder:"Bellway",site:"Holbrook Park Ph1",location:"Chellaston",units:167,scope:"Full package"},{year:"2023-25",builder:"Persimmon",site:"Boulton Moor",location:"Chellaston",units:245,scope:"Full package"},{year:"2023-24",builder:"Barratt",site:"Thoresby Vale Ph2",location:"Mansfield",units:180,scope:"Full package"},{year:"2022-24",builder:"St. Modwen",site:"Hilton Valley Ph3",location:"Hilton",units:120,scope:"1st & 2nd fix"},{year:"2021-23",builder:"Persimmon",site:"Jubilee Gardens",location:"Ilkeston",units:200,scope:"Full package"},{year:"2020-22",builder:"Barratt",site:"Dunstall Park",location:"Tamworth",units:280,scope:"Full package"},{year:"2019-21",builder:"Bellway",site:"The Meadows Ph1",location:"Alvaston",units:78,scope:"Full package"},{year:"2018-20",builder:"Persimmon",site:"Clipstone Park",location:"Mansfield",units:190,scope:"Full package"},{year:"2017-19",builder:"Bellway",site:"Coppice Heights",location:"Ripley",units:130,scope:"Full package"},{year:"2016-18",builder:"Persimmon",site:"Carlton View",location:"Gedling",units:170,scope:"Full package"},{year:"2015-17",builder:"Bellway",site:"Hugglescote Grange",location:"Leicestershire",units:140,scope:"Full package"},{year:"2014-16",builder:"Barratt",site:"Grange Park",location:"Loughborough",units:220,scope:"Full package"},{year:"2012-14",builder:"Bellway",site:"Stenson Fields",location:"Derby",units:250,scope:"Full package"},{year:"2010-12",builder:"Persimmon",site:"Wollaton Vale",location:"Nottingham",units:200,scope:"Full package"},{year:"2008-10",builder:"Barratt",site:"Chestnut Grove",location:"Long Eaton",units:140,scope:"Full package"},{year:"2005-07",builder:"Bellway",site:"Millbrook Park",location:"Stapleford",units:85,scope:"Full package"}];
-const SERVICES=[{id:"joists",title:"Joists & Structural Floors",icon:"┃",desc:"All structural timber floor systems to NHBC standards.",subs:[{n:"Joist Types",items:["Masonry Hanger Joists","Joist Hanger to Trimmer","Change of Direction","I-Beam / Engineered","Traditional Softwood"]},{n:"Floor Construction",items:["Semi-Detached Party Floor","Strutting & Noggins","Structural Decking","Fire Stopping"]}]},{id:"roofs",title:"Roof Construction",icon:"△",desc:"Full roof erection through to weathertight.",subs:[{n:"Roof Types",items:["Straight Up & Over","Gable Elevations","Hipped Roofs","Valley Roofs","Dormer Construction"]},{n:"Roof Details",items:["Open Eaves","Boxed Soffit","Gable Ladders","Box Ends","Fascia & Barge Boards","Roof Bracing"]}]},{id:"first-fix",title:"First Fix Carpentry",icon:"▣",desc:"All carpentry before plastering.",subs:[{n:"Traditional (Blockwork)",items:["Staircase Installation","Stud Partitions","Bulkheads","Door Linings","Window Boards","Pipe Boxing","Loft Hatches","Solar Panel Stands"]},{n:"Timber Frame",items:["Frame Erection","Squaring & Levelling","Panel Stitching","Party Walls","Floor Cassettes","Breather Membrane","Fire Stopping & Cavity Barriers"]}]},{id:"second-fix",title:"Second Fix Carpentry",icon:"▤",desc:"All finishing carpentry after plastering.",subs:[{n:"Traditional Doors",items:["Door Trimming & Fitting","Hinging","Latch & Lock Fitting","Fire Door Hanging"]},{n:"Prehung Casings",items:["Prehung Installation","Levelling & Packing","Fire-Rated Sets"]},{n:"Standard Spec",items:["Standard Skirting (68/94mm)","Standard Architrave","Standard Staircase"]},{n:"Premium Spec",items:["Premium Skirting (119-168mm)","Premium Architrave + Plinth Blocks","Oak Staircase","Engineered Hardwood Flooring","Panelling & Wainscoting"]}]},{id:"finals",title:"Final Fix",icon:"◆",desc:"All final items to handover standard.",subs:[{n:"Included",items:["Door Handles & Furnishings","Ironmongery - Locks, Latches & Keeps","Bath Panel","Front Door Accessories"]}]},{id:"extras",title:"Unique Works",icon:"🔧",desc:"Remedial & snagging work for other contractors.",subs:[{n:"Remedial Services",items:["Rectifying defective carpentry by other contractors","Door realignment & rehinging","Skirting & architrave replacement","Staircase remedials","Floor levelling & joist repairs"]},{n:"Snagging Support",items:["NHBC inspection preparation for other sites","Pre-completion snagging lists","Warranty defect repairs","Fire door compliance remedials","Builder handover support"]}]}];
+const SERVICES=[{id:"joists",title:"Joists & Structural Floors",icon:"┃",desc:"All structural timber floor systems to NHBC standards.",subs:[{n:"Joist Types",items:["Masonry Hanger Joists","Joist Hanger to Trimmer","Change of Direction","I-Beam / Engineered","Traditional Softwood"]},{n:"Floor Construction",items:["Semi-Detached Party Floor","Strutting & Noggins","Structural Decking","Fire Stopping"]}]},{id:"roofs",title:"Roof Construction",icon:"△",desc:"Full roof erection through to weathertight.",subs:[{n:"Roof Types",items:["Straight Up & Over","Gable Elevations","Hipped Roofs","Valley Roofs","Dormer Construction"]},{n:"Roof Details",items:["Open Eaves","Boxed Soffit","Gable Ladders","Box Ends","Fascia & Barge Boards","Roof Bracing"]}]},{id:"first-fix",title:"First Fix Carpentry",icon:"▣",desc:"All carpentry before plastering.",subs:[{n:"Traditional (Blockwork)",items:["Staircase Installation","Stud Partitions","Bulkheads","Door Linings","Window Boards","Pipe Boxing","Loft Hatches","Solar Panel Stands"]},{n:"Timber Frame",items:["Frame Erection","Squaring & Levelling","Panel Stitching","Party Walls","Floor Cassettes","Breather Membrane","Fire Stopping & Cavity Barriers"]}]},{id:"second-fix",title:"Second Fix Carpentry",icon:"▤",desc:"All finishing carpentry after plastering.",subs:[{n:"Traditional Doors",items:["Door Trimming & Fitting","Hinging","Latch & Lock Fitting","Fire Door Hanging"]},{n:"Prehung Casings",items:["Prehung Installation","Levelling & Packing","Fire-Rated Sets"]},{n:"Standard Spec",items:["Standard Skirting (68/94mm)","Standard Architrave","Standard Staircase"]},{n:"Premium Spec",items:["Premium Skirting (119-168mm)","Premium Architrave + Plinth Blocks","Oak Staircase","Engineered Hardwood Flooring","Panelling & Wainscoting"]}]},{id:"finals",title:"Final Fix",icon:"◆",desc:"All final items to handover standard.",subs:[{n:"Included",items:["Door Handles & Furnishings","Ironmongery - Locks, Latches & Keeps","Bath Panel","Front Door Accessories"]}]},{id:"extras",title:"Unique Works",icon:"\u25C7",desc:"Remedial & snagging work for other contractors.",subs:[{n:"Remedial Services",items:["Rectifying defective carpentry by other contractors","Door realignment & rehinging","Skirting & architrave replacement","Staircase remedials","Floor levelling & joist repairs"]},{n:"Snagging Support",items:["NHBC inspection preparation for other sites","Pre-completion snagging lists","Warranty defect repairs","Fire door compliance remedials","Builder handover support"]}]}];
 const DEMO_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",schedule:[{day:"Mon",plot:"34",type:"Craftsman",stage:"First Fix",status:"active"},{day:"Tue",plot:"34",type:"Craftsman",stage:"First Fix",status:"upcoming"},{day:"Wed",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Thu",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Fri",plot:"36",type:"Turner",stage:"First Fix",status:"upcoming"}]},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",schedule:[{day:"Mon",plot:"18",type:"Joiner",stage:"Roofs",status:"active"},{day:"Tue",plot:"18",type:"Joiner",stage:"Roofs",status:"upcoming"},{day:"Wed",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Thu",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Fri",plot:"20",type:"Tanner",stage:"Roofs",status:"upcoming"}]}];
 const HOLBROOK_PLOTS=Array.from({length:40},(_,i)=>{const n=i+1;const stages=["Not Started","Joists","Joists Complete","Roofs","Roofs Complete","First Fix","First Fix Complete","Second Fix","Second Fix Complete","Finals","Complete"];const si=n<=8?10:n<=14?8:n<=20?6:n<=28?4:n<=34?2:0;return{plot:n,stage:stages[si],carpenter:n<=8?"Various":n<=14?"Sam Bennett":n<=20?"Tom Harris":n<=28?"Dave Mitchell":n<=34?"Ryan Cooper":"Unallocated",houseType:["Craftsman","Joiner","Turner","Tanner","Weaver"][i%5]};});
 const ALL_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",status:"active"},{id:"C003",name:"Jake Williams",pin:"2345",site:"Thoresby Vale",builder:"Barratt",status:"active"},{id:"C004",name:"Tom Harris",pin:"3456",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C005",name:"Sam Bennett",pin:"4567",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C006",name:"Chris Taylor",pin:"5679",site:"The Meadows",builder:"Bellway",status:"active"},{id:"C007",name:"Dan Evans",pin:"6780",site:"Hilton Valley",builder:"St. Modwen",status:"leave"},{id:"C008",name:"Mark Johnson",pin:"7891",site:"Edwalton Fields",builder:"Countryside",status:"active"},{id:"C009",name:"Luke Brown",pin:"8902",site:"Broadnook",builder:"Vistry",status:"active"},{id:"C010",name:"James Wilson",pin:"9013",site:"Clipstone Park",builder:"Persimmon",status:"active"}];
@@ -202,6 +202,11 @@ const[fixingQty,setFixingQty]=useState('');
 const[fixingNotes,setFixingNotes]=useState('');
 const[fixingRequests,setFixingRequests]=useState([]);
 const[successMsg,setSuccessMsg]=useState('');
+const[delays,setDelays]=useState([]);
+const[delayingAllocId,setDelayingAllocId]=useState(null);
+const[delayReason,setDelayReason]=useState('');
+const[delayDays,setDelayDays]=useState(1);
+const[allFixingRequests,setAllFixingRequests]=useState([]);
   // Website/old portal states from App7
   const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[delayReason,setDelayReason]=useState("");const[delayDuration,setDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
@@ -223,25 +228,82 @@ const go=(s)=>{setSec(s);setSB(null);setSS(null);setSH(null);setSSv(null);setPor
 const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",background:"#fff",minHeight:"100vh"},nav:{position:"fixed",top:0,left:0,right:0,zIndex:100,background:"rgba(12,24,33,.97)",backdropFilter:"blur(12px)",minHeight:64,display:"flex",alignItems:"center",padding:"0 24px",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,.06)"},nl:(a)=>({color:a?"#B8860B":"rgba(255,255,255,.6)",fontSize:10,fontWeight:600,letterSpacing:.8,textTransform:"uppercase",cursor:"pointer",borderBottom:a?"2px solid #B8860B":"2px solid transparent",padding:"4px 0",whiteSpace:"nowrap"}),sc:{padding:"80px clamp(20px,4vw,40px)",maxWidth:1320,margin:"0 auto"},lb:{fontSize:11,fontWeight:700,letterSpacing:2.5,textTransform:"uppercase",color:"#B8860B",marginBottom:8,display:"block"},h2:{fontSize:32,fontWeight:700,lineHeight:1.15,marginBottom:12},sub:{fontSize:14,color:"#777",lineHeight:1.7,maxWidth:600},cd:{background:"#fff",borderRadius:6,overflow:"hidden",boxShadow:"0 2px 16px rgba(0,0,0,.06)",cursor:"pointer",transition:".25s"},bt:{display:"inline-flex",alignItems:"center",gap:6,padding:"11px 24px",borderRadius:5,fontSize:13,fontWeight:700,cursor:"pointer",border:"none",letterSpacing:.4}};
 
 
+
   // ===== ENHANCED PORTAL =====
   if(currentPage === 'app' && user) {
   const myAllocs = allocations.filter(a => a.carpenter === user?.name);
   const todayStr = new Date().toISOString().split('T')[0];
-  const getWeekDates = () => {
-    const today = new Date();
-    const dow = today.getDay();
-    const monday = new Date(today);
-    monday.setDate(today.getDate() - ((dow + 6) % 7));
-    const days = [];
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(monday);
-      d.setDate(monday.getDate() + i);
-      days.push(d);
-    }
-    return days;
+  const todayDate = new Date(todayStr);
+
+  const handleDelay = (allocId) => {
+    if(!delayReason.trim()) { alert('Please enter a reason for the delay'); return; }
+    const alloc = allocations.find(a => a.id === allocId);
+    if(!alloc) return;
+    const delayEntry = {
+      id: Date.now(),
+      allocId: allocId,
+      carpenter: alloc.carpenter,
+      site: alloc.site,
+      plot: alloc.plot,
+      houseType: alloc.houseType,
+      stage: alloc.stage,
+      reason: delayReason,
+      delayDays: delayDays,
+      originalEnd: alloc.endDate,
+      date: new Date().toLocaleDateString('en-GB'),
+      status: 'active'
+    };
+    setDelays([...delays, delayEntry]);
+    // Push this allocation's end date back
+    const newEnd = new Date(alloc.endDate);
+    newEnd.setDate(newEnd.getDate() + delayDays);
+    // Also push all subsequent allocations for this carpenter back
+    const sortedAllocs = [...allocations].sort((a,b) => new Date(a.startDate) - new Date(b.startDate));
+    const updatedAllocs = allocations.map(a => {
+      if(a.id === allocId) {
+        return {...a, endDate: newEnd.toISOString().split('T')[0], delayed: true, delayDays: (a.delayDays||0) + delayDays};
+      }
+      // Push subsequent allocs for same carpenter
+      if(a.carpenter === alloc.carpenter && new Date(a.startDate) > new Date(alloc.endDate)) {
+        const ns = new Date(a.startDate); ns.setDate(ns.getDate() + delayDays);
+        const ne = new Date(a.endDate); ne.setDate(ne.getDate() + delayDays);
+        return {...a, startDate: ns.toISOString().split('T')[0], endDate: ne.toISOString().split('T')[0]};
+      }
+      return a;
+    });
+    setAllocations(updatedAllocs);
+    setDelayingAllocId(null);
+    setDelayReason('');
+    setDelayDays(1);
+    setSuccessMsg('Delay recorded - schedule updated'); setTimeout(()=>setSuccessMsg(''),2500);
   };
-  const weekDates = getWeekDates();
-  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  const markAllocComplete = (allocId) => {
+    setAllocations(allocations.map(a => a.id === allocId ? {...a, completed: true, completedDate: todayStr} : a));
+    // Also update work log
+    const alloc = allocations.find(a => a.id === allocId);
+    if(alloc) {
+      setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
+    }
+    setSuccessMsg('Job marked as complete'); setTimeout(()=>setSuccessMsg(''),2500);
+  };
+
+  const handleFixingRequest = (item, qty, notes, allocInfo) => {
+    const req = {
+      id: Date.now(),
+      carpenter: user?.name,
+      site: allocInfo?.site || user?.site || '',
+      plot: allocInfo?.plot || '',
+      stage: allocInfo?.stage || '',
+      item: item,
+      qty: qty,
+      notes: notes,
+      date: new Date().toLocaleDateString('en-GB'),
+      status: 'pending'
+    };
+    setAllFixingRequests([...allFixingRequests, req]);
+    return req;
+  };
 
   return (
     <div style={{ fontFamily: 'DM Sans, sans-serif', backgroundColor: CREAM, minHeight: '100vh' }}>
@@ -271,7 +333,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           transition: 'left 0.25s ease'
         }}>
 
-          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Price Lists','Documents'].map(tab => (
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Delays','Fixings','Price Lists','Documents'].map(tab => (
             <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -279,6 +341,12 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
                 fontWeight: adminTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
               {tab}
+              {tab === 'Delays' && delays.filter(d=>d.status==='active').length > 0 && (
+                <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{delays.filter(d=>d.status==='active').length}</span>
+              )}
+              {tab === 'Fixings' && allFixingRequests.filter(r=>r.status==='pending').length > 0 && (
+                <span style={{marginLeft:6,backgroundColor:'#d32f2f',color:'white',borderRadius:'50%',padding:'1px 6px',fontSize:10}}>{allFixingRequests.filter(r=>r.status==='pending').length}</span>
+              )}
             </button>
           ))}
 
@@ -342,11 +410,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   {label:'Total Carpenters', val: CARPENTERS.length},
                   {label:'Active Sites', val: BUILDERS.reduce((s,b) => s + b.sites.length, 0)},
                   {label:'Unallocated Work', val: workLog.filter(w => w.status === 'logged').length},
-                  {label:'Allocated This Week', val: allocations.length},
+                  {label:'Allocated This Week', val: allocations.filter(a=>!a.completed).length},
+                  {label:'Active Delays', val: delays.filter(d=>d.status==='active').length},
+                  {label:'Pending Fixings', val: allFixingRequests.filter(r=>r.status==='pending').length},
                   {label:'Total Invoiced', val: 'GBP ' + invoices.filter(i => i.status === 'paid').reduce((s,i) => s + i.amount, 0)},
                   {label:'Pending Invoices', val: 'GBP ' + invoices.filter(i => i.status === 'pending').reduce((s,i) => s + i.amount, 0)}
                 ].map((c,ci) => (
-                  <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
+                  <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + (c.label.includes('Delay')?'#d32f2f':GOLD) }}>
                     <p style={{ margin: 0, fontSize: '11px', opacity: 0.8 }}>{c.label}</p>
                     <h3 style={{ margin: '5px 0 0 0', fontSize: '24px' }}>{c.val}</h3>
                   </div>
@@ -487,7 +557,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                             <button onClick={() => {
                               if(allocateCarpenter && allocateStartDate){
                                 const ed=new Date(allocateStartDate); ed.setDate(ed.getDate()+item.expectedDays-1);
-                                setAllocations([...allocations, {id:Math.max(...allocations.map(a=>a.id),0)+1, carpenter:allocateCarpenter, site:item.site, plot:item.plot, houseType:item.houseType, stage:item.stage, startDate:allocateStartDate, endDate:ed.toISOString().split('T')[0]}]);
+                                setAllocations([...allocations, {id:Math.max(...allocations.map(a=>a.id),0)+1, carpenter:allocateCarpenter, site:item.site, plot:item.plot, houseType:item.houseType, stage:item.stage, startDate:allocateStartDate, endDate:ed.toISOString().split('T')[0], completed:false, delayed:false, delayDays:0}]);
                                 setWorkLog(workLog.map(w => w.id===item.id ? {...w, status:'allocated', allocatedTo:allocateCarpenter} : w));
                                 setAllocateId(null); setAllocateCarpenter(''); setAllocateStartDate('');
                                 setSuccessMsg('Work allocated to '+allocateCarpenter); setTimeout(()=>setSuccessMsg(''),2500);
@@ -550,8 +620,10 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                             {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
                               const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
                               return (
-                                <div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px', backgroundColor:af?GOLD:'white', color:af?NAVY:'#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
-                                  {af ? af.site.substring(0,4) : ''}
+                                <div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px',
+                                  backgroundColor: af ? (af.completed ? '#c8e6c9' : af.delayed ? '#ffcdd2' : GOLD) : 'white',
+                                  color: af ? NAVY : '#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
+                                  {af ? (af.completed ? 'Done' : af.site.substring(0,4)) : ''}
                                 </div>
                               );
                             })}
@@ -560,19 +632,24 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                       })}
                     </div>
                   </div>
+                  <div style={{marginTop:10,fontSize:11,display:'flex',gap:15}}>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:GOLD,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Active</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#c8e6c9',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ffcdd2',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
+                  </div>
                 </div>
               )}
               {scheduleView === 'list' && (
                 <div style={{overflowX:'auto'}}>
-                <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'600px' }}>
+                <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'700px' }}>
                   <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
-                    {['Carpenter','Site','Plot','Type','Stage','Start','End'].map(h => (
+                    {['Carpenter','Site','Plot','Type','Stage','Start','End','Status'].map(h => (
                       <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
                     ))}
                   </tr></thead>
                   <tbody>
                     {allocations.map((alloc,idx) => (
-                      <tr key={alloc.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
+                      <tr key={alloc.id} style={{ backgroundColor: alloc.delayed?'#fff3e0':(idx%2===0?'#f9f9f9':'white'), borderBottom:'1px solid #ddd' }}>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.carpenter}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.site}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.plot}</td>
@@ -580,6 +657,11 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.stage}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.startDate)}</td>
                         <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.endDate)}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>
+                          {alloc.completed ? <span style={{color:'#2e7d32',fontWeight:'bold'}}>Complete</span> :
+                           alloc.delayed ? <span style={{color:'#d32f2f',fontWeight:'bold'}}>Delayed +{alloc.delayDays}d</span> :
+                           <span style={{color:GOLD,fontWeight:'bold'}}>Active</span>}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -614,6 +696,124 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 </tbody>
               </table>
               </div>
+            </div>
+          )}
+
+          {/* ========== ADMIN DELAYS ========== */}
+          {user?.role === 'admin' && adminTab === 'delays' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Delayed Works</h2>
+              {delays.length === 0 ? (
+                <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}>
+                  <p style={{color:'#666',fontSize:14,margin:0}}>No delays reported.</p>
+                </div>
+              ) : (
+                <div>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(160px, 1fr))',gap:12,marginBottom:20}}>
+                    <div style={{backgroundColor:'#d32f2f',color:'white',padding:14,borderRadius:8}}>
+                      <p style={{margin:0,fontSize:11,opacity:.8}}>Active Delays</p>
+                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.filter(d=>d.status==='active').length}</h3>
+                    </div>
+                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8}}>
+                      <p style={{margin:0,fontSize:11,opacity:.8}}>Total Delay Days</p>
+                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.reduce((s,d)=>s+d.delayDays,0)}</h3>
+                    </div>
+                    <div style={{backgroundColor:NAVY,color:CREAM,padding:14,borderRadius:8}}>
+                      <p style={{margin:0,fontSize:11,opacity:.8}}>Resolved</p>
+                      <h3 style={{margin:'4px 0 0',fontSize:22}}>{delays.filter(d=>d.status==='resolved').length}</h3>
+                    </div>
+                  </div>
+                  {delays.sort((a,b)=>b.id-a.id).map(d => (
+                    <div key={d.id} style={{backgroundColor:'white',border: d.status==='active'?'2px solid #d32f2f':'1px solid #ddd',borderLeft: d.status==='active'?'5px solid #d32f2f':'5px solid #999',borderRadius:8,padding:16,marginBottom:10}}>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:15}}>{d.carpenter}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{d.site} - Plot {d.plot} / {d.houseType} / {d.stage}</div>
+                        </div>
+                        <div style={{textAlign:'right'}}>
+                          <span style={{display:'inline-block',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold',
+                            backgroundColor: d.status==='active'?'#ffebee':'#e8f5e9', color: d.status==='active'?'#c62828':'#2e7d32'}}>
+                            {d.status==='active'?'ACTIVE DELAY':'RESOLVED'}
+                          </span>
+                          <div style={{fontSize:12,marginTop:4,fontWeight:'bold',color:'#d32f2f'}}>+{d.delayDays} day{d.delayDays>1?'s':''}</div>
+                        </div>
+                      </div>
+                      <div style={{marginTop:10,padding:10,backgroundColor:'#fafafa',borderRadius:4,fontSize:13}}>
+                        <strong>Reason:</strong> {d.reason}
+                      </div>
+                      <div style={{marginTop:6,fontSize:11,color:'#999'}}>Reported: {d.date} | Original end: {d.originalEnd}</div>
+                      {d.status === 'active' && (
+                        <button onClick={() => setDelays(delays.map(dd => dd.id===d.id ? {...dd, status:'resolved'} : dd))}
+                          style={{marginTop:8,backgroundColor:'#2e7d32',color:'white',padding:'5px 12px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
+                          Mark Resolved
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== ADMIN FIXINGS MANAGEMENT ========== */}
+          {user?.role === 'admin' && adminTab === 'fixings' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Fixings and Materials Requests</h2>
+              {allFixingRequests.length === 0 ? (
+                <div style={{backgroundColor:'white',padding:'20px',borderRadius:'8px',textAlign:'center'}}>
+                  <p style={{color:'#666',fontSize:14,margin:0}}>No fixing requests yet. Carpenters can submit requests from their portal.</p>
+                </div>
+              ) : (
+                <div>
+                  <div style={{display:'flex',gap:8,marginBottom:15,flexWrap:'wrap'}}>
+                    {['all','pending','approved','denied'].map(f => (
+                      <button key={f} onClick={() => setPlotFilter(f)}
+                        style={{padding:'6px 14px',borderRadius:4,border:'none',cursor:'pointer',fontSize:12,fontWeight:'bold',
+                          backgroundColor:plotFilter===f?GOLD:'#ddd', color:plotFilter===f?NAVY:'#333'}}>
+                        {f.charAt(0).toUpperCase()+f.slice(1)} {f!=='all' && <span>({allFixingRequests.filter(r=>r.status===f).length})</span>}
+                      </button>
+                    ))}
+                  </div>
+                  {allFixingRequests.filter(r => plotFilter==='all' || !plotFilter || r.status===plotFilter).sort((a,b)=>b.id-a.id).map(req => (
+                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderLeft: req.status==='pending'?'5px solid '+GOLD : req.status==='approved'?'5px solid #2e7d32':'5px solid #999', borderRadius:8,padding:14,marginBottom:10}}>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:14}}>{req.carpenter}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{req.site}{req.plot ? ' - Plot '+req.plot : ''} {req.stage ? '/ '+req.stage : ''}</div>
+                          <div style={{marginTop:6,fontSize:14}}><strong>{req.item}</strong> x {req.qty}</div>
+                          {req.notes && <div style={{fontSize:12,color:'#888',marginTop:4}}>Note: {req.notes}</div>}
+                          <div style={{fontSize:11,color:'#aaa',marginTop:4}}>Requested: {req.date}</div>
+                        </div>
+                        <div style={{display:'flex',gap:6,alignItems:'center'}}>
+                          {req.status === 'pending' && (
+                            <>
+                              <button onClick={() => {
+                                setAllFixingRequests(allFixingRequests.map(r => r.id===req.id ? {...r, status:'approved'} : r));
+                                setSuccessMsg('Fixing request approved'); setTimeout(()=>setSuccessMsg(''),2500);
+                              }} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
+                                Approve
+                              </button>
+                              <button onClick={() => {
+                                setAllFixingRequests(allFixingRequests.map(r => r.id===req.id ? {...r, status:'denied'} : r));
+                                setSuccessMsg('Fixing request denied'); setTimeout(()=>setSuccessMsg(''),2500);
+                              }} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12,fontWeight:'bold'}}>
+                                Deny
+                              </button>
+                            </>
+                          )}
+                          {req.status !== 'pending' && (
+                            <span style={{padding:'4px 12px',borderRadius:4,fontSize:11,fontWeight:'bold',
+                              backgroundColor: req.status==='approved'?'#e8f5e9':'#ffebee',
+                              color: req.status==='approved'?'#2e7d32':'#c62828'}}>
+                              {req.status.toUpperCase()}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
@@ -768,33 +968,40 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
-          {/* ========== CARPENTER SCHEDULE (MOBILE-FIRST) ========== */}
+          {/* ========== CARPENTER SCHEDULE (MOBILE-FIRST WITH DELAY) ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Week</h2>
               {myAllocs.length === 0 ? (
                 <div style={{ backgroundColor:'white', padding:'20px', borderRadius:'8px', textAlign:'center' }}>
-                  <p style={{ color:'#666', fontSize:16, margin:0 }}>No work scheduled this week.</p>
+                  <p style={{ color:'#666', fontSize:16, margin:0 }}>No work scheduled.</p>
                   <p style={{ color:'#999', fontSize:13, marginTop:8 }}>Check back later or contact your site manager.</p>
                 </div>
               ) : (
                 <div>
-                  {/* Card view - mobile friendly */}
-                  {myAllocs.map(alloc => {
+                  {myAllocs.sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).map(alloc => {
                     const start = new Date(alloc.startDate);
                     const end = new Date(alloc.endDate);
-                    const today = new Date(todayStr);
-                    const isActive = today >= start && today <= end;
-                    const isPast = today > end;
+                    const isActive = todayDate >= start && todayDate <= end && !alloc.completed;
+                    const isPast = todayDate > end || alloc.completed;
+                    const isFuture = todayDate < start;
+                    const totalDays = daysInRange(alloc.startDate, alloc.endDate);
+                    const daysWorked = isActive ? Math.max(1, Math.ceil((todayDate - start)/(1000*60*60*24))+1) : isPast ? totalDays : 0;
+                    const progress = isPast ? 100 : isActive ? Math.round((daysWorked/totalDays)*100) : 0;
                     return (
                       <div key={alloc.id} style={{
-                        backgroundColor: isActive ? '#fff' : isPast ? '#f5f5f5' : '#fff',
+                        backgroundColor: '#fff',
                         border: isActive ? '2px solid '+GOLD : '1px solid #ddd',
-                        borderRadius: '8px', padding: '16px', marginBottom: '12px',
-                        borderLeft: isActive ? '5px solid '+GOLD : isPast ? '5px solid #ccc' : '5px solid '+NAVY
+                        borderRadius: '10px', padding: '16px', marginBottom: '12px',
+                        borderLeft: isActive ? '6px solid '+GOLD : isPast ? '6px solid #4caf50' : '6px solid '+NAVY
                       }}>
-                        {isActive && <span style={{ display:'inline-block', backgroundColor:GOLD, color:NAVY, padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginBottom:8 }}>CURRENT</span>}
-                        {isPast && <span style={{ display:'inline-block', backgroundColor:'#999', color:'white', padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginBottom:8 }}>COMPLETED</span>}
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:6,marginBottom:10}}>
+                          {isActive && <span style={{backgroundColor:GOLD, color:NAVY, padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>IN PROGRESS</span>}
+                          {isPast && <span style={{backgroundColor:'#4caf50', color:'white', padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>COMPLETE</span>}
+                          {isFuture && <span style={{backgroundColor:NAVY, color:CREAM, padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>UPCOMING</span>}
+                          {alloc.delayed && <span style={{backgroundColor:'#d32f2f', color:'white', padding:'3px 10px', borderRadius:4, fontSize:11, fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
+                          <span style={{fontSize:12,color:'#888'}}>{totalDays} day{totalDays>1?'s':''}</span>
+                        </div>
                         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', fontSize:14 }}>
                           <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Site</span><strong>{alloc.site}</strong></div>
                           <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Plot</span><strong>{alloc.plot}</strong></div>
@@ -803,7 +1010,63 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
                           <div><span style={{ color:'#888', fontSize:11, display:'block' }}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
                         </div>
-                        <div style={{ marginTop:10, fontSize:12, color:'#666' }}>{daysInRange(alloc.startDate, alloc.endDate)} day{daysInRange(alloc.startDate, alloc.endDate) > 1 ? 's' : ''}</div>
+                        {/* Progress bar */}
+                        {(isActive || isPast) && (
+                          <div style={{marginTop:12}}>
+                            <div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}>
+                              <span>Day {daysWorked} of {totalDays}</span>
+                              <span>{progress}%</span>
+                            </div>
+                            <div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}>
+                              <div style={{backgroundColor: isPast?'#4caf50':GOLD, height:'100%', width:progress+'%', borderRadius:4, transition:'width 0.3s'}}></div>
+                            </div>
+                          </div>
+                        )}
+                        {/* Action buttons for active jobs */}
+                        {isActive && !alloc.completed && (
+                          <div style={{marginTop:14,display:'flex',gap:8,flexWrap:'wrap'}}>
+                            <button onClick={() => markAllocComplete(alloc.id)}
+                              style={{backgroundColor:'#4caf50',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>
+                              Mark Complete
+                            </button>
+                            {delayingAllocId === alloc.id ? (
+                              <div style={{width:'100%',marginTop:8,padding:12,backgroundColor:'#fff3e0',borderRadius:6,border:'1px solid #ffcc80'}}>
+                                <p style={{margin:'0 0 8px',fontSize:13,fontWeight:'bold',color:'#e65100'}}>Report Delay</p>
+                                <div style={{marginBottom:8}}>
+                                  <label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Reason for delay</label>
+                                  <textarea value={delayReason} onChange={(e) => setDelayReason(e.target.value)}
+                                    placeholder="e.g. Materials not delivered, weather, access issue..."
+                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13,minHeight:50,boxSizing:'border-box',fontFamily:'inherit'}} />
+                                </div>
+                                <div style={{marginBottom:10}}>
+                                  <label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Additional days needed</label>
+                                  <select value={delayDays} onChange={(e) => setDelayDays(parseInt(e.target.value))}
+                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13}}>
+                                    {[1,2,3,4,5,6,7].map(d => <option key={d} value={d}>{d} day{d>1?'s':''}</option>)}
+                                  </select>
+                                </div>
+                                <div style={{display:'flex',gap:8}}>
+                                  <button onClick={() => handleDelay(alloc.id)}
+                                    style={{backgroundColor:'#e65100',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>
+                                    Submit Delay
+                                  </button>
+                                  <button onClick={() => {setDelayingAllocId(null);setDelayReason('');setDelayDays(1);}}
+                                    style={{backgroundColor:'#999',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12}}>
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <button onClick={() => setDelayingAllocId(alloc.id)}
+                                style={{backgroundColor:'#e65100',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>
+                                Report Delay
+                              </button>
+                            )}
+                          </div>
+                        )}
+                        {isFuture && (
+                          <div style={{marginTop:10,fontSize:12,color:'#888',fontStyle:'italic'}}>Starts {formatDate(alloc.startDate)}</div>
+                        )}
                       </div>
                     );
                   })}
@@ -872,7 +1135,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   <select value={fixingAlloc} onChange={(e) => setFixingAlloc(e.target.value)}
                     style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
                     <option value="">Select</option>
-                    {myAllocs.map(a => (
+                    {myAllocs.filter(a=>!a.completed).map(a => (
                       <option key={a.id} value={a.id}>{a.site} - Plot {a.plot} ({a.stage})</option>
                     ))}
                   </select>
@@ -895,7 +1158,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 <button type="button" onClick={() => {
                   if(fixingAlloc && fixingItem && fixingQty){
                     const alloc = myAllocs.find(a => String(a.id) === String(fixingAlloc));
-                    setFixingRequests([...fixingRequests, {id:Date.now(), alloc:alloc?alloc.site+' Plot '+alloc.plot:'', item:fixingItem, qty:fixingQty, notes:fixingNotes, status:'Requested', date:new Date().toLocaleDateString('en-GB')}]);
+                    const req = handleFixingRequest(fixingItem, fixingQty, fixingNotes, alloc);
+                    setFixingRequests([...fixingRequests, req]);
                     setFixingAlloc(''); setFixingItem(''); setFixingQty(''); setFixingNotes('');
                     setSuccessMsg('Fixing request submitted'); setTimeout(()=>setSuccessMsg(''),2500);
                   } else { alert('Please fill in allocation, item and quantity'); }
@@ -903,16 +1167,20 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   Request
                 </button>
               </div>
-              {fixingRequests.length > 0 && (
+              {(fixingRequests.length > 0 || allFixingRequests.filter(r=>r.carpenter===user?.name).length > 0) && (
                 <div>
                   <h3 style={{ color:NAVY, fontSize:16 }}>Your Requests</h3>
-                  {fixingRequests.map(r => (
+                  {[...fixingRequests, ...allFixingRequests.filter(r=>r.carpenter===user?.name)].map(r => (
                     <div key={r.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'6px', padding:'12px', marginBottom:'8px', fontSize:13 }}>
                       <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:4}}>
                         <strong>{r.item} x{r.qty}</strong>
-                        <span style={{ backgroundColor:'#e3f2fd', color:'#1565c0', padding:'2px 8px', borderRadius:'3px', fontSize:11 }}>{r.status}</span>
+                        <span style={{ padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold',
+                          backgroundColor: r.status==='approved'?'#e8f5e9' : r.status==='denied'?'#ffebee' : '#e3f2fd',
+                          color: r.status==='approved'?'#2e7d32' : r.status==='denied'?'#c62828' : '#1565c0' }}>
+                          {(r.status||'pending').toUpperCase()}
+                        </span>
                       </div>
-                      <div style={{color:'#666', fontSize:12, marginTop:4}}>{r.alloc} - {r.date}</div>
+                      <div style={{color:'#666', fontSize:12, marginTop:4}}>{r.site || r.alloc} - {r.date}</div>
                     </div>
                   ))}
                 </div>
@@ -928,7 +1196,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 <p style={{color:'#666', fontSize:14}}>No invoices yet.</p>
               ) : (
                 <div>
-                  {invoices.filter(i => i.carpenter === user?.name).map((inv,idx) => (
+                  {invoices.filter(i => i.carpenter === user?.name).map(inv => (
                     <div key={inv.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'8px', padding:'14px', marginBottom:'10px' }}>
                       <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
                         <div>
@@ -1013,6 +1281,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       </div>
     </div>
   ); }
+
 
 
 if(portal){return(<div style={S.root}><nav style={{...S.nav,padding:"0 20px"}}><div style={{display:"flex",alignItems:"center",gap:10}}><img src={logoUrl} alt="M&W" style={{width:32,height:32,borderRadius:4,objectFit:"contain"}}/><span style={{color:"#fff",fontSize:14,fontWeight:600}}>M&W Portal</span>{pUser&&<span style={{fontSize:10,padding:"3px 10px",borderRadius:100,background:"rgba(184,134,11,.2)",color:"#D4A843",fontWeight:600,marginLeft:4}}>{pUser.role==="admin"?"ADMIN":pUser.role==="office"?"OFFICE":"CARPENTER"}</span>}</div><span style={{...S.nl(false),color:"rgba(255,255,255,.8)"}} onClick={()=>{setPortal(null);setPUser(null);go("home");}}>Exit Portal</span></nav>
