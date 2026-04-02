@@ -63,19 +63,19 @@ const SITE_MANAGERS = [
 const INITIAL_WORK_LOG = [
   { id: 1, site: "Holbrook Park", builder: "Bellway", plot: "34", houseType: "Craftsman", stage: "First Fix", expectedDays: 3, priority: "high", notes: "Ready to go", status: "allocated", allocatedTo: "Dave Mitchell" },
   { id: 2, site: "Holbrook Park", builder: "Bellway", plot: "35", houseType: "Joiner", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "allocated", allocatedTo: "Dave Mitchell" },
-  { id: 3, site: "Coppice Heights", builder: "Bellway", plot: "18", houseType: "Turner", stage: "Roofs", expectedDays: 2, priority: "high", notes: "Trusses delivered", status: "allocated", allocatedTo: "Ryan Cooper" },
-  { id: 4, site: "Coppice Heights", builder: "Bellway", plot: "19", houseType: "Joiner", stage: "Roofs", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Ryan Cooper" },
+  { id: 3, site: "Coppice Heights", builder: "Bellway", plot: "18", houseType: "Turner", stage: "Roof", expectedDays: 2, priority: "high", notes: "Trusses delivered", status: "allocated", allocatedTo: "Ryan Cooper" },
+  { id: 4, site: "Coppice Heights", builder: "Bellway", plot: "19", houseType: "Joiner", stage: "Roof", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Ryan Cooper" },
   { id: 5, site: "Thoresby Vale", builder: "Barratt", plot: "42", houseType: "Windermere", stage: "Joists", expectedDays: 2, priority: "high", notes: "", status: "allocated", allocatedTo: "Jake Williams" },
   { id: 6, site: "Holbrook Park", builder: "Bellway", plot: "29", houseType: "Weaver", stage: "Second Fix", expectedDays: 4, priority: "medium", notes: "", status: "allocated", allocatedTo: "Tom Harris" },
-  { id: 7, site: "Holbrook Park", builder: "Bellway", plot: "12", houseType: "Cooper", stage: "Finals", expectedDays: 1, priority: "low", notes: "Snagging only", status: "complete", allocatedTo: "Sam Bennett" },
+  { id: 7, site: "Holbrook Park", builder: "Bellway", plot: "12", houseType: "Cooper", stage: "Final", expectedDays: 1, priority: "low", notes: "Snagging only", status: "complete", allocatedTo: "Sam Bennett" },
   { id: 8, site: "Swinfen Vale", builder: "Bellway", plot: "5", houseType: "Craftsman", stage: "Joists", expectedDays: 2, priority: "high", notes: "Michael called — ready Monday", status: "logged" },
   { id: 9, site: "Swinfen Vale", builder: "Bellway", plot: "6", houseType: "Joiner", stage: "Joists", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
   { id: 10, site: "Oadby Grange", builder: "Bellway", plot: "3", houseType: "Weaver", stage: "First Fix", expectedDays: 3, priority: "high", notes: "Richard needs ASAP", status: "logged" },
   { id: 11, site: "Oadby Grange", builder: "Bellway", plot: "4", houseType: "Cooper", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "logged" },
-  { id: 12, site: "Hilton Valley", builder: "St. Modwen", plot: "22", houseType: "Arden", stage: "Roofs", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
+  { id: 12, site: "Hilton Valley", builder: "St. Modwen", plot: "22", houseType: "Arden", stage: "Roof", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
   { id: 13, site: "Edwalton Fields", builder: "Countryside", plot: "8", houseType: "Thornbury", stage: "Second Fix", expectedDays: 4, priority: "low", notes: "", status: "logged" },
   { id: 14, site: "Broadnook Garden Village", builder: "Vistry", plot: "15", houseType: "Limewood", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "logged" },
-  { id: 15, site: "Clipstone Park", builder: "Persimmon", plot: "67", houseType: "Bedale", stage: "Roofs", expectedDays: 2, priority: "high", notes: "", status: "logged" }
+  { id: 15, site: "Clipstone Park", builder: "Persimmon", plot: "67", houseType: "Bedale", stage: "Roof", expectedDays: 2, priority: "high", notes: "", status: "logged" }
 ];
 
 const PRICE_LISTS = {
@@ -137,21 +137,21 @@ const DOCUMENTS = {
 const ALLOCATIONS = [
   { id: 1, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "34", houseType: "Craftsman", stage: "First Fix", startDate: "2026-03-24", endDate: "2026-03-27" },
   { id: 2, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "35", houseType: "Joiner", stage: "First Fix", startDate: "2026-03-27", endDate: "2026-03-30" },
-  { id: 3, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "18", houseType: "Turner", stage: "Roofs", startDate: "2026-03-25", endDate: "2026-03-27" },
-  { id: 4, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "19", houseType: "Joiner", stage: "Roofs", startDate: "2026-03-27", endDate: "2026-03-29" },
+  { id: 3, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "18", houseType: "Turner", stage: "Roof", startDate: "2026-03-25", endDate: "2026-03-27" },
+  { id: 4, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "19", houseType: "Joiner", stage: "Roof", startDate: "2026-03-27", endDate: "2026-03-29" },
   { id: 5, carpenter: "Jake Williams", site: "Thoresby Vale", plot: "42", houseType: "Windermere", stage: "Joists", startDate: "2026-03-30", endDate: "2026-04-01" },
   { id: 6, carpenter: "Tom Harris", site: "Holbrook Park", plot: "29", houseType: "Weaver", stage: "Second Fix", startDate: "2026-03-26", endDate: "2026-03-30" },
-  { id: 7, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "12", houseType: "Cooper", stage: "Finals", startDate: "2026-03-31", endDate: "2026-03-31" },
-  { id: 8, carpenter: "Tom Harris", site: "Holbrook Park", plot: "38", houseType: "Craftsman", stage: "Roofs", startDate: "2026-04-02", endDate: "2026-04-04" }
+  { id: 7, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "12", houseType: "Cooper", stage: "Final", startDate: "2026-03-31", endDate: "2026-03-31" },
+  { id: 8, carpenter: "Tom Harris", site: "Holbrook Park", plot: "38", houseType: "Craftsman", stage: "Roof", startDate: "2026-04-02", endDate: "2026-04-04" }
 ];
 
 const INVOICES = [
-  { id: 1, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "12", houseType: "Joiner", stage: "Finals", amount: 600, status: "pending", date: "2026-03-20" },
+  { id: 1, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "12", houseType: "Joiner", stage: "Final", amount: 600, status: "pending", date: "2026-03-20" },
   { id: 2, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "14", houseType: "Turner", stage: "First Fix", amount: 950, status: "pending", date: "2026-03-22" },
   { id: 3, carpenter: "Jake Williams", site: "Thoresby Vale", plot: "40", houseType: "Windermere", stage: "Joists GF", amount: 860, status: "approved", date: "2026-03-15" },
   { id: 4, carpenter: "Tom Harris", site: "Holbrook Park", plot: "28", houseType: "Weaver", stage: "Second Fix", amount: 800, status: "approved", date: "2026-03-18" },
-  { id: 5, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "10", houseType: "Craftsman", stage: "Finals", amount: 600, status: "paid", date: "2026-03-10" },
-  { id: 6, carpenter: "Chris Taylor", site: "The Meadows", plot: "5", houseType: "Turner", stage: "Roofs", amount: 1210, status: "paid", date: "2026-03-05" }
+  { id: 5, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "10", houseType: "Craftsman", stage: "Final", amount: 600, status: "paid", date: "2026-03-10" },
+  { id: 6, carpenter: "Chris Taylor", site: "The Meadows", plot: "5", houseType: "Turner", stage: "Roof", amount: 1210, status: "paid", date: "2026-03-05" }
 ];
 
 const getSiteHousetypes = (siteName) => {
@@ -191,6 +191,17 @@ export default function App(){
   const [invoiceTab, setInvoiceTab] = useState('pending');
   const [siteManagerTab, setSiteManagerTab] = useState('overview');
   const [plotFilter, setPlotFilter] = useState('');
+const[sidebarOpen,setSidebarOpen]=useState(false);
+const[smPlot,setSmPlot]=useState('');
+const[smHouseType,setSmHouseType]=useState('');
+const[smStage,setSmStage]=useState('');
+const[smNotes,setSmNotes]=useState('');
+const[fixingAlloc,setFixingAlloc]=useState('');
+const[fixingItem,setFixingItem]=useState('');
+const[fixingQty,setFixingQty]=useState('');
+const[fixingNotes,setFixingNotes]=useState('');
+const[fixingRequests,setFixingRequests]=useState([]);
+const[successMsg,setSuccessMsg]=useState('');
   // Website/old portal states from App7
   const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[delayReason,setDelayReason]=useState("");const[delayDuration,setDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
@@ -211,880 +222,798 @@ const send=(t)=>{if(!t.trim())return;const m=[...msgs,{f:"u",t}];setMsgs(m);setC
 const go=(s)=>{setSec(s);setSB(null);setSS(null);setSH(null);setSSv(null);setPortal(null);setPUser(null);setMobileMenu(false);window.scrollTo(0,0);};
 const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",background:"#fff",minHeight:"100vh"},nav:{position:"fixed",top:0,left:0,right:0,zIndex:100,background:"rgba(12,24,33,.97)",backdropFilter:"blur(12px)",minHeight:64,display:"flex",alignItems:"center",padding:"0 24px",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,.06)"},nl:(a)=>({color:a?"#B8860B":"rgba(255,255,255,.6)",fontSize:10,fontWeight:600,letterSpacing:.8,textTransform:"uppercase",cursor:"pointer",borderBottom:a?"2px solid #B8860B":"2px solid transparent",padding:"4px 0",whiteSpace:"nowrap"}),sc:{padding:"80px clamp(20px,4vw,40px)",maxWidth:1320,margin:"0 auto"},lb:{fontSize:11,fontWeight:700,letterSpacing:2.5,textTransform:"uppercase",color:"#B8860B",marginBottom:8,display:"block"},h2:{fontSize:32,fontWeight:700,lineHeight:1.15,marginBottom:12},sub:{fontSize:14,color:"#777",lineHeight:1.7,maxWidth:600},cd:{background:"#fff",borderRadius:6,overflow:"hidden",boxShadow:"0 2px 16px rgba(0,0,0,.06)",cursor:"pointer",transition:".25s"},bt:{display:"inline-flex",alignItems:"center",gap:6,padding:"11px 24px",borderRadius:5,fontSize:13,fontWeight:700,cursor:"pointer",border:"none",letterSpacing:.4}};
 
+
   // ===== ENHANCED PORTAL =====
-  if(currentPage === 'app' && user) { return (
+  if(currentPage === 'app' && user) {
+  const myAllocs = allocations.filter(a => a.carpenter === user?.name);
+  const todayStr = new Date().toISOString().split('T')[0];
+  const getWeekDates = () => {
+    const today = new Date();
+    const dow = today.getDay();
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - ((dow + 6) % 7));
+    const days = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      days.push(d);
+    }
+    return days;
+  };
+  const weekDates = getWeekDates();
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  return (
     <div style={{ fontFamily: 'DM Sans, sans-serif', backgroundColor: CREAM, minHeight: '100vh' }}>
-      {/* Header */}
-      <header style={{ backgroundColor: NAVY, color: CREAM, padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s" alt="M&W" style={{ height: '40px' }} />
-          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>Miller & Watson</span>
+      {successMsg && <div style={{position:'fixed',top:80,left:'50%',transform:'translateX(-50%)',zIndex:9999,backgroundColor:'#2e7d32',color:'white',padding:'12px 28px',borderRadius:6,fontWeight:'bold',fontSize:14,boxShadow:'0 4px 20px rgba(0,0,0,.25)'}}>{successMsg}</div>}
+      <header style={{ backgroundColor: NAVY, color: CREAM, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position:'sticky', top:0, zIndex:200 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} style={{background:'none',border:'none',color:CREAM,fontSize:24,cursor:'pointer',padding:'4px 8px',lineHeight:1}}>
+            {sidebarOpen ? 'X' : '\u2630'}
+          </button>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s" alt="M&W" style={{ height: '36px' }} />
+          <span style={{ fontSize: '16px', fontWeight: 'bold' }}>Miller & Watson</span>
         </div>
-        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-          <span style={{ fontSize: '14px' }}>{user?.name} | {user?.role?.toUpperCase()}</span>
-          <button onClick={() => { setUser(null); setCurrentPage('home'); setPinInput(''); setPortal(null); setPUser(null); setPin(''); }} style={{ backgroundColor: GOLD, color: NAVY, padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <span style={{ fontSize: '13px' }}>{user?.name} | {user?.role?.toUpperCase().replace('_',' ')}</span>
+          <button onClick={() => { setUser(null); setCurrentPage('home'); setPinInput(''); setPortal(null); setPUser(null); setPin(''); setSidebarOpen(false); }} style={{ backgroundColor: GOLD, color: NAVY, padding: '6px 14px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize:13 }}>
             Logout
           </button>
         </div>
       </header>
 
-      {/* ADMIN PORTAL */}
-      {user?.role === 'admin' && (
-        <div style={{ display: 'flex', height: 'calc(100vh - 70px)' }}>
-          <aside style={{ backgroundColor: NAVY, color: CREAM, width: '200px', padding: '20px', overflow: 'auto' }}>
-            {['Dashboard', 'Work Log', 'Allocate', 'Schedule', 'Carpenters', 'Price Lists', 'Documents'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setAdminTab(tab.toLowerCase())}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  margin: '10px 0',
-                  backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
-                  color: adminTab === tab.toLowerCase() ? NAVY : CREAM,
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  fontWeight: adminTab === tab.toLowerCase() ? 'bold' : 'normal'
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-          </aside>
+      {sidebarOpen && <div onClick={() => setSidebarOpen(false)} style={{position:'fixed',top:0,left:0,right:0,bottom:0,backgroundColor:'rgba(0,0,0,0.5)',zIndex:298}}></div>}
 
-          <main style={{ flex: 1, padding: '30px', overflow: 'auto' }}>
-            {/* Dashboard */}
-            {adminTab === 'dashboard' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Dashboard</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Total Carpenters</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>{CARPENTERS.length}</h3>
+      <div style={{ display: 'flex', minHeight: 'calc(100vh - 60px)' }}>
+        <aside style={{
+          backgroundColor: NAVY, color: CREAM, width: '240px', padding: '20px', overflow: 'auto',
+          position: 'fixed', top: 60, bottom: 0, left: sidebarOpen ? 0 : -260, zIndex: 299,
+          transition: 'left 0.25s ease'
+        }}>
+
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Price Lists','Documents'].map(tab => (
+            <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
+              style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
+                backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
+                color: adminTab === tab.toLowerCase() ? NAVY : CREAM,
+                border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
+                fontWeight: adminTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
+              {tab}
+            </button>
+          ))}
+
+          {user?.role === 'site_manager' && ['Overview','Log Work','Documents'].map(tab => (
+            <button key={tab} onClick={() => { setSiteManagerTab(tab.toLowerCase()); setSidebarOpen(false); }}
+              style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
+                backgroundColor: siteManagerTab === tab.toLowerCase() ? GOLD : 'transparent',
+                color: siteManagerTab === tab.toLowerCase() ? NAVY : CREAM,
+                border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
+                fontWeight: siteManagerTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
+              {tab}
+            </button>
+          ))}
+
+          {user?.role === 'carpenter' && ['Schedule','Documents','Price Lists','Fixings','Invoice'].map(tab => (
+            <button key={tab} onClick={() => { setCarpenterTab(tab.toLowerCase()); setSidebarOpen(false); }}
+              style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
+                backgroundColor: carpenterTab === tab.toLowerCase() ? GOLD : 'transparent',
+                color: carpenterTab === tab.toLowerCase() ? NAVY : CREAM,
+                border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
+                fontWeight: carpenterTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
+              {tab}
+            </button>
+          ))}
+
+          {user?.role === 'invoice' && ['Pending','Approved','Paid'].map(tab => (
+            <button key={tab} onClick={() => { setInvoiceTab(tab.toLowerCase()); setSidebarOpen(false); }}
+              style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
+                backgroundColor: invoiceTab === tab.toLowerCase() ? GOLD : 'transparent',
+                color: invoiceTab === tab.toLowerCase() ? NAVY : CREAM,
+                border:'none', borderRadius:'4px', cursor:'pointer', textAlign:'left',
+                fontWeight: invoiceTab === tab.toLowerCase() ? 'bold' : 'normal', fontSize:14 }}>
+              {tab}
+            </button>
+          ))}
+
+          {(user?.role === 'site_manager' || user?.role === 'carpenter') && (
+            <div style={{ marginTop:'30px', padding:'15px', backgroundColor:'rgba(184,134,11,0.2)', borderRadius:'4px', fontSize:'12px' }}>
+              {user?.role === 'carpenter' && <p style={{ margin:'0', color:GOLD, fontWeight:'bold' }}>Name: {user?.name}</p>}
+              <p style={{ margin: user?.role === 'carpenter' ? '5px 0 0 0' : '0', color: user?.role === 'site_manager' ? GOLD : CREAM, fontWeight: user?.role === 'site_manager' ? 'bold' : 'normal' }}>Site: {user?.site}</p>
+              <p style={{ margin:'5px 0 0 0' }}>Builder: {user?.builder}</p>
+            </div>
+          )}
+          {user?.role === 'invoice' && (
+            <div style={{ marginTop:'30px', padding:'15px', backgroundColor:'rgba(184,134,11,0.2)', borderRadius:'4px', fontSize:'12px' }}>
+              <p style={{ margin:'0', color:GOLD, fontWeight:'bold' }}>Total Pending:</p>
+              <p style={{ margin:'5px 0 0 0' }}>GBP {invoices.filter(i => i.status === 'pending').reduce((sum, i) => sum + i.amount, 0)}</p>
+            </div>
+          )}
+        </aside>
+
+        <main style={{ flex: 1, padding: '20px', overflow: 'auto', maxWidth:'100%' }}>
+
+
+          {/* ========== ADMIN DASHBOARD ========== */}
+          {user?.role === 'admin' && adminTab === 'dashboard' && (
+            <div>
+              <h2 style={{ color: NAVY, marginTop: 0, fontSize:22 }}>Dashboard</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '15px' }}>
+                {[
+                  {label:'Total Carpenters', val: CARPENTERS.length},
+                  {label:'Active Sites', val: BUILDERS.reduce((s,b) => s + b.sites.length, 0)},
+                  {label:'Unallocated Work', val: workLog.filter(w => w.status === 'logged').length},
+                  {label:'Allocated This Week', val: allocations.length},
+                  {label:'Total Invoiced', val: 'GBP ' + invoices.filter(i => i.status === 'paid').reduce((s,i) => s + i.amount, 0)},
+                  {label:'Pending Invoices', val: 'GBP ' + invoices.filter(i => i.status === 'pending').reduce((s,i) => s + i.amount, 0)}
+                ].map((c,ci) => (
+                  <div key={ci} style={{ backgroundColor: NAVY, color: CREAM, padding: '16px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
+                    <p style={{ margin: 0, fontSize: '11px', opacity: 0.8 }}>{c.label}</p>
+                    <h3 style={{ margin: '5px 0 0 0', fontSize: '24px' }}>{c.val}</h3>
                   </div>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Active Sites</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>{BUILDERS.reduce((sum, b) => sum + b.sites.length, 0)}</h3>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ========== ADMIN WORK LOG ========== */}
+          {user?.role === 'admin' && adminTab === 'work log' && (
+            <div>
+              <h2 style={{ color: NAVY, marginTop: 0, fontSize:22 }}>Work Log</h2>
+              <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginBottom: '12px' }}>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Site</label>
+                    <select value={selectedSiteForLog} onChange={(e) => { setSelectedSiteForLog(e.target.value); setFormData({...formData, site:e.target.value, houseType:''}); }}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                      <option value="">Select Site</option>
+                      {BUILDERS.flatMap(b => b.sites.map(s => ({name:s.name, builder:b.name}))).map(site => (
+                        <option key={site.name} value={site.name}>{site.name} ({site.builder})</option>
+                      ))}
+                    </select>
                   </div>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Unallocated Work</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>{workLog.filter(w => w.status === 'logged').length}</h3>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Plot</label>
+                    <input type="text" value={formData.plot} onChange={(e) => setFormData({...formData, plot:e.target.value})}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
                   </div>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Allocated This Week</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>{allocations.length}</h3>
-                  </div>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Total Invoiced</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>£{invoices.filter(i => i.status === 'paid').reduce((sum, i) => sum + i.amount, 0)}</h3>
-                  </div>
-                  <div style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', borderLeft: '4px solid ' + GOLD }}>
-                    <p style={{ margin: 0, fontSize: '12px', opacity: 0.8 }}>Pending Invoices</p>
-                    <h3 style={{ margin: '5px 0 0 0', fontSize: '28px' }}>£{invoices.filter(i => i.status === 'pending').reduce((sum, i) => sum + i.amount, 0)}</h3>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>House Type</label>
+                    <select value={formData.houseType} onChange={(e) => setFormData({...formData, houseType:e.target.value})}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                      <option value="">Select</option>
+                      {getSiteHousetypes(selectedSiteForLog).map(ht => <option key={ht} value={ht}>{ht}</option>)}
+                    </select>
                   </div>
                 </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginBottom: '12px' }}>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Stage</label>
+                    <select value={formData.stage} onChange={(e) => setFormData({...formData, stage:e.target.value})}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                      <option value="">Select</option>
+                      {['Joists','Roof','First Fix','Drop Backs','Second Fix','Final','Snags'].map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Expected Days</label>
+                    <input type="number" min="1" max="14" value={formData.expectedDays} onChange={(e) => setFormData({...formData, expectedDays:parseInt(e.target.value)||1})}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
+                  </div>
+                  <div>
+                    <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Priority</label>
+                    <select value={formData.priority} onChange={(e) => setFormData({...formData, priority:e.target.value})}
+                      style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                      <option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option>
+                    </select>
+                  </div>
+                </div>
+                <div style={{ marginBottom:'12px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Notes</label>
+                  <textarea value={formData.notes} onChange={(e) => setFormData({...formData, notes:e.target.value})}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, minHeight:'60px', boxSizing:'border-box', fontFamily:'inherit', fontSize:13 }} />
+                </div>
+                <button type="button" onClick={() => {
+                  if(selectedSiteForLog && formData.plot && formData.houseType && formData.stage){
+                    const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===selectedSiteForLog));
+                    setWorkLog([...workLog, {id:Math.max(...workLog.map(w=>w.id),0)+1, site:selectedSiteForLog, builder:builder?builder.name:'', plot:formData.plot, houseType:formData.houseType, stage:formData.stage, expectedDays:formData.expectedDays, priority:formData.priority, notes:formData.notes, status:'logged'}]);
+                    setFormData({site:'',plot:'',houseType:'',stage:'',expectedDays:1,priority:'medium',notes:''});
+                    setSelectedSiteForLog('');
+                    setSuccessMsg('Work logged successfully'); setTimeout(()=>setSuccessMsg(''),2500);
+                  }
+                }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
+                  Log Work
+                </button>
               </div>
-            )}
-
-            {/* Work Log */}
-            {adminTab === 'work log' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Work Log</h2>
-                <form style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '15px' }}>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Site</label>
-                      <select
-                        value={selectedSiteForLog}
-                        onChange={(e) => {
-                          setSelectedSiteForLog(e.target.value);
-                          setFormData({ ...formData, site: e.target.value, houseType: '' });
-                        }}
-                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}
-                      >
-                        <option value="">Select Site</option>
-                        {BUILDERS.flatMap(b => b.sites.map(s => ({name: s.name, builder: b.name}))).map(site => (
-                          <option key={site.name} value={site.name}>{site.name} ({site.builder})</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Plot Number</label>
-                      <input type="text" value={formData.plot} onChange={(e) => setFormData({...formData, plot: e.target.value})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, boxSizing: 'border-box' }} />
-                    </div>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>House Type</label>
-                      <select value={formData.houseType} onChange={(e) => setFormData({...formData, houseType: e.target.value})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                        <option value="">Select Type</option>
-                        {getSiteHousetypes(selectedSiteForLog).map(ht => <option key={ht} value={ht}>{ht}</option>)}
-                      </select>
-                    </div>
-                  </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '15px' }}>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Stage</label>
-                      <select value={formData.stage} onChange={(e) => setFormData({...formData, stage: e.target.value})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                        <option value="">Select Stage</option>
-                        {['Joists', 'Roofs', 'First Fix', 'Second Fix', 'Finals'].map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Expected Days</label>
-                      <input type="number" min="1" max="5" value={formData.expectedDays} onChange={(e) => setFormData({...formData, expectedDays: parseInt(e.target.value)})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, boxSizing: 'border-box' }} />
-                    </div>
-                    <div>
-                      <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Priority</label>
-                      <select value={formData.priority} onChange={(e) => setFormData({...formData, priority: e.target.value})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Notes</label>
-                    <textarea value={formData.notes} onChange={(e) => setFormData({...formData, notes: e.target.value})} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, minHeight: '80px', boxSizing: 'border-box', fontFamily: 'inherit' }} />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (selectedSiteForLog && formData.plot && formData.houseType && formData.stage) {
-                        const builder = BUILDERS.find(b => b.sites.some(s => s.name === selectedSiteForLog));
-                        const newWork = {
-                          id: Math.max(...workLog.map(w => w.id), 0) + 1,
-                          site: selectedSiteForLog,
-                          builder: builder.name,
-                          plot: formData.plot,
-                          houseType: formData.houseType,
-                          stage: formData.stage,
-                          expectedDays: formData.expectedDays,
-                          priority: formData.priority,
-                          notes: formData.notes,
-                          status: 'logged'
-                        };
-                        setWorkLog([...workLog, newWork]);
-                        setFormData({ site: '', plot: '', houseType: '', stage: '', expectedDays: 1, priority: 'medium', notes: '' });
-                        setSelectedSiteForLog('');
-                      }
-                    }}
-                    style={{ backgroundColor: GOLD, color: NAVY, padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
-                  >
-                    Log Work
-                  </button>
-                </form>
-
-                <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Days</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Priority</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Status</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Allocated To</th>
+              <div style={{overflowX:'auto'}}>
+              <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'700px' }}>
+                <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
+                  {['Site','Plot','Type','Stage','Days','Priority','Status','Allocated To'].map(h => (
+                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
+                  ))}
+                </tr></thead>
+                <tbody>
+                  {workLog.map((item, idx) => (
+                    <tr key={item.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.site}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.plot}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.houseType}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.stage}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.expectedDays}</td>
+                      <td style={{ padding:'8px', fontSize:'12px', textTransform:'capitalize' }}>{item.priority}</td>
+                      <td style={{ padding:'8px', fontSize:'12px', textTransform:'capitalize' }}>{item.status}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.allocatedTo || '-'}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {workLog.map((item, idx) => (
-                      <tr key={item.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.site}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.plot}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.houseType}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.stage}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.expectedDays}</td>
-                        <td style={{ padding: '10px', fontSize: '12px', textTransform: 'capitalize' }}>{item.priority}</td>
-                        <td style={{ padding: '10px', fontSize: '12px', textTransform: 'capitalize' }}>{item.status}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.allocatedTo || '-'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Allocate */}
-            {adminTab === 'allocate' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Allocate Work</h2>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Days</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {workLog.filter(w => w.status === 'logged').map((item, idx) => (
-                      <tr key={item.id} style={{ backgroundColor: allocateId === item.id ? '#ffffcc' : (idx % 2 === 0 ? '#f9f9f9' : 'white'), borderBottom: '1px solid #ddd' }}>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.site}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.plot}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.houseType}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.stage}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.expectedDays}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>
-                          {allocateId === item.id ? (
-                            <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
-                              <input
-                                type="text"
-                                placeholder="Search carpenter"
-                                value={carpenterSearch}
-                                onChange={(e) => setCarpenterSearch(e.target.value)}
-                                style={{ padding: '5px', borderRadius: '3px', border: '1px solid ' + GOLD, fontSize: '11px', flex: 1, minWidth: '120px' }}
-                              />
-                              <select
-                                value={allocateCarpenter}
-                                onChange={(e) => setAllocateCarpenter(e.target.value)}
-                                style={{ padding: '5px', borderRadius: '3px', border: '1px solid ' + GOLD, fontSize: '11px' }}
-                              >
-                                <option value="">Select</option>
-                                {CARPENTERS.filter(c => c.name.toLowerCase().includes(carpenterSearch.toLowerCase())).map(c => (
-                                  <option key={c.id} value={c.name}>{c.name}</option>
-                                ))}
-                              </select>
-                              <input
-                                type="date"
-                                value={allocateStartDate}
-                                onChange={(e) => setAllocateStartDate(e.target.value)}
-                                style={{ padding: '5px', borderRadius: '3px', border: '1px solid ' + GOLD, fontSize: '11px' }}
-                              />
-                              <button
-                                onClick={() => {
-                                  if (allocateCarpenter && allocateStartDate) {
-                                    const endDate = new Date(allocateStartDate);
-                                    endDate.setDate(endDate.getDate() + item.expectedDays - 1);
-                                    const newAlloc = {
-                                      id: Math.max(...allocations.map(a => a.id), 0) + 1,
-                                      carpenter: allocateCarpenter,
-                                      site: item.site,
-                                      plot: item.plot,
-                                      houseType: item.houseType,
-                                      stage: item.stage,
-                                      startDate: allocateStartDate,
-                                      endDate: endDate.toISOString().split('T')[0]
-                                    };
-                                    setAllocations([...allocations, newAlloc]);
-                                    setWorkLog(workLog.map(w => w.id === item.id ? {...w, status: 'allocated', allocatedTo: allocateCarpenter} : w));
-                                    setAllocateId(null);
-                                    setAllocateCarpenter('');
-                                    setAllocateStartDate('');
-                                    setCarpenterSearch('');
-                                  }
-                                }}
-                                style={{ backgroundColor: GOLD, color: NAVY, padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }}
-                              >
-                                Confirm
-                              </button>
-                              <button
-                                onClick={() => { setAllocateId(null); setAllocateCarpenter(''); setAllocateStartDate(''); setCarpenterSearch(''); }}
-                                style={{ backgroundColor: '#999', color: 'white', padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer', fontSize: '11px' }}
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          ) : (
-                            <button onClick={() => setAllocateId(item.id)} style={{ backgroundColor: GOLD, color: NAVY, padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }}>
-                              Allocate
+          {/* ========== ADMIN ALLOCATE ========== */}
+          {user?.role === 'admin' && adminTab === 'allocate' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Allocate Work</h2>
+              {workLog.filter(w => w.status === 'logged').length === 0 ? (
+                <p style={{color:'#666', fontSize:14}}>No unallocated work items. Add work via the Work Log tab.</p>
+              ) : (
+              <div style={{overflowX:'auto'}}>
+              <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'600px' }}>
+                <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
+                  {['Site','Plot','Type','Stage','Days','Action'].map(h => (
+                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
+                  ))}
+                </tr></thead>
+                <tbody>
+                  {workLog.filter(w => w.status === 'logged').map((item, idx) => (
+                    <tr key={item.id} style={{ backgroundColor: allocateId===item.id?'#ffffcc':(idx%2===0?'#f9f9f9':'white'), borderBottom:'1px solid #ddd' }}>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.site}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.plot}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.houseType}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.stage}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.expectedDays}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>
+                        {allocateId === item.id ? (
+                          <div style={{ display:'flex', gap:'5px', flexWrap:'wrap' }}>
+                            <select value={allocateCarpenter} onChange={(e) => setAllocateCarpenter(e.target.value)}
+                              style={{ padding:'5px', borderRadius:'3px', border:'1px solid '+GOLD, fontSize:'11px', minWidth:'120px' }}>
+                              <option value="">Select Carpenter</option>
+                              {CARPENTERS.filter(c => !c.status || c.status !== 'leave').map(c => (
+                                <option key={c.id} value={c.name}>{c.name} - {c.site}</option>
+                              ))}
+                            </select>
+                            <input type="date" value={allocateStartDate} onChange={(e) => setAllocateStartDate(e.target.value)}
+                              style={{ padding:'5px', borderRadius:'3px', border:'1px solid '+GOLD, fontSize:'11px' }} />
+                            <button onClick={() => {
+                              if(allocateCarpenter && allocateStartDate){
+                                const ed=new Date(allocateStartDate); ed.setDate(ed.getDate()+item.expectedDays-1);
+                                setAllocations([...allocations, {id:Math.max(...allocations.map(a=>a.id),0)+1, carpenter:allocateCarpenter, site:item.site, plot:item.plot, houseType:item.houseType, stage:item.stage, startDate:allocateStartDate, endDate:ed.toISOString().split('T')[0]}]);
+                                setWorkLog(workLog.map(w => w.id===item.id ? {...w, status:'allocated', allocatedTo:allocateCarpenter} : w));
+                                setAllocateId(null); setAllocateCarpenter(''); setAllocateStartDate('');
+                                setSuccessMsg('Work allocated to '+allocateCarpenter); setTimeout(()=>setSuccessMsg(''),2500);
+                              }
+                            }} style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>
+                              Confirm
                             </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                            <button onClick={() => {setAllocateId(null);setAllocateCarpenter('');setAllocateStartDate('');}}
+                              style={{ backgroundColor:'#999', color:'white', padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px' }}>
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <button onClick={() => setAllocateId(item.id)}
+                            style={{ backgroundColor:GOLD, color:NAVY, padding:'5px 10px', border:'none', borderRadius:'3px', cursor:'pointer', fontSize:'11px', fontWeight:'bold' }}>
+                            Allocate
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
               </div>
-            )}
+              )}
+            </div>
+          )}
 
-            {/* Schedule */}
-            {adminTab === 'schedule' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Schedule</h2>
-                <div style={{ marginBottom: '15px' }}>
-                  <button
-                    onClick={() => setScheduleView('gantt')}
-                    style={{ backgroundColor: scheduleView === 'gantt' ? GOLD : '#ccc', color: scheduleView === 'gantt' ? NAVY : 'black', padding: '8px 15px', margin: '0 5px 0 0', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    Gantt View
-                  </button>
-                  <button
-                    onClick={() => setScheduleView('list')}
-                    style={{ backgroundColor: scheduleView === 'list' ? GOLD : '#ccc', color: scheduleView === 'list' ? NAVY : 'black', padding: '8px 15px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    List View
-                  </button>
-                </div>
-
-                {scheduleView === 'gantt' && (
-                  <div style={{ overflowX: 'auto', backgroundColor: 'white', padding: '15px', borderRadius: '8px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div style={{ width: '150px', flexShrink: 0 }}>
-                        <div style={{ fontWeight: 'bold', padding: '10px', borderBottom: '1px solid #ddd', minHeight: '40px' }}>Carpenter</div>
-                        {[...new Set(allocations.map(a => a.carpenter))].map(carp => (
-                          <div key={carp} style={{ padding: '10px', borderBottom: '1px solid #ddd', minHeight: '40px', fontSize: '13px' }}>{carp}</div>
-                        ))}
-                      </div>
-                      <div style={{ display: 'flex', flex: 1 }}>
-                        {Array.from({length: 21}, (_, i) => {
-                          const date = new Date(2026, 2, 24 + i);
-                          return (
-                            <div key={i} style={{ minWidth: '50px', flexShrink: 0, borderRight: '1px solid #ddd' }}>
-                              <div style={{ fontWeight: 'bold', padding: '5px', borderBottom: '1px solid #ddd', fontSize: '11px', textAlign: 'center' }}>
-                                {formatDate(date).split(' ')[0]} {date.getDate()}
-                              </div>
-                              {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
-                                const allocForDay = allocations.find(a => a.carpenter === carp && new Date(a.startDate) <= date && new Date(a.endDate) >= date);
-                                return (
-                                  <div key={carp} style={{ minHeight: '40px', padding: '3px', borderBottom: '1px solid #ddd', fontSize: '9px', backgroundColor: allocForDay ? '#FFB6C1' : 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    {allocForDay ? allocForDay.site.substring(0, 3) : ''}
-                                  </div>
-                                );
-                              })}
+          {/* ========== ADMIN SCHEDULE ========== */}
+          {user?.role === 'admin' && adminTab === 'schedule' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Schedule</h2>
+              <div style={{ marginBottom:'15px' }}>
+                <button onClick={() => setScheduleView('gantt')}
+                  style={{ backgroundColor: scheduleView==='gantt'?GOLD:'#ccc', color: scheduleView==='gantt'?NAVY:'black', padding:'8px 15px', margin:'0 5px 0 0', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>
+                  Gantt View
+                </button>
+                <button onClick={() => setScheduleView('list')}
+                  style={{ backgroundColor: scheduleView==='list'?GOLD:'#ccc', color: scheduleView==='list'?NAVY:'black', padding:'8px 15px', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>
+                  List View
+                </button>
+              </div>
+              {scheduleView === 'gantt' && (
+                <div style={{ overflowX:'auto', backgroundColor:'white', padding:'15px', borderRadius:'8px' }}>
+                  <div style={{ display:'flex' }}>
+                    <div style={{ width:'130px', flexShrink:0 }}>
+                      <div style={{ fontWeight:'bold', padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:12 }}>Carpenter</div>
+                      {[...new Set(allocations.map(a => a.carpenter))].map(carp => (
+                        <div key={carp} style={{ padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:'12px' }}>{carp}</div>
+                      ))}
+                    </div>
+                    <div style={{ display:'flex', flex:1 }}>
+                      {Array.from({length:21},(_,i) => {
+                        const date = new Date(2026,2,24+i);
+                        return (
+                          <div key={i} style={{ minWidth:'45px', flexShrink:0, borderRight:'1px solid #eee' }}>
+                            <div style={{ fontWeight:'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center' }}>
+                              {formatDate(date).split(' ')[0]} {date.getDate()}
                             </div>
-                          );
-                        })}
-                      </div>
+                            {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
+                              const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
+                              return (
+                                <div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px', backgroundColor:af?GOLD:'white', color:af?NAVY:'#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
+                                  {af ? af.site.substring(0,4) : ''}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                )}
-
-                {scheduleView === 'list' && (
-                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                      <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Carpenter</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Start</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>End</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {allocations.map((alloc, idx) => (
-                        <tr key={alloc.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.carpenter}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.site}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.plot}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.houseType}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.stage}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{formatDate(alloc.startDate)}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{formatDate(alloc.endDate)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </div>
-            )}
-
-            {/* Carpenters */}
-            {adminTab === 'carpenters' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Carpenter Roster</h2>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>ID</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Name</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>PIN</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Assigned Site</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Builder</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Status</th>
-                    </tr>
-                  </thead>
+                </div>
+              )}
+              {scheduleView === 'list' && (
+                <div style={{overflowX:'auto'}}>
+                <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'600px' }}>
+                  <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
+                    {['Carpenter','Site','Plot','Type','Stage','Start','End'].map(h => (
+                      <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
+                    ))}
+                  </tr></thead>
                   <tbody>
-                    {CARPENTERS.map((carp, idx) => (
-                      <tr key={carp.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{carp.id}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{carp.name}</td>
-                        <td style={{ padding: '10px', fontSize: '12px', fontFamily: 'monospace' }}>{carp.pin}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{carp.site}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{carp.builder}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{carp.status || 'active'}</td>
+                    {allocations.map((alloc,idx) => (
+                      <tr key={alloc.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.carpenter}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.site}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.plot}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.houseType}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{alloc.stage}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.startDate)}</td>
+                        <td style={{ padding:'8px', fontSize:'12px' }}>{formatDate(alloc.endDate)}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </div>
-            )}
-
-            {/* Price Lists */}
-            {adminTab === 'price lists' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Price Lists by Builder & Site</h2>
-                {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
-                  <details key={builder} style={{ marginBottom: '15px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: NAVY, marginBottom: '10px' }}>{builder}</summary>
-                    {Object.entries(sites).map(([site, rates]) => (
-                      <details key={site} style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                        <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>{site}</summary>
-                        <table style={{ width: '100%', fontSize: '12px', marginTop: '8px' }}>
-                          <tbody>
-                            {Object.entries(rates).map(([stage, price]) => (
-                              <tr key={stage} style={{ borderBottom: '1px solid #ddd' }}>
-                                <td style={{ padding: '5px' }}>{stage}</td>
-                                <td style={{ padding: '5px', textAlign: 'right', fontWeight: 'bold' }}>£{price}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </details>
-                    ))}
-                  </details>
-                ))}
-              </div>
-            )}
-
-            {/* Documents */}
-            {adminTab === 'documents' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Documents</h2>
-                {Object.entries(DOCUMENTS).map(([site, categories]) => (
-                  <details key={site} style={{ marginBottom: '15px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: NAVY, marginBottom: '10px' }}>{site}</summary>
-                    {Object.entries(categories).map(([category, docs]) => (
-                      <details key={category} style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                        <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>{category}</summary>
-                        <ul style={{ margin: '8px 0', paddingLeft: '20px', fontSize: '13px' }}>
-                          {docs.map((doc, idx) => <li key={idx} style={{ marginBottom: '4px' }}>{doc}</li>)}
-                        </ul>
-                      </details>
-                    ))}
-                  </details>
-                ))}
-              </div>
-            )}
-          </main>
-        </div>
-      )}
-
-      {/* SITE MANAGER PORTAL */}
-      {user?.role === 'site_manager' && (
-        <div style={{ display: 'flex', height: 'calc(100vh - 70px)' }}>
-          <aside style={{ backgroundColor: NAVY, color: CREAM, width: '200px', padding: '20px', overflow: 'auto' }}>
-            {['Overview', 'Log Work', 'Documents'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setSiteManagerTab(tab.toLowerCase())}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  margin: '10px 0',
-                  backgroundColor: siteManagerTab === tab.toLowerCase() ? GOLD : 'transparent',
-                  color: siteManagerTab === tab.toLowerCase() ? NAVY : CREAM,
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  fontWeight: siteManagerTab === tab.toLowerCase() ? 'bold' : 'normal'
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-            <div style={{ marginTop: '30px', padding: '15px', backgroundColor: 'rgba(184, 134, 11, 0.2)', borderRadius: '4px', fontSize: '12px' }}>
-              <p style={{ margin: '0', color: GOLD, fontWeight: 'bold' }}>Site: {user?.site}</p>
-              <p style={{ margin: '5px 0 0 0' }}>Builder: {user?.builder}</p>
-            </div>
-          </aside>
-
-          <main style={{ flex: 1, padding: '30px', overflow: 'auto' }}>
-            {/* Overview */}
-            {siteManagerTab === 'overview' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Site Overview: {user?.site}</h2>
-                <div style={{ marginBottom: '15px' }}>
-                  <input
-                    type="text"
-                    placeholder="Filter by plot number"
-                    value={plotFilter}
-                    onChange={(e) => setPlotFilter(e.target.value)}
-                    style={{ padding: '8px', borderRadius: '4px', border: '2px solid ' + GOLD, fontSize: '14px' }}
-                  />
                 </div>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Current Stage</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Carpenter Assigned</th>
+              )}
+            </div>
+          )}
+
+          {/* ========== ADMIN CARPENTERS ========== */}
+          {user?.role === 'admin' && adminTab === 'carpenters' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Carpenter Roster</h2>
+              <div style={{overflowX:'auto'}}>
+              <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'500px' }}>
+                <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
+                  {['ID','Name','PIN','Site','Builder','Status'].map(h => (
+                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
+                  ))}
+                </tr></thead>
+                <tbody>
+                  {CARPENTERS.map((carp,idx) => (
+                    <tr key={carp.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.id}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.name}</td>
+                      <td style={{ padding:'8px', fontSize:'12px', fontFamily:'monospace' }}>{carp.pin}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.site}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.builder}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{carp.status || 'Active'}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter))).map((item, idx) => (
-                      <tr key={item.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.plot}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.houseType}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.stage}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{item.allocatedTo || '-'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
               </div>
-            )}
-
-            {/* Log Work */}
-            {siteManagerTab === 'log work' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Log Work Request</h2>
-                <form style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', maxWidth: '500px' }}>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Plot Number</label>
-                    <input type="text" placeholder="e.g., 34" style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, boxSizing: 'border-box' }} />
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>House Type</label>
-                    <select style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                      <option value="">Select</option>
-                      {getSiteHousetypes(user?.site).map(ht => <option key={ht} value={ht}>{ht}</option>)}
-                    </select>
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Stage</label>
-                    <select style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                      <option value="">Select</option>
-                      {['Joists', 'Roofs', 'First Fix', 'Second Fix', 'Finals'].map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Notes</label>
-                    <textarea placeholder="Any additional details..." style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, minHeight: '80px', boxSizing: 'border-box', fontFamily: 'inherit' }} />
-                  </div>
-                  <button type="button" style={{ backgroundColor: GOLD, color: NAVY, padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                    Submit Request
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* Documents */}
-            {siteManagerTab === 'documents' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Documents: {user?.site}</h2>
-                {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
-                  <details key={category} style={{ marginBottom: '15px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: NAVY, marginBottom: '10px' }}>{category}</summary>
-                    <ul style={{ margin: '10px 0', paddingLeft: '20px', fontSize: '13px' }}>
-                      {docs.map((doc, idx) => (
-                        <li key={idx} style={{ marginBottom: '8px', padding: '8px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                          {doc}
-                          <button style={{ marginLeft: '10px', padding: '3px 8px', fontSize: '11px', backgroundColor: GOLD, color: NAVY, border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
-                            Download
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                ))}
-                <div style={{ marginTop: '20px', padding: '15px', backgroundColor: NAVY, color: CREAM, borderRadius: '8px' }}>
-                  <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>Upload Documents</p>
-                  <input type="file" style={{ display: 'block', marginBottom: '10px' }} />
-                  <button style={{ backgroundColor: GOLD, color: NAVY, padding: '8px 15px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                    Upload
-                  </button>
-                </div>
-              </div>
-            )}
-          </main>
-        </div>
-      )}
-
-      {/* CARPENTER PORTAL */}
-      {user?.role === 'carpenter' && (
-        <div style={{ display: 'flex', height: 'calc(100vh - 70px)' }}>
-          <aside style={{ backgroundColor: NAVY, color: CREAM, width: '200px', padding: '20px', overflow: 'auto' }}>
-            {['Schedule', 'Documents', 'Price Lists', 'Fixings', 'Invoice'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setCarpenterTab(tab.toLowerCase())}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  margin: '10px 0',
-                  backgroundColor: carpenterTab === tab.toLowerCase() ? GOLD : 'transparent',
-                  color: carpenterTab === tab.toLowerCase() ? NAVY : CREAM,
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  fontWeight: carpenterTab === tab.toLowerCase() ? 'bold' : 'normal'
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-            <div style={{ marginTop: '30px', padding: '15px', backgroundColor: 'rgba(184, 134, 11, 0.2)', borderRadius: '4px', fontSize: '12px' }}>
-              <p style={{ margin: '0', color: GOLD, fontWeight: 'bold' }}>Name: {user?.name}</p>
-              <p style={{ margin: '5px 0 0 0' }}>Site: {user?.site}</p>
-              <p style={{ margin: '5px 0 0 0' }}>Builder: {user?.builder}</p>
             </div>
-          </aside>
+          )}
 
-          <main style={{ flex: 1, padding: '30px', overflow: 'auto' }}>
-            {/* Schedule */}
-            {carpenterTab === 'schedule' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Your Schedule</h2>
-                <div style={{ overflowX: 'auto', backgroundColor: 'white', padding: '15px', borderRadius: '8px', marginBottom: '20px' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
-                    <thead>
-                      <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Start Date</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>End Date</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Days</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {allocations.filter(a => a.carpenter === user?.name).map((alloc, idx) => (
-                        <tr key={alloc.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.site}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.plot}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.houseType}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{alloc.stage}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{formatDate(alloc.startDate)}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{formatDate(alloc.endDate)}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{daysInRange(alloc.startDate, alloc.endDate)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+          {/* ========== ADMIN PRICE LISTS ========== */}
+          {user?.role === 'admin' && adminTab === 'price lists' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists by Builder and Site</h2>
+              {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
+                <div key={builder} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
+                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{builder}</h3>
+                  {Object.entries(sites).map(([site, rates]) => (
+                    <div key={site} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
+                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{site}</h4>
+                      <table style={{ width:'100%', fontSize:'12px' }}>
+                        <tbody>
+                          {Object.entries(rates).map(([stage, price]) => (
+                            <tr key={stage} style={{ borderBottom:'1px solid #eee' }}>
+                              <td style={{ padding:'4px' }}>{stage}</td>
+                              <td style={{ padding:'4px', textAlign:'right', fontWeight:'bold' }}>GBP {price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
+          )}
 
-            {/* Documents */}
-            {carpenterTab === 'documents' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Documents: {user?.site}</h2>
-                {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
-                  <details key={category} style={{ marginBottom: '15px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: NAVY, marginBottom: '10px' }}>{category}</summary>
-                    <ul style={{ margin: '10px 0', paddingLeft: '20px', fontSize: '13px' }}>
-                      {docs.map((doc, idx) => (
-                        <li key={idx} style={{ marginBottom: '8px', padding: '8px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                          {doc}
-                          <button style={{ marginLeft: '10px', padding: '3px 8px', fontSize: '11px', backgroundColor: GOLD, color: NAVY, border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
-                            Download
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                ))}
-              </div>
-            )}
+          {/* ========== ADMIN DOCUMENTS ========== */}
+          {user?.role === 'admin' && adminTab === 'documents' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents</h2>
+              {Object.entries(DOCUMENTS).map(([site, categories]) => (
+                <div key={site} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
+                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{site}</h3>
+                  {Object.entries(categories).map(([category, docs]) => (
+                    <div key={category} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
+                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{category}</h4>
+                      <div style={{ fontSize:'13px' }}>
+                        {docs.map((doc, idx) => (
+                          <div key={idx} style={{ marginBottom:'4px', padding:'6px 8px', backgroundColor:'white', borderRadius:'3px' }}>{doc}</div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
 
-            {/* Price Lists */}
-            {carpenterTab === 'price lists' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>All Price Lists</h2>
-                {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
-                  <details key={builder} style={{ marginBottom: '15px', backgroundColor: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #ddd' }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: NAVY, marginBottom: '10px' }}>{builder}</summary>
-                    {Object.entries(sites).map(([site, rates]) => (
-                      <details key={site} style={{ marginLeft: '20px', marginBottom: '10px', padding: '10px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                        <summary style={{ cursor: 'pointer', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>{site}</summary>
-                        <table style={{ width: '100%', fontSize: '12px', marginTop: '8px' }}>
-                          <tbody>
-                            {Object.entries(rates).map(([stage, price]) => (
-                              <tr key={stage} style={{ borderBottom: '1px solid #ddd' }}>
-                                <td style={{ padding: '5px' }}>{stage}</td>
-                                <td style={{ padding: '5px', textAlign: 'right', fontWeight: 'bold' }}>£{price}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </details>
-                    ))}
-                  </details>
-                ))}
+          {/* ========== SITE MANAGER OVERVIEW ========== */}
+          {user?.role === 'site_manager' && siteManagerTab === 'overview' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Site Overview: {user?.site}</h2>
+              <div style={{ marginBottom:'15px' }}>
+                <input type="text" placeholder="Filter by plot number" value={plotFilter} onChange={(e) => setPlotFilter(e.target.value)}
+                  style={{ padding:'8px', borderRadius:'4px', border:'2px solid '+GOLD, fontSize:'14px', width:'100%', maxWidth:'250px', boxSizing:'border-box' }} />
               </div>
-            )}
-
-            {/* Fixings */}
-            {carpenterTab === 'fixings' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>Request Fixings / Materials</h2>
-                <form style={{ backgroundColor: NAVY, color: CREAM, padding: '20px', borderRadius: '8px', maxWidth: '500px' }}>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Allocation</label>
-                    <select style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD }}>
-                      <option value="">Select</option>
-                      {allocations.filter(a => a.carpenter === user?.name).map(a => (
-                        <option key={a.id} value={a.id}>{a.site} - Plot {a.plot}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Item Description</label>
-                    <input type="text" placeholder="e.g., M8 bolts, wall ties..." style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, boxSizing: 'border-box' }} />
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Quantity</label>
-                    <input type="number" placeholder="e.g., 500" style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, boxSizing: 'border-box' }} />
-                  </div>
-                  <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px' }}>Notes</label>
-                    <textarea placeholder="Any additional details..." style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid ' + GOLD, minHeight: '60px', boxSizing: 'border-box', fontFamily: 'inherit' }} />
-                  </div>
-                  <button type="button" style={{ backgroundColor: GOLD, color: NAVY, padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                    Request
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* Invoice */}
-            {carpenterTab === 'invoice' && (
-              <div>
-                <h2 style={{ color: NAVY, marginTop: 0 }}>My Invoice</h2>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Amount</th>
-                      <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Status</th>
+              {workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter))).length === 0 ? (
+                <p style={{color:'#666', fontSize:14}}>No work logged for this site yet. Use Log Work to add entries.</p>
+              ) : (
+              <div style={{overflowX:'auto'}}>
+              <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'400px' }}>
+                <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
+                  {['Plot','House Type','Current Stage','Carpenter'].map(h => (
+                    <th key={h} style={{ padding:'10px', textAlign:'left', fontSize:'11px' }}>{h}</th>
+                  ))}
+                </tr></thead>
+                <tbody>
+                  {workLog.filter(w => w.site === user?.site && (plotFilter === '' || w.plot.includes(plotFilter))).map((item,idx) => (
+                    <tr key={item.id} style={{ backgroundColor: idx%2===0?'#f9f9f9':'white', borderBottom:'1px solid #ddd' }}>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.plot}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.houseType}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.stage}</td>
+                      <td style={{ padding:'8px', fontSize:'12px' }}>{item.allocatedTo || '-'}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {invoices.filter(i => i.carpenter === user?.name).map((inv, idx) => (
-                      <tr key={inv.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{inv.site}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{inv.plot}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{inv.houseType}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>{inv.stage}</td>
-                        <td style={{ padding: '10px', fontSize: '12px' }}>£{inv.amount}</td>
-                        <td style={{ padding: '10px', fontSize: '12px', textTransform: 'capitalize', fontWeight: 'bold', color: inv.status === 'paid' ? 'green' : inv.status === 'approved' ? 'blue' : 'orange' }}>
-                          {inv.status}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div style={{ marginTop: '20px', padding: '15px', backgroundColor: NAVY, color: CREAM, borderRadius: '8px' }}>
-                  <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>Total Pending: £{invoices.filter(i => i.carpenter === user?.name && i.status === 'pending').reduce((sum, i) => sum + i.amount, 0)}</p>
-                  <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>Total Approved: £{invoices.filter(i => i.carpenter === user?.name && i.status === 'approved').reduce((sum, i) => sum + i.amount, 0)}</p>
-                  <p style={{ margin: '0', fontWeight: 'bold' }}>Total Paid: £{invoices.filter(i => i.carpenter === user?.name && i.status === 'paid').reduce((sum, i) => sum + i.amount, 0)}</p>
-                </div>
+                  ))}
+                </tbody>
+              </table>
               </div>
-            )}
-          </main>
-        </div>
-      )}
-
-      {/* INVOICE/OFFICE PORTAL */}
-      {user?.role === 'invoice' && (
-        <div style={{ display: 'flex', height: 'calc(100vh - 70px)' }}>
-          <aside style={{ backgroundColor: NAVY, color: CREAM, width: '200px', padding: '20px', overflow: 'auto' }}>
-            {['Pending', 'Approved', 'Paid'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setInvoiceTab(tab.toLowerCase())}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '12px',
-                  margin: '10px 0',
-                  backgroundColor: invoiceTab === tab.toLowerCase() ? GOLD : 'transparent',
-                  color: invoiceTab === tab.toLowerCase() ? NAVY : CREAM,
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  fontWeight: invoiceTab === tab.toLowerCase() ? 'bold' : 'normal'
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-            <div style={{ marginTop: '30px', padding: '15px', backgroundColor: 'rgba(184, 134, 11, 0.2)', borderRadius: '4px', fontSize: '12px' }}>
-              <p style={{ margin: '0', color: GOLD, fontWeight: 'bold' }}>Total Pending:</p>
-              <p style={{ margin: '5px 0 0 0' }}>£{invoices.filter(i => i.status === 'pending').reduce((sum, i) => sum + i.amount, 0)}</p>
+              )}
             </div>
-          </aside>
+          )}
 
-          <main style={{ flex: 1, padding: '30px', overflow: 'auto' }}>
-            {['pending', 'approved', 'paid'].map(status => (
-              invoiceTab === status && (
-                <div key={status}>
-                  <h2 style={{ color: NAVY, marginTop: 0, textTransform: 'capitalize' }}>{status} Invoices</h2>
-                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                      <tr style={{ backgroundColor: NAVY, color: CREAM }}>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Carpenter</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Site</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Plot</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>House Type</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Stage</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Amount</th>
-                        <th style={{ padding: '10px', textAlign: 'left', fontSize: '12px' }}>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {invoices.filter(i => i.status === status).map((inv, idx) => (
-                        <tr key={inv.id} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white', borderBottom: '1px solid #ddd' }}>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{inv.carpenter}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{inv.site}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{inv.plot}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{inv.houseType}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>{inv.stage}</td>
-                          <td style={{ padding: '10px', fontSize: '12px', fontWeight: 'bold' }}>£{inv.amount}</td>
-                          <td style={{ padding: '10px', fontSize: '12px' }}>
+          {/* ========== SITE MANAGER LOG WORK ========== */}
+          {user?.role === 'site_manager' && siteManagerTab === 'log work' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Log Work Request</h2>
+              <div style={{ backgroundColor:NAVY, color:CREAM, padding:'20px', borderRadius:'8px', maxWidth:'500px' }}>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Plot Number</label>
+                  <input type="text" placeholder="e.g. 34" value={smPlot} onChange={(e) => setSmPlot(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>House Type</label>
+                  <select value={smHouseType} onChange={(e) => setSmHouseType(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                    <option value="">Select</option>
+                    {getSiteHousetypes(user?.site).map(ht => <option key={ht} value={ht}>{ht}</option>)}
+                  </select>
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Stage</label>
+                  <select value={smStage} onChange={(e) => setSmStage(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                    <option value="">Select</option>
+                    {['Joists','Roof','First Fix','Drop Backs','Second Fix','Final','Snags'].map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Notes</label>
+                  <textarea placeholder="Any additional details..." value={smNotes} onChange={(e) => setSmNotes(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, minHeight:'60px', boxSizing:'border-box', fontFamily:'inherit', fontSize:13 }} />
+                </div>
+                <button type="button" onClick={() => {
+                  if(smPlot && smHouseType && smStage){
+                    const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===user?.site));
+                    setWorkLog([...workLog, {id:Math.max(...workLog.map(w=>w.id),0)+1, site:user?.site, builder:builder?builder.name:'', plot:smPlot, houseType:smHouseType, stage:smStage, expectedDays:2, priority:'medium', notes:smNotes, status:'logged'}]);
+                    setSmPlot(''); setSmHouseType(''); setSmStage(''); setSmNotes('');
+                    setSuccessMsg('Work request submitted'); setTimeout(()=>setSuccessMsg(''),2500);
+                  } else { alert('Please fill in plot, house type and stage'); }
+                }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
+                  Submit Request
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ========== SITE MANAGER DOCUMENTS ========== */}
+          {user?.role === 'site_manager' && siteManagerTab === 'documents' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
+              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
+                <div key={category} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
+                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:15 }}>{category}</h3>
+                  <div style={{ fontSize:'13px' }}>
+                    {docs.map((doc, idx) => (
+                      <div key={idx} style={{ marginBottom:'6px', padding:'8px', backgroundColor:'#f9f9f9', borderRadius:'4px', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
+                        <span>{doc}</span>
+                        <button onClick={() => { setSuccessMsg('Download started: '+doc); setTimeout(()=>setSuccessMsg(''),2500); }}
+                          style={{ padding:'4px 10px', fontSize:'11px', backgroundColor:GOLD, color:NAVY, border:'none', borderRadius:'3px', cursor:'pointer', fontWeight:'bold' }}>
+                          View
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ========== CARPENTER SCHEDULE (MOBILE-FIRST) ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Week</h2>
+              {myAllocs.length === 0 ? (
+                <div style={{ backgroundColor:'white', padding:'20px', borderRadius:'8px', textAlign:'center' }}>
+                  <p style={{ color:'#666', fontSize:16, margin:0 }}>No work scheduled this week.</p>
+                  <p style={{ color:'#999', fontSize:13, marginTop:8 }}>Check back later or contact your site manager.</p>
+                </div>
+              ) : (
+                <div>
+                  {/* Card view - mobile friendly */}
+                  {myAllocs.map(alloc => {
+                    const start = new Date(alloc.startDate);
+                    const end = new Date(alloc.endDate);
+                    const today = new Date(todayStr);
+                    const isActive = today >= start && today <= end;
+                    const isPast = today > end;
+                    return (
+                      <div key={alloc.id} style={{
+                        backgroundColor: isActive ? '#fff' : isPast ? '#f5f5f5' : '#fff',
+                        border: isActive ? '2px solid '+GOLD : '1px solid #ddd',
+                        borderRadius: '8px', padding: '16px', marginBottom: '12px',
+                        borderLeft: isActive ? '5px solid '+GOLD : isPast ? '5px solid #ccc' : '5px solid '+NAVY
+                      }}>
+                        {isActive && <span style={{ display:'inline-block', backgroundColor:GOLD, color:NAVY, padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginBottom:8 }}>CURRENT</span>}
+                        {isPast && <span style={{ display:'inline-block', backgroundColor:'#999', color:'white', padding:'2px 8px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginBottom:8 }}>COMPLETED</span>}
+                        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px', fontSize:14 }}>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Site</span><strong>{alloc.site}</strong></div>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Plot</span><strong>{alloc.plot}</strong></div>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>House Type</span><strong>{alloc.houseType}</strong></div>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Stage</span><strong style={{ color:GOLD }}>{alloc.stage}</strong></div>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
+                          <div><span style={{ color:'#888', fontSize:11, display:'block' }}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
+                        </div>
+                        <div style={{ marginTop:10, fontSize:12, color:'#666' }}>{daysInRange(alloc.startDate, alloc.endDate)} day{daysInRange(alloc.startDate, alloc.endDate) > 1 ? 's' : ''}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== CARPENTER DOCUMENTS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'documents' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
+              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([category, docs]) => (
+                <div key={category} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
+                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:15 }}>{category}</h3>
+                  <div style={{ fontSize:'13px' }}>
+                    {docs.map((doc, idx) => (
+                      <div key={idx} style={{ marginBottom:'6px', padding:'8px', backgroundColor:'#f9f9f9', borderRadius:'4px', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
+                        <span>{doc}</span>
+                        <button onClick={() => { setSuccessMsg('Download started: '+doc); setTimeout(()=>setSuccessMsg(''),2500); }}
+                          style={{ padding:'4px 10px', fontSize:'11px', backgroundColor:GOLD, color:NAVY, border:'none', borderRadius:'3px', cursor:'pointer', fontWeight:'bold' }}>
+                          View
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ========== CARPENTER PRICE LISTS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'price lists' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
+              {Object.entries(PRICE_LISTS).map(([builder, sites]) => (
+                <div key={builder} style={{ marginBottom:'15px', backgroundColor:'white', padding:'15px', borderRadius:'8px', border:'1px solid #ddd' }}>
+                  <h3 style={{ color:NAVY, margin:'0 0 10px 0', fontSize:16 }}>{builder}</h3>
+                  {Object.entries(sites).map(([site, rates]) => (
+                    <div key={site} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
+                      <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{site}</h4>
+                      <table style={{ width:'100%', fontSize:'12px' }}>
+                        <tbody>
+                          {Object.entries(rates).map(([stage, price]) => (
+                            <tr key={stage} style={{ borderBottom:'1px solid #eee' }}>
+                              <td style={{ padding:'4px' }}>{stage}</td>
+                              <td style={{ padding:'4px', textAlign:'right', fontWeight:'bold' }}>GBP {price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ========== CARPENTER FIXINGS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'fixings' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Fixings / Materials</h2>
+              <div style={{ backgroundColor:NAVY, color:CREAM, padding:'20px', borderRadius:'8px', maxWidth:'500px', marginBottom:'20px' }}>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Allocation</label>
+                  <select value={fixingAlloc} onChange={(e) => setFixingAlloc(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, fontSize:13 }}>
+                    <option value="">Select</option>
+                    {myAllocs.map(a => (
+                      <option key={a.id} value={a.id}>{a.site} - Plot {a.plot} ({a.stage})</option>
+                    ))}
+                  </select>
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Item Description</label>
+                  <input type="text" placeholder="e.g. M8 bolts, wall ties..." value={fixingItem} onChange={(e) => setFixingItem(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Quantity</label>
+                  <input type="number" placeholder="e.g. 500" value={fixingQty} onChange={(e) => setFixingQty(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, boxSizing:'border-box', fontSize:13 }} />
+                </div>
+                <div style={{ marginBottom:'15px' }}>
+                  <label style={{ display:'block', marginBottom:'4px', fontSize:'11px' }}>Notes</label>
+                  <textarea placeholder="Any additional details..." value={fixingNotes} onChange={(e) => setFixingNotes(e.target.value)}
+                    style={{ width:'100%', padding:'8px', borderRadius:'4px', border:'1px solid '+GOLD, minHeight:'60px', boxSizing:'border-box', fontFamily:'inherit', fontSize:13 }} />
+                </div>
+                <button type="button" onClick={() => {
+                  if(fixingAlloc && fixingItem && fixingQty){
+                    const alloc = myAllocs.find(a => String(a.id) === String(fixingAlloc));
+                    setFixingRequests([...fixingRequests, {id:Date.now(), alloc:alloc?alloc.site+' Plot '+alloc.plot:'', item:fixingItem, qty:fixingQty, notes:fixingNotes, status:'Requested', date:new Date().toLocaleDateString('en-GB')}]);
+                    setFixingAlloc(''); setFixingItem(''); setFixingQty(''); setFixingNotes('');
+                    setSuccessMsg('Fixing request submitted'); setTimeout(()=>setSuccessMsg(''),2500);
+                  } else { alert('Please fill in allocation, item and quantity'); }
+                }} style={{ backgroundColor:GOLD, color:NAVY, padding:'10px 20px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:14 }}>
+                  Request
+                </button>
+              </div>
+              {fixingRequests.length > 0 && (
+                <div>
+                  <h3 style={{ color:NAVY, fontSize:16 }}>Your Requests</h3>
+                  {fixingRequests.map(r => (
+                    <div key={r.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'6px', padding:'12px', marginBottom:'8px', fontSize:13 }}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:4}}>
+                        <strong>{r.item} x{r.qty}</strong>
+                        <span style={{ backgroundColor:'#e3f2fd', color:'#1565c0', padding:'2px 8px', borderRadius:'3px', fontSize:11 }}>{r.status}</span>
+                      </div>
+                      <div style={{color:'#666', fontSize:12, marginTop:4}}>{r.alloc} - {r.date}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== CARPENTER INVOICE ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'invoice' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>My Invoices</h2>
+              {invoices.filter(i => i.carpenter === user?.name).length === 0 ? (
+                <p style={{color:'#666', fontSize:14}}>No invoices yet.</p>
+              ) : (
+                <div>
+                  {invoices.filter(i => i.carpenter === user?.name).map((inv,idx) => (
+                    <div key={inv.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'8px', padding:'14px', marginBottom:'10px' }}>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div>
+                        </div>
+                        <div style={{textAlign:'right'}}>
+                          <div style={{fontSize:18,fontWeight:'bold'}}>GBP {inv.amount}</div>
+                          <span style={{
+                            display:'inline-block', padding:'2px 10px', borderRadius:'3px', fontSize:11, fontWeight:'bold', marginTop:4,
+                            backgroundColor: inv.status==='paid'?'#e8f5e9' : inv.status==='approved'?'#e3f2fd' : '#fff3e0',
+                            color: inv.status==='paid'?'#2e7d32' : inv.status==='approved'?'#1565c0' : '#e65100'
+                          }}>{inv.status.toUpperCase()}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ marginTop:'15px', padding:'15px', backgroundColor:NAVY, color:CREAM, borderRadius:'8px', fontSize:14 }}>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'pending').reduce((s,i) => s + i.amount, 0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'approved').reduce((s,i) => s + i.amount, 0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>GBP {invoices.filter(i => i.carpenter === user?.name && i.status === 'paid').reduce((s,i) => s + i.amount, 0)}</strong></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== INVOICE/OFFICE PORTAL ========== */}
+          {user?.role === 'invoice' && ['pending','approved','paid'].map(status => (
+            invoiceTab === status && (
+              <div key={status}>
+                <h2 style={{ color:NAVY, marginTop:0, fontSize:22, textTransform:'capitalize' }}>{status} Invoices</h2>
+                {invoices.filter(i => i.status === status).length === 0 ? (
+                  <p style={{color:'#666', fontSize:14}}>No {status} invoices.</p>
+                ) : (
+                  <div>
+                    {invoices.filter(i => i.status === status).map(inv => (
+                      <div key={inv.id} style={{ backgroundColor:'white', border:'1px solid #ddd', borderRadius:'8px', padding:'14px', marginBottom:'10px' }}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+                          <div>
+                            <strong style={{fontSize:14}}>{inv.carpenter}</strong>
+                            <div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.site} - Plot {inv.plot} / {inv.houseType} / {inv.stage}</div>
+                            <div style={{fontSize:11,color:'#999',marginTop:2}}>{inv.date}</div>
+                          </div>
+                          <div style={{textAlign:'right',display:'flex',alignItems:'center',gap:10}}>
+                            <strong style={{fontSize:18}}>GBP {inv.amount}</strong>
                             {status === 'pending' && (
-                              <button
-                                onClick={() => setInvoices(invoices.map(i => i.id === inv.id ? {...i, status: 'approved'} : i))}
-                                style={{ backgroundColor: GOLD, color: NAVY, padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer', fontWeight: 'bold', fontSize: '11px' }}
-                              >
+                              <button onClick={() => {
+                                setInvoices(invoices.map(i => i.id===inv.id ? {...i, status:'approved'} : i));
+                                setSuccessMsg('Invoice signed off'); setTimeout(()=>setSuccessMsg(''),2500);
+                              }} style={{ backgroundColor:GOLD, color:NAVY, padding:'6px 12px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:12 }}>
                                 Sign Off
                               </button>
                             )}
                             {status === 'approved' && (
-                              <button
-                                onClick={() => setInvoices(invoices.map(i => i.id === inv.id ? {...i, status: 'paid'} : i))}
-                                style={{ backgroundColor: '#4CAF50', color: 'white', padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer', fontWeight: 'bold', fontSize: '11px' }}
-                              >
+                              <button onClick={() => {
+                                setInvoices(invoices.map(i => i.id===inv.id ? {...i, status:'paid'} : i));
+                                setSuccessMsg('Invoice marked as paid'); setTimeout(()=>setSuccessMsg(''),2500);
+                              }} style={{ backgroundColor:'#2e7d32', color:'white', padding:'6px 12px', border:'none', borderRadius:'4px', cursor:'pointer', fontWeight:'bold', fontSize:12 }}>
                                 Mark Paid
                               </button>
                             )}
-                            {status === 'paid' && <span style={{ fontSize: '11px', color: 'green', fontWeight: 'bold' }}>Paid</span>}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <div style={{ marginTop: '20px', padding: '15px', backgroundColor: NAVY, color: CREAM, borderRadius: '8px' }}>
-                    <p style={{ margin: '0', fontWeight: 'bold', fontSize: '18px' }}>
-                      Total {status}: £{invoices.filter(i => i.status === status).reduce((sum, i) => sum + i.amount, 0)}
-                    </p>
+                            {status === 'paid' && (
+                              <span style={{ fontSize:12, color:'#2e7d32', fontWeight:'bold' }}>Paid</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ marginTop:'15px', padding:'15px', backgroundColor:NAVY, color:CREAM, borderRadius:'8px' }}>
+                      <p style={{ margin:'0', fontWeight:'bold', fontSize:'16px' }}>
+                        Total {status}: GBP {invoices.filter(i => i.status === status).reduce((sum, i) => sum + i.amount, 0)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )
-            ))}
-          </main>
-        </div>
-      )}
+                )}
+              </div>
+            )
+          ))}
+
+        </main>
+      </div>
     </div>
   ); }
+
 
 if(portal){return(<div style={S.root}><nav style={{...S.nav,padding:"0 20px"}}><div style={{display:"flex",alignItems:"center",gap:10}}><img src={logoUrl} alt="M&W" style={{width:32,height:32,borderRadius:4,objectFit:"contain"}}/><span style={{color:"#fff",fontSize:14,fontWeight:600}}>M&W Portal</span>{pUser&&<span style={{fontSize:10,padding:"3px 10px",borderRadius:100,background:"rgba(184,134,11,.2)",color:"#D4A843",fontWeight:600,marginLeft:4}}>{pUser.role==="admin"?"ADMIN":pUser.role==="office"?"OFFICE":"CARPENTER"}</span>}</div><span style={{...S.nl(false),color:"rgba(255,255,255,.8)"}} onClick={()=>{setPortal(null);setPUser(null);go("home");}}>Exit Portal</span></nav>
 {portal==="login"&&(<div style={{marginTop:64,minHeight:"90vh",display:"flex",alignItems:"center",justifyContent:"center",background:"linear-gradient(160deg, #0a1520 0%, #0C1821 40%, #111f2c 100%)",position:"relative",overflow:"hidden"}}><div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"radial-gradient(ellipse at 30% 20%, rgba(184,134,11,0.04) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(184,134,11,0.03) 0%, transparent 50%)",pointerEvents:"none"}}></div><div style={{position:"relative",width:"100%",maxWidth:420,padding:"0 20px"}}><div style={{textAlign:"center",marginBottom:40}}><div style={{width:72,height:72,borderRadius:16,overflow:"hidden",margin:"0 auto 24px",boxShadow:"0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(184,134,11,0.2)",background:"linear-gradient(135deg, #B8860B, #D4A843)"}}><img src={logoUrl} alt="M&W" style={{width:"100%",height:"100%",objectFit:"contain"}}/></div><h2 style={{color:"#fff",fontSize:26,fontWeight:700,letterSpacing:"-0.02em",marginBottom:6,fontFamily:"'DM Sans',sans-serif"}}>Miller &amp; Watson</h2><div style={{width:40,height:2,background:"linear-gradient(90deg, transparent, #B8860B, transparent)",margin:"12px auto 14px"}}></div><p style={{color:"rgba(255,255,255,.4)",fontSize:13,fontWeight:400,letterSpacing:"0.02em"}}>Contractor Management Portal</p></div><div style={{background:"rgba(255,255,255,.025)",border:"1px solid rgba(255,255,255,.06)",borderRadius:16,padding:"36px 32px 32px",boxShadow:"0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)"}}><label style={{display:"block",fontSize:11,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",color:"rgba(255,255,255,.35)",marginBottom:10}}>Access PIN</label><input type="password" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doLogin()} placeholder="Enter PIN" style={{width:"100%",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)",borderRadius:10,padding:"16px 20px",color:"#fff",fontSize:22,fontFamily:"'DM Sans',monospace",outline:"none",textAlign:"center",letterSpacing:12,boxSizing:"border-box"}}/><button onClick={doLogin} style={{width:"100%",marginTop:20,padding:"15px 24px",background:"linear-gradient(135deg, #B8860B 0%, #D4A843 100%)",color:"#0C1821",fontSize:14,fontWeight:700,border:"none",borderRadius:10,cursor:"pointer",letterSpacing:"0.04em",fontFamily:"'DM Sans',sans-serif",boxShadow:"0 4px 16px rgba(184,134,11,0.25), inset 0 1px 0 rgba(255,255,255,0.2)"}}>Sign In</button></div><div style={{marginTop:24,display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>{[{label:"Carpenter",pins:"1234 / 5678"},{label:"Site Manager",pins:"1111 / 2222"},{label:"Admin",pins:"4444"},{label:"Office",pins:"9999"}].map(r=>(<div key={r.label} style={{background:"rgba(255,255,255,.03)",borderRadius:8,padding:"8px 12px",border:"1px solid rgba(255,255,255,.04)"}}><div style={{fontSize:10,color:"rgba(255,255,255,.25)",marginBottom:2}}>{r.label}</div><div style={{fontSize:12,color:"#D4A843",fontFamily:"monospace",fontWeight:600}}>{r.pins}</div></div>))}</div><div style={{marginTop:28,textAlign:"center",borderTop:"1px solid rgba(255,255,255,.04)",paddingTop:16}}><p style={{color:"rgba(255,255,255,.2)",fontSize:10,letterSpacing:"0.05em",margin:0}}>Suite 4, The Hayloft, Blakenhall Park</p><p style={{color:"rgba(255,255,255,.15)",fontSize:10,margin:"4px 0 0"}}>Barton Under Needwood, DE13 8AJ | Est. 2005</p></div></div></div>)}
