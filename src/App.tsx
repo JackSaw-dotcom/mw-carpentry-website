@@ -34,12 +34,12 @@ const NAVY = '#0C1821';
 const GOLD = '#B8860B';
 const CREAM = '#f6f4ef';
 const GALLERY_PHOTOS={joists:[{src:j1,caption:"I-beam joists with joist hangers — first floor"},{src:j2,caption:"Stairwell opening marked out on structural decking"},{src:j3,caption:"Structural decking complete — first floor"},{src:j4,caption:"I-beam floor joists with strutting"},{src:j5,caption:"Floor joists with trimming around stairwell"},{src:j6,caption:"Completed structural floor with Peel Clean Xtra"},{src:j7,caption:"I-beam joists — first floor installation"},{src:j8,caption:"Completed decked floor from scaffold"},{src:j9,caption:"Floor joists with herringbone strutting"},{src:j10,caption:"Structural decking with loft hatch opening"},{src:j11,caption:"Decked floor — wide angle view across site"},{src:j12,caption:"First floor joists with trimmer detail"},{src:j13,caption:"Structural decking complete — side elevation"},{src:j14,caption:"Decked floor with stairwell marked — site view"},{src:j15,caption:"Completed structural floor — elevated view"},{src:j16,caption:"Joists and decking — finished first floor"}],roofs:[{src:rf1,caption:"Trussed rafter installation — gable end"},{src:rf2,caption:"Roof trusses from scaffold level"},{src:rf3,caption:"Trussed rafters with bracing"},{src:rf4,caption:"Front door canopy — porch carpentry"},{src:rf5,caption:"Cut roof structure — hipped roof from above"}],"first-fix":[{src:ff1,caption:"Stud partitions & door linings — first floor"},{src:ff2,caption:"Staircase installation with safety barrier"},{src:ff3,caption:"Stud framing around staircase opening"},{src:ff4,caption:"Winder staircase installation"},{src:ff5,caption:"Dormer room stud partitions"},{src:ff6,caption:"Loft room framing with Velux window"},{src:ff7,caption:"Ground floor stud partitions & door linings"},{src:ff8,caption:"Under-stair framing detail"}],"second-fix":[],finals:[],extras:[]};
-const BUILDERS=[{id:"barratt",name:"Barratt Homes",color:"#E31937",logo:"https://www.barratthomes.co.uk/favicon.ico",relationship:"Our partnership with Barratt Homes stretches back over a decade. They trust M&W to deliver consistently across multiple sites.",sites:[{name:"Thoresby Vale",location:"Edwinstowe, Mansfield",lat:53.177,lng:-1.069,housetypes:["Windermere","Holden","Moresby","Kennett","Radleigh"]},{name:"Romans' Quarter",location:"Bingham, Nottingham",lat:52.949,lng:-1.0,housetypes:["Hollinwood","Bradgate","Moresby","Alderney"]},{name:"Dunstall Park",location:"Tamworth, Staffordshire",lat:52.634,lng:-1.693,housetypes:["Windermere","Archford","Holden","Kennett"]},{name:"Poppy Fields",location:"Uttoxeter, Staffordshire",lat:52.898,lng:-1.86,housetypes:["Maidstone","Ellerton","Denford"]},{name:"Bertelin Fields",location:"Beaconside, Stafford",lat:52.826,lng:-2.117,housetypes:["Windermere","Archford","Kennett","Moresby"]}]},{id:"dwh",name:"Lovell Homes",color:"#1B3D6F",logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",relationship:"Our carpenters understand the higher specification that Lovell developments demand.",sites:[{name:"Old Mill Farm",location:"Cotgrave, Nottingham",lat:52.917,lng:-1.046,housetypes:["Holden","Kingsley","Layton","Windermere"]},{name:"Berry Hill",location:"Mansfield",lat:53.148,lng:-1.188,housetypes:["Hollinwood","Bradgate","Exeter"]},{name:"Gateford Park",location:"Worksop, Nottinghamshire",lat:53.321,lng:-1.132,housetypes:["Radleigh","Holden","Moresby"]}]},{id:"bellway",name:"Bellway Homes",color:"#003DA5",logo:"https://s3-eu-west-1.amazonaws.com/tpd/logos/58932caa0000ff00059bf27f/0x0.png",relationship:"Bellway is one of our longest-standing partners across their East Midlands division.",sites:[{name:"The Meadows",location:"Alvaston, Derby",lat:52.893,lng:-1.434,housetypes:["Joiner","Craftsman","Turner","Tanner","Weaver"]},{name:"Holbrook Park",location:"Chellaston, Derby",lat:52.873,lng:-1.437,housetypes:["Craftsman","Joiner","Turner","Weaver","Cooper"]},{name:"Coppice Heights",location:"Ripley, Derbyshire",lat:53.051,lng:-1.405,housetypes:["Joiner","Turner","Tanner","Fletcher"]},{name:"Springwood",location:"Midway, S. Derbyshire",lat:52.773,lng:-1.542,housetypes:["Joiner","Craftsman","Turner","Weaver"]},{name:"Hugglescote Grange",location:"Hugglescote, Leicestershire",lat:52.727,lng:-1.362,housetypes:["Craftsman","Turner","Cooper","Fletcher"]},{name:"Abbey Fields Grange",location:"Hucknall, Nottinghamshire",lat:53.033,lng:-1.195,housetypes:["Tanner","Weaver","Turner","Joiner"]},{name:"Ashlands",location:"Sutton in Ashfield, Notts",lat:53.128,lng:-1.255,housetypes:["Joiner","Craftsman","Turner"]},{name:"Torvill Park",location:"Fairham, Nottingham",lat:52.909,lng:-1.163,housetypes:["Craftsman","Turner","Tanner","Weaver"]}]},{id:"persimmon",name:"Persimmon Homes",color:"#D4002A",logo:"https://cdn.prod.website-files.com/65a518d6a768fc381c83acf8/65a518d6a768fc381c83b06d_2020_Persimmon_1.png",relationship:"A fast-paced partnership built on trust across Derbyshire, Nottinghamshire, and Leicestershire.",sites:[{name:"Clipstone Park",location:"Clipstone, Mansfield",lat:53.167,lng:-1.137,housetypes:["Bedale","Alnwick","Byford","Bolsover","Kielder"]},{name:"The Oaks",location:"Calverton, Notts",lat:53.033,lng:-1.093,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Boulton Moor",location:"Chellaston, Derby",lat:52.872,lng:-1.413,housetypes:["Bedale","Alnwick","Bolsover","Kielder","Roseberry"]},{name:"Jubilee Gardens",location:"Ilkeston, Derbyshire",lat:52.972,lng:-1.307,housetypes:["Bedale","Byford","Alnwick","Bolsover"]},{name:"Foxley Fields",location:"Market Harborough, Leics",lat:52.478,lng:-0.918,housetypes:["Kielder","Roseberry","Alnwick","Bolsover"]}]},{id:"stmodwen",name:"St. Modwen Homes",color:"#6B2D5B",logo:"https://ramsboards.com/wp-content/uploads/2021/01/st.modwen-homes.webp",relationship:"With their head office in Derby, St. Modwen are a natural partner for M&W.",sites:[{name:"Hilton Valley",location:"Hilton, Derbyshire",lat:52.862,lng:-1.596,housetypes:["Arden","Berwick","Carleton","Danbury"]},{name:"Bramshall Meadows",location:"Uttoxeter, Staffordshire",lat:52.907,lng:-1.847,housetypes:["Arden","Berwick","Carleton","Elmswell"]},{name:"Snibston Mill",location:"Coalville, Leicestershire",lat:52.725,lng:-1.37,housetypes:["Arden","Carleton","Danbury","Elmswell"]},{name:"Egstow Park",location:"Clay Cross, Derbyshire",lat:53.163,lng:-1.413,housetypes:["Berwick","Carleton","Danbury"]}]},{id:"countryside",name:"Countryside Homes",color:"#2B6E44",logo:"https://nla-production-media.s3.eu-west-2.amazonaws.com/84908/Untitled-design-15.png?v=1766430558",relationship:"M&W support their Midlands mixed-tenure developments.",sites:[{name:"Edwalton Fields",location:"Edwalton, Nottingham",lat:52.917,lng:-1.12,housetypes:["Thornbury","Wentworth","Henley","Sudbury"]},{name:"Mastin Moor",location:"Chesterfield, Derbyshire",lat:53.267,lng:-1.342,housetypes:["Thornbury","Henley","Sudbury"]}]},{id:"vistry",name:"Vistry / Bovis Homes",color:"#00594F",logo:"https://housingforum.org.uk/wp-content/uploads/2020/05/Untitled-design.png",relationship:"Our work on Broadnook Garden Village is a testament to their trust in M&W.",sites:[{name:"Broadnook Garden Village",location:"Rothley, Leicestershire",lat:52.719,lng:-1.138,housetypes:["Limewood","Fern","Lime","Oak","Willow"]},{name:"Partridge Walk",location:"Stafford",lat:52.808,lng:-2.101,housetypes:["Limewood","Oak","Willow","Cedar"]},{name:"Hinckley 475",location:"Hinckley, Leicestershire",lat:52.54,lng:-1.37,housetypes:["Limewood","Fern","Oak","Willow"]}]},{id:"ashberry",name:"Ashberry Homes",color:"#7B3F98",logo:"https://www.ashberryhomes.co.uk/img/default-social-image.jpg",relationship:"M&W deliver consistently across Ashberry's Nottinghamshire sites.",sites:[{name:"Potters Gate",location:"Farndon, Newark",lat:53.064,lng:-0.856,housetypes:["Greenwood","Oakwood","Birchwood"]},{name:"Longridge",location:"Long Eaton, Notts",lat:52.89,lng:-1.275,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]}]},{id:"davidsons",name:"Davidsons Homes",color:"#C8102E",logo:"https://davidsonsgroup.co.uk/wp-content/uploads/2023/01/Screenshot-2023-01-03-at-16.53.01-1024x522.png",relationship:"Davidsons are a well-respected Midlands developer. We're proud to be part of their supply chain.",sites:[{name:"Davidsons at Huncote",location:"Huncote, Leicestershire",lat:52.582,lng:-1.218,housetypes:["The Arden","The Warwick","The Ashby","The Leamington"]},{name:"Davidsons at Boulton Moor",location:"Derby",lat:52.878,lng:-1.418,housetypes:["The Arden","The Warwick","The Kenilworth"]}]},{id:"wheeldons",name:"Wheeldon Homes",color:"#2E4057",logo:"https://www.panddg.co.uk/wp-content/uploads/2022/02/logo-wheeldon-homes.svg",relationship:"A boutique developer that values the personal service M&W bring.",sites:[{name:"Oaklands",location:"Etwall, South Derbyshire",lat:52.871,lng:-1.599,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"The Green",location:"Church Broughton, Derby",lat:52.857,lng:-1.66,housetypes:["The Chatsworth","The Haddon"]}]},{id:"crest",name:"Crest Nicholson",color:"#003C71",logo:"https://www.crestnicholson.com/favicon.ico",relationship:"M&W meet Crest Nicholson's exacting standards on every element.",sites:[{name:"Barley Fields",location:"Queniborough, Leicestershire",lat:52.697,lng:-1.08,housetypes:["Elm","Beech","Maple","Rowan","Birch"]}]}];
+const BUILDERS=[{id:"barratt",name:"Barratt Homes",color:"#E31937",logo:"https://www.barratthomes.co.uk/favicon.ico",relationship:"Our partnership with Barratt Homes stretches back over a decade. They trust M&W to deliver consistently across multiple sites.",sites:[{name:"Thoresby Vale",location:"Edwinstowe, Mansfield",lat:53.177,lng:-1.069,housetypes:["Windermere","Holden","Moresby","Kennett","Radleigh"]},{name:"Romans' Quarter",location:"Bingham, Nottingham",lat:52.949,lng:-1.0,housetypes:["Hollinwood","Bradgate","Moresby","Alderney"]},{name:"Dunstall Park",location:"Tamworth, Staffordshire",lat:52.634,lng:-1.693,housetypes:["Windermere","Archford","Holden","Kennett"]},{name:"Poppy Fields",location:"Uttoxeter, Staffordshire",lat:52.898,lng:-1.86,housetypes:["Maidstone","Ellerton","Denford"]},{name:"Bertelin Fields",location:"Beaconside, Stafford",lat:52.826,lng:-2.117,housetypes:["Windermere","Archford","Kennett","Moresby"]}]},{id:"dwh",name:"Lovell Homes",color:"#1B3D6F",logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",relationship:"Our carpenters understand the higher specification that Lovell developments demand.",sites:[{name:"Old Mill Farm",location:"Cotgrave, Nottingham",lat:52.917,lng:-1.046,housetypes:["Holden","Kingsley","Layton","Windermere"]},{name:"Berry Hill",location:"Mansfield",lat:53.148,lng:-1.188,housetypes:["Hollinwood","Bradgate","Exeter"]},{name:"Gateford Park",location:"Worksop, Nottinghamshire",lat:53.321,lng:-1.132,housetypes:["Radleigh","Holden","Moresby"]}]},{id:"bellway",name:"Bellway Homes",color:"#003DA5",logo:"https://s3-eu-west-1.amazonaws.com/tpd/logos/58932caa0000ff00059bf27f/0x0.png",relationship:"Bellway is one of our longest-standing partners across their East Midlands division.",sites:[{name:"The Meadows",location:"Alvaston, Derby",lat:52.893,lng:-1.434,housetypes:["Joiner","Craftsman","Turner","Tanner","Weaver"]},{name:"Holbrook Park",location:"Chellaston, Derby",lat:52.873,lng:-1.437,housetypes:["Craftsman","Joiner","Turner","Weaver","Cooper"]},{name:"Coppice Heights",location:"Ripley, Derbyshire",lat:53.051,lng:-1.405,housetypes:["Joiner","Turner","Tanner","Fletcher"]},{name:"Springwood",location:"Midway, S. Derbyshire",lat:52.773,lng:-1.542,housetypes:["Joiner","Craftsman","Turner","Weaver"]},{name:"Hugglescote Grange",location:"Hugglescote, Leicestershire",lat:52.727,lng:-1.362,housetypes:["Craftsman","Turner","Cooper","Fletcher"]},{name:"Abbey Fields Grange",location:"Hucknall, Nottinghamshire",lat:53.033,lng:-1.195,housetypes:["Tanner","Weaver","Turner","Joiner"]},{name:"Ashlands",location:"Sutton in Ashfield, Notts",lat:53.128,lng:-1.255,housetypes:["Joiner","Craftsman","Turner"]},{name:"Torvill Park",location:"Fairham, Nottingham",lat:52.909,lng:-1.163,housetypes:["Craftsman","Turner","Tanner","Weaver"]}]},{id:"persimmon",name:"Persimmon Homes",color:"#D4002A",logo:"https://cdn.prod.website-files.com/65a518d6a768fc381c83acf8/65a518d6a768fc381c83b06d_2020_Persimmon_1.png",relationship:"A fast-paced partnership built on trust across Derbyshire, Nottinghamshire, and Leicestershire.",sites:[{name:"Clipstone Park",location:"Clipstone, Mansfield",lat:53.167,lng:-1.137,housetypes:["Bedale","Alnwick","Byford","Bolsover","Kielder"]},{name:"The Oaks",location:"Calverton, Notts",lat:53.033,lng:-1.093,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Boulton Moor",location:"Chellaston, Derby",lat:52.872,lng:-1.413,housetypes:["Bedale","Alnwick","Bolsover","Kielder","Roseberry"]},{name:"Jubilee Gardens",location:"Ilkeston, Derbyshire",lat:52.972,lng:-1.307,housetypes:["Bedale","Byford","Alnwick","Bolsover"]},{name:"Brascote Park",location:"Brascote, Leicestershire",lat:52.607,lng:-1.36,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Foxley Fields",location:"Market Harborough, Leics",lat:52.478,lng:-0.918,housetypes:["Kielder","Roseberry","Alnwick","Bolsover"]}]},{id:"stmodwen",name:"St. Modwen Homes",color:"#6B2D5B",logo:"https://ramsboards.com/wp-content/uploads/2021/01/st.modwen-homes.webp",relationship:"With their head office in Derby, St. Modwen are a natural partner for M&W.",sites:[{name:"Hilton Valley",location:"Hilton, Derbyshire",lat:52.862,lng:-1.596,housetypes:["Arden","Berwick","Carleton","Danbury"]},{name:"Bramshall Meadows",location:"Uttoxeter, Staffordshire",lat:52.907,lng:-1.847,housetypes:["Arden","Berwick","Carleton","Elmswell"]},{name:"Snibston Mill",location:"Coalville, Leicestershire",lat:52.725,lng:-1.37,housetypes:["Arden","Carleton","Danbury","Elmswell"]},{name:"Egstow Park",location:"Clay Cross, Derbyshire",lat:53.163,lng:-1.413,housetypes:["Berwick","Carleton","Danbury"]}]},{id:"countryside",name:"Countryside Homes",color:"#2B6E44",logo:"https://nla-production-media.s3.eu-west-2.amazonaws.com/84908/Untitled-design-15.png?v=1766430558",relationship:"M&W support their Midlands mixed-tenure developments.",sites:[{name:"Edwalton Fields",location:"Edwalton, Nottingham",lat:52.917,lng:-1.12,housetypes:["Thornbury","Wentworth","Henley","Sudbury"]},{name:"Mastin Moor",location:"Chesterfield, Derbyshire",lat:53.267,lng:-1.342,housetypes:["Thornbury","Henley","Sudbury"]}]},{id:"vistry",name:"Vistry / Bovis Homes",color:"#00594F",logo:"https://housingforum.org.uk/wp-content/uploads/2020/05/Untitled-design.png",relationship:"Our work on Broadnook Garden Village is a testament to their trust in M&W.",sites:[{name:"Broadnook Garden Village",location:"Rothley, Leicestershire",lat:52.719,lng:-1.138,housetypes:["Limewood","Fern","Lime","Oak","Willow"]},{name:"Partridge Walk",location:"Stafford",lat:52.808,lng:-2.101,housetypes:["Limewood","Oak","Willow","Cedar"]},{name:"Hinckley 475",location:"Hinckley, Leicestershire",lat:52.54,lng:-1.37,housetypes:["Limewood","Fern","Oak","Willow"]}]},{id:"ashberry",name:"Ashberry Homes",color:"#7B3F98",logo:"https://www.ashberryhomes.co.uk/img/default-social-image.jpg",relationship:"M&W deliver consistently across Ashberry's Nottinghamshire sites.",sites:[{name:"Potters Gate",location:"Farndon, Newark",lat:53.064,lng:-0.856,housetypes:["Greenwood","Oakwood","Birchwood"]},{name:"Swinfen Vale",location:"Swinfen, Staffordshire",lat:52.667,lng:-1.755,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]},{name:"Longridge",location:"Long Eaton, Notts",lat:52.89,lng:-1.275,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]}]},{id:"davidsons",name:"Davidsons Homes",color:"#C8102E",logo:"https://davidsonsgroup.co.uk/wp-content/uploads/2023/01/Screenshot-2023-01-03-at-16.53.01-1024x522.png",relationship:"Davidsons are a well-respected Midlands developer. We're proud to be part of their supply chain.",sites:[{name:"Davidsons at Huncote",location:"Huncote, Leicestershire",lat:52.582,lng:-1.218,housetypes:["The Arden","The Warwick","The Ashby","The Leamington"]},{name:"Davidsons at Boulton Moor",location:"Derby",lat:52.878,lng:-1.418,housetypes:["The Arden","The Warwick","The Kenilworth"]}]},{id:"wheeldons",name:"Wheeldon Homes",color:"#2E4057",logo:"https://www.panddg.co.uk/wp-content/uploads/2022/02/logo-wheeldon-homes.svg",relationship:"A boutique developer that values the personal service M&W bring.",sites:[{name:"Oaklands",location:"Etwall, South Derbyshire",lat:52.871,lng:-1.599,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"Derwentside",location:"Derwentside, Derbyshire",lat:52.92,lng:-1.48,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"The Green",location:"Church Broughton, Derby",lat:52.857,lng:-1.66,housetypes:["The Chatsworth","The Haddon"]}]},{id:"crest",name:"Crest Nicholson",color:"#003C71",logo:"https://www.crestnicholson.com/favicon.ico",relationship:"M&W meet Crest Nicholson's exacting standards on every element.",sites:[{name:"Barley Fields",location:"Queniborough, Leicestershire",lat:52.697,lng:-1.08,housetypes:["Elm","Beech","Maple","Rowan","Birch"]}]}];
 const PAST_PROJECTS=[{year:"2024-25",builder:"Bellway",site:"Holbrook Park Ph1",location:"Chellaston",units:167,scope:"Full package"},{year:"2023-25",builder:"Persimmon",site:"Boulton Moor",location:"Chellaston",units:245,scope:"Full package"},{year:"2023-24",builder:"Barratt",site:"Thoresby Vale Ph2",location:"Mansfield",units:180,scope:"Full package"},{year:"2022-24",builder:"St. Modwen",site:"Hilton Valley Ph3",location:"Hilton",units:120,scope:"1st & 2nd fix"},{year:"2021-23",builder:"Persimmon",site:"Jubilee Gardens",location:"Ilkeston",units:200,scope:"Full package"},{year:"2020-22",builder:"Barratt",site:"Dunstall Park",location:"Tamworth",units:280,scope:"Full package"},{year:"2019-21",builder:"Bellway",site:"The Meadows Ph1",location:"Alvaston",units:78,scope:"Full package"},{year:"2018-20",builder:"Persimmon",site:"Clipstone Park",location:"Mansfield",units:190,scope:"Full package"},{year:"2017-19",builder:"Bellway",site:"Coppice Heights",location:"Ripley",units:130,scope:"Full package"},{year:"2016-18",builder:"Persimmon",site:"Carlton View",location:"Gedling",units:170,scope:"Full package"},{year:"2015-17",builder:"Bellway",site:"Hugglescote Grange",location:"Leicestershire",units:140,scope:"Full package"},{year:"2014-16",builder:"Barratt",site:"Grange Park",location:"Loughborough",units:220,scope:"Full package"},{year:"2012-14",builder:"Bellway",site:"Stenson Fields",location:"Derby",units:250,scope:"Full package"},{year:"2010-12",builder:"Persimmon",site:"Wollaton Vale",location:"Nottingham",units:200,scope:"Full package"},{year:"2008-10",builder:"Barratt",site:"Chestnut Grove",location:"Long Eaton",units:140,scope:"Full package"},{year:"2005-07",builder:"Bellway",site:"Millbrook Park",location:"Stapleford",units:85,scope:"Full package"}];
 const SERVICES=[{id:"joists",title:"Joists & Structural Floors",icon:"┃",desc:"All structural timber floor systems to NHBC standards.",subs:[{n:"Joist Types",items:["Masonry Hanger Joists","Joist Hanger to Trimmer","Change of Direction","I-Beam / Engineered","Traditional Softwood"]},{n:"Floor Construction",items:["Semi-Detached Party Floor","Strutting & Noggins","Structural Decking","Fire Stopping"]}]},{id:"roofs",title:"Roof Construction",icon:"△",desc:"Full roof erection through to weathertight.",subs:[{n:"Roof Types",items:["Straight Up & Over","Gable Elevations","Hipped Roofs","Valley Roofs","Dormer Construction"]},{n:"Roof Details",items:["Open Eaves","Boxed Soffit","Gable Ladders","Box Ends","Fascia & Barge Boards","Roof Bracing"]}]},{id:"first-fix",title:"First Fix Carpentry",icon:"▣",desc:"All carpentry before plastering.",subs:[{n:"Traditional (Blockwork)",items:["Staircase Installation","Stud Partitions","Bulkheads","Door Linings","Window Boards","Pipe Boxing","Loft Hatches","Solar Panel Stands"]},{n:"Timber Frame",items:["Frame Erection","Squaring & Levelling","Panel Stitching","Party Walls","Floor Cassettes","Breather Membrane","Fire Stopping & Cavity Barriers"]}]},{id:"second-fix",title:"Second Fix Carpentry",icon:"▤",desc:"All finishing carpentry after plastering.",subs:[{n:"Traditional Doors",items:["Door Trimming & Fitting","Hinging","Latch & Lock Fitting","Fire Door Hanging"]},{n:"Prehung Casings",items:["Prehung Installation","Levelling & Packing","Fire-Rated Sets"]},{n:"Standard Spec",items:["Standard Skirting (68/94mm)","Standard Architrave","Standard Staircase"]},{n:"Premium Spec",items:["Premium Skirting (119-168mm)","Premium Architrave + Plinth Blocks","Oak Staircase","Engineered Hardwood Flooring","Panelling & Wainscoting"]}]},{id:"finals",title:"Final Fix",icon:"◆",desc:"All final items to handover standard.",subs:[{n:"Included",items:["Door Handles & Furnishings","Ironmongery - Locks, Latches & Keeps","Bath Panel","Front Door Accessories"]}]},{id:"extras",title:"Unique Works",icon:"\u25C7",desc:"Remedial & snagging work for other contractors.",subs:[{n:"Remedial Services",items:["Rectifying defective carpentry by other contractors","Door realignment & rehinging","Skirting & architrave replacement","Staircase remedials","Floor levelling & joist repairs"]},{n:"Snagging Support",items:["NHBC inspection preparation for other sites","Pre-completion snagging lists","Warranty defect repairs","Fire door compliance remedials","Builder handover support"]}]}];
 const DEMO_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",schedule:[{day:"Mon",plot:"34",type:"Craftsman",stage:"First Fix",status:"active"},{day:"Tue",plot:"34",type:"Craftsman",stage:"First Fix",status:"upcoming"},{day:"Wed",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Thu",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Fri",plot:"36",type:"Turner",stage:"First Fix",status:"upcoming"}]},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",schedule:[{day:"Mon",plot:"18",type:"Joiner",stage:"Roofs",status:"active"},{day:"Tue",plot:"18",type:"Joiner",stage:"Roofs",status:"upcoming"},{day:"Wed",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Thu",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Fri",plot:"20",type:"Tanner",stage:"Roofs",status:"upcoming"}]}];
 const HOLBROOK_PLOTS=Array.from({length:40},(_,i)=>{const n=i+1;const stages=["Not Started","Joists","Joists Complete","Roofs","Roofs Complete","First Fix","First Fix Complete","Second Fix","Second Fix Complete","Finals","Complete"];const si=n<=8?10:n<=14?8:n<=20?6:n<=28?4:n<=34?2:0;return{plot:n,stage:stages[si],carpenter:n<=8?"Various":n<=14?"Sam Bennett":n<=20?"Tom Harris":n<=28?"Dave Mitchell":n<=34?"Ryan Cooper":"Unallocated",houseType:["Craftsman","Joiner","Turner","Tanner","Weaver"][i%5]};});
-const ALL_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",status:"active"},{id:"C003",name:"Jake Williams",pin:"2345",site:"Thoresby Vale",builder:"Barratt",status:"active"},{id:"C004",name:"Tom Harris",pin:"3456",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C005",name:"Sam Bennett",pin:"4567",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C006",name:"Chris Taylor",pin:"5679",site:"The Meadows",builder:"Bellway",status:"active"},{id:"C007",name:"Dan Evans",pin:"6780",site:"Hilton Valley",builder:"St. Modwen",status:"leave"},{id:"C008",name:"Mark Johnson",pin:"7891",site:"Edwalton Fields",builder:"Countryside",status:"active"},{id:"C009",name:"Luke Brown",pin:"8902",site:"Broadnook",builder:"Vistry",status:"active"},{id:"C010",name:"James Wilson",pin:"9013",site:"Clipstone Park",builder:"Persimmon",status:"active"}];
+const ALL_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",status:"active"},{id:"C003",name:"Jake Williams",pin:"2345",site:"Thoresby Vale",builder:"Barratt",status:"active"},{id:"C004",name:"Tom Harris",pin:"3456",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C005",name:"Sam Bennett",pin:"4567",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C006",name:"Chris Taylor",pin:"5679",site:"The Meadows",builder:"Bellway",status:"active"},{id:"C007",name:"Dan Evans",pin:"6780",site:"Hilton Valley",builder:"St. Modwen",status:"leave"},{id:"C008",name:"Mark Johnson",pin:"7891",site:"Edwalton Fields",builder:"Countryside",status:"active"},{id:"C009",name:"Luke Brown",pin:"8902",site:"Broadnook",builder:"Vistry",status:"active"},{id:"C010",name:"James Wilson",pin:"9013",site:"Clipstone Park",builder:"Persimmon",status:"active"},{id:"C011",name:"Richard Wileman",pin:"3002",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C012",name:"Charlie Dillon",pin:"3003",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C013",name:"Ian Johnson",pin:"3004",site:"Brascote Park",builder:"Persimmon Homes",status:"active"},{id:"C014",name:"Neil Hines",pin:"3006",site:"Springwood",builder:"Bellway Homes",status:"active"},{id:"C015",name:"Neil Goodwin",pin:"3008",site:"Derwentside",builder:"Wheeldon Homes",status:"active"},{id:"C016",name:"Rob Jones",pin:"3010",site:"Snibston Mill",builder:"St. Modwen Homes",status:"active"}];
 const ALL_PRICE_LISTS=[{builder:"Barratt Homes",color:"#E31937",sites:[{site:"Thoresby Vale",rates:[["Joists — GF","£440"],["Joists — FF","£400"],["Roof (trussed)","£720"],["First Fix","£1,200"],["Second Fix","£1,350"],["Finals","£240"]]},{site:"Dunstall Park",rates:[["Joists — GF","£460"],["Joists — FF","£420"],["Roof (trussed)","£750"],["First Fix","£1,250"],["Second Fix","£1,400"],["Finals","£250"]]}]},{builder:"Lovell Homes",color:"#1B3D6F",sites:[{site:"Old Mill Farm",rates:[["Joists — GF","£480"],["Joists — FF","£440"],["Roof (trussed)","£780"],["First Fix","£1,300"],["Second Fix","£1,450"],["Finals","£260"]]},{site:"Berry Hill",rates:[["Joists — GF","£470"],["Joists — FF","£430"],["Roof (trussed)","£760"],["First Fix","£1,280"],["Second Fix","£1,420"],["Finals","£255"]]}]},{builder:"Bellway Homes",color:"#003DA5",sites:[{site:"Holbrook Park",rates:[["Joists — GF","£450"],["Joists — FF","£410"],["Roof (trussed)","£730"],["First Fix","£1,220"],["Second Fix","£1,380"],["Finals","£245"]]},{site:"Coppice Heights",rates:[["Joists — GF","£445"],["Joists — FF","£405"],["Roof (cut)","£1,050"],["First Fix","£1,210"],["Second Fix","£1,360"],["Finals","£240"]]},{site:"The Meadows",rates:[["Joists — GF","£455"],["Joists — FF","£415"],["Roof (trussed)","£740"],["First Fix","£1,230"],["Second Fix","£1,390"],["Finals","£248"]]}]},{builder:"Persimmon Homes",color:"#D4002A",sites:[{site:"Clipstone Park",rates:[["Joists — GF","£420"],["Joists — FF","£380"],["Roof (trussed)","£700"],["First Fix","£1,150"],["Second Fix","£1,300"],["Finals","£230"]]},{site:"Boulton Moor",rates:[["Joists — GF","£430"],["Joists — FF","£390"],["Roof (trussed)","£710"],["First Fix","£1,180"],["Second Fix","£1,320"],["Finals","£235"]]}]},{builder:"St. Modwen Homes",color:"#6B2D5B",sites:[{site:"Hilton Valley",rates:[["Joists — GF","£460"],["Joists — FF","£420"],["Roof (trussed)","£740"],["First Fix","£1,240"],["Second Fix","£1,380"],["Finals","£250"]]}]},{builder:"Countryside Homes",color:"#2B6E44",sites:[{site:"Edwalton Fields",rates:[["Joists — GF","£470"],["Joists — FF","£430"],["Roof (trussed)","£760"],["First Fix","£1,280"],["Second Fix","£1,420"],["Finals","£258"]]}]},{builder:"Vistry / Bovis",color:"#00594F",sites:[{site:"Broadnook Garden Village",rates:[["Joists — GF","£480"],["Joists — FF","£440"],["Roof (trussed)","£770"],["First Fix","£1,300"],["Second Fix","£1,450"],["Finals","£265"]]}]},{builder:"Ashberry Homes",color:"#7B3F98",sites:[{site:"Potters Gate",rates:[["Joists — GF","£440"],["Joists — FF","£400"],["Roof (trussed)","£720"],["First Fix","£1,200"],["Second Fix","£1,350"],["Finals","£240"]]}]},{builder:"Davidsons Homes",color:"#C8102E",sites:[{site:"Davidsons at Huncote",rates:[["Joists — GF","£420"],["Joists — FF","£380"],["Roof (trussed)","£680"],["First Fix","£1,150"],["Second Fix","£1,280"],["Finals","£220"]]}]},{builder:"Wheeldon Homes",color:"#2E4057",sites:[{site:"Oaklands, Etwall",rates:[["Joists — GF","£490"],["Joists — FF","£450"],["Roof (cut)","£1,100"],["First Fix","£1,350"],["Second Fix","£1,520"],["Finals","£280"]]}]},{builder:"Crest Nicholson",color:"#003C71",sites:[{site:"Barley Fields",rates:[["Joists — GF","£475"],["Joists — FF","£435"],["Roof (trussed)","£770"],["First Fix","£1,300"],["Second Fix","£1,460"],["Finals","£265"]]}]}];
 const DEMO_DOCS_BY_SITE={"Holbrook Park":[{cat:"Floorplans",docs:["Craftsman — Ground Floor","Craftsman — First Floor","Joiner — Ground Floor","Joiner — First Floor","Turner — Ground Floor","Turner — First Floor"]},{cat:"Technical Drawings",docs:["Craftsman — Roof Plan","Joiner — Roof Plan","Turner — Roof Plan"]},{cat:"Site Documents",docs:["Holbrook Park — Site Layout","Holbrook Park — H&S Pack","Bellway Specification Book"]}],"Coppice Heights":[{cat:"Floorplans",docs:["Joiner — Ground Floor","Joiner — First Floor","Turner — Ground Floor","Turner — First Floor"]},{cat:"Site Documents",docs:["Coppice Heights — Site Layout","Coppice Heights — H&S Pack"]}]};
 
@@ -53,12 +53,23 @@ const CARPENTERS = [
   { id: "C007", name: "Dan Evans", pin: "6780", site: "Hilton Valley", builder: "St. Modwen", status: "leave" },
   { id: "C008", name: "Mark Johnson", pin: "7891", site: "Edwalton Fields", builder: "Countryside" },
   { id: "C009", name: "Luke Brown", pin: "8902", site: "Broadnook Garden Village", builder: "Vistry" },
-  { id: "C010", name: "James Wilson", pin: "9013", site: "Clipstone Park", builder: "Persimmon" }
+  { id: "C010", name: "James Wilson", pin: "9013", site: "Clipstone Park", builder: "Persimmon" },
+  { id: "C011", name: "Richard Wileman", pin: "3002", site: "Swinfen Vale", builder: "Ashberry Homes" },
+  { id: "C012", name: "Charlie Dillon", pin: "3003", site: "Swinfen Vale", builder: "Ashberry Homes" },
+  { id: "C013", name: "Ian Johnson", pin: "3004", site: "Brascote Park", builder: "Persimmon Homes" },
+  { id: "C014", name: "Neil Hines", pin: "3006", site: "Springwood", builder: "Bellway Homes" },
+  { id: "C015", name: "Neil Goodwin", pin: "3008", site: "Derwentside", builder: "Wheeldon Homes" },
+  { id: "C016", name: "Rob Jones", pin: "3010", site: "Snibston Mill", builder: "St. Modwen Homes" }
 ];
 
 const SITE_MANAGERS = [
   { id: "SM001", name: "Michael", pin: "1111", site: "Swinfen Vale", builder: "Bellway", role: "site_manager" },
-  { id: "SM002", name: "Richard", pin: "2222", site: "Oadby Grange", builder: "Bellway", role: "site_manager" }
+  { id: "SM002", name: "Richard", pin: "2222", site: "Oadby Grange", builder: "Bellway", role: "site_manager" },
+  { id: "SM003", name: "Michael Blake", pin: "3001", site: "Swinfen Vale", builder: "Ashberry Homes", role: "site_manager" },
+  { id: "SM004", name: "Andy Manager", pin: "3005", site: "Brascote Park", builder: "Persimmon Homes", role: "site_manager" },
+  { id: "SM005", name: "Tim Allen", pin: "3007", site: "Springwood", builder: "Bellway Homes", role: "site_manager" },
+  { id: "SM006", name: "Daniel Moody", pin: "3009", site: "Derwentside", builder: "Wheeldon Homes", role: "site_manager" },
+  { id: "SM007", name: "Ellis Manager", pin: "3011", site: "Snibston Mill", builder: "St. Modwen Homes", role: "site_manager" }
 ];
 
 const INITIAL_WORK_LOG = [
@@ -105,6 +116,12 @@ const PRICE_LISTS = {
   },
   "Vistry": {
     "Broadnook Garden Village": { "Joists GF": 750, "Joists FF": 650, "Roof": 1100, "First Fix": 850, "Second Fix": 700, "Finals": 550 }
+  },
+  "Ashberry Homes": {
+    "Swinfen Vale": { "Joists GF": 840, "Joists FF": 700, "Roof": 1200, "First Fix": 950, "Second Fix": 820, "Finals": 620 }
+  },
+  "Wheeldon Homes": {
+    "Derwentside": { "Joists GF": 870, "Joists FF": 720, "Roof": 1240, "First Fix": 980, "Second Fix": 850, "Finals": 650 }
   }
 };
 
@@ -131,6 +148,36 @@ const DOCUMENTS = {
     "Floorplans": ["Joiner — Ground Floor", "Joiner — First Floor", "Craftsman — Ground Floor", "Craftsman — First Floor", "Weaver — Ground Floor"],
     "Technical Drawings": ["Electrical — Oadby Grange", "Structural — Oadby Grange"],
     "Site Documents": ["Health & Safety Plan", "Site Rules"],
+    "H&S": ["Site Induction", "Equipment Register"]
+  },
+  "Swinfen Vale": {
+    "Floorplans": ["Greenwood — Ground Floor", "Greenwood — First Floor", "Oakwood — Ground Floor", "Oakwood — First Floor", "Elmwood — Ground Floor", "Elmwood — First Floor"],
+    "Technical Drawings": ["Electrical — Swinfen Vale", "Structural — Swinfen Vale", "Plumbing — Swinfen Vale"],
+    "Site Documents": ["Health & Safety Plan", "Site Rules", "Site Map"],
+    "H&S": ["Site Induction", "Equipment Register", "Incident Log"]
+  },
+  "Brascote Park": {
+    "Floorplans": ["Bedale — Ground Floor", "Bedale — First Floor", "Alnwick — Ground Floor", "Alnwick — First Floor", "Bolsover — Ground Floor", "Bolsover — First Floor"],
+    "Technical Drawings": ["Electrical — Brascote Park", "Structural — Brascote Park"],
+    "Site Documents": ["Health & Safety Plan", "Site Rules", "Site Map"],
+    "H&S": ["Site Induction", "Equipment Register"]
+  },
+  "Springwood": {
+    "Floorplans": ["Joiner — Ground Floor", "Joiner — First Floor", "Craftsman — Ground Floor", "Craftsman — First Floor", "Turner — Ground Floor", "Turner — First Floor"],
+    "Technical Drawings": ["Electrical — Springwood", "Structural — Springwood"],
+    "Site Documents": ["Health & Safety Plan", "Site Rules", "Site Map"],
+    "H&S": ["Site Induction", "Equipment Register"]
+  },
+  "Derwentside": {
+    "Floorplans": ["The Chatsworth — Ground Floor", "The Chatsworth — First Floor", "The Haddon — Ground Floor", "The Haddon — First Floor", "The Calke — Ground Floor", "The Calke — First Floor"],
+    "Technical Drawings": ["Electrical — Derwentside", "Structural — Derwentside"],
+    "Site Documents": ["Health & Safety Plan", "Site Rules"],
+    "H&S": ["Site Induction", "Equipment Register"]
+  },
+  "Snibston Mill": {
+    "Floorplans": ["Arden — Ground Floor", "Arden — First Floor", "Carleton — Ground Floor", "Carleton — First Floor", "Danbury — Ground Floor", "Danbury — First Floor"],
+    "Technical Drawings": ["Electrical — Snibston Mill", "Structural — Snibston Mill"],
+    "Site Documents": ["Health & Safety Plan", "Site Rules", "Site Map"],
     "H&S": ["Site Induction", "Equipment Register"]
   }
 };
@@ -237,6 +284,11 @@ const[sendDocType,setSendDocType]=useState('Toolbox Talk');
 const[sendDocTitle,setSendDocTitle]=useState('');
 const[sendDocMessage,setSendDocMessage]=useState('');
 const fileInputRef=useRef(null);
+const[scheduleClickedAlloc,setScheduleClickedAlloc]=useState(null);
+const[editingInvoiceId,setEditingInvoiceId]=useState(null);
+const[invoiceExtraItems,setInvoiceExtraItems]=useState({});
+const[newExtraDesc,setNewExtraDesc]=useState('');
+const[newExtraAmount,setNewExtraAmount]=useState('');
 // ===== SUPABASE DATA LOADING =====
 const [dbLoaded, setDbLoaded] = useState(false);
 useEffect(() => {
@@ -380,7 +432,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
   const todayDate = new Date(todayStr);
 
   const myNotifications = user?.role === 'carpenter'
-    ? notifications.filter(n => n.recipients.includes(user?.name))
+    ? notifications.filter(n => n.recipients.includes(user?.name) && !(n.responses[user?.name]?.signed))
     : user?.role === 'site_manager'
     ? notifications.filter(n => n.site === user?.site)
     : notifications;
@@ -509,6 +561,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
         const resp = {...n.responses};
         resp[user?.name] = {...(resp[user?.name]||{}), read: true, signed: true, signature: sigData,
           signedDate: new Date().toLocaleDateString('en-GB') + ' ' + new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})};
+        upsertNotificationResponse(notifId, user?.name, {read_status: true, signed: true, signed_date: new Date().toLocaleDateString('en-GB') + ' ' + new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}), signature_data: sigData}).catch(e=>console.error('DB sig error:',e));
         return {...n, responses: resp};
       }
       return n;
@@ -850,21 +903,45 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div style={{ fontWeight:'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center' }}>{formatDate(date).split(' ')[0]} {date.getDate()}</div>
                           {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
                             const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
-                            return (<div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'9px',
-                              backgroundColor: af?(af.completed?'#c8e6c9':af.delayed?'#ffcdd2':new Date(af.startDate)<=todayDate&&new Date(af.endDate)>=todayDate?GOLD:NAVY):'white',
-                              color: af?NAVY:'#ccc', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal' }}>
-                              {af?(af.completed?'Done':af.delayed?'Delay':af.site.substring(0,4)):''}</div>);
+                            const cellStatus = af?(af.completed?'complete':af.delayed?'delayed':new Date(af.startDate)<=todayDate&&new Date(af.endDate)>=todayDate?'active':'upcoming'):'empty';
+                            const cellColors = {complete:{bg:'#2e7d32',fg:'white'},delayed:{bg:'#d32f2f',fg:'white'},active:{bg:GOLD,fg:NAVY},upcoming:{bg:NAVY,fg:'white'},empty:{bg:'white',fg:'#ccc'}};
+                            const cc = cellColors[cellStatus];
+                            return (<div key={carp} onClick={()=>af&&setScheduleClickedAlloc(af)} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'8px',
+                              backgroundColor: cc.bg, color: cc.fg, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal',
+                              cursor:af?'pointer':'default', lineHeight:'1.1', textAlign:'center', borderRadius:af?2:0 }}>
+                              {af?af.site.length>10?af.site.substring(0,9)+'..':af.site:''}</div>);
                           })}
                         </div>);
                       })}
                     </div>
                   </div>
-                  <div style={{marginTop:10,fontSize:11,display:'flex',gap:15}}>
-                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:GOLD,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Active</span>
-                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#c8e6c9',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
-                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ffcdd2',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
+                  <div style={{marginTop:10,fontSize:11,display:'flex',gap:15,flexWrap:'wrap'}}>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:GOLD,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> In Progress</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#2e7d32',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#d32f2f',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:NAVY,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Upcoming</span>
                   </div>
+                  {scheduleClickedAlloc && (
+                    <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,backgroundColor:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:20}} onClick={()=>setScheduleClickedAlloc(null)}>
+                      <div onClick={e=>e.stopPropagation()} style={{backgroundColor:'white',borderRadius:12,padding:24,maxWidth:420,width:'100%',boxShadow:'0 20px 60px rgba(0,0,0,0.3)'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+                          <h3 style={{margin:0,color:NAVY,fontSize:18}}>Job Details</h3>
+                          <button onClick={()=>setScheduleClickedAlloc(null)} style={{background:'none',border:'none',fontSize:20,cursor:'pointer',color:'#999'}}>x</button>
+                        </div>
+                        <div style={{fontSize:14,lineHeight:'2'}}>
+                          <div><strong>Carpenter:</strong> {scheduleClickedAlloc.carpenter}</div>
+                          <div><strong>Site:</strong> {scheduleClickedAlloc.site}</div>
+                          <div><strong>Plot:</strong> {scheduleClickedAlloc.plot}</div>
+                          <div><strong>House Type:</strong> {scheduleClickedAlloc.houseType}</div>
+                          <div><strong>Stage:</strong> {scheduleClickedAlloc.stage}</div>
+                          <div><strong>Start:</strong> {formatDate(scheduleClickedAlloc.startDate)}</div>
+                          <div><strong>End:</strong> {formatDate(scheduleClickedAlloc.endDate)}</div>
+                          <div><strong>Status:</strong> <span style={{fontWeight:'bold',color:scheduleClickedAlloc.completed?'#2e7d32':scheduleClickedAlloc.delayed?'#d32f2f':GOLD}}>{scheduleClickedAlloc.completed?'Complete':scheduleClickedAlloc.delayed?'Delayed':'In Progress'}</span></div>
+                          {scheduleClickedAlloc.delayed && <div><strong>Delay:</strong> +{scheduleClickedAlloc.delayDays} days</div>}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
               {scheduleView === 'list' && (
@@ -1688,14 +1765,58 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'documents' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
-              {DOCUMENTS[user?.site] && Object.entries(DOCUMENTS[user?.site]).map(([cat,docs])=>(
-                <div key={cat} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
-                  <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:15}}>{cat}</h3>
-                  {docs.map((doc,idx)=><div key={idx} style={{marginBottom:6,padding:8,backgroundColor:'#f9f9f9',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8,fontSize:13}}>
-                    <span>{doc}</span><button onClick={()=>{setSuccessMsg('Download: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>View</button>
-                  </div>)}
-                </div>
-              ))}
+              {(() => {
+                const siteDocs = DOCUMENTS[user?.site];
+                if(!siteDocs) return <p style={{color:'#666',fontSize:14}}>No documents available for this site.</p>;
+                const builder = BUILDERS.find(b => b.sites.some(s => s.name === user?.site));
+                const siteInfo = builder?.sites.find(s => s.name === user?.site);
+                const houseTypes = siteInfo?.housetypes || [];
+                return (<div>
+                  {houseTypes.length > 0 && (
+                    <div style={{marginBottom:20}}>
+                      <h3 style={{color:NAVY,margin:'0 0 12px',fontSize:16}}>Drawings by House Type</h3>
+                      {houseTypes.map(ht => {
+                        const htDocs = (siteDocs['Floorplans']||[]).filter(d => d.toLowerCase().includes(ht.toLowerCase()));
+                        const htTech = (siteDocs['Technical Drawings']||[]).filter(d => d.toLowerCase().includes(ht.toLowerCase()));
+                        const allHtDocs = [...htDocs, ...htTech];
+                        return (
+                          <details key={ht} style={{marginBottom:8,backgroundColor:'white',borderRadius:8,border:'1px solid #ddd',overflow:'hidden'}}>
+                            <summary style={{padding:'12px 15px',cursor:'pointer',fontWeight:'bold',fontSize:14,color:NAVY,backgroundColor:'#f6f4ef',display:'flex',alignItems:'center',gap:8}}>
+                              <span style={{display:'inline-block',width:8,height:8,backgroundColor:GOLD,borderRadius:'50%'}}></span> {ht}
+                              <span style={{fontSize:11,color:'#888',fontWeight:'normal',marginLeft:'auto'}}>{allHtDocs.length} drawing{allHtDocs.length!==1?'s':''}</span>
+                            </summary>
+                            <div style={{padding:'10px 15px'}}>
+                              {allHtDocs.length===0?<p style={{color:'#999',fontSize:12,margin:'5px 0'}}>No drawings uploaded yet</p>:
+                                allHtDocs.map((doc,idx)=>(
+                                  <div key={idx} style={{marginBottom:6,padding:'8px 10px',backgroundColor:'#f9f9f9',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,fontSize:13}}>
+                                    <span>{doc}</span>
+                                    <div style={{display:'flex',gap:6}}>
+                                      <button onClick={()=>{setSuccessMsg('Opening: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>Open</button>
+                                      <button onClick={()=>{setSuccessMsg('Downloading: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:NAVY,color:'white',border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>Download</button>
+                                    </div>
+                                  </div>
+                                ))
+                              }
+                            </div>
+                          </details>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {['Site Documents','H&S'].filter(cat=>siteDocs[cat]).map(cat=>(
+                    <div key={cat} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
+                      <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:15}}>{cat}</h3>
+                      {siteDocs[cat].map((doc,idx)=><div key={idx} style={{marginBottom:6,padding:8,backgroundColor:'#f9f9f9',borderRadius:4,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8,fontSize:13}}>
+                        <span>{doc}</span>
+                        <div style={{display:'flex',gap:6}}>
+                          <button onClick={()=>{setSuccessMsg('Opening: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>Open</button>
+                          <button onClick={()=>{setSuccessMsg('Downloading: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:NAVY,color:'white',border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>Download</button>
+                        </div>
+                      </div>)}
+                    </div>
+                  ))}
+                </div>);
+              })()}
             </div>
           )}
 
@@ -1764,24 +1885,58 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'invoice' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>My Invoices</h2>
-              {invoices.filter(i=>i.carpenter===user?.name).length===0?<p style={{color:'#666',fontSize:14}}>No invoices yet.</p>:(
+              {invoices.filter(i=>i.carpenter===user?.name).length===0?<p style={{color:'#666',fontSize:14}}>No invoices yet. Invoices are auto-generated when jobs are completed.</p>:(
                 <div>
-                  {invoices.filter(i=>i.carpenter===user?.name).map(inv=>(
+                  {invoices.filter(i=>i.carpenter===user?.name).map(inv=>{
+                    const extras = invoiceExtraItems[inv.id] || [];
+                    const extrasTotal = extras.reduce((s,e)=>s+parseFloat(e.amount||0),0);
+                    const totalWithExtras = inv.amount + extrasTotal;
+                    return (
                     <div key={inv.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10}}>
-                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
-                        <div><strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div></div>
-                        <div style={{textAlign:'right'}}><div style={{fontSize:18,fontWeight:'bold'}}>GBP {inv.amount}</div>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
+                        <div><strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div><div style={{fontSize:11,color:'#999',marginTop:2}}>{inv.date}</div></div>
+                        <div style={{textAlign:'right'}}>
+                          <div style={{fontSize:14,color:'#666'}}>Base: £{inv.amount}</div>
+                          {extrasTotal>0 && <div style={{fontSize:14,color:GOLD}}>Extras: +£{extrasTotal}</div>}
+                          <div style={{fontSize:18,fontWeight:'bold'}}>£{totalWithExtras}</div>
                           <span style={{display:'inline-block',padding:'2px 10px',borderRadius:3,fontSize:11,fontWeight:'bold',marginTop:4,
                             backgroundColor:inv.status==='paid'?'#e8f5e9':inv.status==='approved'?'#e3f2fd':'#fff3e0',
                             color:inv.status==='paid'?'#2e7d32':inv.status==='approved'?'#1565c0':'#e65100'}}>{inv.status.toUpperCase()}</span>
                         </div>
                       </div>
+                      {extras.length>0 && (
+                        <div style={{marginTop:10,padding:10,backgroundColor:'#f9f9f9',borderRadius:4}}>
+                          <div style={{fontSize:11,fontWeight:'bold',color:'#666',marginBottom:6}}>Extra Items:</div>
+                          {extras.map((ex,idx)=>(
+                            <div key={idx} style={{display:'flex',justifyContent:'space-between',fontSize:12,padding:'3px 0',borderBottom:'1px solid #eee'}}>
+                              <span>{ex.desc}</span><strong>£{ex.amount}</strong>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {inv.status==='pending' && (
+                        <div style={{marginTop:10}}>
+                          {editingInvoiceId===inv.id ? (
+                            <div style={{padding:10,backgroundColor:'#f0f0f0',borderRadius:6}}>
+                              <div style={{fontSize:12,fontWeight:'bold',marginBottom:8,color:NAVY}}>Add Extra Item</div>
+                              <input placeholder="Description (e.g. Additional snagging)" value={newExtraDesc} onChange={e=>setNewExtraDesc(e.target.value)} style={{width:'100%',padding:8,marginBottom:6,border:'1px solid #ccc',borderRadius:4,fontSize:12,boxSizing:'border-box'}}/>
+                              <div style={{display:'flex',gap:8}}>
+                                <input placeholder="Amount (£)" type="number" value={newExtraAmount} onChange={e=>setNewExtraAmount(e.target.value)} style={{flex:1,padding:8,border:'1px solid #ccc',borderRadius:4,fontSize:12}}/>
+                                <button onClick={()=>{if(!newExtraDesc||!newExtraAmount)return;setInvoiceExtraItems(prev=>({...prev,[inv.id]:[...(prev[inv.id]||[]),{desc:newExtraDesc,amount:parseFloat(newExtraAmount)}]}));setNewExtraDesc('');setNewExtraAmount('');setSuccessMsg('Extra item added');setTimeout(()=>setSuccessMsg(''),2000);}} style={{padding:'8px 14px',backgroundColor:'#2e7d32',color:'white',border:'none',borderRadius:4,fontSize:12,fontWeight:'bold',cursor:'pointer'}}>Add</button>
+                                <button onClick={()=>setEditingInvoiceId(null)} style={{padding:'8px 14px',backgroundColor:'#999',color:'white',border:'none',borderRadius:4,fontSize:12,cursor:'pointer'}}>Done</button>
+                              </div>
+                            </div>
+                          ) : (
+                            <button onClick={()=>setEditingInvoiceId(inv.id)} style={{padding:'6px 14px',fontSize:12,backgroundColor:'#e3f2fd',color:'#1565c0',border:'1px solid #90caf9',borderRadius:4,cursor:'pointer',fontWeight:'bold'}}>Edit / Add Extras</button>
+                          )}
+                        </div>
+                      )}
                     </div>
-                  ))}
+                  );})}
                   <div style={{marginTop:15,padding:15,backgroundColor:NAVY,color:CREAM,borderRadius:8,fontSize:14}}>
-                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='pending').reduce((s,i)=>s+i.amount,0)}</strong></div>
-                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='approved').reduce((s,i)=>s+i.amount,0)}</strong></div>
-                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>GBP {invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='pending').reduce((s,i)=>s+i.amount,0) + Object.entries(invoiceExtraItems).filter(([id])=>invoices.find(i=>i.id===parseInt(id)&&i.carpenter===user?.name&&i.status==='pending')).reduce((s,[id,items])=>s+items.reduce((ss,e)=>ss+parseFloat(e.amount||0),0),0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='approved').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
                   </div>
                 </div>
               )}
