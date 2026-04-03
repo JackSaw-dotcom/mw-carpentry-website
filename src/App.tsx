@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { supabase, loginWithPin, fetchWorkLog, addWorkLogEntry, updateWorkLogEntry, fetchAllocations, addAllocation, updateAllocation, fetchInvoices, addInvoice, updateInvoice, fetchDelays, addDelay, fetchNotifications, addNotification, fetchNotificationResponses, upsertNotificationResponse, fetchFixingRequests, addFixingRequest as addFixingReq, fetchSiteFiles, addSiteFile, addSiteFilePhoto, fetchPriceLists, fetchUsers, uploadPhoto, subscribeToAll } from './supabase';
 import roofImg from "./truss-roof-cost.jpg";
 import ff1 from "./IMG_1851.jpeg";
 import ff2 from "./IMG_1838.jpeg";
@@ -236,10 +237,123 @@ const[sendDocType,setSendDocType]=useState('Toolbox Talk');
 const[sendDocTitle,setSendDocTitle]=useState('');
 const[sendDocMessage,setSendDocMessage]=useState('');
 const fileInputRef=useRef(null);
+// ===== SUPABASE DATA LOADING =====
+const [dbLoaded, setDbLoaded] = useState(false);
+useEffect(() => {
+  if (currentPage === 'app' && user && !dbLoaded) {
+    const loadData = async () => {
+      try {
+        const [wl, al, inv, del, notifs, nResponses, fixReqs, sf] = await Promise.all([
+          fetchWorkLog(), fetchAllocations(), fetchInvoices(), fetchDelays(),
+          fetchNotifications(), fetchNotificationResponses(), fetchFixingRequests(), fetchSiteFiles()
+        ]);
+        if (wl && wl.length > 0) {
+          setWorkLog(wl.map(w => ({
+            id: w.id, site: w.site, builder: w.builder, plot: w.plot,
+            houseType: w.house_type, stage: w.stage, expectedDays: w.expected_days,
+            priority: w.priority, notes: w.notes || '', status: w.status,
+            allocatedTo: w.allocated_to || ''
+          })));
+        }
+        if (al && al.length > 0) {
+          setAllocations(al.map(a => ({
+            id: a.id, carpenter: a.carpenter, site: a.site, plot: a.plot,
+            houseType: a.house_type, stage: a.stage,
+            startDate: a.start_date, endDate: a.end_date,
+            completed: a.completed || false, completedDate: a.completed_date || null,
+            delayed: a.delayed || false, delayDays: a.delay_days || 0
+          })));
+        }
+        if (inv && inv.length > 0) {
+          setInvoices(inv.map(i => ({
+            id: i.id, carpenter: i.carpenter, site: i.site, plot: i.plot,
+            houseType: i.house_type, stage: i.stage, amount: parseFloat(i.amount),
+            status: i.status, date: i.date
+          })));
+        }
+        if (del && del.length > 0) {
+          setDelays(del.map(d => ({
+            id: d.id, allocId: d.alloc_id, carpenter: d.carpenter, site: d.site,
+            plot: d.plot, houseType: d.house_type, stage: d.stage,
+            reason: d.reason, delayDays: d.delay_days,
+            originalEnd: d.original_end, date: d.date, status: d.status
+          })));
+        }
+        if (notifs && notifs.length > 0) {
+          const responseMap = {};
+          (nResponses || []).forEach(r => {
+            if (!responseMap[r.notification_id]) responseMap[r.notification_id] = {};
+            responseMap[r.notification_id][r.carpenter_name] = {
+              read: r.read_status, readDate: r.read_date,
+              signed: r.signed, signedDate: r.signed_date,
+              signatureData: r.signature_data
+            };
+          });
+          setNotifications(notifs.map(n => ({
+            id: n.id, type: n.type, title: n.title, message: n.message,
+            site: n.site, sentBy: n.sent_by, sentDate: n.sent_date,
+            recipients: n.recipients || [], responses: responseMap[n.id] || {}
+          })));
+        }
+        if (fixReqs && fixReqs.length > 0) {
+          const mapped = fixReqs.map(r => ({
+            id: r.id, carpenter: r.carpenter, site: r.site, plot: r.plot,
+            stage: r.stage, item: r.item, qty: r.qty, notes: r.notes || '',
+            date: r.date, status: r.status
+          }));
+          setAllFixingRequests(mapped);
+          setFixingRequests(mapped.filter(r => r.carpenter === user?.name));
+        }
+        if (sf && sf.length > 0) {
+          setSiteFiles(sf.map(f => ({
+            id: f.id, site: f.site, name: f.name, createdBy: f.created_by,
+            date: f.date, sentTo: f.sent_to, status: f.status,
+            photos: (f.site_file_photos || []).map(p => ({
+              id: p.id, note: p.note, dataUrl: p.photo_url
+            }))
+          })));
+        }
+        setDbLoaded(true);
+        console.log('Supabase data loaded successfully');
+      } catch (err) {
+        console.error('Error loading from Supabase:', err);
+        setDbLoaded(true);
+      }
+    };
+    loadData();
+  }
+}, [currentPage, user, dbLoaded]);
+// ===== END SUPABASE DATA LOADING =====
+
   // Website/old portal states from App7
   const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
-const doLogin=()=>{
+const doLogin=async()=>{
+// Try Supabase login first
+try {
+  const dbUser = await loginWithPin(pin);
+  if(dbUser) {
+    const role = dbUser.role;
+    if(role === 'admin') {
+      setPortal("mgr");setPUser({name:dbUser.name,role:"admin"});setPTab("dashboard");
+      setUser({role:'admin',name:dbUser.name,id:dbUser.id});setCurrentPage('app');setAdminTab('dashboard');return;
+    }
+    if(role === 'invoice') {
+      setPortal("office");setPUser({name:dbUser.name,role:"office"});setPTab("invoices");
+      setUser({role:'invoice',name:dbUser.name,id:dbUser.id});setCurrentPage('app');setInvoiceTab('pending');return;
+    }
+    if(role === 'site_manager') {
+      const u = {id:dbUser.employee_id,name:dbUser.name,pin:dbUser.pin,site:dbUser.site,builder:dbUser.builder,role:'site_manager'};
+      setUser(u);setCurrentPage('app');setSiteManagerTab('overview');return;
+    }
+    if(role === 'carpenter') {
+      const c = {id:dbUser.employee_id,name:dbUser.name,pin:dbUser.pin,site:dbUser.site,builder:dbUser.builder};
+      setPortal("carp");setPUser(c);setPTab("schedule");
+      setUser({...c,role:'carpenter'});setCurrentPage('app');setCarpenterTab('schedule');return;
+    }
+  }
+} catch(e) { console.log('Supabase login failed, falling back to local:', e); }
+// Fallback to local auth
 if(pin==="4444"){setPortal("mgr");setPUser({name:"Admin \u2014 M&W",role:"admin"});setPTab("dashboard");setUser({role:'admin',name:'Admin'});setCurrentPage('app');setAdminTab('dashboard');return;}
 if(pin==="9999"){setPortal("office");setPUser({name:"Office \u2014 M&W",role:"office"});setPTab("invoices");setUser({role:'invoice',name:'Office/Invoice'});setCurrentPage('app');setInvoiceTab('pending');return;}
 const sm=SITE_MANAGERS.find(s=>s.pin===pin);if(sm){const u={...sm,role:'site_manager'};setUser(u);setCurrentPage('app');setSiteManagerTab('overview');return;}
@@ -285,6 +399,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       originalEnd: alloc.endDate, date: new Date().toLocaleDateString('en-GB'), status: 'active'
     };
     setDelays([...delays, delayEntry]);
+    addDelay({alloc_id: allocId, carpenter: alloc.carpenter, site: alloc.site, plot: alloc.plot, house_type: alloc.houseType, stage: alloc.stage, reason: delayReason, delay_days: delayDays, original_end: alloc.endDate, date: new Date().toLocaleDateString('en-GB'), status: 'active'}).catch(e=>console.error('DB delay error:',e));
     const updatedAllocs = allocations.map(a => {
       if(a.id === allocId) {
         const newEnd = new Date(a.endDate); newEnd.setDate(newEnd.getDate() + delayDays);
@@ -298,6 +413,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       return a;
     });
     setAllocations(updatedAllocs);
+    updatedAllocs.filter(a => a.id === allocId || (a.carpenter === alloc.carpenter && new Date(a.startDate) > new Date(alloc.endDate))).forEach(a => {
+      updateAllocation(a.id, {start_date: a.startDate, end_date: a.endDate, delayed: a.delayed, delay_days: a.delayDays}).catch(e=>console.error('DB alloc update error:',e));
+    });
     setDelayingAllocId(null); setDelayReason(''); setDelayDays(1);
     setSuccessMsg('Delay recorded - schedule updated'); setTimeout(()=>setSuccessMsg(''),2500);
   };
@@ -306,13 +424,17 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
     const alloc = allocations.find(a => a.id === allocId);
     if(!alloc) return;
     setAllocations(allocations.map(a => a.id === allocId ? {...a, completed: true, completedDate: todayStr} : a));
+    updateAllocation(allocId, {completed: true, completed_date: todayStr}).catch(e=>console.error('DB error:',e));
     setWorkLog(workLog.map(w => (w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage) ? {...w, status: 'complete'} : w));
+    const matchingWl = workLog.find(w => w.site === alloc.site && w.plot === alloc.plot && w.stage === alloc.stage);
+    if(matchingWl) updateWorkLogEntry(matchingWl.id, {status: 'complete'}).catch(e=>console.error('DB error:',e));
     const siteRates = PRICE_LISTS[alloc.builder]?.[alloc.site] || PRICE_LISTS[Object.keys(PRICE_LISTS).find(b => PRICE_LISTS[b][alloc.site])]?.[alloc.site] || {};
     const stageKey = alloc.stage === 'Final' ? 'Finals' : alloc.stage;
     const amount = siteRates[stageKey] || siteRates[alloc.stage] || 0;
     if(amount > 0) {
       const newInvoice = { id: Math.max(...invoices.map(inv=>inv.id),0)+1, carpenter: alloc.carpenter, site: alloc.site, plot: alloc.plot, houseType: alloc.houseType, stage: alloc.stage, amount, status: 'pending', date: todayStr };
       setInvoices(prev => [...prev, newInvoice]);
+      addInvoice({carpenter: alloc.carpenter, site: alloc.site, plot: alloc.plot, house_type: alloc.houseType, stage: alloc.stage, amount, status: 'pending', date: todayStr}).catch(e=>console.error('DB invoice error:',e));
     }
     setSuccessMsg('Job complete — invoice generated'); setTimeout(()=>setSuccessMsg(''),2500);
   };
@@ -334,6 +456,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       recipients: siteCarpenterNames, responses: {}
     };
     setNotifications([notif, ...notifications]);
+    addNotification({type: notifType, title: notifTitle, message: notifMessage, site: notifSite, sent_by: user?.name || 'Admin', sent_date: new Date().toISOString().split('T')[0], recipients: siteCarpenterNames}).catch(e=>console.error('DB notif error:',e));
     setNotifTitle(''); setNotifMessage(''); setNotifSite(user?.role === 'site_manager' ? user?.site : '');
     setSuccessMsg('Notification sent to ' + siteCarpenterNames.length + ' carpenter' + (siteCarpenterNames.length>1?'s':'')); setTimeout(()=>setSuccessMsg(''),2500);
   };
@@ -343,6 +466,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
       if(n.id === notifId) {
         const resp = {...n.responses};
         resp[user?.name] = {...(resp[user?.name]||{}), read: true, readDate: new Date().toLocaleDateString('en-GB')};
+        upsertNotificationResponse(notifId, user?.name, {read_status: true, read_date: new Date().toLocaleDateString('en-GB')}).catch(e=>console.error('DB error:',e));
         return {...n, responses: resp};
       }
       return n;
@@ -622,6 +746,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   if(selectedSiteForLog && formData.plot && formData.houseType && formData.stage){
                     const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===selectedSiteForLog));
                     setWorkLog([...workLog, {id:Math.max(...workLog.map(w=>w.id),0)+1, site:selectedSiteForLog, builder:builder?builder.name:'', plot:formData.plot, houseType:formData.houseType, stage:formData.stage, expectedDays:formData.expectedDays, priority:formData.priority, notes:formData.notes, status:'logged'}]);
+                    addWorkLogEntry({site:selectedSiteForLog, builder:builder?builder.name:'', plot:formData.plot, house_type:formData.houseType, stage:formData.stage, expected_days:formData.expectedDays, priority:formData.priority, notes:formData.notes, status:'logged'}).catch(e=>console.error('DB error:',e));
                     setFormData({site:'',plot:'',houseType:'',stage:'',expectedDays:1,priority:'medium',notes:''}); setSelectedSiteForLog('');
                     setSuccessMsg('Work logged successfully'); setTimeout(()=>setSuccessMsg(''),2500);
                   }
@@ -683,7 +808,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                               if(allocateCarpenter && allocateStartDate){
                                 const ed=new Date(allocateStartDate); ed.setDate(ed.getDate()+item.expectedDays-1);
                                 setAllocations([...allocations, {id:Math.max(...allocations.map(a=>a.id),0)+1, carpenter:allocateCarpenter, site:item.site, plot:item.plot, houseType:item.houseType, stage:item.stage, startDate:allocateStartDate, endDate:ed.toISOString().split('T')[0], completed:false, delayed:false, delayDays:0}]);
+                                addAllocation({carpenter:allocateCarpenter, site:item.site, plot:item.plot, house_type:item.houseType, stage:item.stage, start_date:allocateStartDate, end_date:ed.toISOString().split('T')[0], completed:false, delayed:false, delay_days:0}).catch(e=>console.error('DB error:',e));
                                 setWorkLog(workLog.map(w => w.id===item.id ? {...w, status:'allocated', allocatedTo:allocateCarpenter} : w));
+                                updateWorkLogEntry(item.id, {status:'allocated', allocated_to:allocateCarpenter}).catch(e=>console.error('DB error:',e));
                                 setAllocateId(null); setAllocateCarpenter(''); setAllocateStartDate('');
                                 setSuccessMsg('Work allocated to '+allocateCarpenter); setTimeout(()=>setSuccessMsg(''),2500);
                               }
@@ -1061,6 +1188,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 <button type="button" onClick={()=>{
                   if(smPlot&&smHouseType&&smStage){const builder=BUILDERS.find(b=>b.sites.some(s=>s.name===user?.site));
                     setWorkLog([...workLog,{id:Math.max(...workLog.map(w=>w.id),0)+1,site:user?.site,builder:builder?builder.name:'',plot:smPlot,houseType:smHouseType,stage:smStage,expectedDays:2,priority:'medium',notes:smNotes,status:'logged'}]);
+                    addWorkLogEntry({site:user?.site,builder:builder?builder.name:'',plot:smPlot,house_type:smHouseType,stage:smStage,expected_days:2,priority:'medium',notes:smNotes,status:'logged'}).catch(e=>console.error('DB error:',e));
                     setSmPlot('');setSmHouseType('');setSmStage('');setSmNotes('');setSuccessMsg('Work request submitted');setTimeout(()=>setSuccessMsg(''),2500);
                   }else{alert('Please fill in all fields');}
                 }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Submit Request</button>
@@ -1156,7 +1284,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                                 <button onClick={()=>{
                                   if(!sendDocTitle.trim()||!sendDocMessage.trim()){alert('Please fill in all fields');return;}
                                   const notif={id:Date.now(),type:sendDocType,title:sendDocTitle,message:sendDocMessage,site:user?.site,sentBy:user?.name||'Site Manager',sentDate:new Date().toISOString().split('T')[0],recipients:[carp.name],responses:{}};
-                                  setNotifications([notif,...notifications]);setSendDocCarp(null);setSendDocTitle('');setSendDocMessage('');
+                                  setNotifications([notif,...notifications]);
+                                  addNotification({type:sendDocType,title:sendDocTitle,message:sendDocMessage,site:user?.site,sent_by:user?.name||'Site Manager',sent_date:new Date().toISOString().split('T')[0],recipients:[sendDocCarp]}).catch(e=>console.error('DB error:',e));
+                                  setSendDocCarp(null);setSendDocTitle('');setSendDocMessage('');
                                   setSuccessMsg('Document sent to '+carp.name);setTimeout(()=>setSuccessMsg(''),2500);
                                 }} style={{backgroundColor:GOLD,color:NAVY,padding:'8px 18px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13}}>Send</button>
                                 <button onClick={()=>{setSendDocCarp(null);setSendDocTitle('');setSendDocMessage('');}} style={{backgroundColor:'#666',color:'white',padding:'8px 18px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>Cancel</button>
@@ -1218,7 +1348,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <button onClick={()=>{
                       if(!newFileName.trim()){alert('Please enter a file name');return;}
                       const newFile={id:Date.now(),site:user?.site,name:newFileName,createdBy:user?.name||'Site Manager',date:new Date().toISOString().split('T')[0],photos:newFilePhotos.map((p,i)=>({id:i+1,note:p.note,dataUrl:p.dataUrl})),sentTo:null,status:'open'};
-                      setSiteFiles(prev=>[newFile,...prev]);setCreatingFile(false);setNewFileName('');setNewFilePhotos([]);setNewFileNote('');
+                      setSiteFiles(prev=>[newFile,...prev]);
+                      addSiteFile({site:user?.site,name:newFileName,created_by:user?.name,date:new Date().toISOString().split('T')[0],status:'open'}).then(r=>{if(r.data&&newFilePhotos.length>0){newFilePhotos.forEach(p=>{addSiteFilePhoto({site_file_id:r.data.id,note:p.note,photo_url:p.dataUrl}).catch(e=>console.error('DB photo error:',e));});}}).catch(e=>console.error('DB error:',e));
+                      setCreatingFile(false);setNewFileName('');setNewFilePhotos([]);setNewFileNote('');
                       setSuccessMsg('Site file created: '+newFileName);setTimeout(()=>setSuccessMsg(''),2500);
                     }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 22px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13}}>Save File</button>
                     <button onClick={()=>{setCreatingFile(false);setNewFileName('');setNewFilePhotos([]);setNewFileNote('');}} style={{backgroundColor:'#666',color:'white',padding:'10px 22px',border:'none',borderRadius:4,cursor:'pointer',fontSize:13}}>Cancel</button>
@@ -1255,7 +1387,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
                             <select onChange={(e)=>{
                               if(e.target.value){
-                                setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,sentTo:e.target.value}:f));
+                                setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,sentTo:e.target.value}:f));supabase.from('site_files').update({sent_to:e.target.value}).eq('id',file.id).then(r=>{if(r.error)console.error('DB error:',r.error);});
                                 setSuccessMsg('Snag list sent to '+e.target.value);setTimeout(()=>setSuccessMsg(''),2500);
                               }
                             }} style={{padding:8,borderRadius:4,border:'1px solid #ddd',fontSize:12,flex:1,minWidth:150}}>
@@ -1266,7 +1398,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         </div>
                       )}
                       {file.sentTo && <div style={{fontSize:12,color:'#2e7d32',padding:8,backgroundColor:'#e8f5e9',borderRadius:4}}>Sent to: {file.sentTo}</div>}
-                      <button onClick={()=>{setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,status:f.status==='open'?'closed':'open'}:f));setSuccessMsg('File '+(file.status==='open'?'closed':'reopened'));setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:file.status==='open'?'#4caf50':'#e65100',color:'white',padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>{file.status==='open'?'Close File':'Reopen File'}</button>
+                      <button onClick={()=>{setSiteFiles(prev=>prev.map(f=>f.id===file.id?{...f,status:f.status==='open'?'closed':'open'}:f));supabase.from('site_files').update({status:file.status==='open'?'closed':'open'}).eq('id',file.id).then(r=>{if(r.error)console.error('DB error:',r.error);});setSuccessMsg('File '+(file.status==='open'?'closed':'reopened'));setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:file.status==='open'?'#4caf50':'#e65100',color:'white',padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>{file.status==='open'?'Close File':'Reopen File'}</button>
                     </div>
                   </div>
                 );
@@ -1605,6 +1737,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   if(fixingAlloc&&fixingItem&&fixingQty){const alloc=myAllocs.find(a=>String(a.id)===String(fixingAlloc));
                     const req=handleFixingRequest(fixingItem,fixingQty,fixingNotes,alloc);
                     setAllFixingRequests([...allFixingRequests,req]);setFixingRequests([...fixingRequests,req]);
+                    addFixingReq({carpenter:req.carpenter,site:req.site,plot:req.plot,stage:req.stage,item:req.item,qty:req.qty,notes:req.notes||'',date:req.date,status:'pending'}).catch(e=>console.error('DB error:',e));
                     setFixingAlloc('');setFixingItem('');setFixingQty('');setFixingNotes('');
                     setSuccessMsg('Request submitted');setTimeout(()=>setSuccessMsg(''),2500);
                   }else{alert('Fill in allocation, item and quantity');}
@@ -1668,8 +1801,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div><strong style={{fontSize:14}}>{inv.carpenter}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.site} - Plot {inv.plot} / {inv.houseType} / {inv.stage}</div></div>
                           <div style={{display:'flex',alignItems:'center',gap:10}}>
                             <strong style={{fontSize:18}}>GBP {inv.amount}</strong>
-                            {status==='pending'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'approved'}:i));setSuccessMsg('Signed off');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:GOLD,color:NAVY,padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Sign Off</button>}
-                            {status==='approved'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'paid'}:i));setSuccessMsg('Marked paid');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Mark Paid</button>}
+                            {status==='pending'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'approved'}:i));updateInvoice(inv.id,{status:'approved'}).catch(e=>console.error('DB error:',e));setSuccessMsg('Signed off');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:GOLD,color:NAVY,padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Sign Off</button>}
+                            {status==='approved'&&<button onClick={()=>{setInvoices(invoices.map(i=>i.id===inv.id?{...i,status:'paid'}:i));updateInvoice(inv.id,{status:'paid'}).catch(e=>console.error('DB error:',e));setSuccessMsg('Marked paid');setTimeout(()=>setSuccessMsg(''),2500);}} style={{backgroundColor:'#2e7d32',color:'white',padding:'6px 12px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Mark Paid</button>}
                             {status==='paid'&&<span style={{fontSize:12,color:'#2e7d32',fontWeight:'bold'}}>Paid</span>}
                           </div>
                         </div>
