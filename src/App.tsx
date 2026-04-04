@@ -2168,7 +2168,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
               {mySites.length > 0 && <p style={{color:'#666',fontSize:12,marginBottom:12}}>Showing price lists for your active sites: {mySites.join(', ')}</p>}
-              {Object.entries(PRICE_LISTS_BY_HOUSE_TYPE).filter(([listName, pl]) => mySites.some(s => pl.site === s || pl.builder === BUILDERS.find(b=>b.sites.some(ss=>ss.name===s))?.name)).map(([listName, pl]) => (
+              {Object.entries(PRICE_LISTS_BY_HOUSE_TYPE).filter(([listName, pl]) => mySites.some(s => pl.site === s)).map(([listName, pl]) => (
                 <div key={listName} style={{marginBottom:20,backgroundColor:'white',borderRadius:10,border:'1px solid #ddd',overflow:'hidden'}}>
                   <div style={{backgroundColor:NAVY,padding:'12px 16px',color:CREAM}}>
                     <strong style={{fontSize:16}}>{pl.builder}</strong>
@@ -2180,7 +2180,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         <summary style={{padding:'8px 10px',cursor:'pointer',fontWeight:'bold',fontSize:13,color:NAVY,backgroundColor:'#f6f4ef',borderRadius:4,display:'flex',alignItems:'center',gap:8}}>
                           <span style={{display:'inline-block',width:6,height:6,backgroundColor:GOLD,borderRadius:'50%'}}></span> {typeName}
                           <span style={{fontSize:11,color:'#888',fontWeight:'normal',marginLeft:'auto'}}>
-                            Total: £{Object.values(rates).reduce((s,v)=>s+v,0)}
+                            Total: £{Object.values(rates).reduce((s,v)=>s+(typeof v==='number'?v:0),0)}
                           </span>
                         </summary>
                         <div style={{padding:'8px 12px'}}>
@@ -2189,12 +2189,12 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                               {Object.entries(rates).map(([stage,price]) => (
                                 <tr key={stage} style={{borderBottom:'1px solid #f0f0f0'}}>
                                   <td style={{padding:'4px 0'}}>{stage}</td>
-                                  <td style={{padding:'4px 0',textAlign:'right',fontWeight:'bold',color:NAVY}}>£{price}</td>
+                                  <td style={{padding:'4px 0',textAlign:'right',fontWeight:'bold',color:NAVY}}>{typeof price==='number'?'£'+price:price}</td>
                                 </tr>
                               ))}
                               <tr style={{borderTop:'2px solid '+GOLD}}>
                                 <td style={{padding:'6px 0',fontWeight:'bold'}}>Total</td>
-                                <td style={{padding:'6px 0',textAlign:'right',fontWeight:'bold',color:GOLD,fontSize:14}}>£{Object.values(rates).reduce((s,v)=>s+v,0)}</td>
+                                <td style={{padding:'6px 0',textAlign:'right',fontWeight:'bold',color:GOLD,fontSize:14}}>£{Object.values(rates).reduce((s,v)=>s+(typeof v==='number'?v:0),0)}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -2273,9 +2273,9 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     const extrasTotal = extras.reduce((s,e)=>s+parseFloat(e.amount||0),0);
                     const totalWithExtras = inv.amount + extrasTotal;
                     return (
-                    <div key={inv.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10}}>
+                    <div key={inv.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:inv.isVariation?'4px solid #ff9800':'none'}}>
                       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:8}}>
-                        <div><strong style={{fontSize:14}}>{inv.site} - Plot {inv.plot}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div><div style={{fontSize:11,color:'#999',marginTop:2}}>{inv.date}</div></div>
+                        <div>{inv.isVariation&&<span style={{display:'inline-block',padding:'1px 8px',borderRadius:3,fontSize:10,fontWeight:'bold',backgroundColor:'#fff3e0',color:'#e65100',marginBottom:4}}>VARIATION ORDER</span>}<strong style={{fontSize:14,display:'block'}}>{inv.site} - Plot {inv.plot}</strong><div style={{fontSize:12,color:'#666',marginTop:2}}>{inv.houseType} / {inv.stage}</div><div style={{fontSize:11,color:'#999',marginTop:2}}>{inv.date}</div></div>
                         <div style={{textAlign:'right'}}>
                           <div style={{fontSize:14,color:'#666'}}>Base: £{inv.amount}</div>
                           {extrasTotal>0 && <div style={{fontSize:14,color:GOLD}}>Extras: +£{extrasTotal}</div>}
@@ -2317,7 +2317,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   <div style={{marginTop:15,padding:15,backgroundColor:NAVY,color:CREAM,borderRadius:8,fontSize:14}}>
                     <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Pending:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='pending').reduce((s,i)=>s+i.amount,0) + Object.entries(invoiceExtraItems).filter(([id])=>invoices.find(i=>i.id===parseInt(id)&&i.carpenter===user?.name&&i.status==='pending')).reduce((s,[id,items])=>s+items.reduce((ss,e)=>ss+parseFloat(e.amount||0),0),0)}</strong></div>
                     <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='approved').reduce((s,i)=>s+i.amount,0)}</strong></div>
-                    <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Paid:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
+                    {invoices.filter(i=>i.carpenter===user?.name&&i.isVariation).length>0&&<div style={{display:'flex',justifyContent:'space-between',borderTop:'1px solid rgba(255,255,255,.15)',paddingTop:6,marginTop:4}}><span style={{color:GOLD}}>Variations ({invoices.filter(i=>i.carpenter===user?.name&&i.isVariation).length}):</span><strong style={{color:GOLD}}>£{invoices.filter(i=>i.carpenter===user?.name&&i.isVariation).reduce((s,i)=>s+i.amount,0)}</strong></div>}
                   </div>
                 </div>
               )}
@@ -2518,7 +2519,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <strong style={{fontSize:18}}>£{vo.amount}</strong>
                           {vo.status==='pending'?(
                             <div style={{display:'flex',gap:6}}>
-                              <button onClick={()=>setVariationOrders(prev=>prev.map(v=>v.id===vo.id?{...v,status:'approved'}:v))} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
+                              <button onClick={()=>{setVariationOrders(prev=>prev.map(v=>v.id===vo.id?{...v,status:'approved'}:v));const voInv={id:Date.now()+Math.random(),carpenter:vo.carpenter,site:vo.site,plot:vo.plot||'VO',houseType:'Variation Order',stage:vo.desc.slice(0,50),amount:vo.amount,status:'pending',date:vo.date,isVariation:true,voId:vo.id};setInvoices(prev=>[...prev,voInv]);addInvoice({carpenter:vo.carpenter,site:vo.site,plot:vo.plot||'VO',house_type:'Variation Order',stage:vo.desc.slice(0,50),amount:vo.amount,status:'pending',date:vo.date}).catch(e=>console.error('DB VO invoice err:',e));setSuccessMsg('Approved — added to '+vo.carpenter+"'s invoice");setTimeout(()=>setSuccessMsg(''),3000);}} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
                               <button onClick={()=>setVariationOrders(prev=>prev.map(v=>v.id===vo.id?{...v,status:'rejected'}:v))} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Reject</button>
                             </div>
                           ):(
