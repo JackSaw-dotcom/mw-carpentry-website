@@ -914,6 +914,66 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   </div>
                 ))}
               </div>
+
+              {/* Logged Work Needing Allocation */}
+              {workLog.filter(w => w.status === 'logged').length > 0 && (
+                <div style={{marginTop:24}}>
+                  <h3 style={{color:NAVY,fontSize:18,margin:'0 0 14px'}}>Logged Work — Needs Allocating</h3>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
+                    {workLog.filter(w => w.status === 'logged').map(item => (
+                      <div key={item.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:10,padding:16,borderLeft:'5px solid '+(item.priority==='high'?'#d32f2f':item.priority==='medium'?GOLD:'#888'),cursor:'pointer'}}
+                        onClick={()=>{setAdminTab('allocate');setAllocateId(item.id);}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
+                          <div>
+                            <strong style={{fontSize:15,color:NAVY}}>{item.site}</strong>
+                            <div style={{fontSize:12,color:'#666',marginTop:2}}>Plot {item.plot} — {item.houseType}</div>
+                          </div>
+                          <span style={{padding:'3px 10px',borderRadius:4,fontSize:10,fontWeight:'bold',textTransform:'uppercase',
+                            backgroundColor:item.priority==='high'?'#ffebee':item.priority==='medium'?'#fff3e0':'#e3f2fd',
+                            color:item.priority==='high'?'#c62828':item.priority==='medium'?'#e65100':'#1565c0'}}>{item.priority}</span>
+                        </div>
+                        <div style={{fontSize:13,color:GOLD,fontWeight:'bold',marginBottom:6}}>{item.stage}</div>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                          <span style={{fontSize:11,color:'#888'}}>{item.expectedDays} day{item.expectedDays>1?'s':''} est.</span>
+                          <span style={{backgroundColor:GOLD,color:NAVY,padding:'4px 12px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>Allocate →</span>
+                        </div>
+                        {item.notes && <div style={{fontSize:11,color:'#999',marginTop:6,fontStyle:'italic'}}>{item.notes}</div>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Recent Allocations */}
+              {allocations.filter(a=>!a.completed).length > 0 && (
+                <div style={{marginTop:24}}>
+                  <h3 style={{color:NAVY,fontSize:18,margin:'0 0 14px'}}>Active Allocations</h3>
+                  <div style={{overflowX:'auto'}}>
+                    <table style={{width:'100%',borderCollapse:'collapse',minWidth:600}}>
+                      <thead><tr style={{backgroundColor:NAVY,color:CREAM}}>
+                        {['Carpenter','Site','Plot','Stage','Start','End','Status'].map(h=><th key={h} style={{padding:10,textAlign:'left',fontSize:11}}>{h}</th>)}
+                      </tr></thead>
+                      <tbody>
+                        {allocations.filter(a=>!a.completed).sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).slice(0,10).map((alloc,idx) => {
+                          const isAct = todayStr>=alloc.startDate && todayStr<=alloc.endDate;
+                          const isOver = !alloc.completed && todayStr>alloc.endDate;
+                          return (
+                            <tr key={alloc.id} style={{backgroundColor:isOver?'#fff3e0':isAct?'#fffde7':idx%2===0?'#f9f9f9':'white',borderBottom:'1px solid #ddd'}}>
+                              <td style={{padding:8,fontSize:12}}>{alloc.carpenter}</td>
+                              <td style={{padding:8,fontSize:12}}>{alloc.site}</td>
+                              <td style={{padding:8,fontSize:12}}>{alloc.plot}</td>
+                              <td style={{padding:8,fontSize:12,fontWeight:'bold',color:GOLD}}>{alloc.stage}</td>
+                              <td style={{padding:8,fontSize:12}}>{formatDate(alloc.startDate)}</td>
+                              <td style={{padding:8,fontSize:12}}>{formatDate(alloc.endDate)}</td>
+                              <td style={{padding:8,fontSize:12}}><span style={{fontWeight:'bold',color:isOver?'#d32f2f':isAct?GOLD:NAVY}}>{isOver?'Overdue':isAct?'Active':'Upcoming'}</span></td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -1103,7 +1163,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                             const cellColors = {complete:{bg:'#2e7d32',fg:'white'},delayed:{bg:'#d32f2f',fg:'white'},active:{bg:GOLD,fg:NAVY},upcoming:{bg:NAVY,fg:'white'},empty:{bg:'transparent',fg:'#ccc'}};
                             const cc = cellColors[cellStatus];
                             // Show day number for multi-day jobs
-                            const dayNum = af ? Math.ceil((date - new Date(af.startDate)) / 864e5) + 1 : 0;
+                            const dayNum = af ? (() => {
+                              const s = new Date(af.startDate); let count = 0;
+                              for(let dd=new Date(s); dd.toISOString().split('T')[0]<=af.endDate; dd.setDate(dd.getDate()+1)){
+                                count++; if(dd.toISOString().split('T')[0]===ds) return count;
+                              }
+                              return count;
+                            })() : 0;
                             const totalDays = af ? daysInRange(af.startDate, af.endDate) : 0;
                             return (<div key={carp} onClick={()=>af&&setScheduleClickedAlloc(af)} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'8px',
                               backgroundColor: cc.bg, color: cc.fg, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal',
@@ -1387,7 +1453,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                   {Object.entries(categories).map(([cat, docs]) => (
                     <div key={cat} style={{ marginLeft:'10px', marginBottom:'10px', padding:'10px', backgroundColor:'#f9f9f9', borderRadius:'4px' }}>
                       <h4 style={{ color:'#333', margin:'0 0 8px 0', fontSize:14 }}>{cat}</h4>
-                      {docs.map((doc,idx) => <div key={idx} style={{marginBottom:4,padding:'6px 8px',backgroundColor:'white',borderRadius:3,fontSize:13}}>{doc}</div>)}
+                      {docs.map((doc,idx) => <div key={idx} style={{marginBottom:4,padding:'8px 10px',backgroundColor:'white',borderRadius:4,fontSize:13,display:'flex',justifyContent:'space-between',alignItems:'center',gap:8}}>
+                          <span>{doc}</span>
+                          <div style={{display:'flex',gap:6,flexShrink:0}}>
+                            <button onClick={()=>{setSuccessMsg('Opening: '+doc);setTimeout(()=>setSuccessMsg(''),2500);}} style={{padding:'4px 10px',fontSize:11,backgroundColor:GOLD,color:NAVY,border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>View</button>
+                            <button onClick={()=>{if(navigator.share){navigator.share({title:doc,text:'Document: '+doc+' — '+site}).catch(()=>{});}else{navigator.clipboard?.writeText(doc+' — '+site);setSuccessMsg('Copied to clipboard');setTimeout(()=>setSuccessMsg(''),2500);}}} style={{padding:'4px 10px',fontSize:11,backgroundColor:NAVY,color:'white',border:'none',borderRadius:3,cursor:'pointer',fontWeight:'bold'}}>Share</button>
+                          </div>
+                        </div>)}
                     </div>
                   ))}
                 </div>
@@ -1825,7 +1897,6 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                       const isToday = isSameDay(day, new Date());
                       const dayAllocations = myAllocs.filter(a => dayStr >= a.startDate && dayStr <= a.endDate);
                       const dayIsOff = dayOffRequests.some(d => d.carpenter === user?.name && d.status === 'approved' && dayStr >= d.startDate && dayStr <= d.endDate);
-                      const daySnags = snagItems.filter(s => s.carpenter === user?.name && s.date === dayStr);
                       return (
                         <div key={dayStr} style={{
                           backgroundColor: dayIsOff ? '#fff3e0' : isToday ? '#e8f5e9' : 'white',
@@ -1852,8 +1923,13 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           ) : (
                             <div>
                               {dayAllocations.map(alloc => {
-                                const totalDays = daysInRange(alloc.startDate, alloc.endDate);
-                                const dayNum = Math.ceil((day - new Date(alloc.startDate)) / 864e5) + 1;
+                                const allocStart = alloc.startDate;
+                                const allocDays = [];
+                                for(let dd=new Date(allocStart); dd.toISOString().split('T')[0]<=alloc.endDate; dd.setDate(dd.getDate()+1)){
+                                  allocDays.push(dd.toISOString().split('T')[0]);
+                                }
+                                const dayNum = allocDays.indexOf(dayStr) + 1;
+                                const totalDaysCalc = allocDays.length;
                                 const isComplete = alloc.completed === true;
                                 return (
                                   <div key={alloc.id} style={{
@@ -1867,11 +1943,11 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                                         <div style={{fontSize:12,color:'#666',marginTop:2}}>{alloc.houseType} / <span style={{color:GOLD,fontWeight:'bold'}}>{alloc.stage}</span></div>
                                       </div>
                                       <div style={{textAlign:'right'}}>
-                                        <span style={{fontSize:11,color:'#888'}}>Day {dayNum} of {totalDays}</span>
+                                        <span style={{fontSize:11,color:'#888'}}>Day {dayNum} of {totalDaysCalc}</span>
                                         {isComplete && <div style={{fontSize:10,color:'#4caf50',fontWeight:'bold'}}>DONE</div>}
                                       </div>
                                     </div>
-                                    {!isComplete && isToday && dayNum === totalDays && (
+                                    {!isComplete && isToday && dayNum === totalDaysCalc && (
                                       <button onClick={()=>markAllocComplete(alloc.id)} style={{marginTop:8,backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12,width:'100%'}}>Mark Complete</button>
                                     )}
                                   </div>
@@ -1879,16 +1955,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                               })}
                             </div>
                           )}
-                          {/* Snags for this day */}
-                          {daySnags.length > 0 && (
-                            <div style={{marginTop:6}}>
-                              {daySnags.map(s => (
-                                <div key={s.id} style={{padding:6,backgroundColor:'#fff3e0',borderRadius:4,fontSize:12,marginBottom:3,borderLeft:'3px solid #ff9800'}}>
-                                  <strong>Snag:</strong> {s.desc} {s.site && <span style={{color:'#888'}}>({s.site}{s.plot ? ' Plot '+s.plot : ''})</span>}
-                                </div>
-                              ))}
-                            </div>
-                          )}
+
                         </div>
                       );
                     })}
@@ -1896,28 +1963,6 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 );
               })()}
 
-              {/* ===== EXTRAS / SNAGS QUICK ADD ===== */}
-              <div style={{marginTop:20,backgroundColor:NAVY,padding:16,borderRadius:10}}>
-                <h3 style={{color:GOLD,margin:'0 0 12px',fontSize:16}}>Quick Add: Extras / Snags</h3>
-                <p style={{color:CREAM,fontSize:12,margin:'0 0 12px',opacity:0.7}}>Log unscheduled work, snags, or extras for today</p>
-                <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:10}}>
-                  <input placeholder="Description (e.g. Fix skirting Plot 12)" value={newSnagDesc} onChange={e=>setNewSnagDesc(e.target.value)}
-                    style={{flex:2,minWidth:180,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
-                  <input placeholder="Site" value={newSnagSite} onChange={e=>setNewSnagSite(e.target.value)}
-                    style={{flex:1,minWidth:100,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
-                  <input placeholder="Plot" value={newSnagPlot} onChange={e=>setNewSnagPlot(e.target.value)}
-                    style={{flex:0.5,minWidth:60,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
-                </div>
-                <button onClick={()=>{
-                  if(!newSnagDesc.trim())return;
-                  const todayISO=new Date().toISOString().split('T')[0];
-                  setSnagItems(prev=>[...prev,{id:Date.now(),carpenter:user?.name,desc:newSnagDesc,site:newSnagSite||user?.site||'',plot:newSnagPlot,date:todayISO}]);
-                  setNewSnagDesc('');setNewSnagSite('');setNewSnagPlot('');
-                  setSuccessMsg('Snag logged');setTimeout(()=>setSuccessMsg(''),2000);
-                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>
-                  Log Snag / Extra
-                </button>
-              </div>
 
               {/* Past allocations summary */}
               {myAllocs.filter(a=>a.completed).length > 0 && (
@@ -2269,14 +2314,24 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <input type="number" value={voAmount} onChange={e=>setVoAmount(e.target.value)} placeholder="0.00" style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
                   <div style={{marginBottom:15}}>
                     <label style={{display:'block',marginBottom:4,fontSize:11}}>Photo Evidence</label>
-                    <input type="file" ref={voFileRef} accept="image/*" capture="environment" multiple onChange={e=>{
-                      const files=Array.from(e.target.files||[]);
-                      files.forEach(file=>{
-                        const reader=new FileReader();
-                        reader.onload=(ev)=>setVoPhotos(prev=>[...prev,{id:Date.now()+Math.random(),dataUrl:ev.target.result,name:file.name}]);
-                        reader.readAsDataURL(file);
-                      });
-                    }} style={{fontSize:12}} />
+                    <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+                      <button type="button" onClick={()=>{
+                        const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.capture='environment';
+                        inp.onchange=(e)=>{const files=Array.from(e.target.files||[]);files.forEach(file=>{
+                          const reader=new FileReader();reader.onload=(ev)=>setVoPhotos(prev=>[...prev,{id:Date.now()+Math.random(),dataUrl:ev.target.result,name:file.name}]);
+                          reader.readAsDataURL(file);});};inp.click();
+                      }} style={{backgroundColor:GOLD,color:NAVY,padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13,display:'flex',alignItems:'center',gap:6}}>
+                        <span style={{fontSize:18}}>📷</span> Take Photo
+                      </button>
+                      <button type="button" onClick={()=>{
+                        const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.multiple=true;
+                        inp.onchange=(e)=>{const files=Array.from(e.target.files||[]);files.forEach(file=>{
+                          const reader=new FileReader();reader.onload=(ev)=>setVoPhotos(prev=>[...prev,{id:Date.now()+Math.random(),dataUrl:ev.target.result,name:file.name}]);
+                          reader.readAsDataURL(file);});};inp.click();
+                      }} style={{backgroundColor:NAVY,color:CREAM,padding:'8px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:13,display:'flex',alignItems:'center',gap:6}}>
+                        <span style={{fontSize:18}}>📁</span> Upload Photo
+                      </button>
+                    </div>
                     {voPhotos.length>0 && (
                       <div style={{display:'flex',gap:6,marginTop:8,flexWrap:'wrap'}}>
                         {voPhotos.map(p=>(
