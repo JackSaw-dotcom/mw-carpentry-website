@@ -90,40 +90,131 @@ const INITIAL_WORK_LOG = [
   { id: 15, site: "Clipstone Park", builder: "Persimmon", plot: "67", houseType: "Bedale", stage: "Roof", expectedDays: 2, priority: "high", notes: "", status: "logged" }
 ];
 
-const PRICE_LISTS = {
-  "Bellway": {
-    "Holbrook Park": { "Joists GF": 850, "Joists FF": 700, "Roof": 1200, "First Fix": 950, "Second Fix": 800, "Finals": 600 },
-    "Coppice Heights": { "Joists GF": 800, "Joists FF": 700, "Roof": 1150, "First Fix": 900, "Second Fix": 800, "Finals": 600 },
-    "Swinfen Vale": { "Joists GF": 820, "Joists FF": 690, "Roof": 1180, "First Fix": 940, "Second Fix": 810, "Finals": 610 },
-    "Oadby Grange": { "Joists GF": 830, "Joists FF": 700, "Roof": 1190, "First Fix": 950, "Second Fix": 820, "Finals": 620 },
-    "The Meadows": { "Joists GF": 840, "Joists FF": 705, "Roof": 1210, "First Fix": 960, "Second Fix": 830, "Finals": 630 }
+const PRICE_LISTS_BY_HOUSE_TYPE = {
+  "Bellway Swinfen Vale": {
+    "builder": "Bellway Homes",
+    "site": "Swinfen Vale",
+    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£35","Bracers/straps":"£20","MDF bulkhead":"£30","Single garage":"£200","Double garage":"£300","External doors":"£40"},
+    "types": {
+      "Harcourt":{"Joist":610,"Main Roof":850,"Low Roof FD":140,"Low Roof Rear":120,"1st Fix":950,"2nd Fix":480,"3rd Fix":200},
+      "Charwood/Clarendon":{"Joist":600,"Main Roof":850,"Low Roof FD":140,"Low Roof Rear":130,"Low Roof Top Bay":110,"1st Fix":980,"2nd Fix":500,"3rd Fix":220},
+      "Poppy/Blacksmith":{"Joist":400,"Main Roof":600,"Low Roof FD":110,"1st Fix":720,"2nd Fix":380,"3rd Fix":160},
+      "Alysumm/Blenmere":{"Joist":380,"Main Roof":570,"Low Roof FD":100,"1st Fix":680,"2nd Fix":360,"3rd Fix":150},
+      "Angelica/Bowyer":{"Joist":430,"Main Roof":650,"Low Roof FD":120,"Low Roof Rear":110,"1st Fix":760,"2nd Fix":400,"3rd Fix":170},
+      "Evelyn/Fletcher":{"Joist":550,"Main Roof":780,"Low Roof FD":130,"Low Roof Rear":120,"1st Fix":880,"2nd Fix":450,"3rd Fix":190},
+      "Aster/Goldsmith":{"Joist":520,"Main Roof":750,"Low Roof FD":125,"Low Roof Rear":115,"1st Fix":850,"2nd Fix":440,"3rd Fix":185},
+      "Verbena/Mason":{"Joist":580,"Main Roof":820,"Low Roof FD":135,"Low Roof Rear":125,"1st Fix":920,"2nd Fix":470,"3rd Fix":200},
+      "Jasmine/Scrivener":{"Joist":620,"Main Roof":870,"Low Roof FD":145,"Low Roof Rear":130,"Low Roof Top Bay":115,"1st Fix":990,"2nd Fix":510,"3rd Fix":225},
+      "Betony/Shoemaker":{"Joist":560,"Main Roof":800,"Low Roof FD":130,"Low Roof Rear":120,"1st Fix":890,"2nd Fix":460,"3rd Fix":195},
+      "Daphne/Spinner":{"Joist":490,"Main Roof":720,"Low Roof FD":120,"Low Roof Rear":110,"1st Fix":820,"2nd Fix":420,"3rd Fix":180},
+      "Foxglove/Tanner":{"Joist":540,"Main Roof":770,"Low Roof FD":128,"Low Roof Rear":118,"1st Fix":860,"2nd Fix":445,"3rd Fix":188},
+      "Delphinium/Wheelwright":{"Joist":630,"Main Roof":880,"Low Roof FD":148,"Low Roof Rear":135,"Low Roof Top Bay":118,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
+      "Type D":{"Joist":350,"Main Roof":520,"Low Roof FD":90,"1st Fix":620,"2nd Fix":320,"3rd Fix":140},
+      "Type B":{"Joist":340,"Main Roof":510,"Low Roof FD":88,"1st Fix":610,"2nd Fix":310,"3rd Fix":135},
+      "Tunstall/Thornton":{"Joist":450,"Main Roof":670,"Low Roof FD":115,"Low Roof Rear":105,"1st Fix":780,"2nd Fix":410,"3rd Fix":175},
+      "Beattie":{"Joist":470,"Main Roof":690,"Low Roof FD":118,"Low Roof Rear":108,"1st Fix":800,"2nd Fix":415,"3rd Fix":178}
+    }
   },
-  "Barratt": {
-    "Thoresby Vale": { "Joists GF": 860, "Joists FF": 710, "Roof": 1220, "First Fix": 970, "Second Fix": 840, "Finals": 640 },
-    "Romans' Quarter": { "Joists GF": 850, "Joists FF": 705, "Roof": 1210, "First Fix": 960, "Second Fix": 830, "Finals": 630 },
-    "Dunstall Park": { "Joists GF": 870, "Joists FF": 720, "Roof": 1240, "First Fix": 980, "Second Fix": 850, "Finals": 650 }
+  "Wheeldon Derwentside": {
+    "builder": "Wheeldon Homes",
+    "site": "Derwentside",
+    "extras": {"Single garage":"£100","Twin garage":"£160","External doors":"£35","Bracers":"£20","Daywork":"£20/hr","Garage door frames":"£15"},
+    "types": {
+      "Alderwood":{"Joist":480,"Main Roof":680,"Cellotex":80,"Low Roof":120,"1st Fix":820,"2nd Fix":420,"3rd Fix":180},
+      "Bramley":{"Joist":520,"Main Roof":730,"Cellotex":85,"Low Roof":130,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
+      "Chestnut":{"Joist":560,"Main Roof":780,"Cellotex":90,"Low Roof":140,"1st Fix":920,"2nd Fix":480,"3rd Fix":210},
+      "Cooper":{"Joist":440,"Main Roof":640,"Cellotex":75,"Low Roof":110,"1st Fix":770,"2nd Fix":390,"3rd Fix":165},
+      "Hawksley":{"Joist":600,"Main Roof":830,"Cellotex":95,"Low Roof":150,"1st Fix":970,"2nd Fix":500,"3rd Fix":225},
+      "Maple":{"Joist":510,"Main Roof":720,"Cellotex":82,"Low Roof":125,"1st Fix":850,"2nd Fix":440,"3rd Fix":190},
+      "Milton":{"Joist":540,"Main Roof":760,"Cellotex":88,"Low Roof":135,"1st Fix":900,"2nd Fix":465,"3rd Fix":200},
+      "Nightingale":{"Joist":580,"Main Roof":810,"Cellotex":92,"Low Roof":145,"1st Fix":950,"2nd Fix":490,"3rd Fix":215}
+    }
   },
-  "Persimmon": {
-    "Clipstone Park": { "Joists GF": 880, "Joists FF": 725, "Roof": 1250, "First Fix": 990, "Second Fix": 860, "Finals": 660 },
-    "Boulton Moor": { "Joists GF": 890, "Joists FF": 730, "Roof": 1260, "First Fix": 1000, "Second Fix": 870, "Finals": 670 }
+  "Davidsons Wellington": {
+    "builder": "Davidsons",
+    "site": "Wellington Place",
+    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£35","Single garage SG1":"£180","Single garage SG2":"£200","Double garage LG1":"£280","Double garage LG2":"£320"},
+    "types": {
+      "DH320R-4":{"Joist":380,"2nd Joist":0,"Low Roof FD":95,"Main Roof":550,"1st Fix":700,"2nd Fix":360,"3rd Fix":155,"Spandrel":35},
+      "DH405G-4":{"Joist":420,"2nd Joist":0,"Low Roof FD":105,"Low Roof Bay":80,"Main Roof":620,"1st Fix":780,"2nd Fix":400,"3rd Fix":170,"Spandrel":35},
+      "DH480G-4":{"Joist":460,"2nd Joist":0,"Low Roof FD":115,"Low Roof Bay":90,"Main Roof":680,"1st Fix":840,"2nd Fix":430,"3rd Fix":185,"Spandrel":35},
+      "DH555G-4":{"Joist":500,"2nd Joist":0,"Low Roof FD":125,"Low Roof Bay":95,"Main Roof":740,"1st Fix":900,"2nd Fix":460,"3rd Fix":200,"Spandrel":35},
+      "DH610G-4":{"Joist":540,"2nd Joist":100,"Low Roof FD":130,"Low Roof Bay":100,"Main Roof":790,"1st Fix":950,"2nd Fix":490,"3rd Fix":215,"Spandrel":35},
+      "DH690G-4":{"Joist":580,"2nd Joist":110,"Low Roof FD":140,"Low Roof Bay":105,"Low Roof Rear":110,"Main Roof":840,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230,"Spandrel":35},
+      "DH770G-4":{"Joist":620,"2nd Joist":120,"Low Roof FD":145,"Low Roof Bay":110,"Low Roof Rear":115,"Main Roof":890,"1st Fix":1050,"2nd Fix":550,"3rd Fix":245,"Spandrel":35},
+      "DH850G-4":{"Joist":660,"2nd Joist":130,"Low Roof FD":150,"Low Roof Bay":115,"Low Roof Rear":120,"Main Roof":940,"1st Fix":1100,"2nd Fix":580,"3rd Fix":260,"Spandrel":35}
+    }
   },
-  "St. Modwen": {
-    "Hilton Valley": { "Joists GF": 820, "Joists FF": 690, "Roof": 1170, "First Fix": 920, "Second Fix": 800, "Finals": 610 },
-    "Bramshall Meadows": { "Joists GF": 810, "Joists FF": 680, "Roof": 1160, "First Fix": 910, "Second Fix": 790, "Finals": 600 }
+  "Lovell Castle Gresley": {
+    "builder": "Lovell Homes",
+    "site": "Castle Gresley",
+    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£50"},
+    "types": {
+      "Type A":{"Joist":340,"Main Roof":500,"Low Roof":90,"1st Fix":600,"2nd Fix":300,"3rd Fix":130},
+      "Type B":{"Joist":360,"Main Roof":530,"Low Roof":95,"1st Fix":640,"2nd Fix":320,"3rd Fix":140},
+      "Type C":{"Joist":390,"Main Roof":570,"Low Roof":100,"1st Fix":690,"2nd Fix":350,"3rd Fix":150},
+      "Type D":{"Joist":420,"Main Roof":610,"Low Roof":110,"1st Fix":740,"2nd Fix":380,"3rd Fix":165},
+      "Type E":{"Joist":450,"Main Roof":650,"Low Roof":115,"1st Fix":790,"2nd Fix":400,"3rd Fix":175},
+      "Type F":{"Joist":480,"Main Roof":690,"Low Roof":120,"1st Fix":840,"2nd Fix":420,"3rd Fix":185},
+      "Type G GF":{"Joist":350,"Main Roof":520,"Low Roof":92,"1st Fix":620,"2nd Fix":310,"3rd Fix":135},
+      "Type G FF":{"Joist":350,"Main Roof":520,"Low Roof":92,"1st Fix":620,"2nd Fix":310,"3rd Fix":135},
+      "Type H":{"Joist":500,"Main Roof":720,"Low Roof":130,"1st Fix":870,"2nd Fix":440,"3rd Fix":195},
+      "Type J":{"Joist":530,"Main Roof":760,"Low Roof":135,"1st Fix":910,"2nd Fix":460,"3rd Fix":205},
+      "Type K":{"Joist":560,"Main Roof":800,"Low Roof":140,"1st Fix":950,"2nd Fix":480,"3rd Fix":215}
+    }
   },
-  "Countryside": {
-    "Edwalton Fields": { "Joists GF": 840, "Joists FF": 700, "Roof": 1200, "First Fix": 950, "Second Fix": 820, "Finals": 620 }
+  "Vistry Glen Parva": {
+    "builder": "Vistry",
+    "site": "Glen Parva",
+    "extras": {"Chimney":"£50","Spandrel":"£50","Single garage":"£200","Double garage":"£320","Twin garage":"£340","Day work":"£20/hr"},
+    "types": {
+      "Mountford":{"Joist":480,"Main Roof":700,"Low Roof":125,"1st Fix":830,"2nd Fix":430,"3rd Fix":185},
+      "Eveleigh Gable":{"Joist":520,"Main Roof":740,"Low Roof":130,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
+      "Eveleigh Hipped":{"Joist":520,"Main Roof":760,"Low Roof":135,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
+      "Hardwick":{"Joist":560,"Main Roof":780,"Low Roof":135,"1st Fix":910,"2nd Fix":470,"3rd Fix":205},
+      "Pembroke Hipped":{"Joist":600,"Main Roof":820,"Low Roof":140,"1st Fix":950,"2nd Fix":490,"3rd Fix":215},
+      "Pembroke Gable":{"Joist":600,"Main Roof":800,"Low Roof":138,"1st Fix":950,"2nd Fix":490,"3rd Fix":215},
+      "Granger":{"Joist":640,"Main Roof":860,"Low Roof":148,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
+      "Wyatt":{"Joist":680,"Main Roof":900,"Low Roof":155,"1st Fix":1050,"2nd Fix":550,"3rd Fix":245},
+      "Foulston":{"Joist":550,"Main Roof":770,"Low Roof":132,"1st Fix":900,"2nd Fix":465,"3rd Fix":200},
+      "Elliot":{"Joist":500,"Main Roof":720,"Low Roof":128,"1st Fix":850,"2nd Fix":440,"3rd Fix":190},
+      "Kempthorne":{"Joist":580,"Main Roof":800,"Low Roof":138,"1st Fix":930,"2nd Fix":480,"3rd Fix":210},
+      "Bungalow":{"Joist":350,"Main Roof":500,"Low Roof":0,"1st Fix":650,"2nd Fix":340,"3rd Fix":150},
+      "W26 Bungalow":{"Joist":370,"Main Roof":520,"Low Roof":0,"1st Fix":670,"2nd Fix":350,"3rd Fix":155},
+      "A22 Mid":{"Joist":300,"Main Roof":430,"Low Roof":80,"1st Fix":560,"2nd Fix":290,"3rd Fix":125},
+      "A30 End":{"Joist":340,"Main Roof":480,"Low Roof":90,"1st Fix":620,"2nd Fix":320,"3rd Fix":140},
+      "A30 Mid":{"Joist":320,"Main Roof":460,"Low Roof":85,"1st Fix":600,"2nd Fix":310,"3rd Fix":135},
+      "A40":{"Joist":380,"Main Roof":540,"Low Roof":100,"1st Fix":700,"2nd Fix":360,"3rd Fix":155}
+    }
   },
-  "Vistry": {
-    "Broadnook Garden Village": { "Joists GF": 750, "Joists FF": 650, "Roof": 1100, "First Fix": 850, "Second Fix": 700, "Finals": 550 }
-  },
-  "Ashberry Homes": {
-    "Swinfen Vale": { "Joists GF": 840, "Joists FF": 700, "Roof": 1200, "First Fix": 950, "Second Fix": 820, "Finals": 620 }
-  },
-  "Wheeldon Homes": {
-    "Derwentside": { "Joists GF": 870, "Joists FF": 720, "Roof": 1240, "First Fix": 980, "Second Fix": 850, "Finals": 650 }
+  "St Modwen Branston": {
+    "builder": "St. Modwen Homes",
+    "site": "Branston Leas",
+    "extras": {"Fitting chimneys":"£40","Fit traditional doors":"£10 each","Cladding":"£33/meter","Load pads":"£25/plot","Skirting returns":"£25/plot","Single garage":"£200","Double/twin garage":"£300","Spandrel":"£50/panel","Day work":"£20/hr"},
+    "types": {
+      "Arden":{"Joist":450,"2nd Joist":0,"Main Roof":650,"Low Roof":120,"1st Fix":800,"2nd Fix":410,"3rd Fix":175},
+      "Carleton":{"Joist":480,"2nd Joist":0,"Main Roof":690,"Low Roof":128,"1st Fix":840,"2nd Fix":430,"3rd Fix":185},
+      "Danbury":{"Joist":510,"2nd Joist":0,"Main Roof":730,"Low Roof":135,"1st Fix":880,"2nd Fix":455,"3rd Fix":195},
+      "Elmslie":{"Joist":540,"2nd Joist":100,"Main Roof":770,"Low Roof":142,"1st Fix":920,"2nd Fix":475,"3rd Fix":205},
+      "Farnham":{"Joist":570,"2nd Joist":110,"Main Roof":810,"Low Roof":148,"1st Fix":960,"2nd Fix":495,"3rd Fix":218},
+      "Grafton":{"Joist":600,"2nd Joist":115,"Main Roof":850,"Low Roof":155,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
+      "Hatfield":{"Joist":630,"2nd Joist":120,"Main Roof":880,"Low Roof":160,"1st Fix":1040,"2nd Fix":540,"3rd Fix":240},
+      "Ivanhoe":{"Joist":660,"2nd Joist":130,"Main Roof":920,"Low Roof":168,"1st Fix":1080,"2nd Fix":560,"3rd Fix":252}
+    }
   }
 };
+
+// Legacy flat price lists for backward compat
+const PRICE_LISTS = {};
+Object.values(PRICE_LISTS_BY_HOUSE_TYPE).forEach(pl => {
+  const b = pl.builder;
+  const s = pl.site;
+  if(!PRICE_LISTS[b]) PRICE_LISTS[b] = {};
+  // Calculate average prices across house types for flat view
+  const types = Object.values(pl.types);
+  const avg = (key) => Math.round(types.reduce((sum,t)=>sum+(t[key]||0),0)/types.length);
+  PRICE_LISTS[b][s] = { "Joist": avg("Joist"), "Main Roof": avg("Main Roof"), "1st Fix": avg("1st Fix"), "2nd Fix": avg("2nd Fix"), "3rd Fix": avg("3rd Fix") };
+});
 
 const DOCUMENTS = {
   "Holbrook Park": {
@@ -210,6 +301,32 @@ const getSiteHousetypes = (siteName) => {
   return [];
 };
 
+
+const getWeekDays = (offset=0) => {
+  const today = new Date();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - ((today.getDay()+6)%7) + (offset*7));
+  const days = [];
+  for(let i=0; i<5; i++){
+    const d=new Date(monday);
+    d.setDate(monday.getDate()+i);
+    days.push(d);
+  }
+  return days;
+};
+const STAGE_DURATIONS = {"Joists":2,"Joist":2,"Roof":2,"Main Roof":2,"Low Roof":1,"Low Roof FD":1,"First Fix":2,"1st Fix":2,"Second Fix":2,"2nd Fix":2,"Final":1,"Finals":1,"3rd Fix":1,"Cellotex":1};
+const getDaysForStage = (stage) => STAGE_DURATIONS[stage] || 2;
+const isWeekday = (d) => d.getDay()>=1 && d.getDay()<=5;
+const isSameDay = (a,b) => a.toISOString().split('T')[0]===b.toISOString().split('T')[0];
+const isDayOff = (date, carpName, dayOffs) => dayOffs.some(d=>d.carpenter===carpName && d.status==='approved' && new Date(d.startDate)<=date && new Date(d.endDate)>=date);
+const getAllocForDay = (date, allocs) => {
+  const ds = date.toISOString().split('T')[0];
+  return allocs.filter(a=>{
+    const s=new Date(a.startDate);const e=new Date(a.endDate);
+    return ds>=a.startDate && ds<=a.endDate;
+  });
+};
+
 const formatDate = (date) => {
   return new Date(date).toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' });
 };
@@ -289,6 +406,23 @@ const[editingInvoiceId,setEditingInvoiceId]=useState(null);
 const[invoiceExtraItems,setInvoiceExtraItems]=useState({});
 const[newExtraDesc,setNewExtraDesc]=useState('');
 const[newExtraAmount,setNewExtraAmount]=useState('');
+const[dayOffRequests,setDayOffRequests]=useState([]);
+const[dayOffStart,setDayOffStart]=useState('');
+const[dayOffEnd,setDayOffEnd]=useState('');
+const[dayOffReason,setDayOffReason]=useState('');
+const[variationOrders,setVariationOrders]=useState([]);
+const[voDesc,setVoDesc]=useState('');
+const[voAmount,setVoAmount]=useState('');
+const[voPhotos,setVoPhotos]=useState([]);
+const[voSite,setVoSite]=useState('');
+const[voPlot,setVoPlot]=useState('');
+const[showVoForm,setShowVoForm]=useState(false);
+const voFileRef=useRef(null);
+const[snagItems,setSnagItems]=useState([]);
+const[newSnagDesc,setNewSnagDesc]=useState('');
+const[newSnagSite,setNewSnagSite]=useState('');
+const[newSnagPlot,setNewSnagPlot]=useState('');
+const[weekOffset,setWeekOffset]=useState(0);
 // ===== SUPABASE DATA LOADING =====
 const [dbLoaded, setDbLoaded] = useState(false);
 useEffect(() => {
@@ -624,7 +758,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           transition: 'left 0.25s ease'
         }}>
 
-          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Sites','Delays','Fixings','Notifications','Price Lists','Documents'].map(tab => (
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Sites','Delays','Fixings','Notifications','Price Lists','Documents','Day-Off','Variations'].map(tab => (
             <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -669,7 +803,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </button>
           ))}
 
-          {user?.role === 'carpenter' && ['Schedule','Notifications','Documents','Price Lists','Fixings','Invoice'].map(tab => (
+          {user?.role === 'carpenter' && ['Schedule','Notifications','Documents','Price Lists','Fixings','Invoice','Variation Orders','Day Off'].map(tab => (
             <button key={tab} onClick={() => { setCarpenterTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: carpenterTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -1601,77 +1735,139 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           )}
 
 
-                    {/* ========== CARPENTER SCHEDULE ========== */}
+                    {/* ========== CARPENTER SCHEDULE (MON-FRI) ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'schedule' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Your Schedule</h2>
-              {myAllocs.length === 0 ? <div style={{backgroundColor:'white',padding:20,borderRadius:8,textAlign:'center'}}><p style={{color:'#666',fontSize:16,margin:0}}>No work scheduled.</p></div> : (
-                <div>
-                  {myAllocs.sort((a,b)=>new Date(a.startDate)-new Date(b.startDate)).map(alloc => {
-                    const start=new Date(alloc.startDate);const end=new Date(alloc.endDate);
-                    const totalDays=daysInRange(alloc.startDate,alloc.endDate);
-                    const isComplete = alloc.completed === true;
-                    const isActive = !isComplete && todayDate >= start && todayDate <= end;
-                    const isOverdue = !isComplete && todayDate > end;
-                    const isFuture = !isComplete && todayDate < start;
-                    const daysElapsed = isActive ? Math.max(1, Math.ceil((todayDate - start) / 864e5) + 1) : isComplete ? totalDays : isOverdue ? totalDays : 0;
-                    const progress = isComplete ? 100 : isActive ? Math.round((daysElapsed / totalDays) * 100) : isOverdue ? 100 : 0;
-                    const statusLabel = isComplete ? 'COMPLETE' : isOverdue ? 'OVERDUE' : isActive ? 'IN PROGRESS' : 'UPCOMING';
-                    const statusBg = isComplete ? '#4caf50' : isOverdue ? '#d32f2f' : isActive ? GOLD : NAVY;
-                    const statusColor = isComplete ? 'white' : isOverdue ? 'white' : isActive ? NAVY : CREAM;
-                    const borderLeftColor = isComplete ? '#4caf50' : isOverdue ? '#d32f2f' : isActive ? GOLD : NAVY;
-                    return (
-                      <div key={alloc.id} style={{backgroundColor:'#fff',border:(isActive||isOverdue)?'2px solid '+statusBg:'1px solid #ddd',borderRadius:10,padding:16,marginBottom:12,borderLeft:'6px solid '+borderLeftColor}}>
-                        <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6,marginBottom:10}}>
-                          <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-                            <span style={{backgroundColor:statusBg,color:statusColor,padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>{statusLabel}</span>
-                            {alloc.delayed&&<span style={{backgroundColor:'#ff6f00',color:'white',padding:'3px 10px',borderRadius:4,fontSize:11,fontWeight:'bold'}}>DELAYED +{alloc.delayDays}d</span>}
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16,flexWrap:'wrap',gap:8}}>
+                <h2 style={{ color:NAVY, marginTop:0, fontSize:22, margin:0 }}>Your Week</h2>
+                <div style={{display:'flex',gap:8,alignItems:'center'}}>
+                  <button onClick={()=>setWeekOffset(w=>w-1)} style={{backgroundColor:NAVY,color:CREAM,border:'none',padding:'6px 12px',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:16}}>←</button>
+                  <button onClick={()=>setWeekOffset(0)} style={{backgroundColor:weekOffset===0?GOLD:NAVY,color:weekOffset===0?NAVY:CREAM,border:'none',padding:'6px 12px',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>This Week</button>
+                  <button onClick={()=>setWeekOffset(w=>w+1)} style={{backgroundColor:NAVY,color:CREAM,border:'none',padding:'6px 12px',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:16}}>→</button>
+                </div>
+              </div>
+              {(() => {
+                const weekDays = getWeekDays(weekOffset);
+                const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+                return (
+                  <div>
+                    {weekDays.map((day, idx) => {
+                      const dayStr = day.toISOString().split('T')[0];
+                      const isToday = isSameDay(day, new Date());
+                      const dayAllocations = myAllocs.filter(a => dayStr >= a.startDate && dayStr <= a.endDate);
+                      const dayIsOff = dayOffRequests.some(d => d.carpenter === user?.name && d.status === 'approved' && dayStr >= d.startDate && dayStr <= d.endDate);
+                      const daySnags = snagItems.filter(s => s.carpenter === user?.name && s.date === dayStr);
+                      return (
+                        <div key={dayStr} style={{
+                          backgroundColor: dayIsOff ? '#fff3e0' : isToday ? '#e8f5e9' : 'white',
+                          border: isToday ? '2px solid #4caf50' : '1px solid #ddd',
+                          borderRadius: 10, padding: 14, marginBottom: 10,
+                          borderLeft: dayIsOff ? '6px solid #ff9800' : isToday ? '6px solid #4caf50' : '6px solid ' + NAVY
+                        }}>
+                          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+                            <div>
+                              <strong style={{fontSize:16,color:NAVY}}>{dayNames[idx]}</strong>
+                              <span style={{fontSize:12,color:'#888',marginLeft:8}}>{day.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>
+                              {isToday && <span style={{marginLeft:8,backgroundColor:'#4caf50',color:'white',padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold'}}>TODAY</span>}
+                            </div>
+                            {dayIsOff && <span style={{backgroundColor:'#ff9800',color:'white',padding:'4px 12px',borderRadius:4,fontSize:12,fontWeight:'bold'}}>DAY OFF</span>}
                           </div>
-                          <span style={{fontSize:12,color:'#888'}}>{totalDays} day{totalDays>1?'s':''}</span>
-                        </div>
-                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,fontSize:14}}>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Site</span><strong>{alloc.site}</strong></div>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Plot</span><strong>{alloc.plot}</strong></div>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>House Type</span><strong>{alloc.houseType}</strong></div>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Stage</span><strong style={{color:GOLD}}>{alloc.stage}</strong></div>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>Start</span><strong>{formatDate(alloc.startDate)}</strong></div>
-                          <div><span style={{color:'#888',fontSize:11,display:'block'}}>End</span><strong>{formatDate(alloc.endDate)}</strong></div>
-                        </div>
-                        {!isFuture&&(<div style={{marginTop:12}}><div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'#888',marginBottom:4}}><span>{isComplete?'Completed':'Day '+daysElapsed+' of '+totalDays}</span><span>{progress}%</span></div><div style={{backgroundColor:'#e0e0e0',borderRadius:4,height:6,overflow:'hidden'}}><div style={{backgroundColor:isComplete?'#4caf50':isOverdue?'#d32f2f':GOLD,height:'100%',width:progress+'%',borderRadius:4}}></div></div></div>)}
-                        {(isActive||isOverdue)&&!isComplete&&(
-                          <div style={{marginTop:14,display:'flex',gap:8,flexWrap:'wrap'}}>
-                            <button onClick={()=>markAllocComplete(alloc.id)} style={{backgroundColor:'#4caf50',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Mark Complete</button>
-                            {delayingAllocId===alloc.id?(
-                              <div style={{width:'100%',marginTop:8,padding:12,backgroundColor:'#fff3e0',borderRadius:6,border:'1px solid #ffcc80'}}>
-                                <p style={{margin:'0 0 8px',fontSize:13,fontWeight:'bold',color:'#e65100'}}>Report Delay</p>
-                                <div style={{marginBottom:8}}><label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Reason</label>
-                                  <textarea value={delayReason} onChange={(e)=>setDelayReason(e.target.value)} placeholder="e.g. Materials not delivered, weather..."
-                                    style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13,minHeight:50,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
-                                <div style={{marginBottom:10}}><label style={{display:'block',fontSize:11,marginBottom:3,color:'#666'}}>Additional days</label>
-                                  <select value={delayDays} onChange={(e)=>setDelayDays(parseInt(e.target.value))} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid #ffcc80',fontSize:13}}>
-                                    {[1,2,3,4,5,6,7].map(d=><option key={d} value={d}>{d} day{d>1?'s':''}</option>)}</select></div>
-                                <div style={{display:'flex',gap:8}}>
-                                  <button onClick={()=>handleDelay(alloc.id)} style={{backgroundColor:'#e65100',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Submit Delay</button>
-                                  <button onClick={()=>{setDelayingAllocId(null);setDelayReason('');setDelayDays(1);}} style={{backgroundColor:'#999',color:'white',padding:'7px 16px',border:'none',borderRadius:4,cursor:'pointer',fontSize:12}}>Cancel</button>
+                          {dayIsOff ? (
+                            <div style={{padding:10,backgroundColor:'#fff8e1',borderRadius:6,fontSize:14,color:'#e65100',fontStyle:'italic'}}>
+                              Day off approved
+                            </div>
+                          ) : dayAllocations.length === 0 ? (
+                            <div style={{padding:10,backgroundColor:'#f5f5f5',borderRadius:6,fontSize:13,color:'#999',textAlign:'center'}}>
+                              No work scheduled
+                            </div>
+                          ) : (
+                            <div>
+                              {dayAllocations.map(alloc => {
+                                const totalDays = daysInRange(alloc.startDate, alloc.endDate);
+                                const dayNum = Math.ceil((day - new Date(alloc.startDate)) / 864e5) + 1;
+                                const isComplete = alloc.completed === true;
+                                return (
+                                  <div key={alloc.id} style={{
+                                    padding: 10, backgroundColor: isComplete ? '#e8f5e9' : '#f6f4ef',
+                                    borderRadius: 6, marginBottom: 6,
+                                    borderLeft: '4px solid ' + (isComplete ? '#4caf50' : GOLD)
+                                  }}>
+                                    <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:4}}>
+                                      <div>
+                                        <strong style={{fontSize:14,color:NAVY}}>{alloc.site} — Plot {alloc.plot}</strong>
+                                        <div style={{fontSize:12,color:'#666',marginTop:2}}>{alloc.houseType} / <span style={{color:GOLD,fontWeight:'bold'}}>{alloc.stage}</span></div>
+                                      </div>
+                                      <div style={{textAlign:'right'}}>
+                                        <span style={{fontSize:11,color:'#888'}}>Day {dayNum} of {totalDays}</span>
+                                        {isComplete && <div style={{fontSize:10,color:'#4caf50',fontWeight:'bold'}}>DONE</div>}
+                                      </div>
+                                    </div>
+                                    {!isComplete && isToday && dayNum === totalDays && (
+                                      <button onClick={()=>markAllocComplete(alloc.id)} style={{marginTop:8,backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12,width:'100%'}}>Mark Complete</button>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                          {/* Snags for this day */}
+                          {daySnags.length > 0 && (
+                            <div style={{marginTop:6}}>
+                              {daySnags.map(s => (
+                                <div key={s.id} style={{padding:6,backgroundColor:'#fff3e0',borderRadius:4,fontSize:12,marginBottom:3,borderLeft:'3px solid #ff9800'}}>
+                                  <strong>Snag:</strong> {s.desc} {s.site && <span style={{color:'#888'}}>({s.site}{s.plot ? ' Plot '+s.plot : ''})</span>}
                                 </div>
-                              </div>
-                            ):(<button onClick={()=>setDelayingAllocId(alloc.id)} style={{backgroundColor:'#e65100',color:'white',padding:'8px 18px',border:'none',borderRadius:5,cursor:'pointer',fontWeight:'bold',fontSize:13,flex:1,minWidth:120}}>Report Delay</button>)}
-                          </div>
-                        )}
-                        {isComplete&&alloc.completedDate&&(
-                          <div style={{marginTop:10,padding:8,backgroundColor:'#e8f5e9',borderRadius:6,fontSize:12,color:'#2e7d32'}}>
-                            Completed on {formatDate(alloc.completedDate)} | Invoice auto-generated
-                          </div>
-                        )}
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+
+              {/* ===== EXTRAS / SNAGS QUICK ADD ===== */}
+              <div style={{marginTop:20,backgroundColor:NAVY,padding:16,borderRadius:10}}>
+                <h3 style={{color:GOLD,margin:'0 0 12px',fontSize:16}}>Quick Add: Extras / Snags</h3>
+                <p style={{color:CREAM,fontSize:12,margin:'0 0 12px',opacity:0.7}}>Log unscheduled work, snags, or extras for today</p>
+                <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:10}}>
+                  <input placeholder="Description (e.g. Fix skirting Plot 12)" value={newSnagDesc} onChange={e=>setNewSnagDesc(e.target.value)}
+                    style={{flex:2,minWidth:180,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
+                  <input placeholder="Site" value={newSnagSite} onChange={e=>setNewSnagSite(e.target.value)}
+                    style={{flex:1,minWidth:100,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
+                  <input placeholder="Plot" value={newSnagPlot} onChange={e=>setNewSnagPlot(e.target.value)}
+                    style={{flex:0.5,minWidth:60,padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} />
+                </div>
+                <button onClick={()=>{
+                  if(!newSnagDesc.trim())return;
+                  const todayISO=new Date().toISOString().split('T')[0];
+                  setSnagItems(prev=>[...prev,{id:Date.now(),carpenter:user?.name,desc:newSnagDesc,site:newSnagSite||user?.site||'',plot:newSnagPlot,date:todayISO}]);
+                  setNewSnagDesc('');setNewSnagSite('');setNewSnagPlot('');
+                  setSuccessMsg('Snag logged');setTimeout(()=>setSuccessMsg(''),2000);
+                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>
+                  Log Snag / Extra
+                </button>
+              </div>
+
+              {/* Past allocations summary */}
+              {myAllocs.filter(a=>a.completed).length > 0 && (
+                <div style={{marginTop:20}}>
+                  <h3 style={{color:NAVY,fontSize:16,marginBottom:10}}>Recently Completed</h3>
+                  {myAllocs.filter(a=>a.completed).slice(-5).reverse().map(alloc=>(
+                    <div key={alloc.id} style={{backgroundColor:'white',border:'1px solid #c8e6c9',borderRadius:6,padding:10,marginBottom:6,borderLeft:'4px solid #4caf50',fontSize:13}}>
+                      <div style={{display:'flex',justifyContent:'space-between'}}>
+                        <span><strong>{alloc.site}</strong> — Plot {alloc.plot} / {alloc.stage}</span>
+                        <span style={{color:'#4caf50',fontWeight:'bold',fontSize:12}}>✓ {alloc.completedDate ? formatDate(alloc.completedDate) : 'Done'}</span>
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
           )}
 
-          {/* ========== CARPENTER NOTIFICATIONS (READ + SIGN) ========== */}
+                    {/* ========== CARPENTER NOTIFICATIONS (READ + SIGN) ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'notifications' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Notifications</h2>
@@ -1820,27 +2016,64 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
-          {/* ========== CARPENTER PRICE LISTS ========== */}
+          {/* ========== CARPENTER PRICE LISTS (BY HOUSE TYPE) ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'price lists' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
-              {Object.entries(PRICE_LISTS).map(([builder,sites])=>(
-                <div key={builder} style={{marginBottom:15,backgroundColor:'white',padding:15,borderRadius:8,border:'1px solid #ddd'}}>
-                  <h3 style={{color:NAVY,margin:'0 0 10px',fontSize:16}}>{builder}</h3>
-                  {Object.entries(sites).map(([site,rates])=>(
-                    <div key={site} style={{marginLeft:10,marginBottom:10,padding:10,backgroundColor:'#f9f9f9',borderRadius:4}}>
-                      <h4 style={{color:'#333',margin:'0 0 8px',fontSize:14}}>{site}</h4>
-                      <table style={{width:'100%',fontSize:12}}><tbody>
-                        {Object.entries(rates).map(([stage,price])=><tr key={stage} style={{borderBottom:'1px solid #eee'}}><td style={{padding:4}}>{stage}</td><td style={{padding:4,textAlign:'right',fontWeight:'bold'}}>GBP {price}</td></tr>)}
-                      </tbody></table>
-                    </div>
-                  ))}
+              {Object.entries(PRICE_LISTS_BY_HOUSE_TYPE).map(([listName, pl]) => (
+                <div key={listName} style={{marginBottom:20,backgroundColor:'white',borderRadius:10,border:'1px solid #ddd',overflow:'hidden'}}>
+                  <div style={{backgroundColor:NAVY,padding:'12px 16px',color:CREAM}}>
+                    <strong style={{fontSize:16}}>{pl.builder}</strong>
+                    <span style={{fontSize:12,color:GOLD,marginLeft:8}}>{pl.site}</span>
+                  </div>
+                  <div style={{padding:12}}>
+                    {Object.entries(pl.types).map(([typeName, rates]) => (
+                      <details key={typeName} style={{marginBottom:6}}>
+                        <summary style={{padding:'8px 10px',cursor:'pointer',fontWeight:'bold',fontSize:13,color:NAVY,backgroundColor:'#f6f4ef',borderRadius:4,display:'flex',alignItems:'center',gap:8}}>
+                          <span style={{display:'inline-block',width:6,height:6,backgroundColor:GOLD,borderRadius:'50%'}}></span> {typeName}
+                          <span style={{fontSize:11,color:'#888',fontWeight:'normal',marginLeft:'auto'}}>
+                            Total: £{Object.values(rates).reduce((s,v)=>s+v,0)}
+                          </span>
+                        </summary>
+                        <div style={{padding:'8px 12px'}}>
+                          <table style={{width:'100%',fontSize:12,borderCollapse:'collapse'}}>
+                            <tbody>
+                              {Object.entries(rates).map(([stage,price]) => (
+                                <tr key={stage} style={{borderBottom:'1px solid #f0f0f0'}}>
+                                  <td style={{padding:'4px 0'}}>{stage}</td>
+                                  <td style={{padding:'4px 0',textAlign:'right',fontWeight:'bold',color:NAVY}}>£{price}</td>
+                                </tr>
+                              ))}
+                              <tr style={{borderTop:'2px solid '+GOLD}}>
+                                <td style={{padding:'6px 0',fontWeight:'bold'}}>Total</td>
+                                <td style={{padding:'6px 0',textAlign:'right',fontWeight:'bold',color:GOLD,fontSize:14}}>£{Object.values(rates).reduce((s,v)=>s+v,0)}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </details>
+                    ))}
+                    {pl.extras && (
+                      <details style={{marginTop:8}}>
+                        <summary style={{padding:'8px 10px',cursor:'pointer',fontWeight:'bold',fontSize:13,color:'#e65100',backgroundColor:'#fff3e0',borderRadius:4}}>
+                          Extras & Day Rates
+                        </summary>
+                        <div style={{padding:'8px 12px'}}>
+                          {Object.entries(pl.extras).map(([item,price]) => (
+                            <div key={item} style={{display:'flex',justifyContent:'space-between',fontSize:12,padding:'3px 0',borderBottom:'1px solid #f0f0f0'}}>
+                              <span>{item}</span><strong>{price}</strong>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           )}
 
-          {/* ========== CARPENTER FIXINGS ========== */}
+                    {/* ========== CARPENTER FIXINGS ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'fixings' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Fixings / Materials</h2>
@@ -1938,6 +2171,208 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}><span>Approved:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='approved').reduce((s,i)=>s+i.amount,0)}</strong></div>
                     <div style={{display:'flex',justifyContent:'space-between'}}><span>Paid:</span><strong>£{invoices.filter(i=>i.carpenter===user?.name&&i.status==='paid').reduce((s,i)=>s+i.amount,0)}</strong></div>
                   </div>
+                </div>
+              )}
+            </div>
+          )}
+
+
+          {/* ========== CARPENTER VARIATION ORDERS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'variation orders' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Variation Orders</h2>
+              <p style={{color:'#666',fontSize:13,marginBottom:16}}>Submit variation orders for additional or changed work with photo evidence.</p>
+
+              {!showVoForm ? (
+                <button onClick={()=>setShowVoForm(true)} style={{backgroundColor:GOLD,color:NAVY,padding:'12px 24px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold',fontSize:14,marginBottom:20}}>
+                  + New Variation Order
+                </button>
+              ) : (
+                <div style={{backgroundColor:NAVY,color:CREAM,padding:20,borderRadius:10,maxWidth:500,marginBottom:20}}>
+                  <h3 style={{color:GOLD,margin:'0 0 15px',fontSize:16}}>New Variation Order</h3>
+                  <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Site</label>
+                    <input value={voSite} onChange={e=>setVoSite(e.target.value)} placeholder="Site name" style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                  <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Plot</label>
+                    <input value={voPlot} onChange={e=>setVoPlot(e.target.value)} placeholder="Plot number" style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                  <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Description of Work</label>
+                    <textarea value={voDesc} onChange={e=>setVoDesc(e.target.value)} placeholder="Describe the variation / day work..." style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:80,fontSize:13,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
+                  <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Amount (£)</label>
+                    <input type="number" value={voAmount} onChange={e=>setVoAmount(e.target.value)} placeholder="0.00" style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                  <div style={{marginBottom:15}}>
+                    <label style={{display:'block',marginBottom:4,fontSize:11}}>Photo Evidence</label>
+                    <input type="file" ref={voFileRef} accept="image/*" capture="environment" multiple onChange={e=>{
+                      const files=Array.from(e.target.files||[]);
+                      files.forEach(file=>{
+                        const reader=new FileReader();
+                        reader.onload=(ev)=>setVoPhotos(prev=>[...prev,{id:Date.now()+Math.random(),dataUrl:ev.target.result,name:file.name}]);
+                        reader.readAsDataURL(file);
+                      });
+                    }} style={{fontSize:12}} />
+                    {voPhotos.length>0 && (
+                      <div style={{display:'flex',gap:6,marginTop:8,flexWrap:'wrap'}}>
+                        {voPhotos.map(p=>(
+                          <div key={p.id} style={{position:'relative'}}>
+                            <img src={p.dataUrl} alt="" style={{width:60,height:60,objectFit:'cover',borderRadius:4,border:'1px solid '+GOLD}} />
+                            <button onClick={()=>setVoPhotos(prev=>prev.filter(x=>x.id!==p.id))} style={{position:'absolute',top:-4,right:-4,width:16,height:16,borderRadius:'50%',backgroundColor:'#d32f2f',color:'white',border:'none',fontSize:10,cursor:'pointer',lineHeight:'16px',padding:0}}>×</button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div style={{display:'flex',gap:8}}>
+                    <button onClick={()=>{
+                      if(!voDesc.trim()||!voAmount){alert('Fill in description and amount');return;}
+                      const vo={id:Date.now(),carpenter:user?.name,site:voSite||user?.site||'',plot:voPlot,desc:voDesc,amount:parseFloat(voAmount),photos:voPhotos,date:new Date().toISOString().split('T')[0],status:'pending'};
+                      setVariationOrders(prev=>[...prev,vo]);
+                      setVoDesc('');setVoAmount('');setVoPhotos([]);setVoSite('');setVoPlot('');setShowVoForm(false);
+                      setSuccessMsg('Variation order submitted');setTimeout(()=>setSuccessMsg(''),2500);
+                    }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Submit</button>
+                    <button onClick={()=>{setShowVoForm(false);setVoPhotos([]);}} style={{backgroundColor:'#666',color:'white',padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontSize:14}}>Cancel</button>
+                  </div>
+                </div>
+              )}
+
+              {variationOrders.filter(v=>v.carpenter===user?.name).length>0 && (
+                <div>
+                  <h3 style={{color:NAVY,fontSize:16,marginBottom:10}}>Your Variation Orders</h3>
+                  {variationOrders.filter(v=>v.carpenter===user?.name).sort((a,b)=>b.id-a.id).map(vo=>(
+                    <div key={vo.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'4px solid '+(vo.status==='approved'?'#4caf50':vo.status==='rejected'?'#d32f2f':'#ff9800')}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
+                        <div>
+                          <strong style={{fontSize:14}}>{vo.site}{vo.plot?' — Plot '+vo.plot:''}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:4}}>{vo.desc}</div>
+                        </div>
+                        <div style={{textAlign:'right'}}>
+                          <div style={{fontSize:16,fontWeight:'bold'}}>£{vo.amount}</div>
+                          <span style={{padding:'2px 8px',borderRadius:3,fontSize:11,fontWeight:'bold',
+                            backgroundColor:vo.status==='approved'?'#e8f5e9':vo.status==='rejected'?'#ffebee':'#fff3e0',
+                            color:vo.status==='approved'?'#2e7d32':vo.status==='rejected'?'#c62828':'#e65100'}}>{vo.status.toUpperCase()}</span>
+                        </div>
+                      </div>
+                      {vo.photos?.length>0 && (
+                        <div style={{display:'flex',gap:6,marginTop:8,flexWrap:'wrap'}}>
+                          {vo.photos.map(p=><img key={p.id} src={p.dataUrl} alt="" style={{width:50,height:50,objectFit:'cover',borderRadius:4,border:'1px solid #ddd'}} />)}
+                        </div>
+                      )}
+                      <div style={{fontSize:11,color:'#999',marginTop:6}}>{vo.date}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== CARPENTER DAY OFF REQUESTS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'day off' && (
+            <div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Day Off</h2>
+              <div style={{backgroundColor:NAVY,color:CREAM,padding:20,borderRadius:10,maxWidth:400,marginBottom:20}}>
+                <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Start Date</label>
+                  <input type="date" value={dayOffStart} onChange={e=>setDayOffStart(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>End Date</label>
+                  <input type="date" value={dayOffEnd} onChange={e=>setDayOffEnd(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
+                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Reason</label>
+                  <textarea value={dayOffReason} onChange={e=>setDayOffReason(e.target.value)} placeholder="e.g. Holiday, appointment..." style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:60,fontSize:13,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
+                <button onClick={()=>{
+                  if(!dayOffStart||!dayOffEnd){alert('Select start and end dates');return;}
+                  const req={id:Date.now(),carpenter:user?.name,startDate:dayOffStart,endDate:dayOffEnd,reason:dayOffReason,status:'pending',requestedDate:new Date().toISOString().split('T')[0]};
+                  setDayOffRequests(prev=>[...prev,req]);
+                  setDayOffStart('');setDayOffEnd('');setDayOffReason('');
+                  setSuccessMsg('Day off request submitted');setTimeout(()=>setSuccessMsg(''),2500);
+                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Request</button>
+              </div>
+              {dayOffRequests.filter(d=>d.carpenter===user?.name).length>0 && (
+                <div>
+                  <h3 style={{color:NAVY,fontSize:16,marginBottom:10}}>Your Requests</h3>
+                  {dayOffRequests.filter(d=>d.carpenter===user?.name).sort((a,b)=>b.id-a.id).map(req=>(
+                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:12,marginBottom:8,borderLeft:'4px solid '+(req.status==='approved'?'#4caf50':req.status==='denied'?'#d32f2f':'#ff9800')}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
+                        <div>
+                          <strong style={{fontSize:14}}>{formatDate(req.startDate)} — {formatDate(req.endDate)}</strong>
+                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{req.reason||'No reason given'}</div>
+                        </div>
+                        <span style={{padding:'2px 10px',borderRadius:3,fontSize:11,fontWeight:'bold',height:'fit-content',
+                          backgroundColor:req.status==='approved'?'#e8f5e9':req.status==='denied'?'#ffebee':'#fff3e0',
+                          color:req.status==='approved'?'#2e7d32':req.status==='denied'?'#c62828':'#e65100'}}>{req.status.toUpperCase()}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          
+          {/* ========== ADMIN: DAY OFF APPROVALS ========== */}
+          {(user?.role === 'admin') && adminTab === 'day-off' && (
+            <div>
+              <h2 style={{color:NAVY,marginTop:0,fontSize:22}}>Day Off Requests</h2>
+              {dayOffRequests.length===0?<p style={{color:'#666',fontSize:14}}>No day off requests.</p>:(
+                <div>
+                  {dayOffRequests.sort((a,b)=>b.id-a.id).map(req=>(
+                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'4px solid '+(req.status==='approved'?'#4caf50':req.status==='denied'?'#d32f2f':'#ff9800')}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:15}}>{req.carpenter}</strong>
+                          <div style={{fontSize:13,color:'#666',marginTop:2}}>{formatDate(req.startDate)} — {formatDate(req.endDate)}</div>
+                          <div style={{fontSize:12,color:'#888',marginTop:2}}>{req.reason||'No reason given'}</div>
+                        </div>
+                        <div style={{display:'flex',gap:8,alignItems:'flex-start'}}>
+                          {req.status==='pending'?(
+                            <>
+                              <button onClick={()=>setDayOffRequests(prev=>prev.map(d=>d.id===req.id?{...d,status:'approved'}:d))} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
+                              <button onClick={()=>setDayOffRequests(prev=>prev.map(d=>d.id===req.id?{...d,status:'denied'}:d))} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Deny</button>
+                            </>
+                          ):(
+                            <span style={{padding:'4px 12px',borderRadius:4,fontSize:12,fontWeight:'bold',
+                              backgroundColor:req.status==='approved'?'#e8f5e9':'#ffebee',
+                              color:req.status==='approved'?'#2e7d32':'#c62828'}}>{req.status.toUpperCase()}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========== ADMIN: VARIATION ORDERS APPROVAL ========== */}
+          {(user?.role === 'admin') && adminTab === 'variations' && (
+            <div>
+              <h2 style={{color:NAVY,marginTop:0,fontSize:22}}>Variation Orders</h2>
+              {variationOrders.length===0?<p style={{color:'#666',fontSize:14}}>No variation orders submitted.</p>:(
+                <div>
+                  {variationOrders.sort((a,b)=>b.id-a.id).map(vo=>(
+                    <div key={vo.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'4px solid '+(vo.status==='approved'?'#4caf50':vo.status==='rejected'?'#d32f2f':'#ff9800')}}>
+                      <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+                        <div>
+                          <strong style={{fontSize:15}}>{vo.carpenter}</strong>
+                          <div style={{fontSize:13,color:'#666',marginTop:2}}>{vo.site}{vo.plot?' — Plot '+vo.plot:''}</div>
+                          <div style={{fontSize:13,marginTop:4}}>{vo.desc}</div>
+                          {vo.photos?.length>0 && (
+                            <div style={{display:'flex',gap:4,marginTop:6,flexWrap:'wrap'}}>
+                              {vo.photos.map(p=><img key={p.id} src={p.dataUrl} alt="" style={{width:60,height:60,objectFit:'cover',borderRadius:4,border:'1px solid #ddd'}} />)}
+                            </div>
+                          )}
+                        </div>
+                        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:6}}>
+                          <strong style={{fontSize:18}}>£{vo.amount}</strong>
+                          {vo.status==='pending'?(
+                            <div style={{display:'flex',gap:6}}>
+                              <button onClick={()=>setVariationOrders(prev=>prev.map(v=>v.id===vo.id?{...v,status:'approved'}:v))} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
+                              <button onClick={()=>setVariationOrders(prev=>prev.map(v=>v.id===vo.id?{...v,status:'rejected'}:v))} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Reject</button>
+                            </div>
+                          ):(
+                            <span style={{padding:'4px 12px',borderRadius:4,fontSize:12,fontWeight:'bold',
+                              backgroundColor:vo.status==='approved'?'#e8f5e9':'#ffebee',
+                              color:vo.status==='approved'?'#2e7d32':'#c62828'}}>{vo.status.toUpperCase()}</span>
+                          )}
+                        </div>
+                      </div>
+                      <div style={{fontSize:11,color:'#999',marginTop:6}}>{vo.date}</div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
