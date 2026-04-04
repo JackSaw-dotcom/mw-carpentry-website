@@ -556,6 +556,18 @@ useEffect(() => {
 }, [currentPage, user, dbLoaded]);
 // ===== END SUPABASE DATA LOADING =====
 
+// Auto-refresh at midnight to keep schedule current
+const [, forceUpdate] = useState(0);
+useEffect(() => {
+  const now = new Date();
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 5);
+  const msUntilMidnight = tomorrow - now;
+  const timer = setTimeout(() => forceUpdate(v => v + 1), msUntilMidnight);
+  // Also refresh every 5 minutes to keep data fresh
+  const interval = setInterval(() => forceUpdate(v => v + 1), 5 * 60 * 1000);
+  return () => { clearTimeout(timer); clearInterval(interval); };
+}, []);
+
   // Website/old portal states from App7
   const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Richard Wileman",site:"Swinfen Vale",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Neil Goodwin",site:"Derwentside",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Neil Hines",site:"Springwood",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Richard Wileman",site:"Swinfen Vale",plot:"5",stage:"Joist",date:"30/03",status:"complete",rate:"\u00a3330"},{id:2,carp:"Charlie Dillon",site:"Swinfen Vale",plot:"6",stage:"1st Fix",date:"30/03",status:"active",rate:"\u00a3650"},{id:3,carp:"Neil Goodwin",site:"Derwentside",plot:"12",stage:"Main Roof",date:"31/03",status:"active",rate:"\u00a3500"},{id:4,carp:"Neil Hines",site:"Springwood",plot:"8",stage:"1st Fix",date:"30/03",status:"active",rate:"\u00a3950"},{id:5,carp:"Rob Jones",site:"Snibston Mill",plot:"14",stage:"2nd Fix",date:"30/03",status:"active",rate:"\u00a3410"},{id:6,carp:"Ian Johnson",site:"Brascote Park",plot:"22",stage:"Main Roof",date:"01/04",status:"upcoming",rate:"\u00a3700"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
@@ -607,6 +619,16 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
   // ===== ENHANCED PORTAL =====
   if(currentPage === 'app' && user) {
   const myAllocs = allocations.filter(a => a.carpenter === user?.name);
+
+  // Compute carpenter's active sites: home site + any sites they're allocated to this week
+  const mySites = (() => {
+    if(user?.role !== 'carpenter') return [];
+    const sites = new Set();
+    if(user?.site) sites.add(user.site);
+    // Add sites from all active/upcoming allocations
+    myAllocs.filter(a => !a.completed).forEach(a => sites.add(a.site));
+    return [...sites];
+  })();
   const todayStr = new Date().toISOString().split('T')[0];
   const todayDate = new Date(todayStr);
 
@@ -2074,14 +2096,21 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {/* ========== CARPENTER DOCUMENTS ========== */}
           {user?.role === 'carpenter' && carpenterTab === 'documents' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents: {user?.site}</h2>
-              {(() => {
-                const siteDocs = DOCUMENTS[user?.site];
-                if(!siteDocs) return <p style={{color:'#666',fontSize:14}}>No documents available for this site.</p>;
-                const builder = BUILDERS.find(b => b.sites.some(s => s.name === user?.site));
-                const siteInfo = builder?.sites.find(s => s.name === user?.site);
-                const houseTypes = siteInfo?.housetypes || [];
-                return (<div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Documents</h2>
+              {mySites.length === 0 ? <p style={{color:'#666',fontSize:14}}>No sites allocated.</p> : (
+                mySites.map(siteName => {
+                  const siteDocs = DOCUMENTS[siteName];
+                  if(!siteDocs) return null;
+                  const builder = BUILDERS.find(b => b.sites.some(s => s.name === siteName));
+                  const siteInfo = builder?.sites.find(s => s.name === siteName);
+                  const houseTypes = siteInfo?.housetypes || [];
+                  return (
+                    <div key={siteName} style={{marginBottom:24}}>
+                      <div style={{backgroundColor:NAVY,color:CREAM,padding:'10px 16px',borderRadius:'8px 8px 0 0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                        <strong style={{fontSize:16}}>{siteName}</strong>
+                        {builder && <span style={{fontSize:12,color:GOLD}}>{builder.name}</span>}
+                      </div>
+                      <div style={{border:'1px solid #ddd',borderTop:'none',borderRadius:'0 0 8px 8px',padding:12}}>
                   {houseTypes.length > 0 && (
                     <div style={{marginBottom:20}}>
                       <h3 style={{color:NAVY,margin:'0 0 12px',fontSize:16}}>Drawings by House Type</h3>
@@ -2125,8 +2154,12 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                       </div>)}
                     </div>
                   ))}
-                </div>);
-              })()}
+                </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           )}
 
@@ -2134,7 +2167,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           {user?.role === 'carpenter' && carpenterTab === 'price lists' && (
             <div>
               <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Price Lists</h2>
-              {Object.entries(PRICE_LISTS_BY_HOUSE_TYPE).map(([listName, pl]) => (
+              {mySites.length > 0 && <p style={{color:'#666',fontSize:12,marginBottom:12}}>Showing price lists for your active sites: {mySites.join(', ')}</p>}
+              {Object.entries(PRICE_LISTS_BY_HOUSE_TYPE).filter(([listName, pl]) => mySites.some(s => pl.site === s || pl.builder === BUILDERS.find(b=>b.sites.some(ss=>ss.name===s))?.name)).map(([listName, pl]) => (
                 <div key={listName} style={{marginBottom:20,backgroundColor:'white',borderRadius:10,border:'1px solid #ddd',overflow:'hidden'}}>
                   <div style={{backgroundColor:NAVY,padding:'12px 16px',color:CREAM}}>
                     <strong style={{fontSize:16}}>{pl.builder}</strong>
