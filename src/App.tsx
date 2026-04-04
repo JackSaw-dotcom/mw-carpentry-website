@@ -37,184 +37,223 @@ const GALLERY_PHOTOS={joists:[{src:j1,caption:"I-beam joists with joist hangers 
 const BUILDERS=[{id:"barratt",name:"Barratt Homes",color:"#E31937",logo:"https://www.barratthomes.co.uk/favicon.ico",relationship:"Our partnership with Barratt Homes stretches back over a decade. They trust M&W to deliver consistently across multiple sites.",sites:[{name:"Thoresby Vale",location:"Edwinstowe, Mansfield",lat:53.177,lng:-1.069,housetypes:["Windermere","Holden","Moresby","Kennett","Radleigh"]},{name:"Romans' Quarter",location:"Bingham, Nottingham",lat:52.949,lng:-1.0,housetypes:["Hollinwood","Bradgate","Moresby","Alderney"]},{name:"Dunstall Park",location:"Tamworth, Staffordshire",lat:52.634,lng:-1.693,housetypes:["Windermere","Archford","Holden","Kennett"]},{name:"Poppy Fields",location:"Uttoxeter, Staffordshire",lat:52.898,lng:-1.86,housetypes:["Maidstone","Ellerton","Denford"]},{name:"Bertelin Fields",location:"Beaconside, Stafford",lat:52.826,lng:-2.117,housetypes:["Windermere","Archford","Kennett","Moresby"]}]},{id:"dwh",name:"Lovell Homes",color:"#1B3D6F",logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_en-0IYbjSLWr1dCt62dPp1evg0udhiAZXg&s",relationship:"Our carpenters understand the higher specification that Lovell developments demand.",sites:[{name:"Old Mill Farm",location:"Cotgrave, Nottingham",lat:52.917,lng:-1.046,housetypes:["Holden","Kingsley","Layton","Windermere"]},{name:"Berry Hill",location:"Mansfield",lat:53.148,lng:-1.188,housetypes:["Hollinwood","Bradgate","Exeter"]},{name:"Gateford Park",location:"Worksop, Nottinghamshire",lat:53.321,lng:-1.132,housetypes:["Radleigh","Holden","Moresby"]}]},{id:"bellway",name:"Bellway Homes",color:"#003DA5",logo:"https://s3-eu-west-1.amazonaws.com/tpd/logos/58932caa0000ff00059bf27f/0x0.png",relationship:"Bellway is one of our longest-standing partners across their East Midlands division.",sites:[{name:"The Meadows",location:"Alvaston, Derby",lat:52.893,lng:-1.434,housetypes:["Joiner","Craftsman","Turner","Tanner","Weaver"]},{name:"Holbrook Park",location:"Chellaston, Derby",lat:52.873,lng:-1.437,housetypes:["Craftsman","Joiner","Turner","Weaver","Cooper"]},{name:"Coppice Heights",location:"Ripley, Derbyshire",lat:53.051,lng:-1.405,housetypes:["Joiner","Turner","Tanner","Fletcher"]},{name:"Springwood",location:"Midway, S. Derbyshire",lat:52.773,lng:-1.542,housetypes:["Joiner","Craftsman","Turner","Weaver"]},{name:"Hugglescote Grange",location:"Hugglescote, Leicestershire",lat:52.727,lng:-1.362,housetypes:["Craftsman","Turner","Cooper","Fletcher"]},{name:"Abbey Fields Grange",location:"Hucknall, Nottinghamshire",lat:53.033,lng:-1.195,housetypes:["Tanner","Weaver","Turner","Joiner"]},{name:"Ashlands",location:"Sutton in Ashfield, Notts",lat:53.128,lng:-1.255,housetypes:["Joiner","Craftsman","Turner"]},{name:"Torvill Park",location:"Fairham, Nottingham",lat:52.909,lng:-1.163,housetypes:["Craftsman","Turner","Tanner","Weaver"]}]},{id:"persimmon",name:"Persimmon Homes",color:"#D4002A",logo:"https://cdn.prod.website-files.com/65a518d6a768fc381c83acf8/65a518d6a768fc381c83b06d_2020_Persimmon_1.png",relationship:"A fast-paced partnership built on trust across Derbyshire, Nottinghamshire, and Leicestershire.",sites:[{name:"Clipstone Park",location:"Clipstone, Mansfield",lat:53.167,lng:-1.137,housetypes:["Bedale","Alnwick","Byford","Bolsover","Kielder"]},{name:"The Oaks",location:"Calverton, Notts",lat:53.033,lng:-1.093,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Boulton Moor",location:"Chellaston, Derby",lat:52.872,lng:-1.413,housetypes:["Bedale","Alnwick","Bolsover","Kielder","Roseberry"]},{name:"Jubilee Gardens",location:"Ilkeston, Derbyshire",lat:52.972,lng:-1.307,housetypes:["Bedale","Byford","Alnwick","Bolsover"]},{name:"Brascote Park",location:"Brascote, Leicestershire",lat:52.607,lng:-1.36,housetypes:["Bedale","Alnwick","Bolsover","Kielder"]},{name:"Foxley Fields",location:"Market Harborough, Leics",lat:52.478,lng:-0.918,housetypes:["Kielder","Roseberry","Alnwick","Bolsover"]}]},{id:"stmodwen",name:"St. Modwen Homes",color:"#6B2D5B",logo:"https://ramsboards.com/wp-content/uploads/2021/01/st.modwen-homes.webp",relationship:"With their head office in Derby, St. Modwen are a natural partner for M&W.",sites:[{name:"Hilton Valley",location:"Hilton, Derbyshire",lat:52.862,lng:-1.596,housetypes:["Arden","Berwick","Carleton","Danbury"]},{name:"Bramshall Meadows",location:"Uttoxeter, Staffordshire",lat:52.907,lng:-1.847,housetypes:["Arden","Berwick","Carleton","Elmswell"]},{name:"Snibston Mill",location:"Coalville, Leicestershire",lat:52.725,lng:-1.37,housetypes:["Arden","Carleton","Danbury","Elmswell"]},{name:"Egstow Park",location:"Clay Cross, Derbyshire",lat:53.163,lng:-1.413,housetypes:["Berwick","Carleton","Danbury"]}]},{id:"countryside",name:"Countryside Homes",color:"#2B6E44",logo:"https://nla-production-media.s3.eu-west-2.amazonaws.com/84908/Untitled-design-15.png?v=1766430558",relationship:"M&W support their Midlands mixed-tenure developments.",sites:[{name:"Edwalton Fields",location:"Edwalton, Nottingham",lat:52.917,lng:-1.12,housetypes:["Thornbury","Wentworth","Henley","Sudbury"]},{name:"Mastin Moor",location:"Chesterfield, Derbyshire",lat:53.267,lng:-1.342,housetypes:["Thornbury","Henley","Sudbury"]}]},{id:"vistry",name:"Vistry / Bovis Homes",color:"#00594F",logo:"https://housingforum.org.uk/wp-content/uploads/2020/05/Untitled-design.png",relationship:"Our work on Broadnook Garden Village is a testament to their trust in M&W.",sites:[{name:"Broadnook Garden Village",location:"Rothley, Leicestershire",lat:52.719,lng:-1.138,housetypes:["Limewood","Fern","Lime","Oak","Willow"]},{name:"Partridge Walk",location:"Stafford",lat:52.808,lng:-2.101,housetypes:["Limewood","Oak","Willow","Cedar"]},{name:"Hinckley 475",location:"Hinckley, Leicestershire",lat:52.54,lng:-1.37,housetypes:["Limewood","Fern","Oak","Willow"]}]},{id:"ashberry",name:"Ashberry Homes",color:"#7B3F98",logo:"https://www.ashberryhomes.co.uk/img/default-social-image.jpg",relationship:"M&W deliver consistently across Ashberry's Nottinghamshire sites.",sites:[{name:"Potters Gate",location:"Farndon, Newark",lat:53.064,lng:-0.856,housetypes:["Greenwood","Oakwood","Birchwood"]},{name:"Swinfen Vale",location:"Swinfen, Staffordshire",lat:52.667,lng:-1.755,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]},{name:"Longridge",location:"Long Eaton, Notts",lat:52.89,lng:-1.275,housetypes:["Greenwood","Oakwood","Elmwood","Birchwood"]}]},{id:"davidsons",name:"Davidsons Homes",color:"#C8102E",logo:"https://davidsonsgroup.co.uk/wp-content/uploads/2023/01/Screenshot-2023-01-03-at-16.53.01-1024x522.png",relationship:"Davidsons are a well-respected Midlands developer. We're proud to be part of their supply chain.",sites:[{name:"Davidsons at Huncote",location:"Huncote, Leicestershire",lat:52.582,lng:-1.218,housetypes:["The Arden","The Warwick","The Ashby","The Leamington"]},{name:"Davidsons at Boulton Moor",location:"Derby",lat:52.878,lng:-1.418,housetypes:["The Arden","The Warwick","The Kenilworth"]}]},{id:"wheeldons",name:"Wheeldon Homes",color:"#2E4057",logo:"https://www.panddg.co.uk/wp-content/uploads/2022/02/logo-wheeldon-homes.svg",relationship:"A boutique developer that values the personal service M&W bring.",sites:[{name:"Oaklands",location:"Etwall, South Derbyshire",lat:52.871,lng:-1.599,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"Derwentside",location:"Derwentside, Derbyshire",lat:52.92,lng:-1.48,housetypes:["The Chatsworth","The Haddon","The Calke"]},{name:"The Green",location:"Church Broughton, Derby",lat:52.857,lng:-1.66,housetypes:["The Chatsworth","The Haddon"]}]},{id:"crest",name:"Crest Nicholson",color:"#003C71",logo:"https://www.crestnicholson.com/favicon.ico",relationship:"M&W meet Crest Nicholson's exacting standards on every element.",sites:[{name:"Barley Fields",location:"Queniborough, Leicestershire",lat:52.697,lng:-1.08,housetypes:["Elm","Beech","Maple","Rowan","Birch"]}]}];
 const PAST_PROJECTS=[{year:"2024-25",builder:"Bellway",site:"Holbrook Park Ph1",location:"Chellaston",units:167,scope:"Full package"},{year:"2023-25",builder:"Persimmon",site:"Boulton Moor",location:"Chellaston",units:245,scope:"Full package"},{year:"2023-24",builder:"Barratt",site:"Thoresby Vale Ph2",location:"Mansfield",units:180,scope:"Full package"},{year:"2022-24",builder:"St. Modwen",site:"Hilton Valley Ph3",location:"Hilton",units:120,scope:"1st & 2nd fix"},{year:"2021-23",builder:"Persimmon",site:"Jubilee Gardens",location:"Ilkeston",units:200,scope:"Full package"},{year:"2020-22",builder:"Barratt",site:"Dunstall Park",location:"Tamworth",units:280,scope:"Full package"},{year:"2019-21",builder:"Bellway",site:"The Meadows Ph1",location:"Alvaston",units:78,scope:"Full package"},{year:"2018-20",builder:"Persimmon",site:"Clipstone Park",location:"Mansfield",units:190,scope:"Full package"},{year:"2017-19",builder:"Bellway",site:"Coppice Heights",location:"Ripley",units:130,scope:"Full package"},{year:"2016-18",builder:"Persimmon",site:"Carlton View",location:"Gedling",units:170,scope:"Full package"},{year:"2015-17",builder:"Bellway",site:"Hugglescote Grange",location:"Leicestershire",units:140,scope:"Full package"},{year:"2014-16",builder:"Barratt",site:"Grange Park",location:"Loughborough",units:220,scope:"Full package"},{year:"2012-14",builder:"Bellway",site:"Stenson Fields",location:"Derby",units:250,scope:"Full package"},{year:"2010-12",builder:"Persimmon",site:"Wollaton Vale",location:"Nottingham",units:200,scope:"Full package"},{year:"2008-10",builder:"Barratt",site:"Chestnut Grove",location:"Long Eaton",units:140,scope:"Full package"},{year:"2005-07",builder:"Bellway",site:"Millbrook Park",location:"Stapleford",units:85,scope:"Full package"}];
 const SERVICES=[{id:"joists",title:"Joists & Structural Floors",icon:"┃",desc:"All structural timber floor systems to NHBC standards.",subs:[{n:"Joist Types",items:["Masonry Hanger Joists","Joist Hanger to Trimmer","Change of Direction","I-Beam / Engineered","Traditional Softwood"]},{n:"Floor Construction",items:["Semi-Detached Party Floor","Strutting & Noggins","Structural Decking","Fire Stopping"]}]},{id:"roofs",title:"Roof Construction",icon:"△",desc:"Full roof erection through to weathertight.",subs:[{n:"Roof Types",items:["Straight Up & Over","Gable Elevations","Hipped Roofs","Valley Roofs","Dormer Construction"]},{n:"Roof Details",items:["Open Eaves","Boxed Soffit","Gable Ladders","Box Ends","Fascia & Barge Boards","Roof Bracing"]}]},{id:"first-fix",title:"First Fix Carpentry",icon:"▣",desc:"All carpentry before plastering.",subs:[{n:"Traditional (Blockwork)",items:["Staircase Installation","Stud Partitions","Bulkheads","Door Linings","Window Boards","Pipe Boxing","Loft Hatches","Solar Panel Stands"]},{n:"Timber Frame",items:["Frame Erection","Squaring & Levelling","Panel Stitching","Party Walls","Floor Cassettes","Breather Membrane","Fire Stopping & Cavity Barriers"]}]},{id:"second-fix",title:"Second Fix Carpentry",icon:"▤",desc:"All finishing carpentry after plastering.",subs:[{n:"Traditional Doors",items:["Door Trimming & Fitting","Hinging","Latch & Lock Fitting","Fire Door Hanging"]},{n:"Prehung Casings",items:["Prehung Installation","Levelling & Packing","Fire-Rated Sets"]},{n:"Standard Spec",items:["Standard Skirting (68/94mm)","Standard Architrave","Standard Staircase"]},{n:"Premium Spec",items:["Premium Skirting (119-168mm)","Premium Architrave + Plinth Blocks","Oak Staircase","Engineered Hardwood Flooring","Panelling & Wainscoting"]}]},{id:"finals",title:"Final Fix",icon:"◆",desc:"All final items to handover standard.",subs:[{n:"Included",items:["Door Handles & Furnishings","Ironmongery - Locks, Latches & Keeps","Bath Panel","Front Door Accessories"]}]},{id:"extras",title:"Unique Works",icon:"\u25C7",desc:"Remedial & snagging work for other contractors.",subs:[{n:"Remedial Services",items:["Rectifying defective carpentry by other contractors","Door realignment & rehinging","Skirting & architrave replacement","Staircase remedials","Floor levelling & joist repairs"]},{n:"Snagging Support",items:["NHBC inspection preparation for other sites","Pre-completion snagging lists","Warranty defect repairs","Fire door compliance remedials","Builder handover support"]}]}];
-const DEMO_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",schedule:[{day:"Mon",plot:"34",type:"Craftsman",stage:"First Fix",status:"active"},{day:"Tue",plot:"34",type:"Craftsman",stage:"First Fix",status:"upcoming"},{day:"Wed",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Thu",plot:"35",type:"Joiner",stage:"First Fix",status:"upcoming"},{day:"Fri",plot:"36",type:"Turner",stage:"First Fix",status:"upcoming"}]},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",schedule:[{day:"Mon",plot:"18",type:"Joiner",stage:"Roofs",status:"active"},{day:"Tue",plot:"18",type:"Joiner",stage:"Roofs",status:"upcoming"},{day:"Wed",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Thu",plot:"19",type:"Turner",stage:"Roofs",status:"upcoming"},{day:"Fri",plot:"20",type:"Tanner",stage:"Roofs",status:"upcoming"}]}];
-const HOLBROOK_PLOTS=Array.from({length:40},(_,i)=>{const n=i+1;const stages=["Not Started","Joists","Joists Complete","Roofs","Roofs Complete","First Fix","First Fix Complete","Second Fix","Second Fix Complete","Finals","Complete"];const si=n<=8?10:n<=14?8:n<=20?6:n<=28?4:n<=34?2:0;return{plot:n,stage:stages[si],carpenter:n<=8?"Various":n<=14?"Sam Bennett":n<=20?"Tom Harris":n<=28?"Dave Mitchell":n<=34?"Ryan Cooper":"Unallocated",houseType:["Craftsman","Joiner","Turner","Tanner","Weaver"][i%5]};});
-const ALL_CARPS=[{id:"C001",name:"Dave Mitchell",pin:"1234",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C002",name:"Ryan Cooper",pin:"5678",site:"Coppice Heights",builder:"Bellway",status:"active"},{id:"C003",name:"Jake Williams",pin:"2345",site:"Thoresby Vale",builder:"Barratt",status:"active"},{id:"C004",name:"Tom Harris",pin:"3456",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C005",name:"Sam Bennett",pin:"4567",site:"Holbrook Park",builder:"Bellway",status:"active"},{id:"C006",name:"Chris Taylor",pin:"5679",site:"The Meadows",builder:"Bellway",status:"active"},{id:"C007",name:"Dan Evans",pin:"6780",site:"Hilton Valley",builder:"St. Modwen",status:"leave"},{id:"C008",name:"Mark Johnson",pin:"7891",site:"Edwalton Fields",builder:"Countryside",status:"active"},{id:"C009",name:"Luke Brown",pin:"8902",site:"Broadnook",builder:"Vistry",status:"active"},{id:"C010",name:"James Wilson",pin:"9013",site:"Clipstone Park",builder:"Persimmon",status:"active"},{id:"C011",name:"Richard Wileman",pin:"3002",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C012",name:"Charlie Dillon",pin:"3003",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C013",name:"Ian Johnson",pin:"3004",site:"Brascote Park",builder:"Persimmon Homes",status:"active"},{id:"C014",name:"Neil Hines",pin:"3006",site:"Springwood",builder:"Bellway Homes",status:"active"},{id:"C015",name:"Neil Goodwin",pin:"3008",site:"Derwentside",builder:"Wheeldon Homes",status:"active"},{id:"C016",name:"Rob Jones",pin:"3010",site:"Snibston Mill",builder:"St. Modwen Homes",status:"active"}];
+const DEMO_CARPS=[];
+const HOLBROOK_PLOTS=Array.from({length:40},(_,i)=>{const n=i+1;const stages=["Not Started","Joists","Joists Complete","Roofs","Roofs Complete","First Fix","First Fix Complete","Second Fix","Second Fix Complete","Finals","Complete"];const si=n<=8?10:n<=14?8:n<=20?6:n<=28?4:n<=34?2:0;return{plot:n,stage:stages[si],carpenter:n<=8?"Various":n<=14?"Richard Wileman":n<=20?"Neil Hines":n<=28?"Charlie Dillon":n<=34?"Neil Goodwin":"Unallocated",houseType:["Craftsman","Joiner","Turner","Tanner","Weaver"][i%5]};});
+const ALL_CARPS=[{id:"C011",name:"Richard Wileman",pin:"3002",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C012",name:"Charlie Dillon",pin:"3003",site:"Swinfen Vale",builder:"Ashberry Homes",status:"active"},{id:"C013",name:"Ian Johnson",pin:"3004",site:"Brascote Park",builder:"Persimmon Homes",status:"active"},{id:"C014",name:"Neil Hines",pin:"3006",site:"Springwood",builder:"Bellway Homes",status:"active"},{id:"C015",name:"Neil Goodwin",pin:"3008",site:"Derwentside",builder:"Wheeldon Homes",status:"active"},{id:"C016",name:"Rob Jones",pin:"3010",site:"Snibston Mill",builder:"St. Modwen Homes",status:"active"}];
 const ALL_PRICE_LISTS=[{builder:"Barratt Homes",color:"#E31937",sites:[{site:"Thoresby Vale",rates:[["Joists — GF","£440"],["Joists — FF","£400"],["Roof (trussed)","£720"],["First Fix","£1,200"],["Second Fix","£1,350"],["Finals","£240"]]},{site:"Dunstall Park",rates:[["Joists — GF","£460"],["Joists — FF","£420"],["Roof (trussed)","£750"],["First Fix","£1,250"],["Second Fix","£1,400"],["Finals","£250"]]}]},{builder:"Lovell Homes",color:"#1B3D6F",sites:[{site:"Old Mill Farm",rates:[["Joists — GF","£480"],["Joists — FF","£440"],["Roof (trussed)","£780"],["First Fix","£1,300"],["Second Fix","£1,450"],["Finals","£260"]]},{site:"Berry Hill",rates:[["Joists — GF","£470"],["Joists — FF","£430"],["Roof (trussed)","£760"],["First Fix","£1,280"],["Second Fix","£1,420"],["Finals","£255"]]}]},{builder:"Bellway Homes",color:"#003DA5",sites:[{site:"Holbrook Park",rates:[["Joists — GF","£450"],["Joists — FF","£410"],["Roof (trussed)","£730"],["First Fix","£1,220"],["Second Fix","£1,380"],["Finals","£245"]]},{site:"Coppice Heights",rates:[["Joists — GF","£445"],["Joists — FF","£405"],["Roof (cut)","£1,050"],["First Fix","£1,210"],["Second Fix","£1,360"],["Finals","£240"]]},{site:"The Meadows",rates:[["Joists — GF","£455"],["Joists — FF","£415"],["Roof (trussed)","£740"],["First Fix","£1,230"],["Second Fix","£1,390"],["Finals","£248"]]}]},{builder:"Persimmon Homes",color:"#D4002A",sites:[{site:"Clipstone Park",rates:[["Joists — GF","£420"],["Joists — FF","£380"],["Roof (trussed)","£700"],["First Fix","£1,150"],["Second Fix","£1,300"],["Finals","£230"]]},{site:"Boulton Moor",rates:[["Joists — GF","£430"],["Joists — FF","£390"],["Roof (trussed)","£710"],["First Fix","£1,180"],["Second Fix","£1,320"],["Finals","£235"]]}]},{builder:"St. Modwen Homes",color:"#6B2D5B",sites:[{site:"Hilton Valley",rates:[["Joists — GF","£460"],["Joists — FF","£420"],["Roof (trussed)","£740"],["First Fix","£1,240"],["Second Fix","£1,380"],["Finals","£250"]]}]},{builder:"Countryside Homes",color:"#2B6E44",sites:[{site:"Edwalton Fields",rates:[["Joists — GF","£470"],["Joists — FF","£430"],["Roof (trussed)","£760"],["First Fix","£1,280"],["Second Fix","£1,420"],["Finals","£258"]]}]},{builder:"Vistry / Bovis",color:"#00594F",sites:[{site:"Broadnook Garden Village",rates:[["Joists — GF","£480"],["Joists — FF","£440"],["Roof (trussed)","£770"],["First Fix","£1,300"],["Second Fix","£1,450"],["Finals","£265"]]}]},{builder:"Ashberry Homes",color:"#7B3F98",sites:[{site:"Potters Gate",rates:[["Joists — GF","£440"],["Joists — FF","£400"],["Roof (trussed)","£720"],["First Fix","£1,200"],["Second Fix","£1,350"],["Finals","£240"]]}]},{builder:"Davidsons Homes",color:"#C8102E",sites:[{site:"Davidsons at Huncote",rates:[["Joists — GF","£420"],["Joists — FF","£380"],["Roof (trussed)","£680"],["First Fix","£1,150"],["Second Fix","£1,280"],["Finals","£220"]]}]},{builder:"Wheeldon Homes",color:"#2E4057",sites:[{site:"Oaklands, Etwall",rates:[["Joists — GF","£490"],["Joists — FF","£450"],["Roof (cut)","£1,100"],["First Fix","£1,350"],["Second Fix","£1,520"],["Finals","£280"]]}]},{builder:"Crest Nicholson",color:"#003C71",sites:[{site:"Barley Fields",rates:[["Joists — GF","£475"],["Joists — FF","£435"],["Roof (trussed)","£770"],["First Fix","£1,300"],["Second Fix","£1,460"],["Finals","£265"]]}]}];
 const DEMO_DOCS_BY_SITE={"Holbrook Park":[{cat:"Floorplans",docs:["Craftsman — Ground Floor","Craftsman — First Floor","Joiner — Ground Floor","Joiner — First Floor","Turner — Ground Floor","Turner — First Floor"]},{cat:"Technical Drawings",docs:["Craftsman — Roof Plan","Joiner — Roof Plan","Turner — Roof Plan"]},{cat:"Site Documents",docs:["Holbrook Park — Site Layout","Holbrook Park — H&S Pack","Bellway Specification Book"]}],"Coppice Heights":[{cat:"Floorplans",docs:["Joiner — Ground Floor","Joiner — First Floor","Turner — Ground Floor","Turner — First Floor"]},{cat:"Site Documents",docs:["Coppice Heights — Site Layout","Coppice Heights — H&S Pack"]}]};
 
 const CARPENTERS = [
-  { id: "C001", name: "Dave Mitchell", pin: "1234", site: "Holbrook Park", builder: "Bellway" },
-  { id: "C002", name: "Ryan Cooper", pin: "5678", site: "Coppice Heights", builder: "Bellway" },
-  { id: "C003", name: "Jake Williams", pin: "2345", site: "Thoresby Vale", builder: "Barratt" },
-  { id: "C004", name: "Tom Harris", pin: "3456", site: "Holbrook Park", builder: "Bellway" },
-  { id: "C005", name: "Sam Bennett", pin: "4567", site: "Holbrook Park", builder: "Bellway" },
-  { id: "C006", name: "Chris Taylor", pin: "5679", site: "The Meadows", builder: "Bellway" },
-  { id: "C007", name: "Dan Evans", pin: "6780", site: "Hilton Valley", builder: "St. Modwen", status: "leave" },
-  { id: "C008", name: "Mark Johnson", pin: "7891", site: "Edwalton Fields", builder: "Countryside" },
-  { id: "C009", name: "Luke Brown", pin: "8902", site: "Broadnook Garden Village", builder: "Vistry" },
-  { id: "C010", name: "James Wilson", pin: "9013", site: "Clipstone Park", builder: "Persimmon" },
-  { id: "C011", name: "Richard Wileman", pin: "3002", site: "Swinfen Vale", builder: "Ashberry Homes" },
-  { id: "C012", name: "Charlie Dillon", pin: "3003", site: "Swinfen Vale", builder: "Ashberry Homes" },
-  { id: "C013", name: "Ian Johnson", pin: "3004", site: "Brascote Park", builder: "Persimmon Homes" },
-  { id: "C014", name: "Neil Hines", pin: "3006", site: "Springwood", builder: "Bellway Homes" },
-  { id: "C015", name: "Neil Goodwin", pin: "3008", site: "Derwentside", builder: "Wheeldon Homes" },
-  { id: "C016", name: "Rob Jones", pin: "3010", site: "Snibston Mill", builder: "St. Modwen Homes" }
+  { id: "C011", name: "Richard Wileman", pin: "3002", site: "Swinfen Vale", builder: "Ashberry Homes", status: "active" },
+  { id: "C012", name: "Charlie Dillon", pin: "3003", site: "Swinfen Vale", builder: "Ashberry Homes", status: "active" },
+  { id: "C013", name: "Ian Johnson", pin: "3004", site: "Brascote Park", builder: "Persimmon Homes", status: "active" },
+  { id: "C014", name: "Neil Hines", pin: "3006", site: "Springwood", builder: "Bellway Homes", status: "active" },
+  { id: "C015", name: "Neil Goodwin", pin: "3008", site: "Derwentside", builder: "Wheeldon Homes", status: "active" },
+  { id: "C016", name: "Rob Jones", pin: "3010", site: "Snibston Mill", builder: "St. Modwen Homes", status: "active" }
 ];
 
 const SITE_MANAGERS = [
-  { id: "SM001", name: "Michael", pin: "1111", site: "Swinfen Vale", builder: "Bellway", role: "site_manager" },
-  { id: "SM002", name: "Richard", pin: "2222", site: "Oadby Grange", builder: "Bellway", role: "site_manager" },
   { id: "SM003", name: "Michael Blake", pin: "3001", site: "Swinfen Vale", builder: "Ashberry Homes", role: "site_manager" },
-  { id: "SM004", name: "Andy Manager", pin: "3005", site: "Brascote Park", builder: "Persimmon Homes", role: "site_manager" },
   { id: "SM005", name: "Tim Allen", pin: "3007", site: "Springwood", builder: "Bellway Homes", role: "site_manager" },
-  { id: "SM006", name: "Daniel Moody", pin: "3009", site: "Derwentside", builder: "Wheeldon Homes", role: "site_manager" },
-  { id: "SM007", name: "Ellis Manager", pin: "3011", site: "Snibston Mill", builder: "St. Modwen Homes", role: "site_manager" }
+  { id: "SM006", name: "Daniel Moody", pin: "3009", site: "Derwentside", builder: "Wheeldon Homes", role: "site_manager" }
 ];
 
 const INITIAL_WORK_LOG = [
-  { id: 1, site: "Holbrook Park", builder: "Bellway", plot: "34", houseType: "Craftsman", stage: "First Fix", expectedDays: 3, priority: "high", notes: "Ready to go", status: "allocated", allocatedTo: "Dave Mitchell" },
-  { id: 2, site: "Holbrook Park", builder: "Bellway", plot: "35", houseType: "Joiner", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "allocated", allocatedTo: "Dave Mitchell" },
-  { id: 3, site: "Coppice Heights", builder: "Bellway", plot: "18", houseType: "Turner", stage: "Roof", expectedDays: 2, priority: "high", notes: "Trusses delivered", status: "allocated", allocatedTo: "Ryan Cooper" },
-  { id: 4, site: "Coppice Heights", builder: "Bellway", plot: "19", houseType: "Joiner", stage: "Roof", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Ryan Cooper" },
-  { id: 5, site: "Thoresby Vale", builder: "Barratt", plot: "42", houseType: "Windermere", stage: "Joists", expectedDays: 2, priority: "high", notes: "", status: "allocated", allocatedTo: "Jake Williams" },
-  { id: 6, site: "Holbrook Park", builder: "Bellway", plot: "29", houseType: "Weaver", stage: "Second Fix", expectedDays: 4, priority: "medium", notes: "", status: "allocated", allocatedTo: "Tom Harris" },
-  { id: 7, site: "Holbrook Park", builder: "Bellway", plot: "12", houseType: "Cooper", stage: "Final", expectedDays: 1, priority: "low", notes: "Snagging only", status: "complete", allocatedTo: "Sam Bennett" },
-  { id: 8, site: "Swinfen Vale", builder: "Bellway", plot: "5", houseType: "Craftsman", stage: "Joists", expectedDays: 2, priority: "high", notes: "Michael called — ready Monday", status: "logged" },
-  { id: 9, site: "Swinfen Vale", builder: "Bellway", plot: "6", houseType: "Joiner", stage: "Joists", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
-  { id: 10, site: "Oadby Grange", builder: "Bellway", plot: "3", houseType: "Weaver", stage: "First Fix", expectedDays: 3, priority: "high", notes: "Richard needs ASAP", status: "logged" },
-  { id: 11, site: "Oadby Grange", builder: "Bellway", plot: "4", houseType: "Cooper", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "logged" },
-  { id: 12, site: "Hilton Valley", builder: "St. Modwen", plot: "22", houseType: "Arden", stage: "Roof", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
-  { id: 13, site: "Edwalton Fields", builder: "Countryside", plot: "8", houseType: "Thornbury", stage: "Second Fix", expectedDays: 4, priority: "low", notes: "", status: "logged" },
-  { id: 14, site: "Broadnook Garden Village", builder: "Vistry", plot: "15", houseType: "Limewood", stage: "First Fix", expectedDays: 3, priority: "medium", notes: "", status: "logged" },
-  { id: 15, site: "Clipstone Park", builder: "Persimmon", plot: "67", houseType: "Bedale", stage: "Roof", expectedDays: 2, priority: "high", notes: "", status: "logged" }
+  { id: 1, site: "Swinfen Vale", builder: "Ashberry Homes", plot: "5", houseType: "Harcourt", stage: "Joist", expectedDays: 2, priority: "high", notes: "Ready Monday", status: "allocated", allocatedTo: "Richard Wileman" },
+  { id: 2, site: "Swinfen Vale", builder: "Ashberry Homes", plot: "6", houseType: "Charwood / Clarendon", stage: "1st Fix", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Charlie Dillon" },
+  { id: 3, site: "Derwentside", builder: "Wheeldon Homes", plot: "12", houseType: "Hawksley", stage: "Main Roof", expectedDays: 2, priority: "high", notes: "Trusses delivered", status: "allocated", allocatedTo: "Neil Goodwin" },
+  { id: 4, site: "Springwood", builder: "Bellway Homes", plot: "8", houseType: "Joiner", stage: "1st Fix", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Neil Hines" },
+  { id: 5, site: "Snibston Mill", builder: "St. Modwen Homes", plot: "14", houseType: "Arden", stage: "2nd Fix", expectedDays: 2, priority: "high", notes: "", status: "allocated", allocatedTo: "Rob Jones" },
+  { id: 6, site: "Brascote Park", builder: "Persimmon Homes", plot: "22", houseType: "Bedale", stage: "Main Roof", expectedDays: 2, priority: "medium", notes: "", status: "allocated", allocatedTo: "Ian Johnson" },
+  { id: 7, site: "Swinfen Vale", builder: "Ashberry Homes", plot: "7", houseType: "Evelyn / Fletcher", stage: "Joist", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
+  { id: 8, site: "Derwentside", builder: "Wheeldon Homes", plot: "15", houseType: "Milton", stage: "1st Fix", expectedDays: 2, priority: "high", notes: "", status: "logged" },
+  { id: 9, site: "Springwood", builder: "Bellway Homes", plot: "10", houseType: "Turner", stage: "Main Roof", expectedDays: 2, priority: "medium", notes: "", status: "logged" },
+  { id: 10, site: "Snibston Mill", builder: "St. Modwen Homes", plot: "18", houseType: "Carleton", stage: "3rd Fix", expectedDays: 1, priority: "low", notes: "", status: "logged" }
 ];
 
 const PRICE_LISTS_BY_HOUSE_TYPE = {
   "Bellway Swinfen Vale": {
     "builder": "Bellway Homes",
     "site": "Swinfen Vale",
-    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£35","Bracers/straps":"£20","MDF bulkhead":"£30","Single garage":"£200","Double garage":"£300","External doors":"£40"},
+    "extras": {"Daywork":"£20/hr","Cut doors over carpets":"£5/door","Cut plinths refit over vinyl/tile":"£20/plot","Spandrel panels":"£35 each","Extend bracers & fit garage straps":"£20","MDF bulkhead":"£30","Single garage roof":"£200","Double garage roof":"£300","External doors":"£40"},
     "types": {
-      "Harcourt":{"Joist":610,"Main Roof":850,"Low Roof FD":140,"Low Roof Rear":120,"1st Fix":950,"2nd Fix":480,"3rd Fix":200},
-      "Charwood/Clarendon":{"Joist":600,"Main Roof":850,"Low Roof FD":140,"Low Roof Rear":130,"Low Roof Top Bay":110,"1st Fix":980,"2nd Fix":500,"3rd Fix":220},
-      "Poppy/Blacksmith":{"Joist":400,"Main Roof":600,"Low Roof FD":110,"1st Fix":720,"2nd Fix":380,"3rd Fix":160},
-      "Alysumm/Blenmere":{"Joist":380,"Main Roof":570,"Low Roof FD":100,"1st Fix":680,"2nd Fix":360,"3rd Fix":150},
-      "Angelica/Bowyer":{"Joist":430,"Main Roof":650,"Low Roof FD":120,"Low Roof Rear":110,"1st Fix":760,"2nd Fix":400,"3rd Fix":170},
-      "Evelyn/Fletcher":{"Joist":550,"Main Roof":780,"Low Roof FD":130,"Low Roof Rear":120,"1st Fix":880,"2nd Fix":450,"3rd Fix":190},
-      "Aster/Goldsmith":{"Joist":520,"Main Roof":750,"Low Roof FD":125,"Low Roof Rear":115,"1st Fix":850,"2nd Fix":440,"3rd Fix":185},
-      "Verbena/Mason":{"Joist":580,"Main Roof":820,"Low Roof FD":135,"Low Roof Rear":125,"1st Fix":920,"2nd Fix":470,"3rd Fix":200},
-      "Jasmine/Scrivener":{"Joist":620,"Main Roof":870,"Low Roof FD":145,"Low Roof Rear":130,"Low Roof Top Bay":115,"1st Fix":990,"2nd Fix":510,"3rd Fix":225},
-      "Betony/Shoemaker":{"Joist":560,"Main Roof":800,"Low Roof FD":130,"Low Roof Rear":120,"1st Fix":890,"2nd Fix":460,"3rd Fix":195},
-      "Daphne/Spinner":{"Joist":490,"Main Roof":720,"Low Roof FD":120,"Low Roof Rear":110,"1st Fix":820,"2nd Fix":420,"3rd Fix":180},
-      "Foxglove/Tanner":{"Joist":540,"Main Roof":770,"Low Roof FD":128,"Low Roof Rear":118,"1st Fix":860,"2nd Fix":445,"3rd Fix":188},
-      "Delphinium/Wheelwright":{"Joist":630,"Main Roof":880,"Low Roof FD":148,"Low Roof Rear":135,"Low Roof Top Bay":118,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
-      "Type D":{"Joist":350,"Main Roof":520,"Low Roof FD":90,"1st Fix":620,"2nd Fix":320,"3rd Fix":140},
-      "Type B":{"Joist":340,"Main Roof":510,"Low Roof FD":88,"1st Fix":610,"2nd Fix":310,"3rd Fix":135},
-      "Tunstall/Thornton":{"Joist":450,"Main Roof":670,"Low Roof FD":115,"Low Roof Rear":105,"1st Fix":780,"2nd Fix":410,"3rd Fix":175},
-      "Beattie":{"Joist":470,"Main Roof":690,"Low Roof FD":118,"Low Roof Rear":108,"1st Fix":800,"2nd Fix":415,"3rd Fix":178}
+      "Harcourt":{"Joist":330,"Main Roof":700,"Low Roof FD":135,"Low Roof Rear":135,"1st Fix":850,"2nd Fix":850,"3rd Fix":210},
+      "Charwood / Clarendon":{"Joist":255,"Main Roof":560,"Low Roof FD":135,"1st Fix":650,"2nd Fix":580,"3rd Fix":135},
+      "Poppy / Blacksmith":{"Joist":200,"Main Roof":"220 MID / 290 END","Low Roof FD":60,"1st Fix":520,"2nd Fix":500,"3rd Fix":115},
+      "Alysumm / Blenmere":{"Joist":280,"Main Roof":480,"Low Roof FD":60,"1st Fix":640,"2nd Fix":570,"3rd Fix":135},
+      "Angelica / Bowyer":{"Joist":300,"Main Roof":530,"Low Roof FD":60,"Low Roof Rear":50,"1st Fix":700,"2nd Fix":620,"3rd Fix":160},
+      "Evelyn / Fletcher":{"Joist":"210/210","Main Roof":700,"Low Roof FD":60,"1st Fix":900,"2nd Fix":850,"3rd Fix":200},
+      "Aster / Goldsmith":{"Joist":320,"Main Roof":540,"Low Roof FD":60,"1st Fix":750,"2nd Fix":680,"3rd Fix":180},
+      "Verbena / Mason":{"Joist":260,"Main Roof":500,"Low Roof FD":50,"Low Roof Rear":120,"1st Fix":650,"2nd Fix":600,"3rd Fix":140},
+      "Jasmine / Scrivener":{"Joist":280,"Main Roof":600,"Low Roof FD":50,"1st Fix":740,"2nd Fix":640,"3rd Fix":160},
+      "Betony / Shoemaker":{"Joist":200,"Main Roof":"220 MID / 290 END","Low Roof FD":120,"1st Fix":520,"2nd Fix":520,"3rd Fix":125},
+      "Daphne / Spinner":{"Joist":"220/220","Main Roof":700,"Low Roof FD":50,"Low Roof Rear":120,"1st Fix":900,"2nd Fix":850,"3rd Fix":200},
+      "Foxglove / Tanner":{"Joist":300,"Main Roof":680,"Low Roof FD":50,"1st Fix":620,"2nd Fix":580,"3rd Fix":125},
+      "Delphinium / Wheelwright":{"Joist":"220/220","Main Roof":700,"Low Roof FD":50,"1st Fix":900,"2nd Fix":850,"3rd Fix":200},
+      "Type D":{"Joist":240,"Main Roof":"220 MID / 270 END","Low Roof FD":40,"1st Fix":560,"2nd Fix":540,"3rd Fix":125},
+      "Type B":{"Joist":220,"Main Roof":"220 MID / 250 END","Low Roof FD":40,"1st Fix":540,"2nd Fix":520,"3rd Fix":125},
+      "Tunstall / Thornton":{"Main Roof":"580 SEMI","1st Fix":500,"2nd Fix":500,"3rd Fix":100},
+      "Beattie":{"Low Roof FD":40,"1st Fix":220,"2nd Fix":200,"3rd Fix":90},
+      "Beattie (600)":{"Main Roof":600,"Low Roof FD":40,"1st Fix":300,"2nd Fix":230,"3rd Fix":90}
     }
   },
   "Wheeldon Derwentside": {
     "builder": "Wheeldon Homes",
     "site": "Derwentside",
-    "extras": {"Single garage":"£100","Twin garage":"£160","External doors":"£35","Bracers":"£20","Daywork":"£20/hr","Garage door frames":"£15"},
+    "extras": {"Single garage roof":"£100","Twin garage roof":"£160","Extend bracers & fix gable straps":"£20","Daywork":"£20/hr","Garage door frames":"£15","External doors (each)":"£35"},
+    "notes": "Cellotex included in 1st Fix price. Spandrell panels fitted with main roof.",
     "types": {
-      "Alderwood":{"Joist":480,"Main Roof":680,"Cellotex":80,"Low Roof":120,"1st Fix":820,"2nd Fix":420,"3rd Fix":180},
-      "Bramley":{"Joist":520,"Main Roof":730,"Cellotex":85,"Low Roof":130,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
-      "Chestnut":{"Joist":560,"Main Roof":780,"Cellotex":90,"Low Roof":140,"1st Fix":920,"2nd Fix":480,"3rd Fix":210},
-      "Cooper":{"Joist":440,"Main Roof":640,"Cellotex":75,"Low Roof":110,"1st Fix":770,"2nd Fix":390,"3rd Fix":165},
-      "Hawksley":{"Joist":600,"Main Roof":830,"Cellotex":95,"Low Roof":150,"1st Fix":970,"2nd Fix":500,"3rd Fix":225},
-      "Maple":{"Joist":510,"Main Roof":720,"Cellotex":82,"Low Roof":125,"1st Fix":850,"2nd Fix":440,"3rd Fix":190},
-      "Milton":{"Joist":540,"Main Roof":760,"Cellotex":88,"Low Roof":135,"1st Fix":900,"2nd Fix":465,"3rd Fix":200},
-      "Nightingale":{"Joist":580,"Main Roof":810,"Cellotex":92,"Low Roof":145,"1st Fix":950,"2nd Fix":490,"3rd Fix":215}
+      "Alderwood":{"Joist":210,"Main Roof":180,"Low Roof":40,"1st Fix":540,"2nd Fix":520,"3rd Fix":110},
+      "Bramley":{"Joist":220,"Main Roof":190,"Low Roof":40,"1st Fix":560,"2nd Fix":540,"3rd Fix":120},
+      "Chestnut":{"Joist":"230 & 230","Main Roof":450,"Cellotex":120,"Low Roof":"40 Front 60 Rear","1st Fix":1000,"2nd Fix":900,"3rd Fix":240},
+      "Cooper":{"Joist":240,"Main Roof":220,"Low Roof":"40 Front 60 Rear","1st Fix":600,"2nd Fix":645,"3rd Fix":135},
+      "Hawksley":{"Joist":350,"Main Roof":500,"Low Roof":40,"1st Fix":750,"2nd Fix":750,"3rd Fix":160},
+      "Maple":{"Joist":230,"Main Roof":200,"Low Roof":40,"1st Fix":585,"2nd Fix":550,"3rd Fix":130},
+      "Milton":{"Joist":260,"Main Roof":260,"Low Roof":40,"1st Fix":690,"2nd Fix":655,"3rd Fix":135},
+      "Nightingale":{"Joist":"230 & 230","Main Roof":220,"Low Roof":40,"1st Fix":900,"2nd Fix":900,"3rd Fix":240}
     }
   },
-  "Davidsons Wellington": {
+  "Davidsons Wellington Place": {
     "builder": "Davidsons",
     "site": "Wellington Place",
-    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£35","Single garage SG1":"£180","Single garage SG2":"£200","Double garage LG1":"£280","Double garage LG2":"£320"},
+    "extras": {"Daywork":"£20/hr","GRP chimney":"£60 each","Cut doors over carpets":"£5/door","Cut plinths refit over vinyl/tile":"£20/plot","Extend bracers & fit garage straps":"£20"},
+    "garages": {"SG1-4":"£145","LG1-4":"£145","SG4-4 Twin single side gable":"£120 (£240/twin)","LG4-4 Twin single side gable":"£120 (£240/twin)","SG10-4 Double hipped":"£460","LG10-4 Double hipped":"£460","SG200-4 Double & single hipped":"£280 (£560 total)"},
     "types": {
-      "DH320R-4":{"Joist":380,"2nd Joist":0,"Low Roof FD":95,"Main Roof":550,"1st Fix":700,"2nd Fix":360,"3rd Fix":155,"Spandrel":35},
-      "DH405G-4":{"Joist":420,"2nd Joist":0,"Low Roof FD":105,"Low Roof Bay":80,"Main Roof":620,"1st Fix":780,"2nd Fix":400,"3rd Fix":170,"Spandrel":35},
-      "DH480G-4":{"Joist":460,"2nd Joist":0,"Low Roof FD":115,"Low Roof Bay":90,"Main Roof":680,"1st Fix":840,"2nd Fix":430,"3rd Fix":185,"Spandrel":35},
-      "DH555G-4":{"Joist":500,"2nd Joist":0,"Low Roof FD":125,"Low Roof Bay":95,"Main Roof":740,"1st Fix":900,"2nd Fix":460,"3rd Fix":200,"Spandrel":35},
-      "DH610G-4":{"Joist":540,"2nd Joist":100,"Low Roof FD":130,"Low Roof Bay":100,"Main Roof":790,"1st Fix":950,"2nd Fix":490,"3rd Fix":215,"Spandrel":35},
-      "DH690G-4":{"Joist":580,"2nd Joist":110,"Low Roof FD":140,"Low Roof Bay":105,"Low Roof Rear":110,"Main Roof":840,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230,"Spandrel":35},
-      "DH770G-4":{"Joist":620,"2nd Joist":120,"Low Roof FD":145,"Low Roof Bay":110,"Low Roof Rear":115,"Main Roof":890,"1st Fix":1050,"2nd Fix":550,"3rd Fix":245,"Spandrel":35},
-      "DH850G-4":{"Joist":660,"2nd Joist":130,"Low Roof FD":150,"Low Roof Bay":115,"Low Roof Rear":120,"Main Roof":940,"1st Fix":1100,"2nd Fix":580,"3rd Fix":260,"Spandrel":35}
+      "DH320R-4 Stanbrook":{"Joist":380,"Main Roof":420,"1st Fix":680,"2nd Fix":680,"3rd Fix":160,"Spandrel":60},
+      "DH405G-4 Bradgate":{"Joist":450,"Low Roof FD":120,"Main Roof":750,"1st Fix":950,"2nd Fix":950,"3rd Fix":200,"Spandrel":60},
+      "DH412G-4 Bicton":{"Joist":400,"Low Roof FD":80,"Low Roof Bay":80,"Low Roof Rear":150,"Low Roof Top Bay":150,"Main Roof":750,"1st Fix":950,"2nd Fix":950,"3rd Fix":210,"Spandrel":60},
+      "DH434B-4 Southall":{"Joist":460,"Low Roof FD":80,"Low Roof Bay":120,"Low Roof Rear":150,"Main Roof":820,"1st Fix":1100,"2nd Fix":1100,"3rd Fix":230,"Spandrel":60},
+      "DH403RG-4 Nearsborough":{"Joist":400,"Low Roof FD":130,"Low Roof Top Bay":150,"Main Roof":550,"1st Fix":750,"2nd Fix":750,"3rd Fix":200,"Spandrel":60},
+      "DH408RS-3":{"Joist":400,"Low Roof FD":80,"Low Roof Rear":150,"Main Roof":1100,"1st Fix":800,"2nd Fix":800,"3rd Fix":200,"Spandrel":60},
+      "DH254MH-4 Amberley":{"Joist":250,"2nd Joist":250,"Low Roof FD":50,"Main Roof":700,"1st Fix":750,"2nd Fix":700,"3rd Fix":150,"Spandrel":60},
+      "DH301MHA-4 Thornton":{"Joist":235,"2nd Joist":235,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":750,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "DH301MHB-4 Thornton":{"Joist":235,"2nd Joist":235,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":750,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "DH301MHC-4 Thornton":{"Joist":235,"2nd Joist":235,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":750,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "DH340L-4 Grove":{"Joist":300,"2nd Joist":300,"Low Roof FD":120,"Low Roof Bay":150,"Main Roof":400,"1st Fix":1100,"2nd Fix":1100,"3rd Fix":240,"Spandrel":60},
+      "DH501G-4 Newstead":{"Joist":450,"2nd Joist":450,"Low Roof FD":100,"Low Roof Bay":80,"Main Roof":1400,"1st Fix":1300,"2nd Fix":1300,"3rd Fix":300,"Spandrel":60},
+      "DH552G-4 Leicester":{"Joist":400,"2nd Joist":400,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":1400,"1st Fix":1300,"2nd Fix":1300,"3rd Fix":300,"Spandrel":60},
+      "DH532B-4 Chesterfield":{"Joist":480,"Low Roof FD":80,"Low Roof Bay":150,"Low Roof Top Bay":140,"Main Roof":1400,"1st Fix":1400,"2nd Fix":1400,"3rd Fix":300,"Spandrel":60},
+      "DH501BB-4 Poets House":{"Joist":450,"2nd Joist":450,"Low Roof FD":100,"Low Roof Bay":80,"Main Roof":1400,"1st Fix":1300,"2nd Fix":1300,"3rd Fix":300,"Spandrel":60},
+      "DH201B-4":{"Joist":220,"Main Roof":300,"1st Fix":450,"2nd Fix":450,"3rd Fix":100,"Spandrel":60},
+      "DH202B-4":{"Joist":220,"Main Roof":300,"1st Fix":450,"2nd Fix":450,"3rd Fix":100,"Spandrel":60},
+      "DH301GE-4 Thornton":{"Joist":230,"Low Roof FD":80,"Low Roof Rear":150,"Main Roof":750,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "DH312G-4 Hutton":{"Joist":300,"Low Roof FD":100,"Low Roof Bay":60,"Main Roof":500,"1st Fix":670,"2nd Fix":670,"3rd Fix":160,"Spandrel":60},
+      "DH313B-4 Ford":{"Joist":285,"Low Roof FD":80,"Low Roof Bay":60,"Main Roof":580,"1st Fix":690,"2nd Fix":690,"3rd Fix":160,"Spandrel":60},
+      "DH318-B-4 Blaby":{"Joist":285,"Low Roof FD":80,"Low Roof Bay":60,"Low Roof Rear":150,"Main Roof":500,"1st Fix":700,"2nd Fix":700,"3rd Fix":160,"Spandrel":60},
+      "DH330V-4 Alford":{"Joist":330,"Low Roof FD":50,"Low Roof Top Bay":150,"Main Roof":500,"1st Fix":700,"2nd Fix":700,"3rd Fix":160,"Spandrel":60},
+      "DH342G-4 Moreley":{"Joist":330,"Low Roof FD":100,"Main Roof":600,"1st Fix":730,"2nd Fix":730,"3rd Fix":200,"Spandrel":60},
+      "DH400B-4 Lincoln":{"Joist":330,"Low Roof FD":80,"Low Roof Bay":80,"Low Roof Rear":150,"Main Roof":550,"1st Fix":720,"2nd Fix":720,"3rd Fix":190,"Spandrel":60},
+      "DH409GG-4 Castleton":{"Joist":420,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":500,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "DH418V-4 Featherstone":{"Joist":400,"Low Roof Bay":80,"Main Roof":650,"1st Fix":900,"2nd Fix":900,"3rd Fix":200,"Spandrel":60},
+      "DH422GR-4 Kibworth":{"Joist":440,"Low Roof FD":100,"Main Roof":1500,"1st Fix":1000,"2nd Fix":1000,"3rd Fix":200},
+      "DH425G-4 Barnwell":{"Joist":400,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":500,"1st Fix":950,"2nd Fix":950,"3rd Fix":210,"Spandrel":60},
+      "DH425GH-4 Barnwell":{"Joist":400,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":1500,"1st Fix":950,"2nd Fix":950,"3rd Fix":210},
+      "DH427B-4 Bolsover":{"Joist":400,"Low Roof FD":120,"Low Roof Bay":180,"Low Roof Rear":150,"Main Roof":600,"1st Fix":900,"2nd Fix":900,"3rd Fix":200,"Spandrel":60},
+      "DH430B-4 Darlington":{"Joist":400,"Low Roof FD":120,"Low Roof Bay":180,"Low Roof Rear":150,"Main Roof":700,"1st Fix":900,"2nd Fix":900,"3rd Fix":200,"Spandrel":60},
+      "DH452B-4 Draycott":{"Joist":440,"Low Roof FD":100,"Low Roof Bay":80,"Low Roof Rear":150,"Main Roof":700,"1st Fix":930,"2nd Fix":930,"3rd Fix":200,"Spandrel":60},
+      "DH422G-4 Kibworth":{"Joist":440,"Low Roof FD":100,"Main Roof":1500,"1st Fix":1000,"2nd Fix":1000,"3rd Fix":200},
+      "DH430R-4 Darlington":{"Joist":400,"Low Roof FD":120,"Low Roof Bay":180,"Low Roof Rear":150,"Main Roof":700,"1st Fix":900,"2nd Fix":900,"3rd Fix":200,"Spandrel":60},
+      "DH404GH-4 Winchester":{"Joist":440,"Low Roof FD":100,"Main Roof":1200,"1st Fix":1020,"2nd Fix":1020,"3rd Fix":220,"Spandrel":60},
+      "DH409GH-4 Castleton":{"Joist":420,"Low Roof FD":100,"Low Roof Rear":150,"Main Roof":1200,"1st Fix":1050,"2nd Fix":1050,"3rd Fix":240,"Spandrel":60},
+      "SH34BRE-3":{"Joist":230,"1st Fix":250,"2nd Fix":550,"3rd Fix":550,"Spandrel":135,"3rd Fix 2":60},
+      "SH34BRI-3":{"Joist":230,"1st Fix":250,"2nd Fix":550,"3rd Fix":550,"Spandrel":135,"3rd Fix 2":60},
+      "SH35BG-3":{"Joist":238,"Low Roof FD":80,"1st Fix":370,"2nd Fix":550,"3rd Fix":550,"Spandrel":135,"3rd Fix 2":60}
     }
   },
   "Lovell Castle Gresley": {
     "builder": "Lovell Homes",
     "site": "Castle Gresley",
-    "extras": {"Daywork":"£20/hr","Cut doors":"£5/door","Cut plinths":"£20/plot","Spandrel":"£50"},
+    "extras": {"Daywork":"£20/hr","Cut doors over carpets":"£5/door","Cut plinths refit over vinyl/tile":"£20/plot","Spandrel panels":"£50"},
     "types": {
-      "Type A":{"Joist":340,"Main Roof":500,"Low Roof":90,"1st Fix":600,"2nd Fix":300,"3rd Fix":130},
-      "Type B":{"Joist":360,"Main Roof":530,"Low Roof":95,"1st Fix":640,"2nd Fix":320,"3rd Fix":140},
-      "Type C":{"Joist":390,"Main Roof":570,"Low Roof":100,"1st Fix":690,"2nd Fix":350,"3rd Fix":150},
-      "Type D":{"Joist":420,"Main Roof":610,"Low Roof":110,"1st Fix":740,"2nd Fix":380,"3rd Fix":165},
-      "Type E":{"Joist":450,"Main Roof":650,"Low Roof":115,"1st Fix":790,"2nd Fix":400,"3rd Fix":175},
-      "Type F":{"Joist":480,"Main Roof":690,"Low Roof":120,"1st Fix":840,"2nd Fix":420,"3rd Fix":185},
-      "Type G GF":{"Joist":350,"Main Roof":520,"Low Roof":92,"1st Fix":620,"2nd Fix":310,"3rd Fix":135},
-      "Type G FF":{"Joist":350,"Main Roof":520,"Low Roof":92,"1st Fix":620,"2nd Fix":310,"3rd Fix":135},
-      "Type H":{"Joist":500,"Main Roof":720,"Low Roof":130,"1st Fix":870,"2nd Fix":440,"3rd Fix":195},
-      "Type J":{"Joist":530,"Main Roof":760,"Low Roof":135,"1st Fix":910,"2nd Fix":460,"3rd Fix":205},
-      "Type K":{"Joist":560,"Main Roof":800,"Low Roof":140,"1st Fix":950,"2nd Fix":480,"3rd Fix":215}
+      "Type A":{"Joist":225,"Main Roof":260,"Low Roof":80,"1st Fix":530,"2nd Fix":500,"3rd Fix":125},
+      "Type B":{"Joist":240,"Main Roof":240,"Low Roof":80,"1st Fix":580,"2nd Fix":530,"3rd Fix":125},
+      "Type C":{"Joist":200,"Main Roof":210,"Low Roof":80,"1st Fix":450,"2nd Fix":470,"3rd Fix":110},
+      "Type D":{"Joist":300,"Main Roof":450,"Low Roof":80,"1st Fix":650,"2nd Fix":570,"3rd Fix":135},
+      "Type E":{"Joist":270,"Main Roof":300,"Low Roof":"80 + 80","1st Fix":680,"2nd Fix":650,"3rd Fix":150},
+      "Type F":{"Joist":240,"Main Roof":450,"Low Roof":"80 + 80","1st Fix":700,"2nd Fix":670,"3rd Fix":160},
+      "Type G GF":{"Low Roof":"120 each","1st Fix":320,"2nd Fix":280,"3rd Fix":100},
+      "Type G FF":{"Main Roof":"600 PAIR","1st Fix":320,"2nd Fix":350,"3rd Fix":100},
+      "Type H":{"Main Roof":420,"Low Roof":80,"1st Fix":380,"2nd Fix":350,"3rd Fix":110},
+      "Type J":{"Main Roof":1500,"Low Roof":50,"1st Fix":800,"2nd Fix":700,"3rd Fix":135},
+      "Type K":{"Joist":300,"Main Roof":380,"Low Roof":80,"1st Fix":600,"2nd Fix":580,"3rd Fix":135}
     }
   },
   "Vistry Glen Parva": {
     "builder": "Vistry",
     "site": "Glen Parva",
-    "extras": {"Chimney":"£50","Spandrel":"£50","Single garage":"£200","Double garage":"£320","Twin garage":"£340","Day work":"£20/hr"},
+    "extras": {"Chimney":"£50 each","Spandrel panel":"£50 each","Single garage roof":"£200","Double garage roof":"£320","Pair twin garage roof":"£340","Day work":"£20/hr"},
+    "notes": "Temporary handrail fitted at 1st fix. Curtain battens included in 2nd fix price.",
     "types": {
-      "Mountford":{"Joist":480,"Main Roof":700,"Low Roof":125,"1st Fix":830,"2nd Fix":430,"3rd Fix":185},
-      "Eveleigh Gable":{"Joist":520,"Main Roof":740,"Low Roof":130,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
-      "Eveleigh Hipped":{"Joist":520,"Main Roof":760,"Low Roof":135,"1st Fix":870,"2nd Fix":450,"3rd Fix":195},
-      "Hardwick":{"Joist":560,"Main Roof":780,"Low Roof":135,"1st Fix":910,"2nd Fix":470,"3rd Fix":205},
-      "Pembroke Hipped":{"Joist":600,"Main Roof":820,"Low Roof":140,"1st Fix":950,"2nd Fix":490,"3rd Fix":215},
-      "Pembroke Gable":{"Joist":600,"Main Roof":800,"Low Roof":138,"1st Fix":950,"2nd Fix":490,"3rd Fix":215},
-      "Granger":{"Joist":640,"Main Roof":860,"Low Roof":148,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
-      "Wyatt":{"Joist":680,"Main Roof":900,"Low Roof":155,"1st Fix":1050,"2nd Fix":550,"3rd Fix":245},
-      "Foulston":{"Joist":550,"Main Roof":770,"Low Roof":132,"1st Fix":900,"2nd Fix":465,"3rd Fix":200},
-      "Elliot":{"Joist":500,"Main Roof":720,"Low Roof":128,"1st Fix":850,"2nd Fix":440,"3rd Fix":190},
-      "Kempthorne":{"Joist":580,"Main Roof":800,"Low Roof":138,"1st Fix":930,"2nd Fix":480,"3rd Fix":210},
-      "Bungalow":{"Joist":350,"Main Roof":500,"Low Roof":0,"1st Fix":650,"2nd Fix":340,"3rd Fix":150},
-      "W26 Bungalow":{"Joist":370,"Main Roof":520,"Low Roof":0,"1st Fix":670,"2nd Fix":350,"3rd Fix":155},
-      "A22 Mid":{"Joist":300,"Main Roof":430,"Low Roof":80,"1st Fix":560,"2nd Fix":290,"3rd Fix":125},
-      "A30 End":{"Joist":340,"Main Roof":480,"Low Roof":90,"1st Fix":620,"2nd Fix":320,"3rd Fix":140},
-      "A30 Mid":{"Joist":320,"Main Roof":460,"Low Roof":85,"1st Fix":600,"2nd Fix":310,"3rd Fix":135},
-      "A40":{"Joist":380,"Main Roof":540,"Low Roof":100,"1st Fix":700,"2nd Fix":360,"3rd Fix":155}
+      "Mountford":{"Joist":285,"Main Roof":440,"Low Roof Bay/FD":50,"1st Fix":570,"2nd Fix":540,"3rd Fix":130},
+      "Eveleigh Gable":{"Joist":260,"Main Roof":"190/300","Low Roof Bay/FD":50,"1st Fix":580,"2nd Fix":520,"3rd Fix":130},
+      "Eveleigh Hipped":{"Joist":260,"Main Roof":"190/600","Low Roof Bay/FD":50,"1st Fix":580,"2nd Fix":520,"3rd Fix":130},
+      "Hardwick":{"Joist":230,"Main Roof":"190/300","Low Roof Bay/FD":50,"1st Fix":540,"2nd Fix":490,"3rd Fix":120},
+      "Pembroke Hipped":{"Joist":350,"Main Roof":1150,"Low Roof Bay/FD":"50/50","1st Fix":800,"2nd Fix":780,"3rd Fix":190},
+      "Pembroke Gable":{"Joist":350,"Main Roof":510,"Low Roof Bay/FD":"50/50","1st Fix":800,"2nd Fix":780,"3rd Fix":190},
+      "Granger":{"Joist":330,"Main Roof":580,"Low Roof Bay/FD":"50/80","1st Fix":730,"2nd Fix":700,"3rd Fix":170},
+      "Wyatt":{"Joist":"240/240","Low Roof Bay/FD":50,"1st Fix":850,"2nd Fix":850,"3rd Fix":210},
+      "Foulston":{"Joist":"260/260","Low Roof Bay/FD":50,"1st Fix":950,"2nd Fix":1000,"3rd Fix":230},
+      "Elliot":{"Joist":260,"Main Roof":380,"Low Roof Bay/FD":50,"1st Fix":540,"2nd Fix":490,"3rd Fix":120},
+      "Kempthorne":{"Joist":350,"Main Roof":1250,"Low Roof Bay/FD":100,"1st Fix":950,"2nd Fix":950,"3rd Fix":260},
+      "Bungalow":{"Main Roof":700,"1st Fix":400,"2nd Fix":400,"3rd Fix":100},
+      "W26 Bungalow":{"Main Roof":700,"1st Fix":400,"2nd Fix":400,"3rd Fix":100},
+      "A22 Mid":{"Joist":230,"Main Roof":200,"Low Roof Bay/FD":50,"1st Fix":570,"2nd Fix":540,"3rd Fix":130},
+      "A30 End":{"Joist":250,"Main Roof":400,"Low Roof Bay/FD":50,"1st Fix":540,"2nd Fix":490,"3rd Fix":120},
+      "A30 Mid":{"Joist":230,"Main Roof":200,"Low Roof Bay/FD":20,"1st Fix":540,"2nd Fix":490,"3rd Fix":120},
+      "A40":{"Joist":260,"Main Roof":400,"Low Roof Bay/FD":50,"1st Fix":580,"2nd Fix":530,"3rd Fix":140}
     }
   },
   "St Modwen Branston": {
     "builder": "St. Modwen Homes",
     "site": "Branston Leas",
-    "extras": {"Fitting chimneys":"£40","Fit traditional doors":"£10 each","Cladding":"£33/meter","Load pads":"£25/plot","Skirting returns":"£25/plot","Single garage":"£200","Double/twin garage":"£300","Spandrel":"£50/panel","Day work":"£20/hr"},
+    "extras": {"Fitting chimneys":"£40","Fit traditional doors":"£10 each","Cladding":"£33/meter","Load out pads on joist + stairwell protection":"£25/plot","Skirting board return mitres":"£25/plot","Single garage roof":"£200","Double/twin garage roof":"£300","Spandrel panel":"£50/panel","Day work":"£20/hr"},
+    "notes": "Prices by plot number — see full document for plot-level detail.",
     "types": {
-      "Arden":{"Joist":450,"2nd Joist":0,"Main Roof":650,"Low Roof":120,"1st Fix":800,"2nd Fix":410,"3rd Fix":175},
-      "Carleton":{"Joist":480,"2nd Joist":0,"Main Roof":690,"Low Roof":128,"1st Fix":840,"2nd Fix":430,"3rd Fix":185},
-      "Danbury":{"Joist":510,"2nd Joist":0,"Main Roof":730,"Low Roof":135,"1st Fix":880,"2nd Fix":455,"3rd Fix":195},
-      "Elmslie":{"Joist":540,"2nd Joist":100,"Main Roof":770,"Low Roof":142,"1st Fix":920,"2nd Fix":475,"3rd Fix":205},
-      "Farnham":{"Joist":570,"2nd Joist":110,"Main Roof":810,"Low Roof":148,"1st Fix":960,"2nd Fix":495,"3rd Fix":218},
-      "Grafton":{"Joist":600,"2nd Joist":115,"Main Roof":850,"Low Roof":155,"1st Fix":1000,"2nd Fix":520,"3rd Fix":230},
-      "Hatfield":{"Joist":630,"2nd Joist":120,"Main Roof":880,"Low Roof":160,"1st Fix":1040,"2nd Fix":540,"3rd Fix":240},
-      "Ivanhoe":{"Joist":660,"2nd Joist":130,"Main Roof":920,"Low Roof":168,"1st Fix":1080,"2nd Fix":560,"3rd Fix":252}
+      "Plot 705/706 (Small)":{"Joist":220,"Main Roof":295,"Low Roof":40,"1st Fix":520,"2nd Fix":480,"3rd Fix":100},
+      "Plot 790/791":{"Joist":230,"Main Roof":305,"Low Roof":40,"1st Fix":550,"2nd Fix":490,"3rd Fix":120},
+      "Plot 835":{"Joist":240,"Main Roof":345,"Low Roof":40,"1st Fix":540,"2nd Fix":480,"3rd Fix":110},
+      "Plot 823/838/839":{"Joist":242,"Main Roof":345,"Low Roof":40,"1st Fix":600,"2nd Fix":510,"3rd Fix":130},
+      "Plot 909/920":{"Joist":225,"Main Roof":350,"Low Roof":"240 pair","1st Fix":600,"2nd Fix":530,"3rd Fix":140},
+      "Plot 922/836/938":{"Joist":255,"Main Roof":400,"Low Roof":40,"1st Fix":700,"2nd Fix":570,"3rd Fix":150},
+      "Plot 1031/1056/1058":{"Joist":265,"Main Roof":420,"Low Roof":50,"1st Fix":690,"2nd Fix":600,"3rd Fix":150},
+      "Plot 1173/1149":{"Joist":320,"Main Roof":530,"Low Roof":"150 carcass 90 clad & post","1st Fix":785,"2nd Fix":700,"3rd Fix":170},
+      "Plot 1206/1210/1203A":{"Joist":230,"Main Roof":230,"Low Roof":"240 pair 4u","1st Fix":980,"2nd Fix":900,"3rd Fix":190},
+      "Plot 1272/1303B":{"Joist":230,"Main Roof":230,"Low Roof":"241 pair 4u","1st Fix":980,"2nd Fix":900,"3rd Fix":190},
+      "Plot 1918/1282":{"Joist":220,"Main Roof":220,"Low Roof":40,"1st Fix":1000,"2nd Fix":900,"3rd Fix":210},
+      "Plot 1362/1379/1381":{"Joist":300,"Main Roof":650,"Low Roof":40,"1st Fix":780,"2nd Fix":680,"3rd Fix":170},
+      "Plot 1454/1474/1475":{"Joist":380,"Main Roof":1000,"Low Roof":40,"1st Fix":980,"2nd Fix":900,"3rd Fix":230},
+      "Plot 968":{"Joist":230,"Main Roof":345,"Low Roof":40,"1st Fix":550,"2nd Fix":490,"3rd Fix":120},
+      "Plot 777/791/790":{"Joist":230,"Main Roof":295,"Low Roof":40,"1st Fix":550,"2nd Fix":490,"3rd Fix":120},
+      "Plot 979/965":{"Joist":280,"Main Roof":"630 no dormas","Low Roof":40,"1st Fix":720,"2nd Fix":640,"3rd Fix":160},
+      "Plot 1209/1208":{"Joist":300,"Main Roof":500,"Low Roof":40,"1st Fix":750,"2nd Fix":680,"3rd Fix":160},
+      "Plot 743":{"Joist":240,"Main Roof":295,"Low Roof":40,"1st Fix":520,"2nd Fix":480,"3rd Fix":110},
+      "Plot 1306":{"Joist":360,"Main Roof":600,"Low Roof":40,"1st Fix":800,"2nd Fix":700,"3rd Fix":180},
+      "Plot 1334/1355":{"Joist":265,"2nd Joist":250,"Main Roof":480,"Low Roof":60,"1st Fix":1100,"2nd Fix":1050,"3rd Fix":230},
+      "Plot 1513":{"Joist":420,"Main Roof":900,"1st Fix":1000,"2nd Fix":950,"3rd Fix":240},
+      "Plot 1087":{"Joist":265,"Main Roof":340,"Low Roof":40,"1st Fix":670,"2nd Fix":560,"3rd Fix":150},
+      "Plot 1208":{"Joist":300,"Main Roof":600,"Low Roof":40,"1st Fix":770,"2nd Fix":700,"3rd Fix":170},
+      "Plot 824":{"Main Roof":400,"Low Roof":30,"1st Fix":460,"2nd Fix":420,"3rd Fix":90},
+      "Plot 539":{"Low Roof":40,"1st Fix":200,"2nd Fix":220,"3rd Fix":80},
+      "Plot 805":{"Main Roof":480,"Low Roof":40,"1st Fix":320,"2nd Fix":280,"3rd Fix":80},
+      "Plot 1371/1342":{"Joist":265,"2nd Joist":250,"Main Roof":1100,"1st Fix":1100,"2nd Fix":1050,"3rd Fix":230}
     }
   }
 };
 
-// Legacy flat price lists for backward compat
+// Legacy flat price lists for backward compat — averages per builder/site
 const PRICE_LISTS = {};
 Object.values(PRICE_LISTS_BY_HOUSE_TYPE).forEach(pl => {
   const b = pl.builder;
   const s = pl.site;
   if(!PRICE_LISTS[b]) PRICE_LISTS[b] = {};
-  // Calculate average prices across house types for flat view
   const types = Object.values(pl.types);
-  const avg = (key) => Math.round(types.reduce((sum,t)=>sum+(t[key]||0),0)/types.length);
+  const avg = (key) => {
+    const nums = types.map(t=>t[key]).filter(v=>typeof v==='number');
+    return nums.length ? Math.round(nums.reduce((s,v)=>s+v,0)/nums.length) : 0;
+  };
   PRICE_LISTS[b][s] = { "Joist": avg("Joist"), "Main Roof": avg("Main Roof"), "1st Fix": avg("1st Fix"), "2nd Fix": avg("2nd Fix"), "3rd Fix": avg("3rd Fix") };
 });
+
 
 const DOCUMENTS = {
   "Holbrook Park": {
@@ -274,23 +313,29 @@ const DOCUMENTS = {
 };
 
 const ALLOCATIONS = [
-  { id: 1, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "34", houseType: "Craftsman", stage: "First Fix", startDate: "2026-03-24", endDate: "2026-03-27" },
-  { id: 2, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "35", houseType: "Joiner", stage: "First Fix", startDate: "2026-03-27", endDate: "2026-03-30" },
-  { id: 3, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "18", houseType: "Turner", stage: "Roof", startDate: "2026-03-25", endDate: "2026-03-27" },
-  { id: 4, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "19", houseType: "Joiner", stage: "Roof", startDate: "2026-03-27", endDate: "2026-03-29" },
-  { id: 5, carpenter: "Jake Williams", site: "Thoresby Vale", plot: "42", houseType: "Windermere", stage: "Joists", startDate: "2026-03-30", endDate: "2026-04-01" },
-  { id: 6, carpenter: "Tom Harris", site: "Holbrook Park", plot: "29", houseType: "Weaver", stage: "Second Fix", startDate: "2026-03-26", endDate: "2026-03-30" },
-  { id: 7, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "12", houseType: "Cooper", stage: "Final", startDate: "2026-03-31", endDate: "2026-03-31" },
-  { id: 8, carpenter: "Tom Harris", site: "Holbrook Park", plot: "38", houseType: "Craftsman", stage: "Roof", startDate: "2026-04-02", endDate: "2026-04-04" }
+  { id: 1, carpenter: "Richard Wileman", site: "Swinfen Vale", plot: "5", houseType: "Harcourt", stage: "Joist", startDate: "2026-03-30", endDate: "2026-03-31", completed: true, completedDate: "2026-03-31" },
+  { id: 2, carpenter: "Richard Wileman", site: "Swinfen Vale", plot: "5", houseType: "Harcourt", stage: "Main Roof", startDate: "2026-04-01", endDate: "2026-04-02" },
+  { id: 3, carpenter: "Richard Wileman", site: "Swinfen Vale", plot: "5", houseType: "Harcourt", stage: "1st Fix", startDate: "2026-04-06", endDate: "2026-04-07" },
+  { id: 4, carpenter: "Charlie Dillon", site: "Swinfen Vale", plot: "6", houseType: "Charwood / Clarendon", stage: "1st Fix", startDate: "2026-03-30", endDate: "2026-03-31" },
+  { id: 5, carpenter: "Charlie Dillon", site: "Swinfen Vale", plot: "6", houseType: "Charwood / Clarendon", stage: "2nd Fix", startDate: "2026-04-01", endDate: "2026-04-02" },
+  { id: 6, carpenter: "Charlie Dillon", site: "Swinfen Vale", plot: "7", houseType: "Evelyn / Fletcher", stage: "Joist", startDate: "2026-04-06", endDate: "2026-04-07" },
+  { id: 7, carpenter: "Neil Goodwin", site: "Derwentside", plot: "12", houseType: "Hawksley", stage: "Main Roof", startDate: "2026-03-31", endDate: "2026-04-01" },
+  { id: 8, carpenter: "Neil Goodwin", site: "Derwentside", plot: "12", houseType: "Hawksley", stage: "1st Fix", startDate: "2026-04-02", endDate: "2026-04-03" },
+  { id: 9, carpenter: "Neil Goodwin", site: "Derwentside", plot: "15", houseType: "Milton", stage: "Joist", startDate: "2026-04-06", endDate: "2026-04-07" },
+  { id: 10, carpenter: "Neil Hines", site: "Springwood", plot: "8", houseType: "Joiner", stage: "1st Fix", startDate: "2026-03-30", endDate: "2026-03-31" },
+  { id: 11, carpenter: "Neil Hines", site: "Springwood", plot: "8", houseType: "Joiner", stage: "2nd Fix", startDate: "2026-04-01", endDate: "2026-04-02" },
+  { id: 12, carpenter: "Neil Hines", site: "Springwood", plot: "10", houseType: "Turner", stage: "Main Roof", startDate: "2026-04-06", endDate: "2026-04-07" },
+  { id: 13, carpenter: "Rob Jones", site: "Snibston Mill", plot: "14", houseType: "Arden", stage: "2nd Fix", startDate: "2026-03-30", endDate: "2026-03-31" },
+  { id: 14, carpenter: "Rob Jones", site: "Snibston Mill", plot: "14", houseType: "Arden", stage: "3rd Fix", startDate: "2026-04-01", endDate: "2026-04-01" },
+  { id: 15, carpenter: "Rob Jones", site: "Snibston Mill", plot: "18", houseType: "Carleton", stage: "Joist", startDate: "2026-04-06", endDate: "2026-04-07" },
+  { id: 16, carpenter: "Ian Johnson", site: "Brascote Park", plot: "22", houseType: "Bedale", stage: "Main Roof", startDate: "2026-04-01", endDate: "2026-04-02" },
+  { id: 17, carpenter: "Ian Johnson", site: "Brascote Park", plot: "22", houseType: "Bedale", stage: "1st Fix", startDate: "2026-04-06", endDate: "2026-04-07" }
 ];
 
 const INVOICES = [
-  { id: 1, carpenter: "Dave Mitchell", site: "Holbrook Park", plot: "12", houseType: "Joiner", stage: "Final", amount: 600, status: "pending", date: "2026-03-20" },
-  { id: 2, carpenter: "Ryan Cooper", site: "Coppice Heights", plot: "14", houseType: "Turner", stage: "First Fix", amount: 950, status: "pending", date: "2026-03-22" },
-  { id: 3, carpenter: "Jake Williams", site: "Thoresby Vale", plot: "40", houseType: "Windermere", stage: "Joists GF", amount: 860, status: "approved", date: "2026-03-15" },
-  { id: 4, carpenter: "Tom Harris", site: "Holbrook Park", plot: "28", houseType: "Weaver", stage: "Second Fix", amount: 800, status: "approved", date: "2026-03-18" },
-  { id: 5, carpenter: "Sam Bennett", site: "Holbrook Park", plot: "10", houseType: "Craftsman", stage: "Final", amount: 600, status: "paid", date: "2026-03-10" },
-  { id: 6, carpenter: "Chris Taylor", site: "The Meadows", plot: "5", houseType: "Turner", stage: "Roof", amount: 1210, status: "paid", date: "2026-03-05" }
+  { id: 1, carpenter: "Richard Wileman", site: "Swinfen Vale", plot: "5", houseType: "Harcourt", stage: "Joist", amount: 330, status: "approved", date: "2026-03-31" },
+  { id: 2, carpenter: "Neil Hines", site: "Springwood", plot: "8", houseType: "Joiner", stage: "1st Fix", amount: 950, status: "pending", date: "2026-04-01" },
+  { id: 3, carpenter: "Rob Jones", site: "Snibston Mill", plot: "14", houseType: "Arden", stage: "2nd Fix", amount: 410, status: "pending", date: "2026-04-01" }
 ];
 
 const getSiteHousetypes = (siteName) => {
@@ -373,9 +418,9 @@ const[delayReason,setDelayReason]=useState('');
 const[delayDays,setDelayDays]=useState(1);
 const[allFixingRequests,setAllFixingRequests]=useState([]);
 const[notifications,setNotifications]=useState([
-{id:1,type:'Toolbox Talk',title:'Working at Heights - Spring 2026',message:'All carpenters must review the updated working at heights procedure before commencing roof work. Key changes include new harness requirements and altered anchor point specifications.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-20',recipients:['Dave Mitchell','Tom Harris','Sam Bennett'],responses:{}},
-{id:2,type:'RAMS',title:'RAMS - First Fix Holbrook Park',message:'Please review and sign the Risk Assessment and Method Statement for first fix carpentry at Holbrook Park. This covers all first fix operations including floor joists, stud walls, and roof trusses.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-22',recipients:['Dave Mitchell','Tom Harris','Sam Bennett'],responses:{}},
-{id:3,type:'H&S Document',title:'Site Safety Briefing - March 2026',message:'Monthly site safety briefing document. All operatives must read and sign to confirm understanding of current site hazards and control measures.',site:'Coppice Heights',sentBy:'Admin',sentDate:'2026-03-25',recipients:['Ryan Cooper'],responses:{}}
+{id:1,type:'Toolbox Talk',title:'Working at Heights - Spring 2026',message:'All carpenters must review the updated working at heights procedure before commencing roof work. Key changes include new harness requirements and altered anchor point specifications.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-20',recipients:['Richard Wileman','Charlie Dillon','Neil Hines'],responses:{}},
+{id:2,type:'RAMS',title:'RAMS - First Fix Holbrook Park',message:'Please review and sign the Risk Assessment and Method Statement for first fix carpentry at Holbrook Park. This covers all first fix operations including floor joists, stud walls, and roof trusses.',site:'Holbrook Park',sentBy:'Admin',sentDate:'2026-03-22',recipients:['Richard Wileman','Charlie Dillon','Neil Hines'],responses:{}},
+{id:3,type:'H&S Document',title:'Site Safety Briefing - March 2026',message:'Monthly site safety briefing document. All operatives must read and sign to confirm understanding of current site hazards and control measures.',site:'Coppice Heights',sentBy:'Admin',sentDate:'2026-03-25',recipients:['Neil Goodwin'],responses:{}}
 ]);
 const[notifType,setNotifType]=useState('Toolbox Talk');
 const[notifTitle,setNotifTitle]=useState('');
@@ -386,8 +431,8 @@ const[isDrawing,setIsDrawing]=useState(false);
 const sigCanvasRef=useRef(null);
 const[smSelectedCarp,setSmSelectedCarp]=useState(null);
 const[siteFiles,setSiteFiles]=useState([
-{id:1,site:'Holbrook Park',name:'Plot 14 - Snag List',createdBy:'Michael',date:'2026-03-28',photos:[{id:1,note:'Kitchen skirting gap - needs refitting',dataUrl:null},{id:2,note:'Landing door lining not plumb',dataUrl:null}],sentTo:'Dave Mitchell',status:'open'},
-{id:2,site:'Holbrook Park',name:'Plot 22 - Second Fix Check',createdBy:'Michael',date:'2026-03-30',photos:[{id:1,note:'All door handles fitted correctly',dataUrl:null}],sentTo:null,status:'open'}
+{id:1,site:'Swinfen Vale',name:'Plot 5 - Snag List',createdBy:'Michael Blake',date:'2026-03-28',photos:[{id:1,note:'Kitchen skirting gap - needs refitting',dataUrl:null},{id:2,note:'Landing door lining not plumb',dataUrl:null}],sentTo:'Richard Wileman',status:'open'},
+{id:2,site:'Swinfen Vale',name:'Plot 6 - Second Fix Check',createdBy:'Michael Blake',date:'2026-03-30',photos:[{id:1,note:'All door handles fitted correctly',dataUrl:null}],sentTo:null,status:'open'}
 ]);
 const[newFileName,setNewFileName]=useState('');
 const[newFilePhotos,setNewFilePhotos]=useState([]);
@@ -512,7 +557,7 @@ useEffect(() => {
 // ===== END SUPABASE DATA LOADING =====
 
   // Website/old portal states from App7
-  const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Dave Mitchell",site:"Holbrook Park",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Ryan Cooper",site:"Coppice Heights",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Tom Harris",site:"Holbrook Park",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Dave Mitchell",site:"Holbrook Park",plot:"34",stage:"First Fix",date:"24/03",status:"active",rate:"\u00a31,220"},{id:2,carp:"Dave Mitchell",site:"Holbrook Park",plot:"35",stage:"First Fix",date:"25/03",status:"upcoming",rate:"\u00a31,220"},{id:3,carp:"Ryan Cooper",site:"Coppice Heights",plot:"18",stage:"Roofs",date:"24/03",status:"active",rate:"\u00a31,050"},{id:4,carp:"Ryan Cooper",site:"Coppice Heights",plot:"19",stage:"Roofs",date:"25/03",status:"upcoming",rate:"\u00a31,050"},{id:5,carp:"Jake Williams",site:"Thoresby Vale",plot:"42",stage:"Joists",date:"24/03",status:"active",rate:"\u00a3840"},{id:6,carp:"Tom Harris",site:"Holbrook Park",plot:"29",stage:"Second Fix",date:"24/03",status:"active",rate:"\u00a31,380"},{id:7,carp:"Sam Bennett",site:"Holbrook Park",plot:"12",stage:"Finals",date:"24/03",status:"complete",rate:"\u00a3245"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
+  const[sec,setSec]=useState("home");const[sB,setSB]=useState(null);const[sS,setSS]=useState(null);const[sH,setSH]=useState(null);const[sSv,setSSv]=useState(null);const[chatOn,setChatOn]=useState(false);const[msgs,setMsgs]=useState([{f:"b",t:"Hello! Welcome to Miller & Watson Carpentry. I\u2019m here to help with any enquiries. Could I start with your name please?"}]);const[chatIn,setChatIn]=useState("");const[formDone,setFormDone]=useState(false);const[portal,setPortal]=useState(null);const[pUser,setPUser]=useState(null);const[pin,setPin]=useState("");const[pTab,setPTab]=useState("schedule");const[matReqs,setMatReqs]=useState([{id:1,who:"Richard Wileman",site:"Swinfen Vale",items:"2x boxes 63mm nails",status:"pending",date:"21/03",payMethod:"deduct"},{id:2,who:"Neil Goodwin",site:"Derwentside",items:"5x sheets 18mm OSB",status:"approved",date:"20/03",payMethod:"cash"},{id:3,who:"Neil Hines",site:"Springwood",items:"1x box 100mm nails, 3x tubes Gripfill",status:"pending",date:"22/03",payMethod:"deduct"}]);const[newMat,setNewMat]=useState("");const[schedAllocs,setSchedAllocs]=useState([{id:1,carp:"Richard Wileman",site:"Swinfen Vale",plot:"5",stage:"Joist",date:"30/03",status:"complete",rate:"\u00a3330"},{id:2,carp:"Charlie Dillon",site:"Swinfen Vale",plot:"6",stage:"1st Fix",date:"30/03",status:"active",rate:"\u00a3650"},{id:3,carp:"Neil Goodwin",site:"Derwentside",plot:"12",stage:"Main Roof",date:"31/03",status:"active",rate:"\u00a3500"},{id:4,carp:"Neil Hines",site:"Springwood",plot:"8",stage:"1st Fix",date:"30/03",status:"active",rate:"\u00a3950"},{id:5,carp:"Rob Jones",site:"Snibston Mill",plot:"14",stage:"2nd Fix",date:"30/03",status:"active",rate:"\u00a3410"},{id:6,carp:"Ian Johnson",site:"Brascote Park",plot:"22",stage:"Main Roof",date:"01/04",status:"upcoming",rate:"\u00a3700"}]);const[allocForm,setAllocForm]=useState({carp:"",site:"",plot:"",stage:"",date:""});const[plots,setPlots]=useState(HOLBROOK_PLOTS);const[selectedPlot,setSelectedPlot]=useState(null);const chatEnd=useRef(null);const mapEl=useRef(null);const[mapOk,setMapOk]=useState(false);const[mobileMenu,setMobileMenu]=useState(false);const[delayModal,setDelayModal]=useState(null);const[oldDelayReason,setOldDelayReason]=useState("");const[oldDelayDuration,setOldDelayDuration]=useState("");const[chatStep,setChatStep]=useState("init");const[chatUserData,setChatUserData]=useState({});
 const logoUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRthM15JuQV5GY0MLTZRPG7t2WY5ShbEsMg-g&s";
 const doLogin=async()=>{
 // Try Supabase login first
@@ -540,8 +585,8 @@ try {
   }
 } catch(e) { console.log('Supabase login failed, falling back to local:', e); }
 // Fallback to local auth
-if(pin==="4444"){setPortal("mgr");setPUser({name:"Admin \u2014 M&W",role:"admin"});setPTab("dashboard");setUser({role:'admin',name:'Admin'});setCurrentPage('app');setAdminTab('dashboard');return;}
-if(pin==="9999"){setPortal("office");setPUser({name:"Office \u2014 M&W",role:"office"});setPTab("invoices");setUser({role:'invoice',name:'Office/Invoice'});setCurrentPage('app');setInvoiceTab('pending');return;}
+// Local fallback removed — use Supabase auth
+// Local fallback removed — use Supabase auth
 const sm=SITE_MANAGERS.find(s=>s.pin===pin);if(sm){const u={...sm,role:'site_manager'};setUser(u);setCurrentPage('app');setSiteManagerTab('overview');return;}
 const c=DEMO_CARPS.find(x=>x.pin===pin);if(c){setPortal("carp");setPUser(c);setPTab("schedule");const carp=CARPENTERS.find(x=>x.pin===pin);if(carp){setUser({...carp,role:'carpenter'});setCurrentPage('app');setCarpenterTab('schedule');}return;}
 const carp2=CARPENTERS.find(x=>x.pin===pin);if(carp2){setUser({...carp2,role:'carpenter'});setCurrentPage('app');setCarpenterTab('schedule');return;}
@@ -1023,27 +1068,49 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                 <button onClick={() => setScheduleView('gantt')} style={{ backgroundColor: scheduleView==='gantt'?GOLD:'#ccc', color: scheduleView==='gantt'?NAVY:'black', padding:'8px 15px', margin:'0 5px 0 0', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>Gantt</button>
                 <button onClick={() => setScheduleView('list')} style={{ backgroundColor: scheduleView==='list'?GOLD:'#ccc', color: scheduleView==='list'?NAVY:'black', padding:'8px 15px', border:'none', borderRadius:'4px', cursor:'pointer', fontSize:13 }}>List</button>
               </div>
-              {scheduleView === 'gantt' && (
+              {scheduleView === 'gantt' && (() => {
+                // Dynamic date range: 7 days before today to 14 days after
+                const ganttStart = new Date(); ganttStart.setDate(ganttStart.getDate() - 7);
+                const ganttDays = 28;
+                const ganttDates = Array.from({length:ganttDays},(_,i)=>{const d=new Date(ganttStart);d.setDate(ganttStart.getDate()+i);return d;});
+                const uniqueCarps = [...new Set(allocations.map(a=>a.carpenter))];
+                return (
                 <div style={{ overflowX:'auto', backgroundColor:'white', padding:'15px', borderRadius:'8px' }}>
                   <div style={{ display:'flex' }}>
                     <div style={{ width:'130px', flexShrink:0 }}>
                       <div style={{ fontWeight:'bold', padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:12 }}>Carpenter</div>
-                      {[...new Set(allocations.map(a => a.carpenter))].map(carp => <div key={carp} style={{ padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:'12px' }}>{carp}</div>)}
+                      {uniqueCarps.map(carp => <div key={carp} style={{ padding:'8px', borderBottom:'1px solid #ddd', minHeight:'36px', fontSize:'12px' }}>{carp}</div>)}
                     </div>
                     <div style={{ display:'flex', flex:1 }}>
-                      {Array.from({length:21},(_,i) => {
-                        const date = new Date(2026,2,24+i);
-                        return (<div key={i} style={{ minWidth:'45px', flexShrink:0, borderRight:'1px solid #eee' }}>
-                          <div style={{ fontWeight:'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center' }}>{formatDate(date).split(' ')[0]} {date.getDate()}</div>
-                          {[...new Set(allocations.map(a => a.carpenter))].map(carp => {
-                            const af = allocations.find(a => a.carpenter===carp && new Date(a.startDate)<=date && new Date(a.endDate)>=date);
-                            const cellStatus = af?(af.completed?'complete':af.delayed?'delayed':new Date(af.startDate)<=todayDate&&new Date(af.endDate)>=todayDate?'active':'upcoming'):'empty';
-                            const cellColors = {complete:{bg:'#2e7d32',fg:'white'},delayed:{bg:'#d32f2f',fg:'white'},active:{bg:GOLD,fg:NAVY},upcoming:{bg:NAVY,fg:'white'},empty:{bg:'white',fg:'#ccc'}};
+                      {ganttDates.map((date, i) => {
+                        const ds = date.toISOString().split('T')[0];
+                        const isToday = ds === todayStr;
+                        const isWeekend = date.getDay()===0||date.getDay()===6;
+                        return (<div key={i} style={{ minWidth:'45px', flexShrink:0, borderRight:'1px solid #eee', backgroundColor:isToday?'#fffde7':isWeekend?'#f5f5f5':'white' }}>
+                          <div style={{ fontWeight:isToday?'bold':'bold', padding:'4px', borderBottom:'1px solid #ddd', fontSize:'10px', textAlign:'center', color:isToday?GOLD:isWeekend?'#bbb':'inherit', backgroundColor:isToday?NAVY:'transparent' }}>
+                            {isToday?<span style={{color:GOLD}}>{formatDate(ds).split(' ')[0]} {date.getDate()}</span>:<>{formatDate(ds).split(' ')[0]} {date.getDate()}</>}
+                          </div>
+                          {uniqueCarps.map(carp => {
+                            // Check for day off
+                            const hasDayOff = dayOffRequests.some(d=>d.carpenter===carp && d.status==='approved' && ds>=d.startDate && ds<=d.endDate);
+                            if(hasDayOff) {
+                              return (<div key={carp} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'8px',
+                                backgroundColor:'#ff9800', color:'white', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold',
+                                borderRadius:2, textAlign:'center' }}>OFF</div>);
+                            }
+                            const af = allocations.find(a => a.carpenter===carp && ds>=a.startDate && ds<=a.endDate);
+                            const cellStatus = af?(af.completed?'complete':af.delayed?'delayed':todayStr>=af.startDate&&todayStr<=af.endDate?'active':'upcoming'):'empty';
+                            const cellColors = {complete:{bg:'#2e7d32',fg:'white'},delayed:{bg:'#d32f2f',fg:'white'},active:{bg:GOLD,fg:NAVY},upcoming:{bg:NAVY,fg:'white'},empty:{bg:'transparent',fg:'#ccc'}};
                             const cc = cellColors[cellStatus];
+                            // Show day number for multi-day jobs
+                            const dayNum = af ? Math.ceil((date - new Date(af.startDate)) / 864e5) + 1 : 0;
+                            const totalDays = af ? daysInRange(af.startDate, af.endDate) : 0;
                             return (<div key={carp} onClick={()=>af&&setScheduleClickedAlloc(af)} style={{ minHeight:'36px', padding:'2px', borderBottom:'1px solid #eee', fontSize:'8px',
                               backgroundColor: cc.bg, color: cc.fg, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:af?'bold':'normal',
-                              cursor:af?'pointer':'default', lineHeight:'1.1', textAlign:'center', borderRadius:af?2:0 }}>
-                              {af?af.site.length>10?af.site.substring(0,9)+'..':af.site:''}</div>);
+                              cursor:af?'pointer':'default', lineHeight:'1.1', textAlign:'center', borderRadius:af?2:0, flexDirection:'column' }}>
+                              {af && <span>{af.site.length>8?af.site.substring(0,7)+'..':af.site}</span>}
+                              {af && totalDays>1 && <span style={{fontSize:'7px',opacity:0.8}}>D{dayNum}/{totalDays}</span>}
+                            </div>);
                           })}
                         </div>);
                       })}
@@ -1054,6 +1121,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#2e7d32',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#d32f2f',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:NAVY,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Upcoming</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ff9800',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Day Off</span>
                   </div>
                   {scheduleClickedAlloc && (
                     <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,backgroundColor:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:20}} onClick={()=>setScheduleClickedAlloc(null)}>
@@ -1070,6 +1138,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                           <div><strong>Stage:</strong> {scheduleClickedAlloc.stage}</div>
                           <div><strong>Start:</strong> {formatDate(scheduleClickedAlloc.startDate)}</div>
                           <div><strong>End:</strong> {formatDate(scheduleClickedAlloc.endDate)}</div>
+                          <div><strong>Days:</strong> {daysInRange(scheduleClickedAlloc.startDate,scheduleClickedAlloc.endDate)}</div>
                           <div><strong>Status:</strong> <span style={{fontWeight:'bold',color:scheduleClickedAlloc.completed?'#2e7d32':scheduleClickedAlloc.delayed?'#d32f2f':GOLD}}>{scheduleClickedAlloc.completed?'Complete':scheduleClickedAlloc.delayed?'Delayed':'In Progress'}</span></div>
                           {scheduleClickedAlloc.delayed && <div><strong>Delay:</strong> +{scheduleClickedAlloc.delayDays} days</div>}
                         </div>
@@ -1077,8 +1146,8 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     </div>
                   )}
                 </div>
-              )}
-              {scheduleView === 'list' && (
+              );})()}
+                            {scheduleView === 'list' && (
                 <div style={{overflowX:'auto'}}>
                 <table style={{ width:'100%', borderCollapse:'collapse', minWidth:'700px' }}>
                   <thead><tr style={{ backgroundColor:NAVY, color:CREAM }}>
