@@ -825,7 +825,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           transition: 'left 0.25s ease'
         }}>
 
-          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Sites','Delays','Fixings','Notifications','Price Lists','Documents','Day-Off','Variations'].map(tab => (
+          {user?.role === 'admin' && ['Dashboard','Work Log','Allocate','Schedule','Carpenters','Sites','Delays','Fixings','Notifications','Price Lists','Documents','Holidays','Variations'].map(tab => (
             <button key={tab} onClick={() => { setAdminTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: adminTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -870,7 +870,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </button>
           ))}
 
-          {user?.role === 'carpenter' && ['Schedule','Notifications','Documents','Price Lists','Fixings','Invoice','Variation Orders','Day Off'].map(tab => (
+          {user?.role === 'carpenter' && ['Schedule','Notifications','Documents','Price Lists','Fixings','Invoice','Variation Orders','Request Holiday'].map(tab => (
             <button key={tab} onClick={() => { setCarpenterTab(tab.toLowerCase()); setSidebarOpen(false); }}
               style={{ display:'block', width:'100%', padding:'12px', margin:'8px 0',
                 backgroundColor: carpenterTab === tab.toLowerCase() ? GOLD : 'transparent',
@@ -1209,7 +1209,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#2e7d32',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Complete</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#d32f2f',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Delayed</span>
                     <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:NAVY,borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Upcoming</span>
-                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ff9800',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Day Off</span>
+                    <span><span style={{display:'inline-block',width:12,height:12,backgroundColor:'#ff9800',borderRadius:2,marginRight:4,verticalAlign:'middle'}}></span> Holiday</span>
                   </div>
                   {scheduleClickedAlloc && (
                     <div style={{position:'fixed',top:0,left:0,right:0,bottom:0,backgroundColor:'rgba(0,0,0,0.5)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:20}} onClick={()=>setScheduleClickedAlloc(null)}>
@@ -1932,11 +1932,11 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                               <span style={{fontSize:12,color:'#888',marginLeft:8}}>{day.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>
                               {isToday && <span style={{marginLeft:8,backgroundColor:'#4caf50',color:'white',padding:'2px 8px',borderRadius:3,fontSize:10,fontWeight:'bold'}}>TODAY</span>}
                             </div>
-                            {dayIsOff && <span style={{backgroundColor:'#ff9800',color:'white',padding:'4px 12px',borderRadius:4,fontSize:12,fontWeight:'bold'}}>DAY OFF</span>}
+                            {dayIsOff && <span style={{backgroundColor:'#ff9800',color:'white',padding:'4px 12px',borderRadius:4,fontSize:12,fontWeight:'bold'}}>HOLIDAY</span>}
                           </div>
                           {dayIsOff ? (
                             <div style={{padding:10,backgroundColor:'#fff8e1',borderRadius:6,fontSize:14,color:'#e65100',fontStyle:'italic'}}>
-                              Day off approved
+                              Holiday approved
                             </div>
                           ) : dayAllocations.length === 0 ? (
                             <div style={{padding:10,backgroundColor:'#f5f5f5',borderRadius:6,fontSize:13,color:'#999',textAlign:'center'}}>
@@ -2420,36 +2420,54 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
             </div>
           )}
 
-          {/* ========== CARPENTER DAY OFF REQUESTS ========== */}
-          {user?.role === 'carpenter' && carpenterTab === 'day off' && (
+          {/* ========== CARPENTER HOLIDAY REQUESTS ========== */}
+          {user?.role === 'carpenter' && carpenterTab === 'request holiday' && (
             <div>
-              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Day Off</h2>
-              <div style={{backgroundColor:NAVY,color:CREAM,padding:20,borderRadius:10,maxWidth:400,marginBottom:20}}>
-                <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Start Date</label>
-                  <input type="date" value={dayOffStart} onChange={e=>setDayOffStart(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
-                <div style={{marginBottom:12}}><label style={{display:'block',marginBottom:4,fontSize:11}}>End Date</label>
-                  <input type="date" value={dayOffEnd} onChange={e=>setDayOffEnd(e.target.value)} style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,fontSize:13,boxSizing:'border-box'}} /></div>
-                <div style={{marginBottom:15}}><label style={{display:'block',marginBottom:4,fontSize:11}}>Reason</label>
-                  <textarea value={dayOffReason} onChange={e=>setDayOffReason(e.target.value)} placeholder="e.g. Holiday, appointment..." style={{width:'100%',padding:8,borderRadius:4,border:'1px solid '+GOLD,minHeight:60,fontSize:13,boxSizing:'border-box',fontFamily:'inherit'}} /></div>
+              <h2 style={{ color:NAVY, marginTop:0, fontSize:22 }}>Request Holiday</h2>
+              <div style={{backgroundColor:NAVY,color:CREAM,padding:24,borderRadius:10,maxWidth:420,marginBottom:20}}>
+                <div style={{marginBottom:16}}>
+                  <label style={{display:'block',marginBottom:6,fontSize:12,fontWeight:'bold',color:GOLD}}>Start Date</label>
+                  <input type="date" value={dayOffStart} onChange={e=>setDayOffStart(e.target.value)} style={{width:'100%',padding:10,borderRadius:6,border:'2px solid '+GOLD,fontSize:14,boxSizing:'border-box',backgroundColor:'rgba(255,255,255,.06)',color:'#fff'}} />
+                </div>
+                <div style={{marginBottom:16}}>
+                  <label style={{display:'block',marginBottom:6,fontSize:12,fontWeight:'bold',color:GOLD}}>Number of Days</label>
+                  <select value={dayOffEnd} onChange={e=>setDayOffEnd(e.target.value)} style={{width:'100%',padding:10,borderRadius:6,border:'2px solid '+GOLD,fontSize:14,boxSizing:'border-box',backgroundColor:'rgba(255,255,255,.06)',color:'#fff',appearance:'auto'}}>
+                    <option value="" style={{color:'#333'}}>Select days...</option>
+                    {[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(n=><option key={n} value={n} style={{color:'#333'}}>{n} day{n>1?'s':''}</option>)}
+                  </select>
+                </div>
+                <div style={{marginBottom:18}}>
+                  <label style={{display:'block',marginBottom:6,fontSize:12,fontWeight:'bold',color:GOLD}}>Reason (optional)</label>
+                  <textarea value={dayOffReason} onChange={e=>setDayOffReason(e.target.value)} placeholder="e.g. Family holiday, appointment..." style={{width:'100%',padding:10,borderRadius:6,border:'2px solid '+GOLD,minHeight:60,fontSize:13,boxSizing:'border-box',fontFamily:'inherit',backgroundColor:'rgba(255,255,255,.06)',color:'#fff'}} />
+                </div>
+                {dayOffStart && dayOffEnd && (
+                  <div style={{backgroundColor:'rgba(184,134,11,.15)',border:'1px solid rgba(184,134,11,.3)',borderRadius:6,padding:12,marginBottom:16,fontSize:13}}>
+                    <strong style={{color:GOLD}}>Holiday Summary:</strong>
+                    <div style={{marginTop:6}}>{formatDate(dayOffStart)} — {formatDate((() => { const d=new Date(dayOffStart); d.setDate(d.getDate()+parseInt(dayOffEnd)-1); return d.toISOString().split('T')[0]; })())}</div>
+                    <div style={{color:'rgba(255,255,255,.6)',marginTop:2}}>{dayOffEnd} day{parseInt(dayOffEnd)>1?'s':''} total</div>
+                  </div>
+                )}
                 <button onClick={()=>{
-                  if(!dayOffStart||!dayOffEnd){alert('Select start and end dates');return;}
-                  const req={id:Date.now(),carpenter:user?.name,startDate:dayOffStart,endDate:dayOffEnd,reason:dayOffReason,status:'pending',requestedDate:new Date().toISOString().split('T')[0]};
+                  if(!dayOffStart||!dayOffEnd){alert('Select a start date and number of days');return;}
+                  const endDate=(()=>{const d=new Date(dayOffStart);d.setDate(d.getDate()+parseInt(dayOffEnd)-1);return d.toISOString().split('T')[0];})();
+                  const req={id:Date.now(),carpenter:user?.name,startDate:dayOffStart,endDate:endDate,days:parseInt(dayOffEnd),reason:dayOffReason,status:'pending',requestedDate:new Date().toISOString().split('T')[0]};
                   setDayOffRequests(prev=>[...prev,req]);
                   setDayOffStart('');setDayOffEnd('');setDayOffReason('');
-                  setSuccessMsg('Day off request submitted');setTimeout(()=>setSuccessMsg(''),2500);
-                }} style={{backgroundColor:GOLD,color:NAVY,padding:'10px 20px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:14}}>Request</button>
+                  setSuccessMsg('Holiday request submitted for '+req.days+' day'+(req.days>1?'s':''));setTimeout(()=>setSuccessMsg(''),2500);
+                }} style={{backgroundColor:GOLD,color:NAVY,padding:'12px 24px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold',fontSize:15,width:'100%'}}>Submit Holiday Request</button>
               </div>
               {dayOffRequests.filter(d=>d.carpenter===user?.name).length>0 && (
                 <div>
-                  <h3 style={{color:NAVY,fontSize:16,marginBottom:10}}>Your Requests</h3>
+                  <h3 style={{color:NAVY,fontSize:16,marginBottom:10}}>Your Holiday Requests</h3>
                   {dayOffRequests.filter(d=>d.carpenter===user?.name).sort((a,b)=>b.id-a.id).map(req=>(
-                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:12,marginBottom:8,borderLeft:'4px solid '+(req.status==='approved'?'#4caf50':req.status==='denied'?'#d32f2f':'#ff9800')}}>
+                    <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:8,borderLeft:'4px solid '+(req.status==='approved'?'#4caf50':req.status==='denied'?'#d32f2f':'#ff9800')}}>
                       <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:6}}>
                         <div>
                           <strong style={{fontSize:14}}>{formatDate(req.startDate)} — {formatDate(req.endDate)}</strong>
-                          <div style={{fontSize:12,color:'#666',marginTop:2}}>{req.reason||'No reason given'}</div>
+                          <div style={{fontSize:12,color:NAVY,marginTop:2,fontWeight:'bold'}}>{req.days||Math.ceil((new Date(req.endDate)-new Date(req.startDate))/(864e5))+1} day{(req.days||2)>1?'s':''}</div>
+                          {req.reason&&<div style={{fontSize:12,color:'#666',marginTop:2}}>{req.reason}</div>}
                         </div>
-                        <span style={{padding:'2px 10px',borderRadius:3,fontSize:11,fontWeight:'bold',height:'fit-content',
+                        <span style={{padding:'3px 12px',borderRadius:4,fontSize:11,fontWeight:'bold',height:'fit-content',
                           backgroundColor:req.status==='approved'?'#e8f5e9':req.status==='denied'?'#ffebee':'#fff3e0',
                           color:req.status==='approved'?'#2e7d32':req.status==='denied'?'#c62828':'#e65100'}}>{req.status.toUpperCase()}</span>
                       </div>
@@ -2461,24 +2479,26 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
           )}
 
           
-          {/* ========== ADMIN: DAY OFF APPROVALS ========== */}
-          {(user?.role === 'admin') && adminTab === 'day-off' && (
+          {/* ========== ADMIN: HOLIDAY APPROVALS ========== */}
+          {(user?.role === 'admin') && adminTab === 'holidays' && (
             <div>
-              <h2 style={{color:NAVY,marginTop:0,fontSize:22}}>Day Off Requests</h2>
-              {dayOffRequests.length===0?<p style={{color:'#666',fontSize:14}}>No day off requests.</p>:(
+              <h2 style={{color:NAVY,marginTop:0,fontSize:22}}>Holiday Requests</h2>
+              {dayOffRequests.length===0?<p style={{color:'#666',fontSize:14}}>No holiday requests.</p>:(
                 <div>
-                  {dayOffRequests.sort((a,b)=>b.id-a.id).map(req=>(
+                  {dayOffRequests.sort((a,b)=>b.id-a.id).map(req=>{
+                    const days=req.days||Math.ceil((new Date(req.endDate)-new Date(req.startDate))/(864e5))+1;
+                    return (
                     <div key={req.id} style={{backgroundColor:'white',border:'1px solid #ddd',borderRadius:8,padding:14,marginBottom:10,borderLeft:'4px solid '+(req.status==='approved'?'#4caf50':req.status==='denied'?'#d32f2f':'#ff9800')}}>
                       <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
                         <div>
                           <strong style={{fontSize:15}}>{req.carpenter}</strong>
-                          <div style={{fontSize:13,color:'#666',marginTop:2}}>{formatDate(req.startDate)} — {formatDate(req.endDate)}</div>
-                          <div style={{fontSize:12,color:'#888',marginTop:2}}>{req.reason||'No reason given'}</div>
+                          <div style={{fontSize:13,color:NAVY,marginTop:4,fontWeight:'bold'}}>{formatDate(req.startDate)} — {formatDate(req.endDate)} <span style={{color:GOLD}}>({days} day{days>1?'s':''})</span></div>
+                          {req.reason&&<div style={{fontSize:12,color:'#888',marginTop:2}}>{req.reason}</div>}
                         </div>
                         <div style={{display:'flex',gap:8,alignItems:'flex-start'}}>
                           {req.status==='pending'?(
                             <>
-                              <button onClick={()=>setDayOffRequests(prev=>prev.map(d=>d.id===req.id?{...d,status:'approved'}:d))} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
+                              <button onClick={()=>{setDayOffRequests(prev=>prev.map(d=>d.id===req.id?{...d,status:'approved'}:d));setSuccessMsg(req.carpenter+"'s holiday approved — added to schedule");setTimeout(()=>setSuccessMsg(''),3000);}} style={{backgroundColor:'#4caf50',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Approve</button>
                               <button onClick={()=>setDayOffRequests(prev=>prev.map(d=>d.id===req.id?{...d,status:'denied'}:d))} style={{backgroundColor:'#d32f2f',color:'white',padding:'6px 14px',border:'none',borderRadius:4,cursor:'pointer',fontWeight:'bold',fontSize:12}}>Deny</button>
                             </>
                           ):(
@@ -2489,7 +2509,7 @@ const S={root:{fontFamily:"'DM Sans',-apple-system,sans-serif",color:"#1a1a1a",b
                         </div>
                       </div>
                     </div>
-                  ))}
+                  );})}
                 </div>
               )}
             </div>
